@@ -1,0 +1,59 @@
+default:
+  tags: ["docker"]
+
+image: cirrusci/flutter:3.0.1
+
+stages:
+  - analyze
+  - test
+
+analyse:
+  stage: analyze
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+  needs: []
+  before_script:
+    - flutter clean
+    - flutter pub get
+  script:
+    - flutter analyze
+
+all_unit_tests:
+  stage: test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+  needs: []
+  before_script:
+    - flutter clean
+    - flutter pub get
+  script:
+    - flutter test --coverage test/**/*test.dart
+  artifacts:
+    paths:
+      - coverage/
+
+coverage:
+  stage: test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+  needs: [all_unit_tests]
+  dependencies: [all_unit_tests]
+
+  script:
+    - lcov --summary coverage/lcov.info
+    - lcov --remove coverage/lcov.info -o coverage/lcov.info
+    - genhtml coverage/lcov.info -o coverage/html
+    - sudo apt-get update && sudo apt-get install python3-distutils -y
+    - curl -O https://raw.githubusercontent.com/eriwen/lcov-to-cobertura-xml/master/lcov_cobertura/lcov_cobertura.py
+    - python3 lcov_cobertura.py coverage/lcov.info --output coverage/coverage.xml
+  coverage: /^\s*lines\.*:\s(\d+.\d+)\%/
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/coverage.xml
+    paths:
+      - coverage/html/
