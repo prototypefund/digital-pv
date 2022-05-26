@@ -2,15 +2,38 @@
 
 Digital Patient Directive
 
-## Getting Started
+## Coding style
 
-This project is a starting point for a Flutter application.
+We prefer `Clean Code` as defined by Robert C. Martin.
 
-A few resources to get you started if this is your first Flutter project:
+Most of the style is secured by Linters and Analyzers, config can be found in `analysis_options.yaml`.  
+**Line Length** of the project is **120** characters. This can be adjusted in your favorite IDE of choice.  
+We also recommend to automatically run **formatting on file save**, which most IDEs are capable of.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Branching Model
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+We use `Feature Branching` (https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
+
+## Architectural Pattern
+
+We want to use `MVC` (Model-View-Controller).
+
+## Development Process
+
+- Development Language: _English_
+- We open Merge Requests for code changes
+- We let another developer review our code
+- We need one approval from another developer to merge our code into the main line
+- The author merges his MR after approval
+- Every requirement, improvement or bug is added as an issue to Gitlab issues
+- These issue focus on value for the end customer. Their title should have meaning to our stakeholders.
+- Software bugs should be reproduced using an automated unit or widget tests, then fixed. Exceptions are possible if cost/benefit ratio is bad.
+- Requirements and improvements should be tested using automated unit or widget tests. It is a good practice to implement the tests first.
+- If an issue is to hard to test, and cost/benefit ratio seems bad, this should be documented within the merge request.
+
+## Definition of Done
+
+- There are sufficient tests to verify requirements are met, bugs are detected and regressions prevented
+- Continuous Integration was successful, i.e. the app can be built, there are no code quality issues and all unit and widget tests are successful
+- Error messages and hints are static, i.e. don't use information created at runtime by errors or transmitted from servers or bluetooth devices. (this helps to prevent the exposure of confidential information to the user)
+- Acceptance criteria are met
