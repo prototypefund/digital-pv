@@ -102,10 +102,6 @@ fixnum
 2.12
 file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.1/
 file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.1/lib/
-flutter_lints
-2.17
-file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/
-file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/lib/
 flutter_svg
 2.12
 file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.0.3/
@@ -154,10 +150,10 @@ json_annotation
 2.14
 file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.5.0/
 file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.5.0/lib/
-lints
-2.17
-file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/lints-2.0.0/
-file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/lints-2.0.0/lib/
+lint
+2.15
+file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/lint-1.8.2/
+file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/lint-1.8.2/lib/
 logger
 2.12
 file:///Users/mariusjeskulke/.pub-cache/hosted/pub.dartlang.org/logger-1.1.0/

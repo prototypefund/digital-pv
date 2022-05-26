@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:pd_app/logging.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget with Logging {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: L10n.of(context).flutterDemoHomePage),
     );
   }
 }
