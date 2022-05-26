@@ -8,5 +8,5 @@ class L10nDe extends L10n {
   L10nDe([String locale = 'de']) : super(locale);
 
   @override
-  String get flutterDemoHomePage => 'Flutter Demo Home Page';
+  String get pushedButtonText => 'You have pushed this button so many times';
 }

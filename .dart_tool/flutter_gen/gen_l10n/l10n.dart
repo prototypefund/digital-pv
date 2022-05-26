@@ -92,11 +92,11 @@ abstract class L10n {
     Locale('de')
   ];
 
-  /// No description provided for @flutterDemoHomePage.
+  /// No description provided for @pushedButtonText.
   ///
   /// In de, this message translates to:
-  /// **'Flutter Demo Home Page'**
-  String get flutterDemoHomePage;
+  /// **'You have pushed this button so many times'**
+  String get pushedButtonText;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

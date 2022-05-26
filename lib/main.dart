@@ -13,6 +13,8 @@ class MyApp extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget with Logging {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: L10n.of(context).flutterDemoHomePage),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -98,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> with Logging {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              L10n.of(context).pushedButtonText,
             ),
             Text(
               '$_counter',
