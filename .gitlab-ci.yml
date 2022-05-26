@@ -63,9 +63,16 @@ stages:
 pages:
   stage: deploy
   script:
-    - flutter build web --base-href "/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/"
+    - flutter build web --base-href "/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
     - mkdir -p public/$CI_COMMIT_REF_NAME # create directory first
     - cp -r build/web public/$CI_COMMIT_REF_NAME
   artifacts:
     paths:
       - public/$CI_COMMIT_REF_NAME
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: never
+    - if: $CI_COMMIT_BRANCH
