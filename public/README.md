@@ -1,0 +1,1 @@
+# Public folder is used by gitlab pages to deploy
