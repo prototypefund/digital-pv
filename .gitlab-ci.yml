@@ -118,13 +118,13 @@ pages: # this job will download the complete pages content from s3 and push it t
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
-    on_stop: stop_review_environment
+    on_stop: remove-review-app-from-s3
   rules:
     - if: $CI_COMMIT_BRANCH
   needs: [store-web-package-and-create-pages-content]
   dependencies: [store-web-package-and-create-pages-content]
 
-stop_review_environment:
+remove-review-app-from-s3:
   stage: deploy
   variables:
     AWS_S3_BUCKET: $GITLAB_PAGES_DEV_BUCKET_NAME
