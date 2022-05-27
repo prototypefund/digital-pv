@@ -113,7 +113,7 @@ pages: # this job will download the complete pages content from s3 and push it t
     AWS_SECRET_ACCESS_KEY: $GITLAB_PAGES_DEV_BUCKET_ACCESS_SECRET_KEY
     AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
   script:
-    - mv pages-content* public/
+    - mv pages-content/* public/
   artifacts:
     paths:
       - public
