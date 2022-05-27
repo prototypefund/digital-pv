@@ -100,7 +100,7 @@ store-web-package-and-create-pages-content: # puts the built web package to the 
   dependencies: [build-web-package]
 
 
-pages: # this job will download the complete pages content from s3 and push it to gitlab pages
+pages: # this job take the downloaded s3 content from store-web-package-and-create-pages-content and push it to pages gitlab pages. The job needs to be name likes this for the deployment to pages to work (source: https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html)
   stage: deploy
   image: ruby:2.7 # for faster execution
   script:
