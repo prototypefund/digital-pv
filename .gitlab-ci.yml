@@ -87,14 +87,9 @@ add-pages-content-to-s3-bucket: # puts the built web package to the s3 bucket co
     name: amazon/aws-cli
     entrypoint: [""]
   script:
-    - echo $AWS_S3_BUCKET
-    - echo $AWS_ACCESS_KEY_ID
-    - echo $AWS_SECRET_ACCESS_KEY
-    - mkdir -p build/web
-    - touch build/web/foo.html
-    - touch build/web/bar.html
+    - aws s3 rm build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
     - aws s3 cp build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
-    - aws s3 sync s3://$AWS_S3_BUCKET/ pages-content # now we download everything
+    - aws s3 sync --quiet s3://$AWS_S3_BUCKET/ pages-content # now we download everything
   artifacts:
     paths:
       - pages-content
@@ -128,9 +123,18 @@ pages: # this job will download the complete pages content from s3 and push it t
 
 stop_review_environment:
   stage: deploy
+  variables:
+    AWS_S3_BUCKET: $GITLAB_PAGES_DEV_BUCKET_NAME
+    AWS_ACCESS_KEY_ID: $GITLAB_PAGES_DEV_BUCKET_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $GITLAB_PAGES_DEV_BUCKET_ACCESS_SECRET_KEY
+    AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
   script:
     - echo "Remove review app"
-    - echo "Not implemented yet"
+    - aws s3 rm build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
+    - echo "next deployment to dev will no longer include this environment"
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     action: stop
