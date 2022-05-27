@@ -113,9 +113,10 @@ push-pages-content: # this job will download the complete pages content from s3 
   script:
     - mkdir -p public
     - aws s3 sync s3://$AWS_S3_BUCKET/ /public
+    - cd /public
   artifacts:
     paths:
-      - /public
+      - public
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
