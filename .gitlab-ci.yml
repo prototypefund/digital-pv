@@ -112,8 +112,7 @@ pages: # this job will download the complete pages content from s3 and push it t
     AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
   script:
     - mkdir -p public
-    - aws s3 sync s3://$AWS_S3_BUCKET/ /public
-    - cd /public
+    - aws s3 sync s3://$AWS_S3_BUCKET/ public
   artifacts:
     paths:
       - public
