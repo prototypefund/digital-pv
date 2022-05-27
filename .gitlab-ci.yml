@@ -122,6 +122,7 @@ remove-review-app-from-s3:
     AWS_ACCESS_KEY_ID: $GITLAB_PAGES_DEV_BUCKET_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY: $GITLAB_PAGES_DEV_BUCKET_ACCESS_SECRET_KEY
     AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
+    GIT_STRATEGY: none # prevents failing to check out repo, when branch was deleted and this job is executed
   image:
     name: amazon/aws-cli
     entrypoint: [""]
