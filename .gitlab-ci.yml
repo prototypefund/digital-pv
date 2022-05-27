@@ -65,8 +65,6 @@ build-web-package:
   stage: build
   script:
     - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
-#    - mkdir -p public/$CI_COMMIT_REF_NAME # create directory first
-  #    - cp -r build/web public/$CI_COMMIT_REF_NAME
   artifacts:
     paths:
       - build/web
