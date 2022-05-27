@@ -67,8 +67,6 @@ build-web-package:
     paths:
       - build/web
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: never
     - if: $CI_COMMIT_BRANCH
   needs: [analyse, all_unit_tests]
   dependencies: [analyse, all_unit_tests]
@@ -91,8 +89,6 @@ store-web-package-and-create-pages-content: # puts the built web package to the 
     paths:
       - pages-content
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: never
     - if: $CI_COMMIT_BRANCH
   needs: [build-web-package]
   dependencies: [build-web-package]
