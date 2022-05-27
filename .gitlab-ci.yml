@@ -6,75 +6,74 @@ image: cirrusci/flutter:3.0.1
 stages:
   - analyze
   - test
-  - build
   - prepare-deploy
   - deploy
 
-#analyse:
-#  stage: analyze
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE == "push"'
-#    - if: '$CI_PIPELINE_SOURCE == "web"'
-#  needs: []
-#  before_script:
-#    - flutter clean
-#    - flutter pub get
-#  script:
-#    - flutter analyze
-#
-#all_unit_tests:
-#  stage: test
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE == "push"'
-#    - if: '$CI_PIPELINE_SOURCE == "web"'
-#  needs: []
-#  before_script:
-#    - flutter clean
-#    - flutter pub get
-#  script:
-#    - flutter test --coverage test/**/*test.dart
-#  artifacts:
-#    paths:
-#      - coverage/
-#
-#coverage:
-#  stage: test
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE == "push"'
-#    - if: '$CI_PIPELINE_SOURCE == "web"'
-#  needs: [all_unit_tests]
-#  dependencies: [all_unit_tests]
-#
-#  script:
-#    - lcov --summary coverage/lcov.info
-#    - lcov --remove coverage/lcov.info -o coverage/lcov.info
-#    - genhtml coverage/lcov.info -o coverage/html
-#    - sudo apt-get update && sudo apt-get install python3-distutils -y
-#    - curl -O https://raw.githubusercontent.com/eriwen/lcov-to-cobertura-xml/master/lcov_cobertura/lcov_cobertura.py
-#    - python3 lcov_cobertura.py coverage/lcov.info --output coverage/coverage.xml
-#  coverage: /^\s*lines\.*:\s(\d+.\d+)\%/
-#  artifacts:
-#    reports:
-#      coverage_report:
-#        coverage_format: cobertura
-#        path: coverage/coverage.xml
-#    paths:
-#      - coverage/html/
+analyse:
+  stage: analyze
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+  needs: []
+  before_script:
+    - flutter clean
+    - flutter pub get
+  script:
+    - flutter analyze
+
+all_unit_tests:
+  stage: test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+  needs: []
+  before_script:
+    - flutter clean
+    - flutter pub get
+  script:
+    - flutter test --coverage test/**/*test.dart
+  artifacts:
+    paths:
+      - coverage/
+
+coverage:
+  stage: test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+  needs: [all_unit_tests]
+  dependencies: [all_unit_tests]
+
+  script:
+    - lcov --summary coverage/lcov.info
+    - lcov --remove coverage/lcov.info -o coverage/lcov.info
+    - genhtml coverage/lcov.info -o coverage/html
+    - sudo apt-get update && sudo apt-get install python3-distutils -y
+    - curl -O https://raw.githubusercontent.com/eriwen/lcov-to-cobertura-xml/master/lcov_cobertura/lcov_cobertura.py
+    - python3 lcov_cobertura.py coverage/lcov.info --output coverage/coverage.xml
+  coverage: /^\s*lines\.*:\s(\d+.\d+)\%/
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/coverage.xml
+    paths:
+      - coverage/html/
 
 
-#build-web-package:
-#  stage: deploy
-#  script:
-#    - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
-##    - mkdir -p public/$CI_COMMIT_REF_NAME # create directory first
-#  #    - cp -r build/web public/$CI_COMMIT_REF_NAME
-#  artifacts:
-#    paths:
-#      - build/web
-#  rules:
-#    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-#      when: never
-#    - if: $CI_COMMIT_BRANCH
+build-web-package:
+  stage: deploy
+  script:
+    - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
+#    - mkdir -p public/$CI_COMMIT_REF_NAME # create directory first
+  #    - cp -r build/web public/$CI_COMMIT_REF_NAME
+  artifacts:
+    paths:
+      - build/web
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: never
+    - if: $CI_COMMIT_BRANCH
 
 add-pages-content-to-s3-bucket: # puts the built web package to the s3 bucket containing all pages files
   stage: prepare-deploy
@@ -87,8 +86,6 @@ add-pages-content-to-s3-bucket: # puts the built web package to the s3 bucket co
     name: amazon/aws-cli
     entrypoint: [""]
   script:
-    - mkdir -p build/web
-    - touch build/web/test.txt
     - aws s3 rm s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
     - aws s3 cp build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
     - aws s3 sync --quiet s3://$AWS_S3_BUCKET/ pages-content # now we download everything
