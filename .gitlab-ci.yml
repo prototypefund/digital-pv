@@ -87,7 +87,7 @@ add-pages-content-to-s3-bucket: # puts the built web package to the s3 bucket co
     name: amazon/aws-cli
     entrypoint: [""]
   script:
-    - aws s3 rm build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
+    - aws s3 rm s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
     - aws s3 cp build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
     - aws s3 sync --quiet s3://$AWS_S3_BUCKET/ pages-content # now we download everything
   artifacts:
@@ -133,7 +133,7 @@ stop_review_environment:
     entrypoint: [""]
   script:
     - echo "Remove review app"
-    - aws s3 rm build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
+    - aws s3 rm s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
     - echo "next deployment to dev will no longer include this environment"
   environment:
     name: review/$CI_COMMIT_REF_SLUG
