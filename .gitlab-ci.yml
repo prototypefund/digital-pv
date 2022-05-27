@@ -134,6 +134,9 @@ remove-review-app-from-s3:
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     action: stop
+  allow_failure: true
   rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: never
     - if: $CI_COMMIT_BRANCH
       when: manual
