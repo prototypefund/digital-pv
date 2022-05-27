@@ -16,7 +16,7 @@ We use `Feature Branching` (https://www.atlassian.com/git/tutorials/comparing-wo
 
 ## Architectural Pattern
 
-We want to use `MVC` (Model-View-Controller).
+We want to use `MVVM` (Model-View-ViewMode).
 
 ## Development Process
 
