@@ -74,6 +74,8 @@ build-web-package:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: never
     - if: $CI_COMMIT_BRANCH
+  needs: [analyse, all_unit_tests]
+  dependencies: [analyse, all_unit_tests]
 
 prepare-pages-content: # puts the built web package to the s3 bucket containing all pages files
   stage: deploy
@@ -118,8 +120,6 @@ pages: # this job will download the complete pages content from s3 and push it t
     url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
     on_stop: stop_review_environment
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: never
     - if: $CI_COMMIT_BRANCH
   needs: [prepare-pages-content]
   dependencies: [prepare-pages-content]
@@ -142,7 +142,5 @@ stop_review_environment:
     name: review/$CI_COMMIT_REF_SLUG
     action: stop
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: never
     - if: $CI_COMMIT_BRANCH
       when: manual
