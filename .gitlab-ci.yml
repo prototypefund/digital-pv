@@ -113,12 +113,11 @@ pages: # this job will download the complete pages content from s3 and push it t
     AWS_SECRET_ACCESS_KEY: $GITLAB_PAGES_DEV_BUCKET_ACCESS_SECRET_KEY
     AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
   script:
-    - mkdir -p public
-    - mv pages-content/* public
+    - mkdir public
+    - mv pages-content* public
   artifacts:
     paths:
-      - public/*
-      - public/$CI_COMMIT_REF_NAME
+      - public
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
