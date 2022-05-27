@@ -60,15 +60,47 @@ stages:
 #      - coverage/html/
 
 
-pages:
+#build-web-package:
+#  stage: deploy
+#  script:
+#    - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
+##    - mkdir -p public/$CI_COMMIT_REF_NAME # create directory first
+#  #    - cp -r build/web public/$CI_COMMIT_REF_NAME
+#  artifacts:
+#    paths:
+#      - build/web
+#  rules:
+#    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#      when: never
+#    - if: $CI_COMMIT_BRANCH
+
+push-pages-content-to-s3: # pushes the built web package to the s3 bucket containing all pages files
   stage: deploy
+#  dependencies:
+#    - build-web-package
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
   script:
-    - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
-    - mkdir -p public/$CI_COMMIT_REF_NAME # create directory first
-    - cp -r build/web public/$CI_COMMIT_REF_NAME
+    - aws --version
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: never
+    - if: $CI_COMMIT_BRANCH
+
+
+push-pages-content:
+  dependencies:
+    - push-pages-content-to-s3 # this job will download the complete pages content from s3 and push it to gitlab pages
+  stage: deploy
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  script:
+    - aws --version
   artifacts:
     paths:
-      - public/$CI_COMMIT_REF_NAME
+      - public
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
@@ -82,8 +114,7 @@ stop_review_environment:
   stage: deploy
   script:
     - echo "Remove review app"
-    - cd public
-    - rm -rf $CI_COMMIT_REF_NAME
+    - echo "Not implemented yet"
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     action: stop
