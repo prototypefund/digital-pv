@@ -117,7 +117,8 @@ pages: # this job will download the complete pages content from s3 and push it t
     - mv pages-content/* public
   artifacts:
     paths:
-      - public
+      - public/*
+      - public/$CI_COMMIT_REF_NAME
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
