@@ -15,7 +15,6 @@ analyse:
   needs: []
   before_script:
     - flutter clean
-    - flutter pub get
   script:
     - flutter analyze
 
@@ -27,7 +26,6 @@ all_unit_tests:
   needs: []
   before_script:
     - flutter clean
-    - flutter pub get
   script:
     - flutter test --coverage test/**/*test.dart
   artifacts:
