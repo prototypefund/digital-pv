@@ -1,1 +1,8 @@
 .idea
+/.packages
+/build
+/.fvm/flutter_sdk
+.dart_tool
+.flutter-plugins-dependencies
+/coverage/
+/.flutter-plugins
