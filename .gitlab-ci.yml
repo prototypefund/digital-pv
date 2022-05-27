@@ -105,6 +105,11 @@ push-pages-content: # this job will download the complete pages content from s3 
   image:
     name: amazon/aws-cli
     entrypoint: [""]
+  variables:
+    AWS_S3_BUCKET: $GITLAB_PAGES_DEV_BUCKET_NAME
+    AWS_ACCESS_KEY_ID: $GITLAB_PAGES_DEV_BUCKET_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $GITLAB_PAGES_DEV_BUCKET_ACCESS_SECRET_KEY
+    AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
   script:
     - aws s3 sync s3://$AWS_S3_BUCKET/ public
   artifacts:
