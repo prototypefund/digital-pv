@@ -6,6 +6,8 @@ image: cirrusci/flutter:3.0.1
 stages:
   - analyze
   - test
+  - build
+  - deploy
 
 analyse:
   stage: analyze
@@ -55,3 +57,84 @@ coverage:
         path: coverage/coverage.xml
     paths:
       - coverage/html/
+
+
+build-web-package:
+  stage: build
+  script:
+    - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
+  artifacts:
+    paths:
+      - build/web
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: never
+    - if: $CI_COMMIT_BRANCH
+  needs: [analyse, all_unit_tests]
+  dependencies: [analyse, all_unit_tests]
+
+store-web-package-and-create-pages-content: # puts the built web package to the s3 bucket containing all pages files
+  stage: deploy
+  variables:
+    AWS_S3_BUCKET: $GITLAB_PAGES_DEV_BUCKET_NAME
+    AWS_ACCESS_KEY_ID: $GITLAB_PAGES_DEV_BUCKET_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $GITLAB_PAGES_DEV_BUCKET_ACCESS_SECRET_KEY
+    AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  script:
+    - aws s3 rm s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
+    - aws s3 cp build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
+    - aws s3 sync --quiet s3://$AWS_S3_BUCKET/ pages-content # now we download everything
+  artifacts:
+    paths:
+      - pages-content
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: never
+    - if: $CI_COMMIT_BRANCH
+  needs: [build-web-package]
+  dependencies: [build-web-package]
+
+
+pages: # this job take the downloaded s3 content from store-web-package-and-create-pages-content and push it to pages gitlab pages. The job needs to be name likes this for the deployment to pages to work (source: https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html)
+  stage: deploy
+  image: ruby:2.7 # for faster execution
+  script:
+    - mv pages-content/* public/
+  artifacts:
+    paths:
+      - public
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/
+    on_stop: remove-review-app-from-s3
+  rules:
+    - if: $CI_COMMIT_BRANCH
+  needs: [store-web-package-and-create-pages-content]
+  dependencies: [store-web-package-and-create-pages-content]
+
+remove-review-app-from-s3:
+  stage: deploy
+  variables:
+    AWS_S3_BUCKET: $GITLAB_PAGES_DEV_BUCKET_NAME
+    AWS_ACCESS_KEY_ID: $GITLAB_PAGES_DEV_BUCKET_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $GITLAB_PAGES_DEV_BUCKET_ACCESS_SECRET_KEY
+    AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  script:
+    - echo "Remove review app"
+    - aws s3 rm s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
+    - echo "next deployment to dev will no longer include this environment"
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: never
+    - if: $CI_COMMIT_BRANCH
+      when: manual
