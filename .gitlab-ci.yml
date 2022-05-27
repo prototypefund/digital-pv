@@ -77,7 +77,7 @@ build-web-package:
   needs: [analyse, all_unit_tests]
   dependencies: [analyse, all_unit_tests]
 
-prepare-pages-content: # puts the built web package to the s3 bucket containing all pages files
+store-web-package-and-create-pages-content: # puts the built web package to the s3 bucket containing all pages files
   stage: deploy
   variables:
     AWS_S3_BUCKET: $GITLAB_PAGES_DEV_BUCKET_NAME
@@ -121,8 +121,8 @@ pages: # this job will download the complete pages content from s3 and push it t
     on_stop: stop_review_environment
   rules:
     - if: $CI_COMMIT_BRANCH
-  needs: [prepare-pages-content]
-  dependencies: [prepare-pages-content]
+  needs: [store-web-package-and-create-pages-content]
+  dependencies: [store-web-package-and-create-pages-content]
 
 stop_review_environment:
   stage: deploy
