@@ -100,7 +100,7 @@ add-pages-content-to-s3-bucket: # puts the built web package to the s3 bucket co
     - if: $CI_COMMIT_BRANCH
 
 
-push-pages-content: # this job will download the complete pages content from s3 and push it to gitlab pages
+push-pages-pages: # this job will download the complete pages content from s3 and push it to gitlab pages
   stage: deploy
   image:
     name: amazon/aws-cli
