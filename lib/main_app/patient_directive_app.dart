@@ -40,6 +40,10 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
         });
   }
 
+  /// Helper to define the default transition to use
+  ///
+  /// GoRouter can only specify transition per Route, not globally (see https://stackoverflow.com/questions/71636397/set-default-transition-for-go-router-in-flutter)
+  /// On Web, we want to have a different transition than on
   CustomTransitionPage<T> buildPageWithDefaultTransition<T>({
     required BuildContext context,
     required GoRouterState state,
