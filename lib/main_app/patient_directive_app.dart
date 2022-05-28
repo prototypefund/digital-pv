@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pd_app/creation_process_navigation/creation_process_navigation_view.dart';
+import 'package:pd_app/current_situation/current_situation_view.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/navigation/routes.dart';
 import 'package:pd_app/themes/default_theme.dart';
@@ -26,16 +26,29 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
         routes: [
           GoRoute(
             path: Routes.root,
-            builder: (context, state) => WelcomeView.page(),
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition(context: context, state: state, child: WelcomeView.page()),
           ),
           GoRoute(
             path: Routes.currentSituation,
-            builder: (context, state) => CreationProcessNavigation.page(),
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition(context: context, state: state, child: CurrentSituation.page()),
           ),
         ],
         redirect: (state) {
           return null;
         });
+  }
+
+  CustomTransitionPage<T> buildPageWithDefaultTransition<T>({
+    required BuildContext context,
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return NoTransitionPage<T>(
+      key: state.pageKey,
+      child: child,
+    );
   }
 
   @override
