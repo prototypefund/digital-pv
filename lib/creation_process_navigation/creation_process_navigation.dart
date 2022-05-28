@@ -3,7 +3,7 @@ import 'package:pd_app/creation_process_navigation/creation_process_navigation_v
 import 'package:provider/provider.dart';
 
 class CreationProcessNavigation extends StatelessWidget {
-  CreationProcessNavigation({
+  const CreationProcessNavigation({
     Key? key,
     required this.widget,
   }) : super(key: key);
