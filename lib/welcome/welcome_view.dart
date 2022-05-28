@@ -17,7 +17,7 @@ class WelcomeView extends StatelessWidget {
     final WelcomeViewModel _viewModel = context.watch();
     return Scaffold(
       body: Center(
-        child: TextButton(
+        child: ElevatedButton(
           onPressed: () => _viewModel.onCallToActionPressed(context),
           child: Text(_viewModel.callToActionText),
         ),
