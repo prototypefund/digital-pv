@@ -10,6 +10,7 @@ import 'package:pd_app/use_cases/future_situations/future_situations.dart';
 import 'package:pd_app/use_cases/general_information_about_patient_directive/general_information_about_patient_directive.dart';
 import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_objective.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view.dart';
+import 'package:pd_app/use_cases/personal_details/general_information_about_patient_directive.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/treatment_activities/treatment_activities.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
@@ -75,6 +76,11 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
             path: Routes.generalInformationAboutPatientDirective,
             pageBuilder: (context, state) => buildPageWithDefaultTransition(
                 context: context, state: state, child: GeneralInformationAboutPatientDirective.page()),
+          ),
+          GoRoute(
+            path: Routes.personalDetails,
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition(context: context, state: state, child: PersonalDetails.page()),
           ),
         ],
         redirect: (state) {

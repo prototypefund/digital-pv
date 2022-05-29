@@ -10,10 +10,11 @@ class GeneralInformationAboutPatientDirective extends StatelessWidget {
   const GeneralInformationAboutPatientDirective({Key? key}) : super(key: key);
 
   static Widget page() {
-    final generalInformationAboutPatientDirective = GeneralInformationAboutPatientDirectiveViewModel();
+    final generalInformationAboutPatientDirectiveViewModel = GeneralInformationAboutPatientDirectiveViewModel();
     return MultiProvider(providers: [
-      ChangeNotifierProvider.value(value: generalInformationAboutPatientDirective),
-      ChangeNotifierProvider<CreationProcessNavigationViewModel>.value(value: generalInformationAboutPatientDirective)
+      ChangeNotifierProvider.value(value: generalInformationAboutPatientDirectiveViewModel),
+      ChangeNotifierProvider<CreationProcessNavigationViewModel>.value(
+          value: generalInformationAboutPatientDirectiveViewModel)
     ], child: const GeneralInformationAboutPatientDirective());
   }
 
