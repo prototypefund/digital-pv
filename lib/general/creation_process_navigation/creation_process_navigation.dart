@@ -51,14 +51,15 @@ class NavigationBar extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: () => _viewModel.onBackButtonPressed(context),
+                        onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
                         child: Text(_viewModel.backButtonText),
                       ),
                       Expanded(
                         child: Container(),
                       ),
                       ElevatedButton(
-                          onPressed: () => _viewModel.onNextButtonPressed(context),
+                          onPressed:
+                              _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
                           child: Text(
                             _viewModel.nextButtonText,
                           )),
