@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pd_app/creation_process_navigation/creation_process_navigation_view_model.dart';
-import 'package:pd_app/navigation/routes.dart';
-import 'package:pd_app/utils/l10n_mixin.dart';
+import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/utils/l10n_mixin.dart';
 
-class EvaluateCurrentAspectsViewModel
+class GeneralTreatmentObjectiveViewModel
     with ChangeNotifier, RootContextL10N
     implements CreationProcessNavigationViewModel {
   @override
@@ -21,11 +21,9 @@ class EvaluateCurrentAspectsViewModel
 
   @override
   void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.positiveAspects);
+    context.go(Routes.evaluateCurrentAspects);
   }
 
   @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.generalTreatmentObjective);
-  }
+  void onNextButtonPressed(BuildContext context) {}
 }

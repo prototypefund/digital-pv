@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pd_app/evaluate_current_aspects/evaluate_current_aspects_view.dart';
-import 'package:pd_app/general_treatment_objective/general_treatment_objective.dart';
+import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/themes/default_theme.dart';
 import 'package:pd_app/logging.dart';
-import 'package:pd_app/navigation/routes.dart';
-import 'package:pd_app/negative_aspects/negative_aspects_view.dart';
-import 'package:pd_app/positive_aspects/positive_aspects_view.dart';
-import 'package:pd_app/themes/default_theme.dart';
-import 'package:pd_app/welcome/welcome_view.dart';
+import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
+import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_objective.dart';
+import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view.dart';
+import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
+import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 
 class PatientDirectiveApp extends StatefulWidget {
   const PatientDirectiveApp({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pd_app/welcome/welcome_view_model.dart';
+import 'package:pd_app/use_cases/welcome/welcome_view_model.dart';
 import 'package:provider/provider.dart';
 
 class WelcomeView extends StatelessWidget {

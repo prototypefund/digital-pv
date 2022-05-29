@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pd_app/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CreationProcessNavigation extends StatelessWidget {
