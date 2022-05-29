@@ -9,7 +9,7 @@ class PositiveAspects extends StatelessWidget {
   const PositiveAspects({Key? key}) : super(key: key);
 
   static Widget page() {
-    final positiveAspectsViewModel = EvaluateCurrentAspectsViewModel();
+    final positiveAspectsViewModel = PositiveAspectsViewModel();
     return MultiProvider(providers: [
       ChangeNotifierProvider.value(value: positiveAspectsViewModel),
       ChangeNotifierProvider<CreationProcessNavigationViewModel>.value(value: positiveAspectsViewModel)

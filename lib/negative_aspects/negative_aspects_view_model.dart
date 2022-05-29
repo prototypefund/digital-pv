@@ -12,7 +12,7 @@ class NegativeAspectsViewModel with ChangeNotifier, RootContextL10N implements C
   String get backButtonText => l10n.navigationBack;
 
   @override
-  bool get nextButtonEnabled => false;
+  bool get nextButtonEnabled => true;
 
   @override
   String get nextButtonText => l10n.navigationNext;

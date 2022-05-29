@@ -4,7 +4,9 @@ import 'package:pd_app/creation_process_navigation/creation_process_navigation_v
 import 'package:pd_app/navigation/routes.dart';
 import 'package:pd_app/utils/l10n_mixin.dart';
 
-class PositiveAspectsViewModel with ChangeNotifier, RootContextL10N implements CreationProcessNavigationViewModel {
+class GeneralTreatmentObjectiveViewModel
+    with ChangeNotifier, RootContextL10N
+    implements CreationProcessNavigationViewModel {
   @override
   bool get backButtonEnabled => true;
 
@@ -19,11 +21,9 @@ class PositiveAspectsViewModel with ChangeNotifier, RootContextL10N implements C
 
   @override
   void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.welcome);
+    context.go(Routes.evaluateCurrentAspects);
   }
 
   @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.negativeAspects);
-  }
+  void onNextButtonPressed(BuildContext context) {}
 }
