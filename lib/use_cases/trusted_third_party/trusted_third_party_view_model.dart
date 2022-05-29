@@ -4,7 +4,7 @@ import 'package:pd_app/general/creation_process_navigation/creation_process_navi
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 
-class FutureSituationsViewModel with ChangeNotifier, RootContextL10N implements CreationProcessNavigationViewModel {
+class TrustedThirdPartyViewModel with ChangeNotifier, RootContextL10N implements CreationProcessNavigationViewModel {
   @override
   bool get backButtonEnabled => true;
 
@@ -19,11 +19,9 @@ class FutureSituationsViewModel with ChangeNotifier, RootContextL10N implements 
 
   @override
   void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.treatmentActivities);
+    context.go(Routes.futureSituations);
   }
 
   @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.trustedThirdParty);
-  }
+  void onNextButtonPressed(BuildContext context) {}
 }
