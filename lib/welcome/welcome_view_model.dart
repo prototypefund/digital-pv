@@ -12,6 +12,6 @@ class WelcomeViewModel with ChangeNotifier {
   }
 
   void onCallToActionPressed(BuildContext context) {
-    context.push(Routes.currentSituation);
+    context.push(Routes.positiveAspects);
   }
 }

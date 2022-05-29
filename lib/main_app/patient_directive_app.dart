@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pd_app/current_situation/current_situation_view.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/navigation/routes.dart';
+import 'package:pd_app/negative_aspects/negative_aspects_view.dart';
+import 'package:pd_app/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/themes/default_theme.dart';
 import 'package:pd_app/welcome/welcome_view.dart';
 
@@ -25,14 +26,19 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
     _router = GoRouter(
         routes: [
           GoRoute(
-            path: Routes.root,
+            path: Routes.welcome,
             pageBuilder: (context, state) =>
                 buildPageWithDefaultTransition(context: context, state: state, child: WelcomeView.page()),
           ),
           GoRoute(
-            path: Routes.currentSituation,
+            path: Routes.positiveAspects,
             pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: CurrentSituation.page()),
+                buildPageWithDefaultTransition(context: context, state: state, child: PositiveAspects.page()),
+          ),
+          GoRoute(
+            path: Routes.negativeAspects,
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition(context: context, state: state, child: NegativeAspects.page()),
           ),
         ],
         redirect: (state) {
