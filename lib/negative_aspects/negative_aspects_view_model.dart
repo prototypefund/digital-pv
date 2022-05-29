@@ -23,5 +23,7 @@ class NegativeAspectsViewModel with ChangeNotifier, RootContextL10N implements C
   }
 
   @override
-  void onNextButtonPressed(BuildContext context) {}
+  void onNextButtonPressed(BuildContext context) {
+    context.go(Routes.evaluateCurrentAspects);
+  }
 }

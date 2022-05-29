@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pd_app/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:provider/provider.dart';
 
-class CreationProcessNavigation<ViewModelClass extends CreationProcessNavigationViewModel> extends StatelessWidget {
+class CreationProcessNavigation extends StatelessWidget {
   const CreationProcessNavigation({
     Key? key,
     required this.widget,
@@ -15,22 +15,22 @@ class CreationProcessNavigation<ViewModelClass extends CreationProcessNavigation
     return Scaffold(
         body: Column(
       children: [
-        NavigationBar<ViewModelClass>(),
+        const NavigationBar(),
         Expanded(child: widget),
-        NavigationBar<ViewModelClass>(),
+        const NavigationBar(),
       ],
     ));
   }
 }
 
-class NavigationBar<ViewModelClass extends CreationProcessNavigationViewModel> extends StatelessWidget {
+class NavigationBar extends StatelessWidget {
   const NavigationBar({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ViewModelClass _viewModel = context.watch();
+    final CreationProcessNavigationViewModel _viewModel = context.watch();
 
     return Material(
       elevation: 15,

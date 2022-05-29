@@ -4,9 +4,7 @@ import 'package:pd_app/creation_process_navigation/creation_process_navigation_v
 import 'package:pd_app/navigation/routes.dart';
 import 'package:pd_app/utils/l10n_mixin.dart';
 
-class EvaluateCurrentAspectsViewModel
-    with ChangeNotifier, RootContextL10N
-    implements CreationProcessNavigationViewModel {
+class PositiveAspectsViewModel with ChangeNotifier, RootContextL10N implements CreationProcessNavigationViewModel {
   @override
   bool get backButtonEnabled => true;
 

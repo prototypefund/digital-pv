@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/evaluate_current_aspects/evaluate_current_aspects_view.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/navigation/routes.dart';
 import 'package:pd_app/negative_aspects/negative_aspects_view.dart';
@@ -39,6 +40,11 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
             path: Routes.negativeAspects,
             pageBuilder: (context, state) =>
                 buildPageWithDefaultTransition(context: context, state: state, child: NegativeAspects.page()),
+          ),
+          GoRoute(
+            path: Routes.evaluateCurrentAspects,
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition(context: context, state: state, child: EvaluateCurrentAspects.page()),
           ),
         ],
         redirect: (state) {
