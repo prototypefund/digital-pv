@@ -9,6 +9,7 @@ import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspec
 import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_objective.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
+import 'package:pd_app/use_cases/treatment_activities/treatment_activities.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 
 class PatientDirectiveApp extends StatefulWidget {
@@ -51,6 +52,11 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
             path: Routes.generalTreatmentObjective,
             pageBuilder: (context, state) =>
                 buildPageWithDefaultTransition(context: context, state: state, child: GeneralTreatmentObjective.page()),
+          ),
+          GoRoute(
+            path: Routes.treatmentActivities,
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition(context: context, state: state, child: TreatmentActivities.page()),
           ),
         ],
         redirect: (state) {
