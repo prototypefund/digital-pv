@@ -114,7 +114,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
       supportedLocales: L10n.supportedLocales,
       builder: (context, widget) {
         _injectL10nIntoGetIt(context);
-        return widget ?? Container();
+        return widget ?? const SizedBox();
       },
     );
   }
