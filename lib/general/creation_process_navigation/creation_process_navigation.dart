@@ -19,37 +19,37 @@ class CreationProcessNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      color: Theme.of(context).backgroundColor,
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Theme.of(context).primaryColor,
-            pinned: true,
-            snap: false,
-            floating: true,
-            expandedHeight: 160.0,
-            title: const NavigationBarButtons(),
-            flexibleSpace: const FlexibleSpaceBar(
-              background: Padding(
-                padding: EdgeInsets.all(sliverBarContentPadding),
-                child: FlutterLogo(),
+      body: Container(
+        color: Theme.of(context).backgroundColor,
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Theme.of(context).primaryColor,
+              pinned: true,
+              snap: false,
+              floating: true,
+              expandedHeight: 160.0,
+              title: const NavigationBarButtons(),
+              flexibleSpace: const FlexibleSpaceBar(
+                background: Padding(
+                  padding: EdgeInsets.all(sliverBarContentPadding),
+                  child: FlutterLogo(),
+                ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: ConstrainedSliverWidth(
-              maxWidth: maximumContentWidth,
-              child: Padding(
-                padding: const EdgeInsets.all(contentAreaPadding),
-                child: widget,
+            SliverToBoxAdapter(
+              child: ConstrainedSliverWidth(
+                maxWidth: maximumContentWidth,
+                child: Padding(
+                  padding: const EdgeInsets.all(contentAreaPadding),
+                  child: widget,
+                ),
               ),
-            ),
-            // child: Container(constraints: const BoxConstraints(maxWidth: maximumContentWidth), child: widget),
-          )
-        ],
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 
