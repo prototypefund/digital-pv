@@ -5,7 +5,7 @@ import 'package:pd_app/general/main_app/patient_directive_app.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 
 void main() {
-  L10nDe l10n = L10nDe();
+  final L10nDe l10n = L10nDe();
   setUp(() {
     GetIt.instance.reset();
     GetIt.instance.registerSingleton(l10n);
