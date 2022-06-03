@@ -15,6 +15,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
   static const double maximumContentWidth = 1200;
   static const double sliverBarContentPadding = 8.0;
   static const double contentAreaPadding = 32.0;
+  static const double sliverAppBarExpandedHeight = 160.0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
               pinned: true,
               snap: false,
               floating: true,
-              expandedHeight: 160.0,
+              expandedHeight: sliverAppBarExpandedHeight,
               title: NavigationBarButtons<ViewModelType>(),
               flexibleSpace: const FlexibleSpaceBar(
                 background: Padding(
