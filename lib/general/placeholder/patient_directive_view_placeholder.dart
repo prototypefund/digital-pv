@@ -16,7 +16,7 @@ class PatientDirectiveViewPlaceholder extends StatelessWidget with PlaceholderTe
             style: Theme.of(context).textTheme.headline2,
           ),
           Text(
-            PlaceholderText.placeholderText,
+            PlaceholderText.veryLongPlaceholderText,
             style: Theme.of(context).textTheme.bodyText1,
           )
         ],
