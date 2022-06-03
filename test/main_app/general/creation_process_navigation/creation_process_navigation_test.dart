@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/placeholder/placeholder_text.dart';
+import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,7 +26,9 @@ void main() {
   });
 }
 
-class StubCreationProcessNavigationViewModel with ChangeNotifier implements CreationProcessNavigationViewModel {
+class StubCreationProcessNavigationViewModel
+    with ChangeNotifier, RootContextL10N
+    implements CreationProcessNavigationViewModel {
   @override
   bool get backButtonEnabled => false;
 
