@@ -10,13 +10,15 @@ class CreationProcessNavigation extends StatelessWidget {
 
   final Widget widget;
 
+  static const double maximumContentWidth = 1200;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
       children: [
         const NavigationBar(),
-        Expanded(child: widget),
+        Expanded(child: Container(constraints: const BoxConstraints(maxWidth: maximumContentWidth), child: widget)),
         const NavigationBar(),
       ],
     ));

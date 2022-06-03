@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/placeholder/placeholder_text.dart';
 
-class PatientDirectiveViewPlaceholder extends StatelessWidget {
+class PatientDirectiveViewPlaceholder extends StatelessWidget with PlaceholderText {
   const PatientDirectiveViewPlaceholder({Key? key, required this.title}) : super(key: key);
 
   final String title;
@@ -8,9 +9,17 @@ class PatientDirectiveViewPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.headline2,
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          Text(
+            PlaceholderText.placeholderText,
+            style: Theme.of(context).textTheme.bodyText1,
+          )
+        ],
       ),
     );
   }
