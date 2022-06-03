@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:provider/provider.dart';
 
-class CreationProcessNavigation extends StatelessWidget {
+class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
   const CreationProcessNavigation({
     Key? key,
     required this.widget,
@@ -29,7 +29,7 @@ class CreationProcessNavigation extends StatelessWidget {
               snap: false,
               floating: true,
               expandedHeight: 160.0,
-              title: const NavigationBarButtons(),
+              title: NavigationBarButtons<ViewModelType>(),
               flexibleSpace: const FlexibleSpaceBar(
                 background: Padding(
                   padding: EdgeInsets.all(sliverBarContentPadding),
@@ -74,14 +74,14 @@ class ConstrainedSliverWidth extends StatelessWidget {
   }
 }
 
-class NavigationBarButtons extends StatelessWidget {
+class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
   const NavigationBarButtons({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final CreationProcessNavigationViewModel _viewModel = context.watch();
+    final ViewModelType _viewModel = context.watch();
 
     const iconSize = 16.0;
 
