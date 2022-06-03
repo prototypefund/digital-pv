@@ -106,8 +106,8 @@ class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewMo
                     onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
                     label: Text(_viewModel.backButtonText),
                   ),
-                  Expanded(
-                    child: Container(),
+                  const Expanded(
+                    child: SizedBox(),
                   ),
                   ElevatedButton.icon(
                       icon: const Icon(
