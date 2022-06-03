@@ -21,7 +21,7 @@ class EvaluateCurrentAspectsViewModel
 
   @override
   void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.positiveAspects);
+    context.go(Routes.negativeAspects);
   }
 
   @override
