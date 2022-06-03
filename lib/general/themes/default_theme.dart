@@ -10,4 +10,3 @@ mixin DefaultTheme {
       textTheme: const TextTheme(caption: TextStyle(color: Colors.black), headline2: TextStyle()));
 }
 
-//
