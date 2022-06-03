@@ -82,6 +82,9 @@ class NavigationBarButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CreationProcessNavigationViewModel _viewModel = context.watch();
+
+    const iconSize = 16.0;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -92,18 +95,26 @@ class NavigationBarButtons extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 800),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  ElevatedButton(
+                  ElevatedButton.icon(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_sharp,
+                      size: iconSize,
+                    ),
                     onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
-                    child: Text(_viewModel.backButtonText),
+                    label: Text(_viewModel.backButtonText),
                   ),
                   Expanded(
                     child: Container(),
                   ),
-                  ElevatedButton(
+                  ElevatedButton.icon(
+                      icon: const Icon(
+                        Icons.arrow_forward_ios_sharp,
+                        size: iconSize,
+                      ),
                       onPressed: _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
-                      child: Text(
+                      label: Text(
                         _viewModel.nextButtonText,
                       )),
                 ],
