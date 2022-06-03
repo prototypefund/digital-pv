@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:provider/provider.dart';
@@ -11,68 +13,105 @@ class CreationProcessNavigation extends StatelessWidget {
   final Widget widget;
 
   static const double maximumContentWidth = 1200;
+  static const double sliverBarContentPadding = 8.0;
+  static const double contentAreaPadding = 32.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        const NavigationBar(),
-        Expanded(child: Container(constraints: const BoxConstraints(maxWidth: maximumContentWidth), child: widget)),
-        const NavigationBar(),
-      ],
+        body: Container(
+      color: Theme.of(context).backgroundColor,
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Theme.of(context).primaryColor,
+            pinned: true,
+            snap: false,
+            floating: true,
+            expandedHeight: 160.0,
+            title: const NavigationBarButtons(),
+            flexibleSpace: const FlexibleSpaceBar(
+              background: Padding(
+                padding: EdgeInsets.all(sliverBarContentPadding),
+                child: FlutterLogo(),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: ConstrainedSliverWidth(
+              maxWidth: maximumContentWidth,
+              child: Padding(
+                padding: const EdgeInsets.all(contentAreaPadding),
+                child: widget,
+              ),
+            ),
+            // child: Container(constraints: const BoxConstraints(maxWidth: maximumContentWidth), child: widget),
+          )
+        ],
+      ),
     ));
   }
 }
 
-class NavigationBar extends StatelessWidget {
-  const NavigationBar({
+class ConstrainedSliverWidth extends StatelessWidget {
+  final Widget child;
+  final double maxWidth;
+
+  const ConstrainedSliverWidth({
+    Key? key,
+    required this.child,
+    required this.maxWidth,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final padding = (size.width - maxWidth) / 2;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: max(padding, 0)),
+      child: child,
+    );
+  }
+}
+
+class NavigationBarButtons extends StatelessWidget {
+  const NavigationBarButtons({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final CreationProcessNavigationViewModel _viewModel = context.watch();
-
-    return Material(
-      elevation: 15,
-      child: Container(
-        width: double.infinity,
-        color: Theme.of(context).primaryColor,
-        height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 800),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ElevatedButton(
-                        onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
-                        child: Text(_viewModel.backButtonText),
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      ElevatedButton(
-                          onPressed:
-                              _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
-                          child: Text(
-                            _viewModel.nextButtonText,
-                          )),
-                    ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
+                    child: Text(_viewModel.backButtonText),
                   ),
-                ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  ElevatedButton(
+                      onPressed: _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                      child: Text(
+                        _viewModel.nextButtonText,
+                      )),
+                ],
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

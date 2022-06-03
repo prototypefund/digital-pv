@@ -14,6 +14,10 @@ class PatientDirectiveViewPlaceholder extends StatelessWidget with PlaceholderTe
           Text(
             title,
             style: Theme.of(context).textTheme.headline2,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 32,
           ),
           Text(
             PlaceholderText.veryLongPlaceholderText,

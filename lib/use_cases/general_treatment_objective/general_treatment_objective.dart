@@ -12,7 +12,7 @@ class GeneralTreatmentObjective extends StatelessWidget {
     final generalTreatmentObjectiveViewModel = GeneralTreatmentObjectiveViewModel();
     return MultiProvider(providers: [
       ChangeNotifierProvider.value(value: generalTreatmentObjectiveViewModel),
-      ChangeNotifierProvider<CreationProcessNavigationViewModel>.value(value: generalTreatmentObjectiveViewModel)
+      ChangeNotifierProvider<CreationProcessNavigationViewModel>.value(value: generalTreatmentObjectiveViewModel),
     ], child: const GeneralTreatmentObjective());
   }
 
