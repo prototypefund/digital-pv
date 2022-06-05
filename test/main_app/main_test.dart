@@ -5,6 +5,7 @@ import 'package:pd_app/general/main_app/patient_directive_app.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   final L10nDe l10n = L10nDe();
   setUp(() {
     GetIt.instance.reset();
@@ -25,7 +26,7 @@ void main() {
     await tester.tap(find.text(l10n.createDigitalPatientDirective));
     await tester.pumpAndSettle();
 
-    expect(find.text("Positive Aspekte", skipOffstage: false), findsOneWidget);
+    expect(find.text(l10n.positiveAspectsHeadline, skipOffstage: false), findsOneWidget);
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
@@ -91,7 +92,7 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Positive Aspekte", skipOffstage: false), findsOneWidget);
+    expect(find.text(l10n.positiveAspectsHeadline, skipOffstage: false), findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

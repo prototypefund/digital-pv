@@ -10,10 +10,10 @@ class BackgroundContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
             image: Svg(
-              Images.backgroundDecorationPath,
+              Images.backgroundDecorationPath(),
             ),
             repeat: ImageRepeat.repeatY,
             alignment: Alignment.topCenter),

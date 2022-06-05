@@ -7,6 +7,8 @@ import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   testWidgets('Can display large content without RenderFlex exception', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
