@@ -21,6 +21,7 @@ dependencies:
   mockito: 5.1.0
   package_info_plus: 1.4.2
   provider: 6.0.2
+  responsive_sizer: ^3.0.8
   retry: ^3.1.0
   rxdart: ^0.27.3
   stack_trace: 1.10.0
@@ -77,3 +78,4 @@ flutter:
 
   assets:
     - assets/
+    - assets/images/

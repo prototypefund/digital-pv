@@ -1,5 +1,6 @@
 {
   "createDigitalPatientDirective": "dPV erstellen",
   "navigationBack": "Zurück",
-  "navigationNext": "Weiter"
+  "navigationNext": "Weiter",
+  "navigationSkip": "Überspringen"
 }
