@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.dart';
 import 'package:provider/provider.dart';
-
-import 'positive_aspects_view_model.dart';
 
 class PositiveAspects extends StatelessWidget {
   const PositiveAspects({Key? key}) : super(key: key);

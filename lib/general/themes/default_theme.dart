@@ -8,7 +8,7 @@ mixin DefaultTheme {
       backgroundColor: DefaultThemeColors.white,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              textStyle: TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
               primary: DefaultThemeColors.purple)),
       textTheme: Typography.blackCupertino.merge(const TextTheme(
           headlineLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: DefaultThemeColors.black),
