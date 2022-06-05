@@ -13,4 +13,27 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel {
   void onNextButtonPressed(BuildContext context) {
     context.go(Routes.negativeAspects);
   }
+
+  bool get addPositiveAspectCallToActionEnabled => true;
+
+  VoidCallback? get addPositiveAspectCallToActionPressed =>
+      addPositiveAspectCallToActionEnabled ? () => onAddPositiveAspectCallToActionPressed : null;
+
+  void onAddPositiveAspectCallToActionPressed() {}
+
+  String get positiveAspectsHeadlineText => l10n.positiveAspectsHeadline;
+
+  String get positiveAspectsExplanationText => l10n.positiveAspectsExplanation;
+
+  String get positiveAspectsSignificanceLabel => l10n.significance;
+
+  String get positiveAspectsSignificanceHighLabel => l10n.significanceHigh;
+
+  String get positiveAspectsSignificanceLowLabel => l10n.significanceLow;
+
+  String get addPositiveAspectCallToActionText => l10n.addPositiveAspectCallToAction;
+
+  bool get showNoPositiveAspectsMessage => true;
+
+  String get noPositiveAspectsMessageText => l10n.positiveAspectsEmptyText;
 }

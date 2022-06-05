@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/themes/colors.dart';
 
 mixin DefaultTheme {
   ThemeData get defaultTheme => ThemeData(
       fontFamily: "Roboto",
-      primaryColor: Colors.white,
-      backgroundColor: Colors.white,
-      elevatedButtonTheme:
-          ElevatedButtonThemeData(style: ElevatedButton.styleFrom(primary: const Color.fromARGB(255, 124, 55, 250))),
-      textTheme: const TextTheme(caption: TextStyle(color: Colors.black), headline2: TextStyle()));
+      primaryColor: DefaultThemeColors.white,
+      backgroundColor: DefaultThemeColors.white,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              textStyle: TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
+              primary: DefaultThemeColors.purple)),
+      textTheme: Typography.blackCupertino.merge(const TextTheme(
+          headlineLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: DefaultThemeColors.black),
+          bodyLarge: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
+          bodyMedium: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))));
 }

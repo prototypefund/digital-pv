@@ -1,5 +1,12 @@
 {
   "createDigitalPatientDirective": "dPV erstellen",
   "navigationBack": "Zurück",
-  "navigationNext": "Weiter"
+  "navigationNext": "Weiter",
+  "positiveAspectsHeadline": "Was macht mir Freude?",
+  "positiveAspectsExplanation": "Bestimmen Sie Aspekte aus Ihrem Leben, die Ihnen Freude machen.",
+  "positiveAspectsEmptyText": "Bisher wurden noch keine positiven Aspekte angegeben.",
+  "addPositiveAspectCallToAction": "Positiven Aspekt hinzufügen",
+  "significance": "Bedeutung",
+  "significanceLow": "gering",
+  "significanceHigh": "hoch"
 }
