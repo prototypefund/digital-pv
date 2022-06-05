@@ -1,3 +1,5 @@
 {
-  "pushedButtonText": "You have pushed this button so many times"
+  "createDigitalPatientDirective": "dPV erstellen",
+  "navigationBack": "Zurück",
+  "navigationNext": "Weiter"
 }

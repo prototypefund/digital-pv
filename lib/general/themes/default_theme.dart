@@ -1,0 +1,11 @@
+import 'package:flutter/material.dart';
+
+mixin DefaultTheme {
+  ThemeData get defaultTheme => ThemeData(
+      fontFamily: "Roboto",
+      primaryColor: Colors.white,
+      backgroundColor: Colors.white,
+      elevatedButtonTheme:
+          ElevatedButtonThemeData(style: ElevatedButton.styleFrom(primary: const Color.fromARGB(255, 124, 55, 250))),
+      textTheme: const TextTheme(caption: TextStyle(color: Colors.black), headline2: TextStyle()));
+}
