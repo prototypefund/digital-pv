@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:pd_app/general/themes/images.dart';
 
 class BackgroundContainer extends StatelessWidget {
@@ -12,9 +11,7 @@ class BackgroundContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: Svg(
-              Images.backgroundDecorationPath(),
-            ),
+            image: AssetImage(Images.backgroundDecorationPath()),
             repeat: ImageRepeat.repeatY,
             alignment: Alignment.topCenter),
       ),
