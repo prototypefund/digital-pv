@@ -48,6 +48,9 @@ class PositiveAspects extends StatelessWidget {
           child: ElevatedButton(
               onPressed: _viewModel.addPositiveAspectCallToActionPressed,
               child: Text(_viewModel.addPositiveAspectCallToActionText)),
+        ),
+        SizedBox(
+          height: 500,
         )
       ],
     ));

@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -40,13 +39,11 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
               ),
             ),
             SliverToBoxAdapter(
-              child: BackgroundContainer(
-                child: ConstrainedSliverWidth(
-                  maxWidth: maximumContentWidth,
-                  child: Padding(
-                    padding: const EdgeInsets.all(contentAreaPadding),
-                    child: widget,
-                  ),
+              child: ConstrainedSliverWidth(
+                maxWidth: maximumContentWidth,
+                child: Padding(
+                  padding: const EdgeInsets.all(contentAreaPadding),
+                  child: widget,
                 ),
               ),
             )
