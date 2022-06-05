@@ -126,7 +126,7 @@ class _WelcomeViewState extends State<WelcomeView> {
             },
             style: TextButton.styleFrom(
               elevation: 0,
-              textStyle: Theme.of(context).textTheme.bodySmall,
+              textStyle: Theme.of(context).textTheme.bodyMedium,
             ),
             child: Text(
               _viewModel.skipButtonText,
@@ -153,7 +153,7 @@ class _WelcomeViewState extends State<WelcomeView> {
               ),
               elevation: 0,
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
-              textStyle: Theme.of(context).textTheme.bodySmall,
+              textStyle: Theme.of(context).textTheme.bodyMedium,
             ),
             child: Text(_viewModel.nextButtonText),
           ),
@@ -173,7 +173,7 @@ class _WelcomeViewState extends State<WelcomeView> {
               borderRadius: BorderRadius.circular(50),
             ),
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
-            textStyle: Theme.of(context).textTheme.bodySmall),
+            textStyle: Theme.of(context).textTheme.bodyMedium),
         child: Text(_viewModel.callToActionText),
       ),
     );
