@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 mixin Images {
-  static const String _backgroundDecorationPath = 'images/background.png';
+  static const String _backgroundDecorationPath = 'images/background.svg';
+
+  static AssetImage backgroundDecoration() => AssetImage(backgroundDecorationPath());
 
   static String backgroundDecorationPath() => _buildAssetPathBasedOnPlattform(rawPath: _backgroundDecorationPath);
 
