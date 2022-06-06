@@ -125,13 +125,17 @@ class AspectWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    sliderLowLabel,
-                    style: Theme.of(context).textTheme.labelSmall,
+                  Flexible(
+                    child: Text(
+                      sliderLowLabel,
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
                   ),
-                  Text(
-                    sliderHighLabel,
-                    style: Theme.of(context).textTheme.labelSmall,
+                  Flexible(
+                    child: Text(
+                      sliderHighLabel,
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
                   )
                 ],
               )
