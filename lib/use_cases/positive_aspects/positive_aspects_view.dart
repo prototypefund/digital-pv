@@ -49,6 +49,9 @@ class PositiveAspects extends StatelessWidget {
               onPressed: _viewModel.addPositiveAspectCallToActionPressed,
               child: Text(_viewModel.addPositiveAspectCallToActionText)),
         ),
+        SizedBox(
+          height: 500,
+        )
       ],
     ));
   }
