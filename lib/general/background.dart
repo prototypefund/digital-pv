@@ -14,7 +14,6 @@ class BackgroundContainer extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        child,
         Positioned(
           top: 0,
           left: 0,
@@ -23,6 +22,7 @@ class BackgroundContainer extends StatelessWidget {
             children: _buildBackgroundChildren(context, repetitions: backgroundPatternRepetitions),
           ),
         ),
+        child,
       ],
     );
   }

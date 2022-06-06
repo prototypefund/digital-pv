@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
+import 'package:pd_app/general/model/aspect.dart';
+import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.dart';
 import 'package:provider/provider.dart';
@@ -35,14 +37,32 @@ class PositiveAspects extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-        Padding(
-          padding: Paddings.emptyViewPadding,
-          child: Text(
-            _viewModel.noPositiveAspectsMessageText,
-            textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
+        if (_viewModel.showNoPositiveAspectsMessage)
+          Padding(
+            padding: Paddings.emptyViewPadding,
+            child: Text(
+              _viewModel.noPositiveAspectsMessageText,
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          )
+        else
+          Padding(
+              padding: Paddings.listPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: _viewModel.positiveAspects
+                    .map((positiveAspect) => Padding(
+                          padding: Paddings.listElementPadding,
+                          child: AspectWidget(
+                            aspect: positiveAspect,
+                            sliderDescription: _viewModel.positiveAspectsSignificanceLabel,
+                            sliderHighLabel: _viewModel.positiveAspectsSignificanceHighLabel,
+                            sliderLowLabel: _viewModel.positiveAspectsSignificanceLowLabel,
+                          ),
+                        ))
+                    .toList(),
+              )),
         Padding(
           padding: Paddings.callToActionPadding,
           child: ElevatedButton(
@@ -51,5 +71,74 @@ class PositiveAspects extends StatelessWidget {
         ),
       ],
     ));
+  }
+}
+
+class AspectWidget extends StatelessWidget {
+  const AspectWidget(
+      {Key? key,
+      required this.aspect,
+      required this.sliderDescription,
+      required this.sliderHighLabel,
+      required this.sliderLowLabel})
+      : super(key: key);
+
+  final Aspect aspect;
+
+  final String sliderDescription;
+  final String sliderLowLabel;
+  final String sliderHighLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final PositiveAspectsViewModel _viewModel = context.watch();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          aspect.name,
+          textAlign: TextAlign.start,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        Container(
+          constraints: Constraints.sliderConstraints,
+          padding: Paddings.sliderPadding,
+          child: Column(
+            children: [
+              if (_viewModel.showPosistiveAspectsSignificanceLabel)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      sliderDescription,
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ],
+                ),
+              Slider(
+                value: aspect.weight.value,
+                onChanged: (double value) {
+                  _viewModel.changeAspectWeight(aspect: aspect, weight: value);
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    sliderLowLabel,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  Text(
+                    sliderHighLabel,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  )
+                ],
+              )
+            ],
+          ),
+        )
+      ],
+    );
   }
 }
