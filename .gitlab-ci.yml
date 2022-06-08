@@ -66,8 +66,8 @@ build-web-package:
   variables:
     KUBERNETES_CPU_REQUEST: 2000m
     KUBERNETES_CPU_LIMIT: 2500m
-    KUBERNETES_MEMORY_REQUEST: 2Gi
-    KUBERNETES_MEMORY_LIMIT: 4Gi
+    KUBERNETES_MEMORY_REQUEST: 2000Mi
+    KUBERNETES_MEMORY_LIMIT: 3500Mi
   stage: build
   script:
     - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
