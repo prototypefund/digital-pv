@@ -6,6 +6,9 @@ mixin DefaultTheme {
       fontFamily: "Roboto",
       primaryColor: DefaultThemeColors.white,
       backgroundColor: DefaultThemeColors.white,
+      inputDecorationTheme: const InputDecorationTheme(
+          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: DefaultThemeColors.purple)),
+          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: DefaultThemeColors.purple))),
       sliderTheme: SliderThemeData(
           overlayShape: SliderComponentShape.noThumb,
           activeTrackColor: DefaultThemeColors.darkGrey,
@@ -21,6 +24,8 @@ mixin DefaultTheme {
           bodyLarge: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
           titleMedium:
               TextStyle(fontSize: 20, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
+          labelLarge:
+              TextStyle(fontSize: 16, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
           labelMedium: TextStyle(
               fontSize: 13, color: DefaultThemeColors.blackTransparent, fontWeight: FontWeight.normal, height: 18 / 13),
           labelSmall: TextStyle(

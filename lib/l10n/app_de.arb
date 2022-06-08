@@ -6,6 +6,8 @@
   "positiveAspectsExplanation": "Bestimmen Sie Aspekte aus Ihrem Leben, die Ihnen Freude machen.",
   "positiveAspectsEmptyText": "Bisher wurden noch keine positiven Aspekte angegeben.",
   "addPositiveAspectCallToAction": "Positiven Aspekt hinzufügen",
+  "addPositiveAspectNavigationButton": "Aspekt hinzufügen",
+  "addPositiveAspectTextFieldHint": "Positiver Aspekt",
   "significanceSliderLabel": "",
   "significanceLow": "Geringe Bedeutung",
   "significanceHigh": "Hohe Bedeutung"

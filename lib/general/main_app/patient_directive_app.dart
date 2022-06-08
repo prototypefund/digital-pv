@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/themes/default_theme.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view.dart';
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations.dart';
 import 'package:pd_app/use_cases/general_information_about_patient_directive/general_information_about_patient_directive.dart';
@@ -41,6 +42,11 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
             path: Routes.positiveAspects,
             pageBuilder: (context, state) =>
                 buildPageWithDefaultTransition(context: context, state: state, child: PositiveAspects.page()),
+          ),
+          GoRoute(
+            path: Routes.addPositiveAspect,
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition(context: context, state: state, child: AddPositiveAspect.page()),
           ),
           GoRoute(
             path: Routes.negativeAspects,

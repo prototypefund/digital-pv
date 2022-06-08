@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
@@ -19,10 +20,12 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
 
   bool get addPositiveAspectCallToActionEnabled => true;
 
-  VoidCallback? get addPositiveAspectCallToActionPressed =>
-      addPositiveAspectCallToActionEnabled ? () => onAddPositiveAspectCallToActionPressed : null;
+  VoidCallback? addPositiveAspectCallToActionPressed(BuildContext context) =>
+      addPositiveAspectCallToActionEnabled ? () => onAddPositiveAspectCallToActionPressed(context) : null;
 
-  void onAddPositiveAspectCallToActionPressed() {}
+  void onAddPositiveAspectCallToActionPressed(BuildContext context) {
+    context.push(Routes.addPositiveAspect);
+  }
 
   String get positiveAspectsHeadlineText => l10n.positiveAspectsHeadline;
 

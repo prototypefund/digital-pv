@@ -7,5 +7,6 @@ mixin Paddings {
   static const EdgeInsets listPadding = EdgeInsets.only(top: 32);
   static const EdgeInsets sliderPadding = EdgeInsets.only(top: 5, bottom: 10);
   static const EdgeInsets listElementPadding = EdgeInsets.only(bottom: 32);
+  static const EdgeInsets textFieldPadding = EdgeInsets.only(top: 16);
   static const EdgeInsets callToActionPadding = EdgeInsets.only(top: 16);
 }

@@ -48,4 +48,10 @@ class StubCreationProcessNavigationViewModel
 
   @override
   void onNextButtonPressed(BuildContext context) {}
+
+  @override
+  bool get backButtonVisible => false;
+
+  @override
+  bool get nextButtonVisible => false;
 }

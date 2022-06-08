@@ -1,5 +1,5 @@
 default:
-  tags: ["docker"]
+  tags: [ "docker" ]
 
 image: cirrusci/flutter:3.0.1
 
@@ -14,18 +14,21 @@ analyse:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "web"'
-  needs: []
+  needs: [ ]
   before_script:
     - flutter clean
   script:
     - flutter analyze
 
 all_unit_tests:
+  variables:
+    KUBERNETES_CPU_REQUEST: 1
+    KUBERNETES_CPU_LIMIT: 2
   stage: test
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "web"'
-  needs: []
+  needs: [ ]
   before_script:
     - flutter clean
   script:
@@ -39,8 +42,8 @@ coverage:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "web"'
-  needs: [all_unit_tests]
-  dependencies: [all_unit_tests]
+  needs: [ all_unit_tests ]
+  dependencies: [ all_unit_tests ]
 
   script:
     - lcov --summary coverage/lcov.info
@@ -60,6 +63,11 @@ coverage:
 
 
 build-web-package:
+  variables:
+    KUBERNETES_CPU_REQUEST: 2000m
+    KUBERNETES_CPU_LIMIT: 2500m
+    KUBERNETES_MEMORY_REQUEST: 2Gi
+    KUBERNETES_MEMORY_LIMIT: 4Gi
   stage: build
   script:
     - flutter build web --base-href "/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME/web/"
@@ -68,8 +76,8 @@ build-web-package:
       - build/web
   rules:
     - if: $CI_COMMIT_BRANCH
-  needs: [analyse, all_unit_tests]
-  dependencies: [analyse, all_unit_tests]
+  needs: [ analyse, all_unit_tests ]
+  dependencies: [ analyse, all_unit_tests ]
 
 store-web-package-and-create-pages-content: # puts the built web package to the s3 bucket containing all pages files
   stage: deploy
@@ -80,7 +88,7 @@ store-web-package-and-create-pages-content: # puts the built web package to the 
     AWS_DEFAULT_REGION: $GITLAB_PAGES_DEV_BUCKET_REGION
   image:
     name: amazon/aws-cli
-    entrypoint: [""]
+    entrypoint: [ "" ]
   script:
     - aws s3 rm s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
     - aws s3 cp build/ s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive
@@ -90,8 +98,8 @@ store-web-package-and-create-pages-content: # puts the built web package to the 
       - pages-content
   rules:
     - if: $CI_COMMIT_BRANCH
-  needs: [build-web-package]
-  dependencies: [build-web-package]
+  needs: [ build-web-package ]
+  dependencies: [ build-web-package ]
 
 
 pages: # this job take the downloaded s3 content from store-web-package-and-create-pages-content and push it to pages gitlab pages. The job needs to be name likes this for the deployment to pages to work (source: https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html)
@@ -108,8 +116,8 @@ pages: # this job take the downloaded s3 content from store-web-package-and-crea
     on_stop: remove-review-app-from-s3
   rules:
     - if: $CI_COMMIT_BRANCH
-  needs: [store-web-package-and-create-pages-content]
-  dependencies: [store-web-package-and-create-pages-content]
+  needs: [ store-web-package-and-create-pages-content ]
+  dependencies: [ store-web-package-and-create-pages-content ]
 
 remove-review-app-from-s3:
   stage: deploy
@@ -121,7 +129,7 @@ remove-review-app-from-s3:
     GIT_STRATEGY: none # prevents failing to check out repo, when branch was deleted and this job is executed
   image:
     name: amazon/aws-cli
-    entrypoint: [""]
+    entrypoint: [ "" ]
   script:
     - echo "Remove review app"
     - aws s3 rm s3://$AWS_S3_BUCKET/$CI_COMMIT_REF_NAME/ --recursive

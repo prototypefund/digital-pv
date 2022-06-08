@@ -66,7 +66,7 @@ class PositiveAspects extends StatelessWidget {
         Padding(
           padding: Paddings.callToActionPadding,
           child: ElevatedButton(
-              onPressed: _viewModel.addPositiveAspectCallToActionPressed,
+              onPressed: _viewModel.addPositiveAspectCallToActionPressed(context),
               child: Text(_viewModel.addPositiveAspectCallToActionText)),
         ),
       ],
