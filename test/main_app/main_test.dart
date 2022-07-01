@@ -20,9 +20,16 @@ void main() {
   testWidgets('Navigate through all screens with minimal input, and back', (WidgetTester tester) async {
     await tester.pumpWidget(const PatientDirectiveApp());
     await tester.pumpAndSettle();
-
     expect(find.byType(WelcomeView), findsOneWidget);
-    await tester.tap(find.text(l10n.createDigitalPatientDirective));
+
+    await tester.tap(find.text(l10n.navigationNext));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.navigationNext));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.navigationNext));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(l10n.createDigitalPatientDirective, skipOffstage: false));
     await tester.pumpAndSettle();
 
     expect(find.text("Positive Aspekte", skipOffstage: false), findsOneWidget);
