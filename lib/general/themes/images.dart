@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 mixin Images {
   static const String _backgroundDecorationPath = 'images/background.svg';
-
-  static AssetImage backgroundDecoration() => AssetImage(backgroundDecorationPath());
 
   static String backgroundDecorationPath() => _buildAssetPathBasedOnPlattform(rawPath: _backgroundDecorationPath);
 
@@ -12,7 +9,7 @@ mixin Images {
   ///
   /// tldr: Flutter Web needs an additional '/assets' prefix for its asset paths. Widget tests ail without this
   static String _buildAssetPathBasedOnPlattform({required String rawPath}) {
-    if (!kIsWeb) {
+    if (kIsWeb) {
       return 'assets/$rawPath';
     } else {
       return rawPath;
