@@ -9,4 +9,5 @@ mixin Paddings {
   static const EdgeInsets listElementPadding = EdgeInsets.only(bottom: 32);
   static const EdgeInsets textFieldPadding = EdgeInsets.only(top: 16);
   static const EdgeInsets callToActionPadding = EdgeInsets.only(top: 16);
+  static const EdgeInsets formSaveActionPadding = EdgeInsets.only(top: 32);
 }

@@ -5,13 +5,18 @@ import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view_model.dart';
 import 'package:provider/provider.dart';
 
-class AddPositiveAspect extends StatelessWidget {
+class AddPositiveAspect extends StatefulWidget {
   const AddPositiveAspect({Key? key}) : super(key: key);
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => AddPositiveAspectViewModel(), child: const AddPositiveAspect());
   }
 
+  @override
+  State<AddPositiveAspect> createState() => _AddPositiveAspectState();
+}
+
+class _AddPositiveAspectState extends State<AddPositiveAspect> {
   @override
   Widget build(BuildContext context) {
     final AddPositiveAspectViewModel _viewModel = context.watch();
@@ -36,12 +41,23 @@ class AddPositiveAspect extends StatelessWidget {
             child: Padding(
               padding: Paddings.textFieldPadding,
               child: TextField(
+                controller: _viewModel.aspectTextFieldController,
+                onChanged: (newValue) => setState(() {}),
                 style: Theme.of(context).textTheme.labelLarge,
                 decoration: InputDecoration(hintText: _viewModel.addPositiveAspectTextfieldHint),
                 autofocus: true,
               ),
             ),
           ),
+          Container(
+            constraints: Constraints.formSaveActionConstraints,
+            child: Padding(
+              padding: Paddings.formSaveActionPadding,
+              child: ElevatedButton(
+                  onPressed: _viewModel.addPositiveAspect(context),
+                  child: Text(_viewModel.addPositiveAspectActionText)),
+            ),
+          )
         ],
       ),
     );

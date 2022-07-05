@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n_de.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pd_app/general/main_app/patient_directive_app.dart';
+import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 
 void main() {
@@ -9,6 +11,7 @@ void main() {
   final L10nDe l10n = L10nDe();
   setUp(() {
     GetIt.instance.reset();
+    GetIt.instance.registerSingleton(PatientDirectiveService());
     GetIt.instance.registerSingleton(l10n);
   });
 
@@ -27,6 +30,39 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(l10n.positiveAspectsHeadline, skipOffstage: false), findsOneWidget);
+    expect(find.text('Testen von Anwendungen', skipOffstage: false), findsNothing);
+
+    await tester.ensureVisible(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.pumpAndSettle();
+
+    // go to add positive aspect and add a new one
+    expect(find.text(l10n.addPositiveAspectTextFieldHint, skipOffstage: false), findsOneWidget);
+    await tester.ensureVisible(find.text(l10n.addPositiveAspectTextFieldHint));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Testen von Anwendungen');
+    await tester.ensureVisible(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.pumpAndSettle();
+
+    // verify new aspect is on page
+    expect(find.text(l10n.positiveAspectsHeadline, skipOffstage: false), findsOneWidget);
+    expect(find.text('Testen von Anwendungen', skipOffstage: false), findsOneWidget);
+
+    // go to add positive aspect and hit back button
+    await tester.ensureVisible(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.navigationBack));
+    await tester.pumpAndSettle();
+
+    // should still have exactly one entry of the new aspect
+    expect(find.text(l10n.positiveAspectsHeadline, skipOffstage: false), findsOneWidget);
+    expect(find.text('Testen von Anwendungen', skipOffstage: false), findsOneWidget);
+
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 

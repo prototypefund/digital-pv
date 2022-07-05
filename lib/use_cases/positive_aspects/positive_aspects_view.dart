@@ -105,7 +105,7 @@ class AspectWidget extends StatelessWidget {
           padding: Paddings.sliderPadding,
           child: Column(
             children: [
-              if (_viewModel.showPosistiveAspectsSignificanceLabel)
+              if (_viewModel.showPositiveAspectsSignificanceLabel)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
