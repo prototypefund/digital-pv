@@ -68,6 +68,15 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
     _patientDirectiveService.currentPatientDirective = currentDirective;
   }
 
+  void removeAspect({required Aspect aspect}) {
+    logger.d('removing aspect $aspect');
+
+    final currentDirective = _patientDirectiveService.currentPatientDirective;
+
+    currentDirective.positiveAspects.remove(aspect);
+    _patientDirectiveService.currentPatientDirective = currentDirective;
+  }
+
   List<Aspect> get positiveAspects => _patientDirectiveService.currentPatientDirective.positiveAspects;
 
   void _reactToPatientDirectiveChange() {

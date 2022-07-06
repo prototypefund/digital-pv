@@ -95,10 +95,28 @@ class AspectWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          aspect.name,
-          textAlign: TextAlign.start,
-          style: Theme.of(context).textTheme.titleMedium,
+        Container(
+          constraints: Constraints.aspectTitleConstraints,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  aspect.name,
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () => _viewModel.removeAspect(aspect: aspect),
+                      icon: const Icon(Icons.remove_circle_outline)),
+                ],
+              ),
+            ],
+          ),
         ),
         Container(
           constraints: Constraints.sliderConstraints,
@@ -138,6 +156,10 @@ class AspectWidget extends StatelessWidget {
                     ),
                   )
                 ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [],
               )
             ],
           ),
