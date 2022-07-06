@@ -68,13 +68,31 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
     _patientDirectiveService.currentPatientDirective = currentDirective;
   }
 
-  void removeAspect({required Aspect aspect}) {
-    logger.d('removing aspect $aspect');
+  Future<void> removeAspect({required Aspect aspect, required BuildContext context}) async {
+    logger.d('call to removing aspect $aspect');
 
-    final currentDirective = _patientDirectiveService.currentPatientDirective;
+    final bool? shouldRemoveAspect = await showDialog<bool>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(l10n.removePositiveAspectConfirmationQuestion(aspect.name)),
+            actions: [
+              ElevatedButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: Text(l10n.removePositiveAspectConfirmationCancel)),
+              ElevatedButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text(l10n.removePositiveAspectConfirmationRemove))
+            ],
+          );
+        });
 
-    currentDirective.positiveAspects.remove(aspect);
-    _patientDirectiveService.currentPatientDirective = currentDirective;
+    if (shouldRemoveAspect != null && shouldRemoveAspect) {
+      final currentDirective = _patientDirectiveService.currentPatientDirective;
+
+      currentDirective.positiveAspects.remove(aspect);
+      _patientDirectiveService.currentPatientDirective = currentDirective;
+    }
   }
 
   List<Aspect> get positiveAspects => _patientDirectiveService.currentPatientDirective.positiveAspects;

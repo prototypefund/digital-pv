@@ -10,5 +10,15 @@
   "addPositiveAspectTextFieldHint": "Positiver Aspekt",
   "significanceSliderLabel": "",
   "significanceLow": "Geringe Bedeutung",
-  "significanceHigh": "Hohe Bedeutung"
+  "significanceHigh": "Hohe Bedeutung",
+  "removePositiveAspectConfirmationQuestion": "Soll der positive Aspekt \"{aspectName}\" wirklich entfernt werden?",
+  "@removePositiveAspectConfirmationQuestion": {
+    "placeholders": {
+      "aspectName": {
+        "type": "String"
+      }
+    }
+  },
+  "removePositiveAspectConfirmationRemove": "Positiven Aspekt entfernen",
+  "removePositiveAspectConfirmationCancel": "Abbrechen"
 }

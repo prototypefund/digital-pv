@@ -111,7 +111,7 @@ class AspectWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                      onPressed: () => _viewModel.removeAspect(aspect: aspect),
+                      onPressed: () => _viewModel.removeAspect(context: context, aspect: aspect),
                       icon: const Icon(Icons.remove_circle_outline)),
                 ],
               ),
@@ -157,10 +157,6 @@ class AspectWidget extends StatelessWidget {
                   )
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [],
-              )
             ],
           ),
         )
