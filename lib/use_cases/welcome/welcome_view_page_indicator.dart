@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/themes/default_theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WelcomeViewPageIndicator extends StatelessWidget {
@@ -16,7 +17,7 @@ class WelcomeViewPageIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
+      duration: defaultDuration,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(90.w),

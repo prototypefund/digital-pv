@@ -1,33 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/themes/default_theme.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_model.dart';
-import 'package:pd_app/use_cases/welcome/welcome_view_page_content_view_model.dart';
+import 'package:pd_app/use_cases/welcome/welcome_view_page_controller.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-final List<WelcomeViewPageContentViewModel> contents = [
-  WelcomeViewPageContentViewModel(
-      title: "Herzlich willkommen bei d-PV, Ihrer digitalen Patientenverfügung!",
-      image: "assets/images/placeholder.png",
-      description: "Erstellen Sie in drei Schritten eine rechtskonforme Patientenverfügung. "),
-  WelcomeViewPageContentViewModel(
-      title: "Medizinische Behandlung festlegen",
-      image: "assets/images/placeholder.png",
-      description: "Mit einer Patientenverfügung können Sie Ihre medizinische Behandlung für den"
-          " Fall einer späteren Entscheidungs- bzw. Urteilsunfähigkeit im Voraus "
-          "schriftlich festlegen. "),
-  WelcomeViewPageContentViewModel(
-      title: "Gesetzeskonform",
-      image: "assets/images/placeholder.png",
-      description: "Die dPV entspricht den gesetzlichen Vorgaben in Deutschland"
-          " und in der Schweiz."),
-  WelcomeViewPageContentViewModel(
-      title: "Vertrauensperson",
-      image: "assets/images/placeholder.png",
-      description: "Statt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell "
-          "sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können"
-          " Sie die Vertretungsperson hier direkt benennen."),
-];
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({Key? key}) : super(key: key);
@@ -44,24 +21,14 @@ class WelcomeView extends StatefulWidget {
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
-  final _controller = PageController();
+  final _controller = WelcomeViewPageController();
   late WelcomeViewModel _viewModel;
-  int _currentPage = 0;
-
-  bool get _isLastPage {
-    return _currentPage + 1 == contents.length;
-  }
-
-  int get _lastPageIndex {
-    return contents.length - 1;
-  }
 
   @override
   Widget build(BuildContext context) {
     _viewModel = context.watch();
 
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -69,19 +36,20 @@ class _WelcomeViewState extends State<WelcomeView> {
               flex: 3,
               child: PageView.builder(
                 controller: _controller,
-                onPageChanged: (value) => setState(() => _currentPage = value),
-                itemCount: contents.length,
+                onPageChanged: (value) => setState(() => _controller.currentPage = value),
+                itemCount: _controller.numberOfPages,
                 itemBuilder: (context, pageIndex) {
+                  final viewModel = _controller.modelAtIndex(pageIndex);
                   return Padding(
                     padding: EdgeInsets.fromLTRB(10.0.w, 4.0.h, 10.0.w, 2.0.h),
                     child: Column(
                       children: [
-                        Image.asset(contents[pageIndex].image, height: 27.0.h),
+                        Image.asset(viewModel.image, height: 27.0.h),
                         Center(
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 4.0.w, 2.0.h),
                             child: Text(
-                              contents[pageIndex].title,
+                              viewModel.title,
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.headlineLarge,
                             ),
@@ -91,7 +59,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                           height: 2.0.h,
                         ),
                         Text(
-                          contents[pageIndex].description,
+                          viewModel.description,
                           style: Theme.of(context).textTheme.bodyMedium,
                           textAlign: TextAlign.center,
                         ),
@@ -105,7 +73,7 @@ class _WelcomeViewState extends State<WelcomeView> {
               flex: 0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [if (_isLastPage) _lastPage(_viewModel, context) else _firstPages(context)],
+                children: [if (_controller.isLastPage) _lastPage(_viewModel, context) else _firstPages(context)],
               ),
             ),
           ],
@@ -122,12 +90,8 @@ class _WelcomeViewState extends State<WelcomeView> {
         children: [
           TextButton(
             onPressed: () {
-              _controller.jumpToPage(_lastPageIndex);
+              _controller.jumpToLastPage();
             },
-            style: TextButton.styleFrom(
-              elevation: 0,
-              textStyle: Theme.of(context).textTheme.bodyMedium,
-            ),
             child: Text(
               _viewModel.skipButtonText,
               style: TextStyle(color: Theme.of(context).primaryColor),
@@ -136,24 +100,19 @@ class _WelcomeViewState extends State<WelcomeView> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                contents.length,
-                (int index) => WelcomeViewPageIndicator(currentPage: _currentPage, context: context, index: index),
+                _controller.numberOfPages,
+                (int index) =>
+                    WelcomeViewPageIndicator(currentPage: _controller.currentPage, context: context, index: index),
               )),
           ElevatedButton(
             onPressed: () {
               _controller.nextPage(
-                duration: const Duration(milliseconds: 200),
+                duration: defaultDuration,
                 curve: Curves.easeIn,
               );
             },
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              elevation: 0,
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
-              textStyle: Theme.of(context).textTheme.bodyMedium,
             ),
             child: Text(_viewModel.nextButtonText),
           ),
@@ -168,12 +127,8 @@ class _WelcomeViewState extends State<WelcomeView> {
       child: ElevatedButton(
         onPressed: () => _viewModel.onCallToActionPressed(context),
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
-            textStyle: Theme.of(context).textTheme.bodyMedium),
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+        ),
         child: Text(_viewModel.callToActionText),
       ),
     );

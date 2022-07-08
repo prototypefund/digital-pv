@@ -2,5 +2,13 @@
   "createDigitalPatientDirective": "dPV erstellen",
   "navigationBack": "Zurück",
   "navigationNext": "Weiter",
-  "navigationSkip": "Überspringen"
+  "navigationSkip": "Überspringen",
+  "welcomeViewPageOneTitle": "Herzlich willkommen bei d-PV, Ihrer digitalen Patientenverfügung!",
+  "welcomeViewPageOneDescription": "Erstellen Sie in drei Schritten eine rechtskonforme Patientenverfügung. ",
+  "welcomeViewPageTwoTitle": "Medizinische Behandlung festlegen",
+  "welcomeViewPageTwoDescription": "Mit einer Patientenverfügung können Sie Ihre medizinische Behandlung für den Fall einer späteren Entscheidungs- bzw. Urteilsunfähigkeit im Voraus schriftlich festlegen. ",
+  "welcomeViewPageThreeTitle": "Gesetzeskonform",
+  "welcomeViewPageThreeDescription": "Die dPV entspricht den gesetzlichen Vorgaben in Deutschland",
+  "welcomeViewPageFourTitle": "Vertrauensperson",
+  "welcomeViewPageFourDescription": "Statt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen."
 }
