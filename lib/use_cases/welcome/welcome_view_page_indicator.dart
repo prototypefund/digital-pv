@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/default_theme.dart';
+import 'package:pd_app/general/themes/extensions/page_indicator_style.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WelcomeViewPageIndicator extends StatelessWidget {
@@ -16,14 +17,10 @@ class WelcomeViewPageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PageIndicatorStyle pageIndicatorStyle = Theme.of(context).extension<PageIndicatorStyle>()!;
     return AnimatedContainer(
       duration: defaultDuration,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(90.w),
-        ),
-        color: Theme.of(context).primaryColor,
-      ),
+      decoration: pageIndicatorStyle.decoration,
       margin: EdgeInsets.only(right: 0.4.w),
       height: Device.aspectRatio > 1.7 ? 3.h : 1.h,
       curve: Curves.easeIn,
