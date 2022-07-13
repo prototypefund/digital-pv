@@ -79,7 +79,7 @@ class PositiveAspects extends StatelessWidget with Logging {
     );
   }
 
-  SizeTransition _buildListItem(
+  Widget _buildListItem(
       {required Animation<double> animation,
       required Aspect aspect,
       required PositiveAspectsViewModel viewModel,
@@ -87,37 +87,40 @@ class PositiveAspects extends StatelessWidget with Logging {
       required int index}) {
     return SizeTransition(
       sizeFactor: animation,
-      child: AspectWidget(
-          aspect: aspect,
-          sliderDescription: viewModel.positiveAspectsSignificanceLabel,
-          sliderHighLabel: viewModel.positiveAspectsSignificanceHighLabel,
-          sliderLowLabel: viewModel.positiveAspectsSignificanceLowLabel,
-          onRemove: !interactive
-              ? null
-              : () async {
-                  logger.i('removing list item with index $index');
-                  _listKey.currentState?.removeItem(
-                      index,
-                      (context, animation) => _buildListItem(
-                          animation: animation,
-                          aspect: aspect,
-                          viewModel: viewModel,
-                          interactive: false,
-                          index: index));
-                },
-          onPositionChange: !interactive
-              ? null
-              : (oldIndex, newIndex) {
-                  _listKey.currentState?.removeItem(
-                      oldIndex,
-                      (context, animation) => _buildListItem(
-                          animation: animation,
-                          aspect: aspect,
-                          viewModel: viewModel,
-                          interactive: false,
-                          index: index));
-                  _listKey.currentState?.insertItem(newIndex);
-                }),
+      child: FadeTransition(
+        opacity: animation,
+        child: AspectWidget(
+            aspect: aspect,
+            sliderDescription: viewModel.positiveAspectsSignificanceLabel,
+            sliderHighLabel: viewModel.positiveAspectsSignificanceHighLabel,
+            sliderLowLabel: viewModel.positiveAspectsSignificanceLowLabel,
+            onRemove: !interactive
+                ? null
+                : () async {
+                    logger.i('removing list item with index $index');
+                    _listKey.currentState?.removeItem(
+                        index,
+                        (context, animation) => _buildListItem(
+                            animation: animation,
+                            aspect: aspect,
+                            viewModel: viewModel,
+                            interactive: false,
+                            index: index));
+                  },
+            onPositionChange: !interactive
+                ? null
+                : (oldIndex, newIndex) {
+                    _listKey.currentState?.removeItem(
+                        oldIndex,
+                        (context, animation) => _buildListItem(
+                            animation: animation,
+                            aspect: aspect,
+                            viewModel: viewModel,
+                            interactive: false,
+                            index: index));
+                    _listKey.currentState?.insertItem(newIndex);
+                  }),
+      ),
     );
   }
 }
