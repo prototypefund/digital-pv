@@ -4,6 +4,10 @@ import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/model/weight.dart';
 
 class PatientDirectiveService with ChangeNotifier {
+  PatientDirectiveService() {
+    sortAspects();
+  }
+
   PatientDirective _currentPatientDirective = PatientDirective(positiveAspects: [
     Aspect(name: "Zeit mit der Familie verbringen", weight: Weight(value: 0.7)),
     Aspect(name: "Haustier", weight: Weight(value: 0.5)),

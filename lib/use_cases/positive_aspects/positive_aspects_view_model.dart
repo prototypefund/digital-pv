@@ -68,11 +68,15 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
     _patientDirectiveService.currentPatientDirective = currentDirective;
   }
 
-  void onAspectWeightAdjustmentDone() {
+  AspectPositionChange onAspectWeightAdjustmentDone({required Aspect aspect}) {
+    final int oldIndex = _patientDirectiveService.currentPatientDirective.positiveAspects.indexOf(aspect);
     _patientDirectiveService.sortAspects();
+    final int newIndex = _patientDirectiveService.currentPatientDirective.positiveAspects.indexOf(aspect);
+
+    return AspectPositionChange(oldIndex: oldIndex, newIndex: newIndex);
   }
 
-  Future<void> removeAspect({required Aspect aspect, required BuildContext context}) async {
+  Future<bool> removeAspect({required Aspect aspect, required BuildContext context}) async {
     logger.d('call to removing aspect $aspect');
 
     final bool? shouldRemoveAspect = await showDialog<bool>(
@@ -96,6 +100,10 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
 
       currentDirective.positiveAspects.remove(aspect);
       _patientDirectiveService.currentPatientDirective = currentDirective;
+
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -104,4 +112,11 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   void _reactToPatientDirectiveChange() {
     notifyListeners();
   }
+}
+
+class AspectPositionChange {
+  AspectPositionChange({required this.oldIndex, required this.newIndex});
+
+  final int oldIndex;
+  final int newIndex;
 }
