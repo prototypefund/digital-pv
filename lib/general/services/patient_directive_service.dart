@@ -18,4 +18,11 @@ class PatientDirectiveService with ChangeNotifier {
     _currentPatientDirective = newValue;
     notifyListeners();
   }
+
+  void sortAspects() {
+    currentPatientDirective.positiveAspects
+        .sort((aspect1, aspect2) => aspect2.weight.value.compareTo(aspect1.weight.value));
+
+    notifyListeners();
+  }
 }

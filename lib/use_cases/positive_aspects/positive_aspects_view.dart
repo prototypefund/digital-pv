@@ -139,6 +139,7 @@ class AspectWidget extends StatelessWidget {
                 onChanged: (double value) {
                   _viewModel.changeAspectWeight(aspect: aspect, weight: value);
                 },
+                onChangeEnd: (_) => _viewModel.onAspectWeightAdjustmentDone(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -64,7 +64,12 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
     final currentDirective = _patientDirectiveService.currentPatientDirective;
 
     currentDirective.positiveAspects.firstWhere((element) => element == aspect).weight = Weight(value: weight);
+
     _patientDirectiveService.currentPatientDirective = currentDirective;
+  }
+
+  void onAspectWeightAdjustmentDone() {
+    _patientDirectiveService.sortAspects();
   }
 
   Future<void> removeAspect({required Aspect aspect, required BuildContext context}) async {
