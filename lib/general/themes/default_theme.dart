@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
+import 'package:pd_app/general/themes/extensions/page_indicator_style.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+const Duration defaultDuration = Duration(milliseconds: 200);
 
 mixin DefaultTheme {
   ThemeData get defaultTheme => ThemeData(
@@ -30,5 +34,15 @@ mixin DefaultTheme {
               fontSize: 13, color: DefaultThemeColors.blackTransparent, fontWeight: FontWeight.normal, height: 18 / 13),
           labelSmall: TextStyle(
               fontSize: 11, color: DefaultThemeColors.blackTransparent, fontWeight: FontWeight.normal, height: 15 / 11),
-          bodyMedium: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))));
+          bodyMedium: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
+    extensions: const <ThemeExtension<dynamic>>[
+      PageIndicatorStyle(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+          color: DefaultThemeColors.purple,
+        ),
+      ),
+    ],);
 }

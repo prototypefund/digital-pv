@@ -16,6 +16,7 @@ import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/treatment_activities/treatment_activities.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PatientDirectiveApp extends StatefulWidget {
   const PatientDirectiveApp({Key? key}) : super(key: key);
@@ -111,16 +112,20 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
-      title: 'DPV',
-      theme: defaultTheme,
-      localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
-      builder: (context, widget) {
-        _injectL10nIntoGetIt(context);
-        return widget ?? const SizedBox();
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp.router(
+          routeInformationParser: _router.routeInformationParser,
+          routerDelegate: _router.routerDelegate,
+          title: 'DPV',
+          theme: defaultTheme,
+          localizationsDelegates: L10n.localizationsDelegates,
+          supportedLocales: L10n.supportedLocales,
+          builder: (context, widget) {
+            _injectL10nIntoGetIt(context);
+            return widget ?? const SizedBox();
+          },
+        );
       },
     );
   }
