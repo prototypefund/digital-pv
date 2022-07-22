@@ -12,6 +12,9 @@ class WelcomeViewModel with ChangeNotifier, Logging {
     return l10n.createDigitalPatientDirective;
   }
 
+  String get nextButtonText => l10n.navigationNext;
+  String get skipButtonText => l10n.navigationSkip;
+
   void onCallToActionPressed(BuildContext context) {
     logger.d('switching to positive aspects view');
     context.go(Routes.positiveAspects);

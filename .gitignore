@@ -6,3 +6,4 @@
 .flutter-plugins-dependencies
 /coverage/
 /.flutter-plugins
+.DS_Store
