@@ -3,6 +3,7 @@ import 'package:pd_app/general/creation_process_navigation/creation_process_navi
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.dart';
 import 'package:provider/provider.dart';
@@ -178,53 +179,21 @@ class AspectWidget extends StatelessWidget with Logging {
             ],
           ),
         ),
-        Container(
-          constraints: Constraints.sliderConstraints,
-          padding: Paddings.sliderPadding,
-          child: Column(
-            children: [
-              if (_viewModel.showPositiveAspectsSignificanceLabel)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      sliderDescription,
-                      textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  ],
-                ),
-              Slider(
-                value: aspect.weight.value,
-                onChanged: (double value) {
-                  _viewModel.changeAspectWeight(aspect: aspect, weight: value);
-                },
-                onChangeEnd: (_) {
-                  final AspectPositionChange positionChange = _viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
-                  if (positionChange.oldIndex != positionChange.newIndex) {
-                    onPositionChange?.call(positionChange.oldIndex, positionChange.newIndex);
-                  }
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Text(
-                      sliderLowLabel,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      sliderHighLabel,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
+        DPVSlider(
+          sliderDescription: sliderDescription,
+          showLabels: _viewModel.showPositiveAspectsSignificanceLabel,
+          sliderLowLabel: sliderLowLabel,
+          sliderHighLabel: sliderHighLabel,
+          value: aspect.weight.value,
+          onChangeEnd: (_) {
+            final AspectPositionChange positionChange = _viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
+            if (positionChange.oldIndex != positionChange.newIndex) {
+              onPositionChange?.call(positionChange.oldIndex, positionChange.newIndex);
+            }
+          },
+          onChanged: (double value) {
+            _viewModel.changeAspectWeight(aspect: aspect, weight: value);
+          },
         )
       ],
     );
