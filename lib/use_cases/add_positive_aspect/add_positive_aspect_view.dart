@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -49,6 +50,17 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
               ),
             ),
           ),
+          DPVSlider(
+            sliderDescription: _viewModel.aspectSignificanceLabel,
+            showLabels: _viewModel.showAspectSignificanceLabel,
+            sliderLowLabel: _viewModel.aspectsSignificanceLowLabel,
+            sliderHighLabel: _viewModel.aspectSignificanceHighLabel,
+            value: _viewModel.weight,
+            padding: Paddings.newAspectSliderPadding,
+            onChanged: (double value) {
+              _viewModel.weight = value;
+            },
+          ),
           Container(
             constraints: Constraints.formSaveActionConstraints,
             child: Padding(
@@ -56,6 +68,24 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
               child: ElevatedButton(
                   onPressed: _viewModel.addPositiveAspect(context),
                   child: Text(_viewModel.addPositiveAspectActionText)),
+            ),
+          ),
+          Padding(
+            padding: Paddings.subHeadlinePadding,
+            child: Text('Beispiele', style: Theme.of(context).textTheme.headlineMedium),
+          ),
+          Container(
+            constraints: Constraints.formSaveActionConstraints,
+            child: Wrap(
+              children: _viewModel.examples
+                  .map((example) => Padding(
+                        padding: Paddings.exampleButtonPadding,
+                        child: OutlinedButton(
+                          onPressed: () => _viewModel.chooseExample(example),
+                          child: Text(example),
+                        ),
+                      ))
+                  .toList(),
             ),
           )
         ],

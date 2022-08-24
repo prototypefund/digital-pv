@@ -21,9 +21,16 @@ mixin DefaultTheme {
             style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
                 primary: DefaultThemeColors.purple)),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+                primary: DefaultThemeColors.purple,
+                textStyle:
+                    const TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
         textTheme: Typography.blackCupertino.merge(const TextTheme(
             headlineLarge:
                 TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
+            headlineMedium:
+                TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: DefaultThemeColors.black, height: 32 / 20),
             bodyLarge: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
             titleMedium:
                 TextStyle(fontSize: 20, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),

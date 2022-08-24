@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
@@ -8,7 +9,7 @@ import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/logging.dart';
 
-class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging {
+class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging, AspectViewModel {
   PositiveAspectsViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
   }
@@ -43,14 +44,6 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   String get positiveAspectsHeadlineText => l10n.positiveAspectsHeadline;
 
   String get positiveAspectsExplanationText => l10n.positiveAspectsExplanation;
-
-  String get positiveAspectsSignificanceLabel => l10n.significanceSliderLabel;
-
-  bool get showPositiveAspectsSignificanceLabel => l10n.significanceSliderLabel.isNotEmpty;
-
-  String get positiveAspectsSignificanceHighLabel => l10n.significanceHigh;
-
-  String get positiveAspectsSignificanceLowLabel => l10n.significanceLow;
 
   String get addPositiveAspectCallToActionText => l10n.addPositiveAspectCallToAction;
 

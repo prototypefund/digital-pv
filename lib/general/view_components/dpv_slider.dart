@@ -6,12 +6,14 @@ class DPVSlider extends StatelessWidget {
   const DPVSlider(
       {Key? key,
       required this.sliderDescription,
-      required this.onChanged,
-      required this.onChangeEnd,
+      this.onChanged,
+      this.onChangeEnd,
       required this.sliderLowLabel,
       required this.sliderHighLabel,
       required this.showLabels,
-      required this.value})
+      required this.value,
+      this.padding = Paddings.sliderPadding,
+      this.constraints = Constraints.sliderConstraints})
       : super(key: key);
 
   final String sliderDescription;
@@ -21,12 +23,14 @@ class DPVSlider extends StatelessWidget {
   final ValueChanged<double>? onChanged;
   final double value;
   final bool showLabels;
+  final EdgeInsets padding;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: Constraints.sliderConstraints,
-      padding: Paddings.sliderPadding,
+      constraints: constraints,
+      padding: padding,
       child: Column(
         children: [
           if (showLabels)

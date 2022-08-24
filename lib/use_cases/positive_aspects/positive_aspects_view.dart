@@ -92,9 +92,9 @@ class PositiveAspects extends StatelessWidget with Logging {
         opacity: animation,
         child: AspectWidget(
             aspect: aspect,
-            sliderDescription: viewModel.positiveAspectsSignificanceLabel,
-            sliderHighLabel: viewModel.positiveAspectsSignificanceHighLabel,
-            sliderLowLabel: viewModel.positiveAspectsSignificanceLowLabel,
+            sliderDescription: viewModel.aspectSignificanceLabel,
+            sliderHighLabel: viewModel.aspectSignificanceHighLabel,
+            sliderLowLabel: viewModel.aspectsSignificanceLowLabel,
             onRemove: !interactive
                 ? null
                 : () async {
@@ -181,7 +181,7 @@ class AspectWidget extends StatelessWidget with Logging {
         ),
         DPVSlider(
           sliderDescription: sliderDescription,
-          showLabels: _viewModel.showPositiveAspectsSignificanceLabel,
+          showLabels: _viewModel.showAspectSignificanceLabel,
           sliderLowLabel: sliderLowLabel,
           sliderHighLabel: sliderHighLabel,
           value: aspect.weight.value,
