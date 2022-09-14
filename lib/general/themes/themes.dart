@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/extensions/page_indicator_style.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 const Duration defaultDuration = Duration(milliseconds: 200);
 
-mixin DefaultTheme {
+class Themes {
   ThemeData get defaultTheme => ThemeData(
         fontFamily: "Roboto",
         primaryColor: DefaultThemeColors.white,
@@ -19,34 +20,34 @@ mixin DefaultTheme {
             thumbColor: DefaultThemeColors.darkGrey),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
+                textStyle: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
                 primary: DefaultThemeColors.purple)),
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
                 primary: DefaultThemeColors.purple,
                 textStyle:
                     const TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
-        textTheme: Typography.blackCupertino.merge(const TextTheme(
-            headlineLarge:
-                TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
-            headlineMedium:
-                TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: DefaultThemeColors.black, height: 32 / 20),
-            bodyLarge: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
-            titleMedium:
-                TextStyle(fontSize: 20, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
-            labelLarge:
-                TextStyle(fontSize: 16, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
+        textTheme: Typography.blackCupertino.merge(TextTheme(
+            headlineLarge: TextStyle(
+                fontSize: 24.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
+            headlineMedium: TextStyle(
+                fontSize: 20.sp, fontWeight: FontWeight.w300, color: DefaultThemeColors.black, height: 32 / 20),
+            bodyLarge: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
+            titleMedium: TextStyle(
+                fontSize: 20.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
+            labelLarge: TextStyle(
+                fontSize: 16.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
             labelMedium: TextStyle(
-                fontSize: 13,
+                fontSize: 13.sp,
                 color: DefaultThemeColors.blackTransparent,
                 fontWeight: FontWeight.normal,
                 height: 18 / 13),
             labelSmall: TextStyle(
-                fontSize: 11,
+                fontSize: 11.sp,
                 color: DefaultThemeColors.blackTransparent,
                 fontWeight: FontWeight.normal,
                 height: 15 / 11),
-            bodyMedium: TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
+            bodyMedium: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
         extensions: const <ThemeExtension<dynamic>>[
           PageIndicatorStyle(
             decoration: BoxDecoration(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pd_app/general/themes/default_theme.dart';
+import 'package:pd_app/general/themes/themes.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_model.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_controller.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_indicator.dart';

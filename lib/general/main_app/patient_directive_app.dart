@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/navigation/routes.dart';
-import 'package:pd_app/general/themes/default_theme.dart';
+import 'package:pd_app/general/themes/themes.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view.dart';
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
@@ -25,7 +25,7 @@ class PatientDirectiveApp extends StatefulWidget {
   State<PatientDirectiveApp> createState() => _PatientDirectiveAppState();
 }
 
-class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging, DefaultTheme {
+class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging {
   late GoRouter _router;
 
   @override
@@ -118,7 +118,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           title: 'DPV',
-          theme: defaultTheme,
+          theme: Themes().defaultTheme,
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
           builder: (context, widget) {

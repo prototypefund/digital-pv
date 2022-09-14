@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pd_app/general/themes/default_theme.dart';
 import 'package:pd_app/general/themes/extensions/page_indicator_style.dart';
+import 'package:pd_app/general/themes/themes.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WelcomeViewPageIndicator extends StatelessWidget {
