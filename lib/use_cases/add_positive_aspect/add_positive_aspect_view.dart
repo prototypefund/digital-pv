@@ -28,12 +28,12 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
         children: [
           Padding(
             padding: Paddings.headlinePadding,
-            child: Text('Aspekt hinzufügen', style: Theme.of(context).textTheme.headlineLarge),
+            child: Text(_viewModel.addPositiveAspectTitle, style: Theme.of(context).textTheme.headlineLarge),
           ),
           Padding(
             padding: Paddings.headlineExplanationPadding,
             child: Text(
-              'Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht',
+              _viewModel.addPositiveAspectExplanation,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
@@ -72,7 +72,7 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
           ),
           Padding(
             padding: Paddings.subHeadlinePadding,
-            child: Text('Beispiele', style: Theme.of(context).textTheme.headlineMedium),
+            child: Text(_viewModel.examplesText, style: Theme.of(context).textTheme.headlineMedium),
           ),
           Container(
             constraints: Constraints.formSaveActionConstraints,

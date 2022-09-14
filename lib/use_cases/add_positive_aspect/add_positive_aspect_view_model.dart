@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
@@ -15,6 +15,12 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
   }
 
   final PatientDirectiveService _patientDirectiveService;
+
+  String get examplesText => l10n.examples;
+
+  String get addPositiveAspectTitle => l10n.addPositiveAspectTitle;
+
+  String get addPositiveAspectExplanation => l10n.addPositiveAspectExplanation;
 
   @override
   void dispose() {
@@ -76,16 +82,16 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
 
   List<String> get examples {
     return [
-      "Zeit mit der Familie verbringen",
-      "Haustier",
-      "Mein Zuhause",
-      "Persönliche Kontakte pflegen",
-      "Meine Arbeit",
-      "Reisen",
-      "Joggen",
-      "Radfahren",
-      "Kochen",
-      "Bücher schreiben"
+      l10n.spendTimeWithFamily,
+      l10n.pet,
+      l10n.myHome,
+      l10n.personalContacts,
+      l10n.myWork,
+      l10n.travelling,
+      l10n.jogging,
+      l10n.ridingTheBike,
+      l10n.cooking,
+      l10n.writingBooks,
     ];
   }
 
