@@ -68,7 +68,6 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
     final PatientDirective currentDirective = _patientDirectiveService.currentPatientDirective;
     currentDirective.positiveAspects.add(newPositiveAspect);
     _patientDirectiveService.currentPatientDirective = currentDirective;
-    _patientDirectiveService.sortAspects();
 
     context.go(Routes.positiveAspects);
   }

@@ -12,15 +12,18 @@ import 'package:pd_app/logging.dart';
 class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging, AspectViewModel {
   PositiveAspectsViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
+    _updatePositiveAspectsFromService();
   }
+
+  late List<Aspect> _positiveAspects;
+
+  final PatientDirectiveService _patientDirectiveService;
 
   @override
   void dispose() {
     super.dispose();
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChange);
   }
-
-  final PatientDirectiveService _patientDirectiveService;
 
   @override
   void onBackButtonPressed(BuildContext context) {
@@ -56,15 +59,15 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
 
     final currentDirective = _patientDirectiveService.currentPatientDirective;
 
-    currentDirective.positiveAspects.firstWhere((element) => element == aspect).weight = Weight(value: weight);
+    _positiveAspects.firstWhere((element) => element == aspect).weight = Weight(value: weight);
 
     _patientDirectiveService.currentPatientDirective = currentDirective;
   }
 
   AspectPositionChange onAspectWeightAdjustmentDone({required Aspect aspect}) {
-    final int oldIndex = _patientDirectiveService.currentPatientDirective.positiveAspects.indexOf(aspect);
-    _patientDirectiveService.sortAspects();
-    final int newIndex = _patientDirectiveService.currentPatientDirective.positiveAspects.indexOf(aspect);
+    final int oldIndex = _positiveAspects.indexOf(aspect);
+    _sortAspects();
+    final int newIndex = _positiveAspects.indexOf(aspect);
 
     return AspectPositionChange(oldIndex: oldIndex, newIndex: newIndex);
   }
@@ -100,9 +103,22 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
     }
   }
 
-  List<Aspect> get positiveAspects => _patientDirectiveService.currentPatientDirective.positiveAspects;
+  List<Aspect> get positiveAspects => _positiveAspects;
+
+  void _sortAspects() {
+    _positiveAspects.sort((aspect1, aspect2) => aspect2.weight.value.compareTo(aspect1.weight.value));
+  }
+
+  void _updatePositiveAspectsFromService() {
+    _positiveAspects = List.of(_patientDirectiveService.currentPatientDirective.positiveAspects);
+    _sortAspects();
+  }
 
   void _reactToPatientDirectiveChange() {
+    if (_patientDirectiveService.currentPatientDirective.positiveAspects.length != _positiveAspects.length) {
+      logger.i("an aspect was removed or added, refreshing view's list of elements and sorting them anew");
+      _updatePositiveAspectsFromService();
+    }
     notifyListeners();
   }
 }
