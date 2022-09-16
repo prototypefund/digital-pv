@@ -2,6 +2,25 @@
   "createDigitalPatientDirective": "dPV erstellen",
   "navigationBack": "Zurück",
   "navigationNext": "Weiter",
+  "positiveAspectsHeadline": "Was macht mir Freude?",
+  "positiveAspectsExplanation": "Bestimmen Sie Aspekte aus Ihrem Leben, die Ihnen Freude machen.",
+  "positiveAspectsEmptyText": "Bisher wurden noch keine positiven Aspekte angegeben.",
+  "addPositiveAspectCallToAction": "Positiven Aspekt hinzufügen",
+  "addPositiveAspectNavigationButton": "Aspekt hinzufügen",
+  "addPositiveAspectTextFieldHint": "Positiver Aspekt",
+  "significanceSliderLabel": "",
+  "significanceLow": "Geringe Bedeutung",
+  "significanceHigh": "Hohe Bedeutung",
+  "removePositiveAspectConfirmationQuestion": "Soll der positive Aspekt \"{aspectName}\" wirklich entfernt werden?",
+  "@removePositiveAspectConfirmationQuestion": {
+    "placeholders": {
+      "aspectName": {
+        "type": "String"
+      }
+    }
+  },
+  "removePositiveAspectConfirmationRemove": "Positiven Aspekt entfernen",
+  "removePositiveAspectConfirmationCancel": "Abbrechen",
   "navigationSkip": "Überspringen",
   "welcomeViewPageOneTitle": "Herzlich willkommen bei d-PV, Ihrer digitalen Patientenverfügung!",
   "welcomeViewPageOneDescription": "Erstellen Sie in drei Schritten eine rechtskonforme Patientenverfügung. ",
@@ -10,5 +29,18 @@
   "welcomeViewPageThreeTitle": "Gesetzeskonform",
   "welcomeViewPageThreeDescription": "Die dPV entspricht den gesetzlichen Vorgaben in Deutschland",
   "welcomeViewPageFourTitle": "Vertrauensperson",
-  "welcomeViewPageFourDescription": "Statt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen."
+  "welcomeViewPageFourDescription": "Statt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen.",
+  "spendTimeWithFamily": "Zeit mit der Familie verbringen",
+  "pet": "Haustier",
+  "myHome": "Mein Zuhause",
+  "personalContacts": "Persönliche Kontakte pflegen",
+  "myWork": "Meine Arbeit",
+  "travelling": "Reisen",
+  "jogging": "Joggen",
+  "ridingTheBike": "Radfahren",
+  "cooking": "Kochen",
+  "writingBooks": "Bücher schreiben",
+  "examples": "Beispiele",
+  "addPositiveAspectTitle": "Aspekt hinzufügen",
+  "addPositiveAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht"
 }

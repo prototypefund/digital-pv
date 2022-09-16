@@ -5,6 +5,7 @@ class Routes {
 
   static const welcome = '/';
   static const positiveAspects = '/${patientDirective}current-situation/positive-aspects';
+  static const addPositiveAspect = '/${patientDirective}current-situation/positive-aspects/add';
   static const negativeAspects = '/${patientDirective}current-situation/negative-aspects';
   static const evaluateCurrentAspects = '/${patientDirective}current-situation/evaluate';
   static const generalTreatmentObjective = '/${patientDirective}treatment-objective';

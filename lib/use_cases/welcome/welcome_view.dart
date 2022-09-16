@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pd_app/general/themes/default_theme.dart';
+import 'package:pd_app/general/themes/themes.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_model.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_controller.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_indicator.dart';
@@ -45,23 +45,27 @@ class _WelcomeViewState extends State<WelcomeView> {
                     child: Column(
                       children: [
                         Image.asset(viewModel.image, height: 27.0.h),
-                        Center(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 4.0.w, 2.0.h),
-                            child: Text(
-                              viewModel.title,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headlineLarge,
+                        Flexible(
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 4.0.w, 2.0.h),
+                              child: Text(
+                                viewModel.title,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.headlineLarge,
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
                           height: 2.0.h,
                         ),
-                        Text(
-                          viewModel.description,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.center,
+                        Flexible(
+                          child: Text(
+                            viewModel.description,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),

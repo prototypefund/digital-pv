@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,8 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              automaticallyImplyLeading: false,
+              // disables back button if popping is possible
               backgroundColor: Theme.of(context).primaryColor,
               pinned: true,
               snap: false,
@@ -39,11 +42,13 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
               ),
             ),
             SliverToBoxAdapter(
-              child: ConstrainedSliverWidth(
-                maxWidth: maximumContentWidth,
-                child: Padding(
-                  padding: const EdgeInsets.all(contentAreaPadding),
-                  child: widget,
+              child: BackgroundContainer(
+                child: ConstrainedSliverWidth(
+                  maxWidth: maximumContentWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.all(contentAreaPadding),
+                    child: widget,
+                  ),
                 ),
               ),
             )
@@ -98,26 +103,32 @@ class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewMo
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  ElevatedButton.icon(
-                    icon: const Icon(
-                      Icons.arrow_back_ios_sharp,
-                      size: iconSize,
+                  Visibility(
+                    visible: _viewModel.backButtonVisible,
+                    child: ElevatedButton.icon(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_sharp,
+                        size: iconSize,
+                      ),
+                      onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
+                      label: Text(_viewModel.backButtonText),
                     ),
-                    onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
-                    label: Text(_viewModel.backButtonText),
                   ),
                   const Expanded(
                     child: SizedBox(),
                   ),
-                  ElevatedButton.icon(
-                      icon: const Icon(
-                        Icons.arrow_forward_ios_sharp,
-                        size: iconSize,
-                      ),
-                      onPressed: _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
-                      label: Text(
-                        _viewModel.nextButtonText,
-                      )),
+                  Visibility(
+                    visible: _viewModel.nextButtonVisible,
+                    child: ElevatedButton.icon(
+                        icon: const Icon(
+                          Icons.arrow_forward_ios_sharp,
+                          size: iconSize,
+                        ),
+                        onPressed: _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                        label: Text(
+                          _viewModel.nextButtonText,
+                        )),
+                  ),
                 ],
               ),
             ),

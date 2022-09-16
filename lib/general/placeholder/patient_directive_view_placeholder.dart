@@ -10,18 +10,20 @@ class PatientDirectiveViewPlaceholder extends StatelessWidget with PlaceholderTe
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.headline2,
-            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineLarge,
+            textAlign: TextAlign.start,
           ),
           const SizedBox(
             height: 32,
           ),
           Text(
             PlaceholderText.veryLongPlaceholderText,
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.start,
           )
         ],
       ),

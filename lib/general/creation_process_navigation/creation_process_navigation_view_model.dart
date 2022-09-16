@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 
 abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNotifier {
@@ -6,11 +7,19 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
 
   String get backButtonText => l10n.navigationBack;
 
-  void onBackButtonPressed(BuildContext context);
+  void onBackButtonPressed(BuildContext context) {
+    if (Navigator.of(context).canPop()) {
+      context.pop();
+    }
+  }
 
   void onNextButtonPressed(BuildContext context);
 
   bool get backButtonEnabled => true;
 
   bool get nextButtonEnabled => true;
+
+  bool get nextButtonVisible => true;
+
+  bool get backButtonVisible => true;
 }
