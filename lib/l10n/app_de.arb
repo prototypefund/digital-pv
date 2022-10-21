@@ -42,5 +42,11 @@
   "writingBooks": "Bücher schreiben",
   "examples": "Beispiele",
   "addPositiveAspectTitle": "Aspekt hinzufügen",
-  "addPositiveAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht"
+  "addPositiveAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht",
+  "addTreatmentActivitiesTitle": "Meine Behandlungswünsche",
+  "addTreatmentActivitiesExplanation": "Hier können Sie optional zu ihrem Behandlungsziel (kurativ) bestimmte Maßnahmen festlegen.",
+  "addTreatmentActivitiesSubHeadline" : "Medizinische Maßnahmen",
+  "addTreatmentActivitiesHospitalAdmission": "Aufnahme ins Krankenhaus",
+  "addTreatmentActivitiesIntensiveTreatment": "Intensivbehandlung",
+  "addTreatmentActivitiesResuscitation": "Wiederbelebung"
 }
