@@ -19,7 +19,7 @@ import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PatientDirectiveApp extends StatefulWidget {
-  const PatientDirectiveApp({Key? key}) : super(key: key);
+  const PatientDirectiveApp({super.key});
 
   @override
   State<PatientDirectiveApp> createState() => _PatientDirectiveAppState();
@@ -115,6 +115,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp.router(
+          routeInformationProvider: _router.routeInformationProvider,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           title: 'DPV',

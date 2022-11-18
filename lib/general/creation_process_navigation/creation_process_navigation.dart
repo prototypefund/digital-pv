@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 
 class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
   const CreationProcessNavigation({
-    Key? key,
+    super.key,
     required this.widget,
-  }) : super(key: key);
+  });
 
   final Widget widget;
 
@@ -21,7 +21,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: ColoredBox(
         color: Theme.of(context).backgroundColor,
         child: CustomScrollView(
           slivers: [
@@ -64,10 +64,10 @@ class ConstrainedSliverWidth extends StatelessWidget {
   final double maxWidth;
 
   const ConstrainedSliverWidth({
-    Key? key,
+    super.key,
     required this.child,
     required this.maxWidth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +82,12 @@ class ConstrainedSliverWidth extends StatelessWidget {
 
 class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
   const NavigationBarButtons({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final ViewModelType _viewModel = context.watch();
+    final ViewModelType viewModel = context.watch();
 
     const iconSize = 16.0;
 
@@ -104,29 +104,29 @@ class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewMo
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Visibility(
-                    visible: _viewModel.backButtonVisible,
+                    visible: viewModel.backButtonVisible,
                     child: ElevatedButton.icon(
                       icon: const Icon(
                         Icons.arrow_back_ios_sharp,
                         size: iconSize,
                       ),
-                      onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
-                      label: Text(_viewModel.backButtonText),
+                      onPressed: viewModel.backButtonEnabled ? () => viewModel.onBackButtonPressed(context) : null,
+                      label: Text(viewModel.backButtonText),
                     ),
                   ),
                   const Expanded(
                     child: SizedBox(),
                   ),
                   Visibility(
-                    visible: _viewModel.nextButtonVisible,
+                    visible: viewModel.nextButtonVisible,
                     child: ElevatedButton.icon(
                         icon: const Icon(
                           Icons.arrow_forward_ios_sharp,
                           size: iconSize,
                         ),
-                        onPressed: _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                        onPressed: viewModel.nextButtonEnabled ? () => viewModel.onNextButtonPressed(context) : null,
                         label: Text(
-                          _viewModel.nextButtonText,
+                          viewModel.nextButtonText,
                         )),
                   ),
                 ],

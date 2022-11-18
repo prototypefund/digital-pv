@@ -5,10 +5,12 @@ import 'package:pd_app/use_cases/personal_details/general_information_about_pati
 import 'package:provider/provider.dart';
 
 class PersonalDetails extends StatelessWidget {
-  const PersonalDetails({Key? key}) : super(key: key);
+  const PersonalDetails({super.key});
 
   static Widget page() {
-    return ChangeNotifierProvider(create: (_) => PersonalDetailsViewModel(), child: const PersonalDetails());
+    return ChangeNotifierProvider(
+        create: (_) => PersonalDetailsViewModel(),
+        child: const PersonalDetails());
   }
 
   @override

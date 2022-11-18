@@ -5,7 +5,7 @@ import 'package:pd_app/use_cases/general_information_about_patient_directive/gen
 import 'package:provider/provider.dart';
 
 class GeneralInformationAboutPatientDirective extends StatelessWidget {
-  const GeneralInformationAboutPatientDirective({Key? key}) : super(key: key);
+  const GeneralInformationAboutPatientDirective({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(
@@ -15,7 +15,9 @@ class GeneralInformationAboutPatientDirective extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CreationProcessNavigation<GeneralInformationAboutPatientDirectiveViewModel>(
-        widget: PatientDirectiveViewPlaceholder(title: 'Grundsätzliches zu meiner Patientenverfügung'));
+    return const CreationProcessNavigation<
+            GeneralInformationAboutPatientDirectiveViewModel>(
+        widget: PatientDirectiveViewPlaceholder(
+            title: 'Grundsätzliches zu meiner Patientenverfügung'));
   }
 }

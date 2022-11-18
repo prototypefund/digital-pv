@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pd_app/general/themes/images.dart';
 
 class BackgroundContainer extends StatelessWidget {
-  const BackgroundContainer({Key? key, required this.child}) : super(key: key);
+  const BackgroundContainer({super.key, required this.child});
 
   final Widget child;
 
@@ -19,7 +19,8 @@ class BackgroundContainer extends StatelessWidget {
           left: 0,
           right: 0,
           child: Column(
-            children: _buildBackgroundChildren(context, repetitions: backgroundPatternRepetitions),
+            children: _buildBackgroundChildren(context,
+                repetitions: backgroundPatternRepetitions),
           ),
         ),
         child,
@@ -27,10 +28,11 @@ class BackgroundContainer extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildBackgroundChildren(BuildContext context, {required int repetitions}) {
+  List<Widget> _buildBackgroundChildren(BuildContext context,
+      {required int repetitions}) {
     return List.generate(repetitions, (index) => index)
-        .expand(
-            (index) => _getBaseBackgroundPattern(context, flipHorizontal: index % 4 == 1, flipVertical: index % 4 == 3))
+        .expand((index) => _getBaseBackgroundPattern(context,
+            flipHorizontal: index % 4 == 1, flipVertical: index % 4 == 3))
         .toList();
   }
 

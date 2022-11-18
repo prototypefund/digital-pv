@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WelcomeView extends StatefulWidget {
-  const WelcomeView({Key? key}) : super(key: key);
+  const WelcomeView({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(
@@ -125,15 +125,15 @@ class _WelcomeViewState extends State<WelcomeView> {
     );
   }
 
-  Padding _lastPage(WelcomeViewModel _viewModel, BuildContext context) {
+  Padding _lastPage(WelcomeViewModel viewModel, BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(10.0.w, 2.h, 10.0.w, 2.0.h),
       child: ElevatedButton(
-        onPressed: () => _viewModel.onCallToActionPressed(context),
+        onPressed: () => viewModel.onCallToActionPressed(context),
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
         ),
-        child: Text(_viewModel.callToActionText),
+        child: Text(viewModel.callToActionText),
       ),
     );
   }

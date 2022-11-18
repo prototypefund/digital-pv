@@ -9,7 +9,7 @@ import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.da
 import 'package:provider/provider.dart';
 
 class PositiveAspects extends StatelessWidget with Logging {
-  PositiveAspects({Key? key}) : super(key: key);
+  PositiveAspects({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => PositiveAspectsViewModel(), child: PositiveAspects());
@@ -19,7 +19,7 @@ class PositiveAspects extends StatelessWidget with Logging {
 
   @override
   Widget build(BuildContext context) {
-    final PositiveAspectsViewModel _viewModel = context.watch();
+    final PositiveAspectsViewModel viewModel = context.watch();
 
     return CreationProcessNavigation<PositiveAspectsViewModel>(
         widget: Column(
@@ -28,7 +28,7 @@ class PositiveAspects extends StatelessWidget with Logging {
         Padding(
           padding: Paddings.headlinePadding,
           child: Text(
-            _viewModel.positiveAspectsHeadlineText,
+            viewModel.positiveAspectsHeadlineText,
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headlineLarge,
           ),
@@ -36,16 +36,16 @@ class PositiveAspects extends StatelessWidget with Logging {
         Padding(
           padding: Paddings.headlineExplanationPadding,
           child: Text(
-            _viewModel.positiveAspectsExplanationText,
+            viewModel.positiveAspectsExplanationText,
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-        if (_viewModel.showNoPositiveAspectsMessage)
+        if (viewModel.showNoPositiveAspectsMessage)
           Padding(
             padding: Paddings.emptyViewPadding,
             child: Text(
-              _viewModel.noPositiveAspectsMessageText,
+              viewModel.noPositiveAspectsMessageText,
               textAlign: TextAlign.start,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -56,27 +56,27 @@ class PositiveAspects extends StatelessWidget with Logging {
               child: AnimatedList(
                 key: _listKey,
                 shrinkWrap: true,
-                initialItemCount: _viewModel.positiveAspects.length,
+                initialItemCount: viewModel.positiveAspects.length,
                 itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
               )),
         Padding(
           padding: Paddings.callToActionPadding,
           child: ElevatedButton(
-              onPressed: _viewModel.addPositiveAspectCallToActionPressed(context),
-              child: Text(_viewModel.addPositiveAspectCallToActionText)),
+              onPressed: viewModel.addPositiveAspectCallToActionPressed(context),
+              child: Text(viewModel.addPositiveAspectCallToActionText)),
         ),
       ],
     ));
   }
 
   Widget buildListItem(BuildContext context, int index, Animation<double> animation) {
-    final PositiveAspectsViewModel _viewModel = context.watch();
-    final aspect = _viewModel.positiveAspects[index];
+    final PositiveAspectsViewModel viewModel = context.watch();
+    final aspect = viewModel.positiveAspects[index];
     return Padding(
       key: Key(aspect.name),
       padding: Paddings.listElementPadding,
       child:
-          _buildListItem(animation: animation, aspect: aspect, viewModel: _viewModel, interactive: true, index: index),
+          _buildListItem(animation: animation, aspect: aspect, viewModel: viewModel, interactive: true, index: index),
     );
   }
 
@@ -128,14 +128,13 @@ class PositiveAspects extends StatelessWidget with Logging {
 
 class AspectWidget extends StatelessWidget with Logging {
   const AspectWidget(
-      {Key? key,
+      {super.key,
       required this.aspect,
       required this.sliderDescription,
       required this.sliderHighLabel,
       required this.sliderLowLabel,
       this.onRemove,
-      this.onPositionChange})
-      : super(key: key);
+      this.onPositionChange});
 
   final Aspect aspect;
 
@@ -147,7 +146,7 @@ class AspectWidget extends StatelessWidget with Logging {
 
   @override
   Widget build(BuildContext context) {
-    final PositiveAspectsViewModel _viewModel = context.watch();
+    final PositiveAspectsViewModel viewModel = context.watch();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -168,7 +167,7 @@ class AspectWidget extends StatelessWidget with Logging {
                 children: [
                   IconButton(
                       onPressed: () async {
-                        final bool didRemove = await _viewModel.removeAspect(context: context, aspect: aspect);
+                        final bool didRemove = await viewModel.removeAspect(context: context, aspect: aspect);
                         if (didRemove) {
                           onRemove?.call();
                         }
@@ -181,18 +180,18 @@ class AspectWidget extends StatelessWidget with Logging {
         ),
         DPVSlider(
           sliderDescription: sliderDescription,
-          showLabels: _viewModel.showAspectSignificanceLabel,
+          showLabels: viewModel.showAspectSignificanceLabel,
           sliderLowLabel: sliderLowLabel,
           sliderHighLabel: sliderHighLabel,
           value: aspect.weight.value,
           onChangeEnd: (_) {
-            final AspectPositionChange positionChange = _viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
+            final AspectPositionChange positionChange = viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
             if (positionChange.oldIndex != positionChange.newIndex) {
               onPositionChange?.call(positionChange.oldIndex, positionChange.newIndex);
             }
           },
           onChanged: (double value) {
-            _viewModel.changeAspectWeight(aspect: aspect, weight: value);
+            viewModel.changeAspectWeight(aspect: aspect, weight: value);
           },
         )
       ],

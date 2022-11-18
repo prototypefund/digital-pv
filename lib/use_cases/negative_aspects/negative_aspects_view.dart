@@ -5,10 +5,12 @@ import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view_model.da
 import 'package:provider/provider.dart';
 
 class NegativeAspects extends StatelessWidget {
-  const NegativeAspects({Key? key}) : super(key: key);
+  const NegativeAspects({super.key});
 
   static Widget page() {
-    return ChangeNotifierProvider(create: (_) => NegativeAspectsViewModel(), child: const NegativeAspects());
+    return ChangeNotifierProvider(
+        create: (_) => NegativeAspectsViewModel(),
+        child: const NegativeAspects());
   }
 
   @override

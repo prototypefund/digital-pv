@@ -5,10 +5,12 @@ import 'package:pd_app/use_cases/future_situations/future_situations_view_model.
 import 'package:provider/provider.dart';
 
 class FutureSituations extends StatelessWidget {
-  const FutureSituations({Key? key}) : super(key: key);
+  const FutureSituations({super.key});
 
   static Widget page() {
-    return ChangeNotifierProvider(create: (_) => FutureSituationsViewModel(), child: const FutureSituations());
+    return ChangeNotifierProvider(
+        create: (_) => FutureSituationsViewModel(),
+        child: const FutureSituations());
   }
 
   @override

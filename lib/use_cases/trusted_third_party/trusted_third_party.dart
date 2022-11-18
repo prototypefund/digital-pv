@@ -5,10 +5,12 @@ import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party_view_mo
 import 'package:provider/provider.dart';
 
 class TrustedThirdParty extends StatelessWidget {
-  const TrustedThirdParty({Key? key}) : super(key: key);
+  const TrustedThirdParty({super.key});
 
   static Widget page() {
-    return ChangeNotifierProvider(create: (_) => TrustedThirdPartyViewModel(), child: const TrustedThirdParty());
+    return ChangeNotifierProvider(
+        create: (_) => TrustedThirdPartyViewModel(),
+        child: const TrustedThirdParty());
   }
 
   @override

@@ -5,16 +5,18 @@ import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_o
 import 'package:provider/provider.dart';
 
 class GeneralTreatmentObjective extends StatelessWidget {
-  const GeneralTreatmentObjective({Key? key}) : super(key: key);
+  const GeneralTreatmentObjective({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(
-        create: (_) => GeneralTreatmentObjectiveViewModel(), child: const GeneralTreatmentObjective());
+        create: (_) => GeneralTreatmentObjectiveViewModel(),
+        child: const GeneralTreatmentObjective());
   }
 
   @override
   Widget build(BuildContext context) {
     return const CreationProcessNavigation<GeneralTreatmentObjectiveViewModel>(
-        widget: PatientDirectiveViewPlaceholder(title: 'Behandlungsziel festlegen'));
+        widget: PatientDirectiveViewPlaceholder(
+            title: 'Behandlungsziel festlegen'));
   }
 }

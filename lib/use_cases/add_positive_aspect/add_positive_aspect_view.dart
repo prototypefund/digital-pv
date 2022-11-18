@@ -7,7 +7,7 @@ import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view_mo
 import 'package:provider/provider.dart';
 
 class AddPositiveAspect extends StatefulWidget {
-  const AddPositiveAspect({Key? key}) : super(key: key);
+  const AddPositiveAspect({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => AddPositiveAspectViewModel(), child: const AddPositiveAspect());
@@ -20,7 +20,7 @@ class AddPositiveAspect extends StatefulWidget {
 class _AddPositiveAspectState extends State<AddPositiveAspect> {
   @override
   Widget build(BuildContext context) {
-    final AddPositiveAspectViewModel _viewModel = context.watch();
+    final AddPositiveAspectViewModel viewModel = context.watch();
 
     return CreationProcessNavigation<AddPositiveAspectViewModel>(
       widget: Column(
@@ -28,12 +28,12 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
         children: [
           Padding(
             padding: Paddings.headlinePadding,
-            child: Text(_viewModel.addPositiveAspectTitle, style: Theme.of(context).textTheme.headlineLarge),
+            child: Text(viewModel.addPositiveAspectTitle, style: Theme.of(context).textTheme.headlineLarge),
           ),
           Padding(
             padding: Paddings.headlineExplanationPadding,
             child: Text(
-              _viewModel.addPositiveAspectExplanation,
+              viewModel.addPositiveAspectExplanation,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
@@ -42,23 +42,23 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
             child: Padding(
               padding: Paddings.textFieldPadding,
               child: TextField(
-                controller: _viewModel.aspectTextFieldController,
+                controller: viewModel.aspectTextFieldController,
                 onChanged: (newValue) => setState(() {}),
                 style: Theme.of(context).textTheme.labelLarge,
-                decoration: InputDecoration(hintText: _viewModel.addPositiveAspectTextfieldHint),
+                decoration: InputDecoration(hintText: viewModel.addPositiveAspectTextfieldHint),
                 autofocus: true,
               ),
             ),
           ),
           DPVSlider(
-            sliderDescription: _viewModel.aspectSignificanceLabel,
-            showLabels: _viewModel.showAspectSignificanceLabel,
-            sliderLowLabel: _viewModel.aspectsSignificanceLowLabel,
-            sliderHighLabel: _viewModel.aspectSignificanceHighLabel,
-            value: _viewModel.weight,
+            sliderDescription: viewModel.aspectSignificanceLabel,
+            showLabels: viewModel.showAspectSignificanceLabel,
+            sliderLowLabel: viewModel.aspectsSignificanceLowLabel,
+            sliderHighLabel: viewModel.aspectSignificanceHighLabel,
+            value: viewModel.weight,
             padding: Paddings.newAspectSliderPadding,
             onChanged: (double value) {
-              _viewModel.weight = value;
+              viewModel.weight = value;
             },
           ),
           Container(
@@ -66,22 +66,21 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
             child: Padding(
               padding: Paddings.formSaveActionPadding,
               child: ElevatedButton(
-                  onPressed: _viewModel.addPositiveAspect(context),
-                  child: Text(_viewModel.addPositiveAspectActionText)),
+                  onPressed: viewModel.addPositiveAspect(context), child: Text(viewModel.addPositiveAspectActionText)),
             ),
           ),
           Padding(
             padding: Paddings.subHeadlinePadding,
-            child: Text(_viewModel.examplesText, style: Theme.of(context).textTheme.headlineMedium),
+            child: Text(viewModel.examplesText, style: Theme.of(context).textTheme.headlineMedium),
           ),
           Container(
             constraints: Constraints.formSaveActionConstraints,
             child: Wrap(
-              children: _viewModel.examples
+              children: viewModel.examples
                   .map((example) => Padding(
                         padding: Paddings.exampleButtonPadding,
                         child: OutlinedButton(
-                          onPressed: () => _viewModel.chooseExample(example),
+                          onPressed: () => viewModel.chooseExample(example),
                           child: Text(example),
                         ),
                       ))

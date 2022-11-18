@@ -5,15 +5,18 @@ import 'package:pd_app/use_cases/treatment_activities/treatment_activities_view_
 import 'package:provider/provider.dart';
 
 class TreatmentActivities extends StatelessWidget {
-  const TreatmentActivities({Key? key}) : super(key: key);
+  const TreatmentActivities({super.key});
 
   static Widget page() {
-    return ChangeNotifierProvider(create: (_) => TreatmentActivitiesViewModel(), child: const TreatmentActivities());
+    return ChangeNotifierProvider(
+        create: (_) => TreatmentActivitiesViewModel(),
+        child: const TreatmentActivities());
   }
 
   @override
   Widget build(BuildContext context) {
     return const CreationProcessNavigation<TreatmentActivitiesViewModel>(
-        widget: PatientDirectiveViewPlaceholder(title: 'Behandlungsmaßnahmen festlegen'));
+        widget: PatientDirectiveViewPlaceholder(
+            title: 'Behandlungsmaßnahmen festlegen'));
   }
 }
