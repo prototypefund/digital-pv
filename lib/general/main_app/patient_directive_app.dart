@@ -18,6 +18,9 @@ import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+// Not sure what this exactly does, but it fixed a problem when entering debugging mode
+final GlobalKey<ScaffoldMessengerState> globalScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
 class PatientDirectiveApp extends StatefulWidget {
   const PatientDirectiveApp({super.key});
 
@@ -115,6 +118,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp.router(
+          scaffoldMessengerKey: globalScaffoldMessengerKey,
           routeInformationProvider: _router.routeInformationProvider,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
@@ -123,7 +127,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
           builder: (context, widget) {
-            _injectL10nIntoGetIt(context);
+            _injectL10nIntoGetIt(globalScaffoldMessengerKey.currentState!.context);
             return widget ?? const SizedBox();
           },
         );
