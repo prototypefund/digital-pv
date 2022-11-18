@@ -33,66 +33,66 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     super.initState();
 
     _router = GoRouter(
-        routes: [
-          GoRoute(
-            path: Routes.welcome,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: WelcomeView.page()),
-          ),
-          GoRoute(
-            path: Routes.positiveAspects,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: PositiveAspects.page()),
-          ),
-          GoRoute(
-            path: Routes.addPositiveAspect,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: AddPositiveAspect.page()),
-          ),
-          GoRoute(
-            path: Routes.negativeAspects,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: NegativeAspects.page()),
-          ),
-          GoRoute(
-            path: Routes.evaluateCurrentAspects,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: EvaluateCurrentAspects.page()),
-          ),
-          GoRoute(
-            path: Routes.generalTreatmentObjective,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: GeneralTreatmentObjective.page()),
-          ),
-          GoRoute(
-            path: Routes.treatmentActivities,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: TreatmentActivities.page()),
-          ),
-          GoRoute(
-            path: Routes.futureSituations,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: FutureSituations.page()),
-          ),
-          GoRoute(
-            path: Routes.trustedThirdParty,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: TrustedThirdParty.page()),
-          ),
-          GoRoute(
-            path: Routes.generalInformationAboutPatientDirective,
-            pageBuilder: (context, state) => buildPageWithDefaultTransition(
-                context: context, state: state, child: GeneralInformationAboutPatientDirective.page()),
-          ),
-          GoRoute(
-            path: Routes.personalDetails,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: PersonalDetails.page()),
-          ),
-        ],
-        redirect: (state) {
-          return null;
-        });
+      debugLogDiagnostics: true,
+      routes: [
+        GoRoute(
+          path: Routes.welcome,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: WelcomeView.page()),
+        ),
+        GoRoute(
+          path: Routes.positiveAspects,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: PositiveAspects.page()),
+        ),
+        GoRoute(
+          path: Routes.addPositiveAspect,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: AddPositiveAspect.page()),
+        ),
+        GoRoute(
+          path: Routes.negativeAspects,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: NegativeAspects.page()),
+        ),
+        GoRoute(
+          path: Routes.evaluateCurrentAspects,
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+              context: context, state: state, child: EvaluateCurrentAspects.page()),
+        ),
+        GoRoute(
+          path: Routes.generalTreatmentObjective,
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+              context: context, state: state, child: GeneralTreatmentObjective.page()),
+        ),
+        GoRoute(
+          path: Routes.treatmentActivities,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: TreatmentActivities.page()),
+        ),
+        GoRoute(
+          path: Routes.futureSituations,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: FutureSituations.page()),
+        ),
+        GoRoute(
+          path: Routes.trustedThirdParty,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: TrustedThirdParty.page()),
+        ),
+        GoRoute(
+          path: Routes.generalInformationAboutPatientDirective,
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+              context: context, state: state, child: GeneralInformationAboutPatientDirective.page()),
+        ),
+        GoRoute(
+          path: Routes.personalDetails,
+          pageBuilder: (context, state) =>
+              buildPageWithDefaultTransition<void>(context: context, state: state, child: PersonalDetails.page()),
+        ),
+      ],
+      redirect: (_, __) => null,
+    );
   }
 
   /// Helper to define the default transition to use
