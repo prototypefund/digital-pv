@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class DPVDropDown extends StatelessWidget {
+class DPVDropDown<Type> extends StatelessWidget {
   const DPVDropDown(
       {Key? key, required this.description, this.initialValue, required this.onChanged, required this.items})
       : super(key: key);
 
   final Widget description;
-  final String? initialValue;
-  final void Function(String?)? onChanged;
-  final List<DropdownMenuItem<String>>? items;
+  final Type? initialValue;
+  final void Function(Type?)? onChanged;
+  final List<DropdownMenuItem<Type>>? items;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DPVDropDown extends StatelessWidget {
           children: [
             description,
             const Spacer(),
-            DropdownButton<String>(
+            DropdownButton<Type>(
               value: initialValue,
               icon: const Icon(Icons.arrow_downward),
               elevation: 16,

@@ -1,46 +1,41 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 
 class TreatmentActivitiesViewModel extends CreationProcessNavigationViewModel {
   String get addTreatmentActivitiesTitle => l10n.addTreatmentActivitiesTitle;
 
   String get addTreatmentActivitiesExplanation => l10n.addTreatmentActivitiesExplanation;
+
   String get addTreatmentActivitiesSubHeadline => l10n.addTreatmentActivitiesSubHeadline;
+
   String get addTreatmentActivitiesHospitalAdmission => l10n.addTreatmentActivitiesHospitalAdmission;
+
   String get addTreatmentActivitiesIntensiveTreatment => l10n.addTreatmentActivitiesIntensiveTreatment;
+
   String get addTreatmentActivitiesResuscitation => l10n.addTreatmentActivitiesResuscitation;
 
-  late String? hospitalizationSelection = hospitalizationList.first;
-  late String? intensiveTreatmentSelection = intensiveTreatmentList.first;
-  late String? resuscitationSelection = resuscitationList.first;
+  late TreatmentActivity? hospitalizationSelection = hospitalizationList.first;
+  late TreatmentActivity? intensiveTreatmentSelection = intensiveTreatmentList.first;
+  late TreatmentActivity? resuscitationSelection = resuscitationList.first;
 
-  List<String> get hospitalizationList {
+  List<TreatmentActivity> get hospitalizationList {
     return [
-      "Not specified",
-      "No",
-      "Yes",
-      "I do want to be admitted to hospital, but only for symptom control which cannot be handled in the outpatient setting."
+      TreatmentActivity.notSpecified,
+      TreatmentActivity.no,
+      TreatmentActivity.yes,
+      TreatmentActivity.symptomControl
     ];
   }
 
-  List<String> get intensiveTreatmentList {
-    return [
-      "Not specified",
-      "No",
-      "Yes",
-      "I do want to be admitted to hospital, but only for symptom control which cannot be handled in the outpatient setting."
-    ];
+  List<TreatmentActivity> get intensiveTreatmentList {
+    return [TreatmentActivity.notSpecified, TreatmentActivity.no, TreatmentActivity.yes];
   }
 
-  List<String> get resuscitationList {
-    return [
-      "Not specified",
-      "No",
-      "Yes",
-      "I do want to be admitted to hospital, but only for symptom control which cannot be handled in the outpatient setting."
-    ];
+  List<TreatmentActivity> get resuscitationList {
+    return [TreatmentActivity.notSpecified, TreatmentActivity.no, TreatmentActivity.yes];
   }
 
   @override
