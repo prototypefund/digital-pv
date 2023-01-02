@@ -48,5 +48,22 @@
   "addTreatmentActivitiesSubHeadline" : "Medizinische Maßnahmen",
   "addTreatmentActivitiesHospitalAdmission": "Aufnahme ins Krankenhaus",
   "addTreatmentActivitiesIntensiveTreatment": "Intensivbehandlung",
-  "addTreatmentActivitiesResuscitation": "Wiederbelebung"
+  "addTreatmentActivitiesResuscitation": "Wiederbelebung",
+  "futureSituationsTitle": "Was wäre wenn?",
+  "futureSituationsExampleDeadlyDisease": "Endstadium einer tödlichen Krankheit",
+  "futureSituationsExampleIntensiveCare": "Intensivbehandlung unklarer Dauer nach akutem Ereignis ...",
+  "futureSituationsExampleIntensiveCareDescription": "z.B. Infektion, Komplikationen bei/nach OP, akute Verschlechterung einer bestehenden Erkrankung",
+  "futureSituationsExampleProcessOfDying": "Sterbeprozess",
+  "futureSituationsExampleSevereImpairement": "Schwere, dauerhafte  körperliche Beeinträchtigung ...",
+  "futureSituationsExampleSevereImpairementDescription": "(Bettlägerigkeit, permanente Pflegedürftigkeit, Inkontinenz) bei gleichzeitigem Verlust der Einwilligungs- bzw. Urteilsfähigkeit",
+  "futureSituationsExampleIntellectualImpairment": "Schwere oder fortschreitende geistige Beeinträchtigung ...",
+  "futureSituationsExampleIntellectualImpairmentDescription": "z.B. unfallbedingte Hirnschädigung, Demenz",
+  "futureSituationsExampleWakingComa": "Wachkoma oder ähnliche Zustände ...",
+  "futureSituationsExampleWakingComaDescription": "Info: Ein Erwachen ist nicht ganz auszuschliessen, aber unwahrscheinlich. Es ist unklar, ob eine gewisse Empfindungsfähigkeit erhalten sein kann.",
+  "futureSituationsGroupTitleSevereImpairement": "Schwere Zustände",
+  "futureSituationsGroupTitleUncertainCondition":"Ungewisse Zustände",
+  "futureSituationsGroupDeathInescapable":"Tod unausweichlich",
+  "addFutureSituationAspectTextfieldHint": "Neue Angabe ...",
+  "futureSituationsTitleExplanation": "Hier können Sie optional für mögliche künftige Situationen bestimmte Maßnahmen festlegen",
+  "addFutureSituationAspect": "Hinzufügen"
 }

@@ -48,6 +48,9 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
           DPVDropDown(
               description: Text(_viewModel.addTreatmentActivitiesHospitalAdmission),
               initialValue: _viewModel.hospitalizationSelection,
@@ -62,6 +65,9 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> {
                   child: Text(value),
                 );
               }).toList()),
+          const SizedBox(
+            height: 20,
+          ),
           DPVDropDown(
               description: Text(_viewModel.addTreatmentActivitiesIntensiveTreatment),
               initialValue: _viewModel.intensiveTreatmentSelection,
@@ -76,6 +82,9 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> {
                   child: Text(value),
                 );
               }).toList()),
+          const SizedBox(
+            height: 20,
+          ),
           DPVDropDown(
               description: Text(_viewModel.addTreatmentActivitiesResuscitation),
               initialValue: _viewModel.resuscitationSelection,

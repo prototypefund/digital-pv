@@ -18,6 +18,8 @@ import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
+
 class PatientDirectiveApp extends StatefulWidget {
   const PatientDirectiveApp({Key? key}) : super(key: key);
 
@@ -110,19 +112,22 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     );
   }
 
+  bool registered = false;
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
+      builder: (newContext, orientation, screenType) {
         return MaterialApp.router(
+          scaffoldMessengerKey: _navigatorKey,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           title: 'DPV',
           theme: Themes().defaultTheme,
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
-          builder: (context, widget) {
-            _injectL10nIntoGetIt(context);
+          builder: (_, widget) {
+            _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
             return widget ?? const SizedBox();
           },
         );

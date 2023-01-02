@@ -17,6 +17,7 @@ class DPVDropDown extends StatelessWidget {
         border: Border.all(
           width: 1,
         ),
+        borderRadius: BorderRadius.circular(5.0),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

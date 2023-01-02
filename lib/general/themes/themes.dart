@@ -25,18 +25,17 @@ class Themes {
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
                 primary: DefaultThemeColors.purple,
-                textStyle:
-                    const TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
+                textStyle: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
         textTheme: Typography.blackCupertino.merge(TextTheme(
             headlineLarge: TextStyle(
-                fontSize: 24.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
+                fontSize: 15.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
             headlineMedium: TextStyle(
-                fontSize: 20.sp, fontWeight: FontWeight.w300, color: DefaultThemeColors.black, height: 32 / 20),
-            bodyLarge: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
+                fontSize: 14.sp, fontWeight: FontWeight.w300, color: DefaultThemeColors.black, height: 32 / 20),
+            bodyLarge: TextStyle(fontSize: 15.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
             titleMedium: TextStyle(
-                fontSize: 20.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
+                fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
             labelLarge: TextStyle(
-                fontSize: 16.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
+                fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
             labelMedium: TextStyle(
                 fontSize: 13.sp,
                 color: DefaultThemeColors.blackTransparent,
@@ -47,7 +46,7 @@ class Themes {
                 color: DefaultThemeColors.blackTransparent,
                 fontWeight: FontWeight.normal,
                 height: 15 / 11),
-            bodyMedium: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
+            bodyMedium: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
         extensions: const <ThemeExtension<dynamic>>[
           PageIndicatorStyle(
             decoration: BoxDecoration(
