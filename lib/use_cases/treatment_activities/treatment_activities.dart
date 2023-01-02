@@ -65,7 +65,9 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> with RootCont
               items: _viewModel.hospitalizationList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
                 return DropdownMenuItem<TreatmentActivity>(
                   value: value,
-                  child: Text(value.localizedString(l10n)),
+                  child: Text(
+                    value.localizedString(l10n),
+                  ),
                 );
               }).toList()),
           const SizedBox(

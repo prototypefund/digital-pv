@@ -25,17 +25,21 @@ class DPVDropDown<Type> extends StatelessWidget {
           children: [
             description,
             const Spacer(),
-            DropdownButton<Type>(
-              value: initialValue,
-              icon: const Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
-              underline: Container(
-                height: 2,
-                color: Colors.deepPurpleAccent,
+            Container(
+              constraints: BoxConstraints(maxWidth: 400),
+              child: DropdownButton<Type>(
+                isExpanded: true,
+                value: initialValue,
+                icon: const Icon(Icons.arrow_downward),
+                elevation: 16,
+                style: const TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: onChanged,
+                items: items,
               ),
-              onChanged: onChanged,
-              items: items,
             )
           ],
         ),
