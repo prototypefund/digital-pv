@@ -4,7 +4,7 @@ import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/general/view_components/dpv_dropdown.dart';
-import 'package:pd_app/use_cases/treatment_activities/treatment_activities_view_model.dart';
+import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_activities_view_model.dart';
 import 'package:provider/provider.dart';
 
 class TreatmentActivities extends StatefulWidget {
