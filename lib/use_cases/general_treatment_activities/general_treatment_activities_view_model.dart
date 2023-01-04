@@ -8,8 +8,8 @@ import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view_model.dart';
 
-class TreatmentActivitiesViewModel extends CreationProcessNavigationViewModel {
-  TreatmentActivitiesViewModel()
+class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewModel {
+  GeneralTreatmentActivitiesViewModel()
       : _patientDirectiveService = getIt.get(),
         _treatmentActivitiesSelectionViewModel = TreatmentActivitiesSelectionViewModel(
             hospitalizationSelection:
@@ -51,6 +51,8 @@ class TreatmentActivitiesViewModel extends CreationProcessNavigationViewModel {
   @override
   void dispose() {
     super.dispose();
+    _patientDirectiveService.removeListener(_reactToPatientDirectiveChange);
+    treatmentActivitiesSelectionViewModel.removeListener(_reactToTreatmentActivitySelection);
     treatmentActivitiesSelectionViewModel.dispose();
   }
 

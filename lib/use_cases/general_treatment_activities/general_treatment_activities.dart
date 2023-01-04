@@ -10,7 +10,8 @@ class TreatmentActivities extends StatefulWidget {
   const TreatmentActivities({Key? key}) : super(key: key);
 
   static Widget page() {
-    return ChangeNotifierProvider(create: (_) => TreatmentActivitiesViewModel(), child: const TreatmentActivities());
+    return ChangeNotifierProvider(
+        create: (_) => GeneralTreatmentActivitiesViewModel(), child: const TreatmentActivities());
   }
 
   @override
@@ -18,12 +19,12 @@ class TreatmentActivities extends StatefulWidget {
 }
 
 class _TreatmentActivitiesState extends State<TreatmentActivities> with RootContextL10N {
-  late TreatmentActivitiesViewModel _viewModel;
+  late GeneralTreatmentActivitiesViewModel _viewModel;
 
   @override
   Widget build(BuildContext context) {
     _viewModel = context.watch();
-    return CreationProcessNavigation<TreatmentActivitiesViewModel>(
+    return CreationProcessNavigation<GeneralTreatmentActivitiesViewModel>(
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
