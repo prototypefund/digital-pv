@@ -32,7 +32,8 @@ class TreatmentActivitiesSelection extends StatelessWidget with RootContextL10N 
             description: Text(_viewModel.addTreatmentActivitiesHospitalAdmission),
             initialValue: _viewModel.hospitalizationSelection,
             onChanged: (TreatmentActivity? value) {
-              _viewModel.hospitalizationSelection = value;
+              final TreatmentActivity newValue = value ?? TreatmentActivity.notSpecified;
+              _viewModel.hospitalizationSelection = newValue;
             },
             items: _viewModel.hospitalizationList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
               return DropdownMenuItem<TreatmentActivity>(
@@ -49,7 +50,8 @@ class TreatmentActivitiesSelection extends StatelessWidget with RootContextL10N 
             description: Text(_viewModel.addTreatmentActivitiesIntensiveTreatment),
             initialValue: _viewModel.intensiveTreatmentSelection,
             onChanged: (TreatmentActivity? value) {
-              _viewModel.intensiveTreatmentSelection = value;
+              final TreatmentActivity newValue = value ?? TreatmentActivity.notSpecified;
+              _viewModel.intensiveTreatmentSelection = newValue;
             },
             items:
                 _viewModel.intensiveTreatmentList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
@@ -65,7 +67,8 @@ class TreatmentActivitiesSelection extends StatelessWidget with RootContextL10N 
             description: Text(_viewModel.addTreatmentActivitiesResuscitation),
             initialValue: _viewModel.resuscitationSelection,
             onChanged: (TreatmentActivity? value) {
-              _viewModel.resuscitationSelection = value;
+              final TreatmentActivity newValue = value ?? TreatmentActivity.notSpecified;
+              _viewModel.resuscitationSelection = newValue;
             },
             items: _viewModel.resuscitationList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
               return DropdownMenuItem<TreatmentActivity>(
