@@ -21,7 +21,7 @@ class Themes {
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 textStyle: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
-                foregroundColor: DefaultThemeColors.purple)),
+                backgroundColor: DefaultThemeColors.purple)),
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
                 foregroundColor: DefaultThemeColors.purple,
