@@ -22,11 +22,14 @@ class DPVDropDown<Type> extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            description,
-            const Spacer(),
-            Container(
-              constraints: BoxConstraints(maxWidth: 400),
+            Flexible(flex: 4, child: description),
+            const Spacer(
+              flex: 1,
+            ),
+            Flexible(
+              flex: 5,
               child: DropdownButton<Type>(
                 isExpanded: true,
                 value: initialValue,

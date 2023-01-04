@@ -77,9 +77,7 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> with RootCont
               description: Text(_viewModel.addTreatmentActivitiesIntensiveTreatment),
               initialValue: _viewModel.intensiveTreatmentSelection,
               onChanged: (TreatmentActivity? value) {
-                setState(() {
-                  _viewModel.intensiveTreatmentSelection = value;
-                });
+                _viewModel.intensiveTreatmentSelection = value;
               },
               items:
                   _viewModel.intensiveTreatmentList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
