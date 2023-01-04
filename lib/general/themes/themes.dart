@@ -21,10 +21,10 @@ class Themes {
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 textStyle: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
-                primary: DefaultThemeColors.purple)),
+                backgroundColor: DefaultThemeColors.purple)),
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
-                primary: DefaultThemeColors.purple,
+                backgroundColor: DefaultThemeColors.purple,
                 textStyle: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
         textTheme: Typography.blackCupertino.merge(TextTheme(
             headlineLarge: TextStyle(
