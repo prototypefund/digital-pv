@@ -9,6 +9,7 @@ import 'package:pd_app/logging.dart';
 class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging {
   PositiveAspectsViewModel()
       : _positiveAspectListViewModel = AspectListViewModel(
+            showTreatmentOptions: false,
             aspectListChoice: (PatientDirective patientDirective) => patientDirective.positiveAspects) {
     _positiveAspectListViewModel.addListener(_reactToAspectListChange);
   }

@@ -18,10 +18,13 @@ typedef AspectListChoice = List<Aspect> Function(PatientDirective patientDirecti
 /// The parent model provides a callback, which given a patient directive returns the list of aspects to show and change.
 /// Manipulation of the patient directive is done directly by this model
 class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
-  AspectListViewModel({required this.aspectListChoice}) : _patientDirectiveService = getIt.get() {
+  AspectListViewModel({required this.aspectListChoice, required this.showTreatmentOptions})
+      : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService();
   }
+
+  final bool showTreatmentOptions;
 
   late List<Aspect> _aspects;
 

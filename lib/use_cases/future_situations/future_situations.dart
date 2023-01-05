@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/model/aspect.dart';
-import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/view_components/aspect_examples/aspect_examples.dart';
+import 'package:pd_app/general/view_components/dpv_box.dart';
 import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations_view_model.dart';
@@ -199,72 +199,55 @@ class _FutureSituationsState extends State<FutureSituations> with SingleTickerPr
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
-          Card(
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(
-                  color: DefaultThemeColors.darkGreyTransparent,
-                ),
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(28.0),
-                child: _viewModel.showNoFutureSituationAspectsMessage == true
-                    ? Padding(
-                        padding: Paddings.emptyViewPadding,
-                        child: Text(
-                          _viewModel.noFutureSituationAspectsMessageText,
-                          textAlign: TextAlign.start,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      )
-                    : Padding(
-                        padding: Paddings.listPadding,
-                        child: AnimatedList(
-                          key: _listKey,
-                          shrinkWrap: true,
-                          initialItemCount: _viewModel.futureSituationAspects.length,
-                          itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
-                        )),
-              )),
-          Card(
-            shape: RoundedRectangleBorder(
-              side: const BorderSide(
-                color: DefaultThemeColors.darkGreyTransparent,
-              ),
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(28.0),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: Paddings.textFieldPadding,
-                    child: TextField(
-                      controller: _viewModel.aspectTextFieldController,
-                      onChanged: (newValue) => setState(() {}),
-                      style: Theme.of(context).textTheme.labelLarge,
-                      decoration: InputDecoration(hintText: _viewModel.addFutureSituationAspectTextfieldHint),
-                      autofocus: true,
+          DPVBox(
+            child: _viewModel.showNoFutureSituationAspectsMessage == true
+                ? Padding(
+                    padding: Paddings.emptyViewPadding,
+                    child: Text(
+                      _viewModel.noFutureSituationAspectsMessageText,
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                  ),
-                  DPVSlider(
-                    sliderDescription: _viewModel.aspectSignificanceLabel,
-                    showLabels: _viewModel.showAspectSignificanceLabel,
-                    sliderLowLabel: _viewModel.aspectsSignificanceLowLabel,
-                    sliderHighLabel: _viewModel.aspectSignificanceHighLabel,
-                    value: _viewModel.weight,
-                    padding: Paddings.newAspectSliderPadding,
-                    onChanged: (double value) {
-                      _viewModel.weight = value;
-                    },
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () => _viewModel.addFutureSituationAspect(context),
-                    icon: const Icon(Icons.add),
-                    label: Text(_viewModel.addFutureSituationAspectText),
                   )
-                ],
-              ),
+                : Padding(
+                    padding: Paddings.listPadding,
+                    child: AnimatedList(
+                      key: _listKey,
+                      shrinkWrap: true,
+                      initialItemCount: _viewModel.futureSituationAspects.length,
+                      itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
+                    )),
+          ),
+          DPVBox(
+            child: Column(
+              children: [
+                Padding(
+                  padding: Paddings.textFieldPadding,
+                  child: TextField(
+                    controller: _viewModel.aspectTextFieldController,
+                    onChanged: (newValue) => setState(() {}),
+                    style: Theme.of(context).textTheme.labelLarge,
+                    decoration: InputDecoration(hintText: _viewModel.addFutureSituationAspectTextfieldHint),
+                    autofocus: true,
+                  ),
+                ),
+                DPVSlider(
+                  sliderDescription: _viewModel.aspectSignificanceLabel,
+                  showLabels: _viewModel.showAspectSignificanceLabel,
+                  sliderLowLabel: _viewModel.aspectsSignificanceLowLabel,
+                  sliderHighLabel: _viewModel.aspectSignificanceHighLabel,
+                  value: _viewModel.weight,
+                  padding: Paddings.newAspectSliderPadding,
+                  onChanged: (double value) {
+                    _viewModel.weight = value;
+                  },
+                ),
+                ElevatedButton.icon(
+                  onPressed: () => _viewModel.addFutureSituationAspect(context),
+                  icon: const Icon(Icons.add),
+                  label: Text(_viewModel.addFutureSituationAspectText),
+                )
+              ],
             ),
           ),
           const SizedBox(

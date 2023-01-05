@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
+import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
+import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view_model.dart';
+import 'package:pd_app/general/view_components/dpv_box.dart';
 import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
@@ -126,54 +130,68 @@ class AspectWidget extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
     final AspectListViewModel _viewModel = context.watch();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          constraints: Constraints.aspectTitleConstraints,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  aspect.name,
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.titleMedium,
+    return DPVBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            constraints: Constraints.aspectTitleConstraints,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
+                    aspect.name,
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () async {
-                        final bool didRemove = await _viewModel.removeAspect(context: context, aspect: aspect);
-                        if (didRemove) {
-                          onRemove?.call();
-                        }
-                      },
-                      icon: const Icon(Icons.remove_circle_outline)),
-                ],
-              ),
-            ],
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () async {
+                          final bool didRemove = await _viewModel.removeAspect(context: context, aspect: aspect);
+                          if (didRemove) {
+                            onRemove?.call();
+                          }
+                        },
+                        icon: const Icon(Icons.remove_circle_outline)),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        DPVSlider(
-          sliderDescription: sliderDescription,
-          showLabels: _viewModel.showAspectSignificanceLabel,
-          sliderLowLabel: sliderLowLabel,
-          sliderHighLabel: sliderHighLabel,
-          value: aspect.weight.value,
-          onChangeEnd: (_) {
-            final AspectPositionChange positionChange = _viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
-            if (positionChange.oldIndex != positionChange.newIndex) {
-              onPositionChange?.call(positionChange.oldIndex, positionChange.newIndex);
-            }
-          },
-          onChanged: (double value) {
-            _viewModel.changeAspectWeight(aspect: aspect, weight: value);
-          },
-        )
-      ],
+          DPVSlider(
+            sliderDescription: sliderDescription,
+            showLabels: _viewModel.showAspectSignificanceLabel,
+            sliderLowLabel: sliderLowLabel,
+            sliderHighLabel: sliderHighLabel,
+            value: aspect.weight.value,
+            onChangeEnd: (_) {
+              final AspectPositionChange positionChange = _viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
+              if (positionChange.oldIndex != positionChange.newIndex) {
+                onPositionChange?.call(positionChange.oldIndex, positionChange.newIndex);
+              }
+            },
+            onChanged: (double value) {
+              _viewModel.changeAspectWeight(aspect: aspect, weight: value);
+            },
+          ),
+          if (_viewModel.showTreatmentOptions)
+            ExpansionTile(
+              title: const Text('Behandlungsoptionen'),
+              children: [
+                ChangeNotifierProvider(
+                    create: (_) => TreatmentActivitiesSelectionViewModel(
+                        hospitalizationSelection: TreatmentActivityChoice.notSpecified,
+                        intensiveTreatmentSelection: TreatmentActivityChoice.notSpecified,
+                        resuscitationSelection: TreatmentActivityChoice.notSpecified),
+                    child: TreatmentActivitiesSelection())
+              ],
+            )
+        ],
+      ),
     );
   }
 }
