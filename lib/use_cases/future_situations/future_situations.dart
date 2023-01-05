@@ -1,10 +1,10 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/view_components/aspect_examples/aspect_examples.dart';
 import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations_view_model.dart';
@@ -93,6 +93,7 @@ class AspectPositionChange {
 
 class FutureSituations extends StatefulWidget {
   const FutureSituations({Key? key}) : super(key: key);
+
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => FutureSituationsViewModel(), child: const FutureSituations());
   }
@@ -273,214 +274,7 @@ class _FutureSituationsState extends State<FutureSituations> with SingleTickerPr
           const SizedBox(
             height: 10,
           ),
-          _Examples(controller: _controller, viewModel: _viewModel),
-        ],
-      ),
-    );
-  }
-}
-
-class _Examples extends StatelessWidget {
-  const _Examples({
-    Key? key,
-    required TabController controller,
-    required FutureSituationsViewModel viewModel,
-  })  : _controller = controller,
-        _viewModel = viewModel,
-        super(key: key);
-
-  final TabController _controller;
-  final FutureSituationsViewModel _viewModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(mainAxisSize: MainAxisSize.min, children: [
-      Align(
-        alignment: Alignment.topLeft,
-        child: TabBar(
-            labelColor: DefaultThemeColors.white,
-            unselectedLabelColor: DefaultThemeColors.darkGrey,
-            labelStyle: const TextStyle(fontWeight: FontWeight.bold, color: DefaultThemeColors.purple),
-            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
-            padding: EdgeInsets.zero,
-            labelPadding: EdgeInsets.zero,
-            indicatorSize: TabBarIndicatorSize.label,
-            isScrollable: true,
-            indicatorWeight: 0,
-            indicatorColor: Colors.transparent,
-            indicator: const BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                color: DefaultThemeColors.purple),
-            controller: _controller,
-            tabs: _viewModel.examples
-                .map(
-                  (e) => Tab(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                          border: Border.all(width: 1, color: DefaultThemeColors.darkGreyTransparent)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(14.0),
-                        child: Text(e.title),
-                      ),
-                    ),
-                  ),
-                )
-                .toList()),
-      ),
-      Transform.translate(
-        offset: const Offset(0, -1),
-        child: _Border(
-          child: SizedBox(
-            height: 500,
-            child: TabBarView(
-              controller: _controller,
-              children: _viewModel.examples.asMap().entries.map((entry) {
-                return Container(
-                  padding: const EdgeInsets.all(12),
-                  child: Wrap(
-                    children: entry.value.children
-                        .asMap()
-                        .entries
-                        .map((child) => _Entry(
-                              item: child.value,
-                              onPressed: () => _viewModel.chooseExample(child.value.title),
-                            ))
-                        .toList(),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-        ),
-      ),
-    ]);
-  }
-}
-
-class _Entry extends StatelessWidget {
-  const _Entry({
-    Key? key,
-    required this.item,
-    required this.onPressed,
-  }) : super(key: key);
-
-  final Item item;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: Paddings.exampleButtonPadding,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            side: const BorderSide(
-          width: 1.0,
-          color: DefaultThemeColors.darkGreyTransparent,
-          style: BorderStyle.solid,
-        )),
-        onPressed: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Theme(
-            data: Theme.of(context).copyWith(dividerColor: Colors.transparent, cardColor: Colors.transparent),
-            child: item.description == null
-                ? Wrap(
-                    children: [
-                      Text(
-                        item.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ],
-                  )
-                : ExpandableNotifier(
-                    child: Wrap(children: [
-                      ExpandableTheme(
-                        // Duration.zero resulted in issues
-                        data: const ExpandableThemeData(animationDuration: Duration(milliseconds: 1)),
-                        child: Expandable(
-                          collapsed: ExpandableWrapper(
-                            icon: const Icon(
-                              Icons.info,
-                              color: DefaultThemeColors.purple,
-                            ),
-                            child: Text(
-                              item.title,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                          ),
-                          expanded: ExpandableWrapper(
-                            icon: const Icon(
-                              Icons.close,
-                              color: DefaultThemeColors.purple,
-                            ),
-                            child: Text(
-                              item.titleWithDescription,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Border extends StatelessWidget {
-  final Widget child;
-  const _Border({Key? key, required this.child}) : super(key: key);
-
-  static const _borderColor = DefaultThemeColors.darkGreyTransparent;
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(0, 240, 242, 245),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10), topRight: Radius.circular(10)),
-          border: Border(
-            left: BorderSide(width: 1, color: _borderColor),
-            right: BorderSide(width: 1, color: _borderColor),
-            top: BorderSide(width: 1, color: _borderColor),
-            bottom: BorderSide(width: 1, color: _borderColor),
-          ),
-        ),
-        child: child);
-  }
-}
-
-class ExpandableWrapper extends StatelessWidget {
-  final Widget child;
-  final Icon icon;
-  const ExpandableWrapper({Key? key, required this.child, required this.icon}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: Wrap(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Row(
-              children: [child],
-            ),
-          ),
-          ExpandableButton(child: icon),
+          Examples(controller: _controller, viewModel: _viewModel),
         ],
       ),
     );
