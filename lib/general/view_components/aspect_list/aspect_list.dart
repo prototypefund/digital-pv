@@ -5,12 +5,11 @@ import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view_model.dart';
+import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/dpv_box.dart';
 import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
-
-import 'aspect_list_view_model.dart';
 
 class AspectList extends StatelessWidget with Logging {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
