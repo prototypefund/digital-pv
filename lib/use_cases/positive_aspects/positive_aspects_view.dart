@@ -35,7 +35,9 @@ class PositiveAspects extends StatelessWidget with Logging {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-        AspectList()
+        ChangeNotifierProvider.value(
+            value: context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectListViewModel),
+            child: AspectList())
       ],
     ));
   }

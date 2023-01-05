@@ -4,8 +4,9 @@ import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/logging.dart';
-import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.dart';
 import 'package:provider/provider.dart';
+
+import 'aspect_list_view_model.dart';
 
 class AspectList extends StatelessWidget with Logging {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
@@ -14,14 +15,14 @@ class AspectList extends StatelessWidget with Logging {
 
   @override
   Widget build(BuildContext context) {
-    final PositiveAspectsViewModel _viewModel = context.watch();
+    final AspectListViewModel _viewModel = context.watch();
     return Column(
       children: [
-        if (_viewModel.showNoPositiveAspectsMessage)
+        if (_viewModel.showEmptyAspectListsMessage)
           Padding(
             padding: Paddings.emptyViewPadding,
             child: Text(
-              _viewModel.noPositiveAspectsMessageText,
+              _viewModel.emptyAspectListsMessageText,
               textAlign: TextAlign.start,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -32,22 +33,22 @@ class AspectList extends StatelessWidget with Logging {
               child: AnimatedList(
                 key: _listKey,
                 shrinkWrap: true,
-                initialItemCount: _viewModel.positiveAspects.length,
+                initialItemCount: _viewModel.aspects.length,
                 itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
               )),
         Padding(
           padding: Paddings.callToActionPadding,
           child: ElevatedButton(
-              onPressed: _viewModel.addPositiveAspectCallToActionPressed(context),
-              child: Text(_viewModel.addPositiveAspectCallToActionText)),
+              onPressed: _viewModel.addAspectCallToActionPressed(context),
+              child: Text(_viewModel.addAspectCallToActionText)),
         ),
       ],
     );
   }
 
   Widget buildListItem(BuildContext context, int index, Animation<double> animation) {
-    final PositiveAspectsViewModel _viewModel = context.watch();
-    final aspect = _viewModel.positiveAspects[index];
+    final AspectListViewModel _viewModel = context.watch();
+    final aspect = _viewModel.aspects[index];
     return Padding(
       key: Key(aspect.name),
       padding: Paddings.listElementPadding,
@@ -59,7 +60,7 @@ class AspectList extends StatelessWidget with Logging {
   Widget _buildListItem(
       {required Animation<double> animation,
       required Aspect aspect,
-      required PositiveAspectsViewModel viewModel,
+      required AspectListViewModel viewModel,
       required bool interactive,
       required int index}) {
     return SizeTransition(
@@ -124,7 +125,7 @@ class AspectWidget extends StatelessWidget with Logging {
 
   @override
   Widget build(BuildContext context) {
-    final PositiveAspectsViewModel _viewModel = context.watch();
+    final AspectListViewModel _viewModel = context.watch();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
