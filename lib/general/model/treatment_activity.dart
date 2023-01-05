@@ -1,17 +1,17 @@
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
-enum TreatmentActivity { notSpecified, no, yes, symptomControl }
+enum TreatmentActivityChoice { notSpecified, no, yes, symptomControl }
 
-extension TreatmentActivityLocalization on TreatmentActivity {
+extension TreatmentActivityChoiceLocalization on TreatmentActivityChoice {
   String localizedString(L10n l10n) {
     switch (this) {
-      case TreatmentActivity.notSpecified:
+      case TreatmentActivityChoice.notSpecified:
         return l10n.treatmentActivityNotSpecified;
-      case TreatmentActivity.no:
+      case TreatmentActivityChoice.no:
         return l10n.treatmentActivityNo;
-      case TreatmentActivity.yes:
+      case TreatmentActivityChoice.yes:
         return l10n.treatmentActivityYes;
-      case TreatmentActivity.symptomControl:
+      case TreatmentActivityChoice.symptomControl:
         return l10n.treatmentActivitySymptomControl;
     }
   }

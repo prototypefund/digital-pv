@@ -27,15 +27,16 @@ class TreatmentActivitiesSelection extends StatelessWidget with RootContextL10N 
         const SizedBox(
           height: 20,
         ),
-        DPVDropDown<TreatmentActivity>(
+        DPVDropDown<TreatmentActivityChoice>(
             description: Text(_viewModel.addTreatmentActivitiesHospitalAdmission),
             initialValue: _viewModel.hospitalizationSelection,
-            onChanged: (TreatmentActivity? value) {
-              final TreatmentActivity newValue = value ?? TreatmentActivity.notSpecified;
+            onChanged: (TreatmentActivityChoice? value) {
+              final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
               _viewModel.hospitalizationSelection = newValue;
             },
-            items: _viewModel.hospitalizationList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
-              return DropdownMenuItem<TreatmentActivity>(
+            items: _viewModel.hospitalizationList
+                .map<DropdownMenuItem<TreatmentActivityChoice>>((TreatmentActivityChoice value) {
+              return DropdownMenuItem<TreatmentActivityChoice>(
                 value: value,
                 child: Text(
                   value.localizedString(l10n),
@@ -45,16 +46,16 @@ class TreatmentActivitiesSelection extends StatelessWidget with RootContextL10N 
         const SizedBox(
           height: 20,
         ),
-        DPVDropDown<TreatmentActivity>(
+        DPVDropDown<TreatmentActivityChoice>(
             description: Text(_viewModel.addTreatmentActivitiesIntensiveTreatment),
             initialValue: _viewModel.intensiveTreatmentSelection,
-            onChanged: (TreatmentActivity? value) {
-              final TreatmentActivity newValue = value ?? TreatmentActivity.notSpecified;
+            onChanged: (TreatmentActivityChoice? value) {
+              final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
               _viewModel.intensiveTreatmentSelection = newValue;
             },
-            items:
-                _viewModel.intensiveTreatmentList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
-              return DropdownMenuItem<TreatmentActivity>(
+            items: _viewModel.intensiveTreatmentList
+                .map<DropdownMenuItem<TreatmentActivityChoice>>((TreatmentActivityChoice value) {
+              return DropdownMenuItem<TreatmentActivityChoice>(
                 value: value,
                 child: Text(value.localizedString(l10n)),
               );
@@ -62,15 +63,16 @@ class TreatmentActivitiesSelection extends StatelessWidget with RootContextL10N 
         const SizedBox(
           height: 20,
         ),
-        DPVDropDown<TreatmentActivity>(
+        DPVDropDown<TreatmentActivityChoice>(
             description: Text(_viewModel.addTreatmentActivitiesResuscitation),
             initialValue: _viewModel.resuscitationSelection,
-            onChanged: (TreatmentActivity? value) {
-              final TreatmentActivity newValue = value ?? TreatmentActivity.notSpecified;
+            onChanged: (TreatmentActivityChoice? value) {
+              final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
               _viewModel.resuscitationSelection = newValue;
             },
-            items: _viewModel.resuscitationList.map<DropdownMenuItem<TreatmentActivity>>((TreatmentActivity value) {
-              return DropdownMenuItem<TreatmentActivity>(
+            items: _viewModel.resuscitationList
+                .map<DropdownMenuItem<TreatmentActivityChoice>>((TreatmentActivityChoice value) {
+              return DropdownMenuItem<TreatmentActivityChoice>(
                 value: value,
                 child: Text(value.localizedString(l10n)),
               );

@@ -9,7 +9,7 @@ class PatientDirective {
   final List<Aspect> futureSituationAspects;
   final TreatmentGoal treatmentGoal;
 
-  TreatmentActivity generalHospitalizationPreference = TreatmentActivity.notSpecified;
-  TreatmentActivity generalIntensiveTreatmentPreference = TreatmentActivity.notSpecified;
-  TreatmentActivity generalResuscitationPreference = TreatmentActivity.notSpecified;
+  TreatmentActivityChoice generalHospitalizationPreference = TreatmentActivityChoice.notSpecified;
+  TreatmentActivityChoice generalIntensiveTreatmentPreference = TreatmentActivityChoice.notSpecified;
+  TreatmentActivityChoice generalResuscitationPreference = TreatmentActivityChoice.notSpecified;
 }
