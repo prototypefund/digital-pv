@@ -11,7 +11,8 @@ import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/logging.dart';
 
 /// this model can be used as part of another view model, which displays a lists of aspects
-/// The parent model provides a callback, which given a patient directive returns the list of aspects to show and change.
+/// The implementing model needs to define some concrete implementations. The model can then be provided to an AspectList
+/// and will correctly visualize and work with services
 /// Manipulation of the patient directive is done directly by this model
 abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
   AspectListViewModel() : _patientDirectiveService = getIt.get() {
