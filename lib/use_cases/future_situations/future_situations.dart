@@ -20,7 +20,7 @@ class FutureSituations extends StatelessWidget {
 
     return CreationProcessNavigation<FutureSituationsViewModel>(
       widget: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: Paddings.headlinePadding,

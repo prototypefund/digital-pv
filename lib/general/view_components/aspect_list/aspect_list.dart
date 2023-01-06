@@ -137,68 +137,101 @@ class AspectWidget extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
     final AspectListViewModel _viewModel = context.watch();
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+    if (mediaQuery.size.width < 800) {
+      return _buildSmallScreenVersion(context, _viewModel);
+    } else {
+      return _buildLargeScreenVersion(context, _viewModel);
+    }
+  }
+
+  DPVBox _buildSmallScreenVersion(BuildContext context, AspectListViewModel _viewModel) {
     return DPVBox(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            constraints: Constraints.aspectTitleConstraints,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    aspect.name,
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                        onPressed: () async {
-                          final bool didRemove = await _viewModel.removeAspect(context: context, aspect: aspect);
-                          if (didRemove) {
-                            onRemove?.call();
-                          }
-                        },
-                        icon: const Icon(Icons.remove_circle_outline)),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          DPVSlider(
-            sliderDescription: sliderDescription,
-            showLabels: _viewModel.showAspectSignificanceLabel,
-            sliderLowLabel: sliderLowLabel,
-            sliderHighLabel: sliderHighLabel,
-            value: aspect.weight.value,
-            onChangeEnd: (_) {
-              final AspectPositionChange positionChange = _viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
-              if (positionChange.oldIndex != positionChange.newIndex) {
-                onPositionChange?.call(positionChange.oldIndex, positionChange.newIndex);
-              }
-            },
-            onChanged: (double value) {
-              _viewModel.changeAspectWeight(aspect: aspect, weight: value);
-            },
-          ),
-          if (_viewModel.showTreatmentOptions)
-            ExpansionTile(
-              title: const Text('Behandlungsoptionen'),
-              children: [
-                ChangeNotifierProvider(
-                    create: (_) => TreatmentActivitiesSelectionViewModel(
-                        hospitalizationSelection: TreatmentActivityChoice.notSpecified,
-                        intensiveTreatmentSelection: TreatmentActivityChoice.notSpecified,
-                        resuscitationSelection: TreatmentActivityChoice.notSpecified),
-                    child: TreatmentActivitiesSelection())
-              ],
-            )
+          _buildSliderWithDescription(context: context, viewModel: _viewModel),
+          if (_viewModel.showTreatmentOptions) _buildTreatmentOptionsWidget()
         ],
       ),
     );
+  }
+
+  DPVBox _buildLargeScreenVersion(BuildContext context, AspectListViewModel _viewModel) {
+    return DPVBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Flexible(flex: 5, child: _buildSliderWithDescription(context: context, viewModel: _viewModel)),
+          if (_viewModel.showTreatmentOptions)
+            const Flexible(
+              flex: 1,
+              child: SizedBox.shrink(),
+            ),
+          if (_viewModel.showTreatmentOptions) Flexible(flex: 5, child: _buildTreatmentOptionsWidget())
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSliderWithDescription({required BuildContext context, required AspectListViewModel viewModel}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          constraints: Constraints.aspectTitleConstraints,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  aspect.name,
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () async {
+                        final bool didRemove = await viewModel.removeAspect(context: context, aspect: aspect);
+                        if (didRemove) {
+                          onRemove?.call();
+                        }
+                      },
+                      icon: const Icon(Icons.remove_circle_outline)),
+                ],
+              ),
+            ],
+          ),
+        ),
+        DPVSlider(
+          sliderDescription: sliderDescription,
+          showLabels: viewModel.showAspectSignificanceLabel,
+          sliderLowLabel: sliderLowLabel,
+          sliderHighLabel: sliderHighLabel,
+          value: aspect.weight.value,
+          onChangeEnd: (_) {
+            final AspectPositionChange positionChange = viewModel.onAspectWeightAdjustmentDone(aspect: aspect);
+            if (positionChange.oldIndex != positionChange.newIndex) {
+              onPositionChange?.call(positionChange.oldIndex, positionChange.newIndex);
+            }
+          },
+          onChanged: (double value) {
+            viewModel.changeAspectWeight(aspect: aspect, weight: value);
+          },
+        ),
+      ],
+    );
+  }
+
+  ChangeNotifierProvider<TreatmentActivitiesSelectionViewModel> _buildTreatmentOptionsWidget() {
+    return ChangeNotifierProvider(
+        create: (_) => TreatmentActivitiesSelectionViewModel(
+            hospitalizationSelection: TreatmentActivityChoice.notSpecified,
+            intensiveTreatmentSelection: TreatmentActivityChoice.notSpecified,
+            resuscitationSelection: TreatmentActivityChoice.notSpecified),
+        child: TreatmentActivitiesSelection());
   }
 }
