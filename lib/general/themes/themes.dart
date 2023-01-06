@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
+import 'package:pd_app/general/themes/extensions/dropdown_button_style.dart';
 import 'package:pd_app/general/themes/extensions/page_indicator_style.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -47,8 +48,8 @@ class Themes {
                 fontWeight: FontWeight.normal,
                 height: 15 / 11),
             bodyMedium: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
-        extensions: const <ThemeExtension<dynamic>>[
-          PageIndicatorStyle(
+        extensions: <ThemeExtension<dynamic>>[
+          const PageIndicatorStyle(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(30),
@@ -56,6 +57,11 @@ class Themes {
               color: DefaultThemeColors.purple,
             ),
           ),
+          DropdownButtonStyle(
+              textStyle: TextStyle(
+                  color: DefaultThemeColors.purple, fontSize: 14.sp, fontWeight: FontWeight.normal, height: 15 / 11),
+              underlineColor: Colors.deepPurpleAccent,
+              underlineHeight: 2.sp)
         ],
       );
 }

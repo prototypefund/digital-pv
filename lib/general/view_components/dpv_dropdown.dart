@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/themes/extensions/dropdown_button_style.dart';
 
 class DPVDropDown<Type> extends StatelessWidget {
   const DPVDropDown(
@@ -12,6 +13,7 @@ class DPVDropDown<Type> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DropdownButtonStyle? dropdownButtonStyle = Theme.of(context).extension();
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(
@@ -24,6 +26,9 @@ class DPVDropDown<Type> extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const Spacer(
+              flex: 1,
+            ),
             Flexible(flex: 4, child: description),
             const Spacer(
               flex: 1,
@@ -35,10 +40,10 @@ class DPVDropDown<Type> extends StatelessWidget {
                 value: initialValue,
                 icon: const Icon(Icons.arrow_downward),
                 elevation: 16,
-                style: const TextStyle(color: Colors.deepPurple),
+                style: dropdownButtonStyle?.textStyle,
                 underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
+                  height: dropdownButtonStyle?.underlineHeight,
+                  color: dropdownButtonStyle?.underlineColor,
                 ),
                 onChanged: onChanged,
                 items: items,
