@@ -63,6 +63,9 @@ abstract class NewAspectViewModel with RootContextL10N, AspectViewModel, Logging
     final List<Aspect> aspectsToManipulate = aspectListChoice(currentDirective);
     aspectsToManipulate.add(newAspect);
     _patientDirectiveService.currentPatientDirective = currentDirective;
+
+    aspectTextFieldController.text = "";
+    notifyListeners();
   }
 
   VoidCallback? addAspect(BuildContext context) =>
