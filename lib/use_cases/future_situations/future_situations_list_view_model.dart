@@ -29,4 +29,9 @@ class FutureSituationsListViewModel extends AspectListViewModel {
 
   @override
   String get removeAspectConfirmationRemove => l10n.removeFutureAspectConfirmationRemove;
+
+  @override
+  String getRemoveAspectConfirmationQuestionLocalization(String aspectName) {
+    return l10n.removeFutureAspectConfirmationQuestion(aspectName);
+  }
 }

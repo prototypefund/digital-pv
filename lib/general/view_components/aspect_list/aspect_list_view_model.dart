@@ -39,8 +39,7 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
 
   bool get showAddAspectCallToAction;
 
-  String Function(String aspectName) get removeAspectConfirmationQuestionLocalizationFunction =>
-      l10n.removePositiveAspectConfirmationQuestion;
+  String getRemoveAspectConfirmationQuestionLocalization(String aspectName);
 
   String get removeAspectConfirmationCancel;
 
@@ -106,7 +105,7 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text(removeAspectConfirmationQuestionLocalizationFunction(aspect.name)),
+            title: Text(getRemoveAspectConfirmationQuestionLocalization(aspect.name)),
             actions: [
               ElevatedButton(
                   onPressed: () => Navigator.pop(context, false), child: Text(removeAspectConfirmationCancel)),
