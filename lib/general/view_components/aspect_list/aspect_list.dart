@@ -39,12 +39,13 @@ class AspectList extends StatelessWidget with Logging {
                 initialItemCount: _viewModel.aspects.length,
                 itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
               )),
-        Padding(
-          padding: Paddings.callToActionPadding,
-          child: ElevatedButton(
-              onPressed: _viewModel.addAspectCallToActionPressed(context),
-              child: Text(_viewModel.addAspectCallToActionText)),
-        ),
+        if (_viewModel.showAddAspectCallToAction)
+          Padding(
+            padding: Paddings.callToActionPadding,
+            child: ElevatedButton(
+                onPressed: _viewModel.addAspectCallToActionPressed(context),
+                child: Text(_viewModel.addAspectCallToActionText)),
+          ),
       ],
     );
   }

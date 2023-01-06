@@ -13,28 +13,29 @@ import 'package:pd_app/logging.dart';
 /// this model can be used as part of another view model, which displays a lists of aspects
 /// The parent model provides a callback, which given a patient directive returns the list of aspects to show and change.
 /// Manipulation of the patient directive is done directly by this model
-class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
-  AspectListViewModel({required this.aspectListChoice, required this.showTreatmentOptions})
-      : _patientDirectiveService = getIt.get() {
+abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
+  AspectListViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService();
   }
 
-  final bool showTreatmentOptions;
-
   late List<Aspect> _aspects;
 
-  final AspectListChoice aspectListChoice;
+  AspectListChoice get aspectListChoice;
 
   final PatientDirectiveService _patientDirectiveService;
 
-  String get addAspectCallToActionText => l10n.addPositiveAspectCallToAction;
+  String get addAspectCallToActionText;
+
+  bool get showTreatmentOptions;
 
   bool get showEmptyAspectListsMessage => _aspects.isEmpty;
 
-  String get emptyAspectListsMessageText => l10n.positiveAspectsEmptyText;
+  String get emptyAspectListsMessageText;
 
   bool get isAddAspectCallToActionEnabled => true;
+
+  bool get showAddAspectCallToAction;
 
   String Function(String aspectName) get removeAspectConfirmationQuestionLocalizationFunction =>
       l10n.removePositiveAspectConfirmationQuestion;
@@ -57,7 +58,8 @@ class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier, AspectV
   }
 
   void _updateAspectsFromService() {
-    _aspects = List.of(_patientDirectiveService.currentPatientDirective.positiveAspects);
+    final currentPatientDirective = _patientDirectiveService.currentPatientDirective;
+    _aspects = List.of(aspectListChoice(currentPatientDirective));
     _sortAspects();
   }
 

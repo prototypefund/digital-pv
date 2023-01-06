@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
@@ -28,5 +29,28 @@ class NewPositiveAspectViewModel extends NewAspectViewModel {
   void onAddAspectActionPressed(BuildContext context) {
     super.onAddAspectActionPressed(context);
     context.go(Routes.positiveAspects);
+  }
+
+  @override
+  List<Group> get examples {
+    return [
+      Group(title: l10n.positiveAspectsGroupFamily, children: [
+        Item(title: l10n.spendTimeWithFamily),
+        Item(title: l10n.pet),
+      ]),
+      Group(title: l10n.positiveAspectsGroupLeisure, children: [
+        Item(title: l10n.personalContacts),
+        Item(title: l10n.myHome),
+        Item(title: l10n.travelling),
+      ]),
+      Group(title: l10n.positiveAspectsGroupWork, children: [
+        Item(title: l10n.myWork),
+        Item(title: l10n.writingBooks),
+      ]),
+      Group(title: l10n.positiveAspectsGroupSport, children: [
+        Item(title: l10n.jogging),
+        Item(title: l10n.ridingTheBike),
+      ]),
+    ];
   }
 }

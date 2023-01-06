@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
-import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/positive_aspects/positive_aspects_list_view_model.dart';
 
 class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging {
-  PositiveAspectsViewModel()
-      : _positiveAspectListViewModel = AspectListViewModel(
-            showTreatmentOptions: false,
-            aspectListChoice: (PatientDirective patientDirective) => patientDirective.positiveAspects) {
+  PositiveAspectsViewModel() : _positiveAspectListViewModel = PositiveAspectsListViewModel() {
     _positiveAspectListViewModel.addListener(_reactToAspectListChange);
   }
 

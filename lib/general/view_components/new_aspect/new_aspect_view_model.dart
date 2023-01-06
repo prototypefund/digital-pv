@@ -77,27 +77,7 @@ abstract class NewAspectViewModel with RootContextL10N, AspectViewModel, Logging
     notifyListeners();
   }
 
-  List<Group> get examples {
-    return [
-      Group(title: l10n.positiveAspectsGroupFamily, children: [
-        Item(title: l10n.spendTimeWithFamily),
-        Item(title: l10n.pet),
-      ]),
-      Group(title: l10n.positiveAspectsGroupLeisure, children: [
-        Item(title: l10n.personalContacts),
-        Item(title: l10n.myHome),
-        Item(title: l10n.travelling),
-      ]),
-      Group(title: l10n.positiveAspectsGroupWork, children: [
-        Item(title: l10n.myWork),
-        Item(title: l10n.writingBooks),
-      ]),
-      Group(title: l10n.positiveAspectsGroupSport, children: [
-        Item(title: l10n.jogging),
-        Item(title: l10n.ridingTheBike),
-      ]),
-    ];
-  }
+  List<Group> get examples;
 
   void chooseExample(String text) {
     aspectTextFieldController.text = text;
