@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
-import 'package:pd_app/general/themes/constraints.dart';
-import 'package:pd_app/general/themes/paddings.dart';
-import 'package:pd_app/general/view_components/dpv_slider.dart';
+import 'package:pd_app/general/view_components/new_aspect/new_aspect.dart';
 import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view_model.dart';
+import 'package:pd_app/use_cases/add_positive_aspect/new_positive_aspect_view_model.dart';
 import 'package:provider/provider.dart';
 
 class AddPositiveAspect extends StatefulWidget {
@@ -26,68 +25,8 @@ class _AddPositiveAspectState extends State<AddPositiveAspect> {
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: Paddings.headlinePadding,
-            child: Text(_viewModel.addPositiveAspectTitle, style: Theme.of(context).textTheme.headlineLarge),
-          ),
-          Padding(
-            padding: Paddings.headlineExplanationPadding,
-            child: Text(
-              _viewModel.addPositiveAspectExplanation,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
-          Container(
-            constraints: Constraints.textFieldConstraints,
-            child: Padding(
-              padding: Paddings.textFieldPadding,
-              child: TextField(
-                controller: _viewModel.aspectTextFieldController,
-                onChanged: (newValue) => setState(() {}),
-                style: Theme.of(context).textTheme.labelLarge,
-                decoration: InputDecoration(hintText: _viewModel.addPositiveAspectTextfieldHint),
-                autofocus: true,
-              ),
-            ),
-          ),
-          DPVSlider(
-            sliderDescription: _viewModel.aspectSignificanceLabel,
-            showLabels: _viewModel.showAspectSignificanceLabel,
-            sliderLowLabel: _viewModel.aspectsSignificanceLowLabel,
-            sliderHighLabel: _viewModel.aspectSignificanceHighLabel,
-            value: _viewModel.weight,
-            padding: Paddings.newAspectSliderPadding,
-            onChanged: (double value) {
-              _viewModel.weight = value;
-            },
-          ),
-          Container(
-            constraints: Constraints.formSaveActionConstraints,
-            child: Padding(
-              padding: Paddings.formSaveActionPadding,
-              child: ElevatedButton(
-                  onPressed: _viewModel.addPositiveAspect(context),
-                  child: Text(_viewModel.addPositiveAspectActionText)),
-            ),
-          ),
-          Padding(
-            padding: Paddings.subHeadlinePadding,
-            child: Text(_viewModel.examplesText, style: Theme.of(context).textTheme.headlineMedium),
-          ),
-          Container(
-            constraints: Constraints.formSaveActionConstraints,
-            child: Wrap(
-              children: _viewModel.examples
-                  .map((example) => Padding(
-                        padding: Paddings.exampleButtonPadding,
-                        child: OutlinedButton(
-                          onPressed: () => _viewModel.chooseExample(example),
-                          child: Text(example),
-                        ),
-                      ))
-                  .toList(),
-            ),
-          )
+          ChangeNotifierProvider.value(
+              value: _viewModel.newPositiveAspectViewModel, child: NewAspect<NewPositiveAspectViewModel>())
         ],
       ),
     );

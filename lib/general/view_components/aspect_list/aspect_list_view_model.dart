@@ -3,16 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
-import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
+import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/logging.dart';
-
-///
-/// chooses from the given patient directive a list of aspects to read and manipulate
-typedef AspectListChoice = List<Aspect> Function(PatientDirective patientDirective);
 
 /// this model can be used as part of another view model, which displays a lists of aspects
 /// The parent model provides a callback, which given a patient directive returns the list of aspects to show and change.

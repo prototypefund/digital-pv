@@ -103,16 +103,8 @@ class FutureSituations extends StatefulWidget {
 }
 
 class _FutureSituationsState extends State<FutureSituations> with SingleTickerProviderStateMixin, Logging {
-  late final TabController _controller;
   late FutureSituationsViewModel _viewModel;
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-
-  @override
-  void initState() {
-    super.initState();
-    // Duration.zero resulted in issues
-    _controller = TabController(length: 3, vsync: this, animationDuration: const Duration(milliseconds: 1));
-  }
 
   @override
   void didChangeDependencies() {
@@ -257,7 +249,10 @@ class _FutureSituationsState extends State<FutureSituations> with SingleTickerPr
           const SizedBox(
             height: 10,
           ),
-          Examples(controller: _controller, viewModel: _viewModel),
+          Examples(
+            examples: _viewModel.examples,
+            onExampleChosen: (String value) => _viewModel.chooseExample(value),
+          ),
         ],
       ),
     );
