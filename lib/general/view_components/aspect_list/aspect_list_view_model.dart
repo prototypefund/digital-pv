@@ -15,12 +15,15 @@ import 'package:pd_app/logging.dart';
 /// and will correctly visualize and work with services
 /// Manipulation of the patient directive is done directly by this model
 abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
-  AspectListViewModel() : _patientDirectiveService = getIt.get() {
+  AspectListViewModel({this.onAspectAdded}) : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService();
   }
 
-  late List<Aspect> _aspects;
+  /// can be used to manipulate the view to react to new aspects, for instance with animated lists
+  ValueChanged<Aspect>? onAspectAdded;
+
+  List<Aspect> _aspects = [];
 
   AspectListChoice get aspectListChoice;
 
@@ -41,14 +44,17 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
   String Function(String aspectName) get removeAspectConfirmationQuestionLocalizationFunction =>
       l10n.removePositiveAspectConfirmationQuestion;
 
+  // TODO generalize this
   String get removeAspectConfirmationCancel => l10n.removePositiveAspectConfirmationCancel;
 
+  // TODO generalize this
   String get removeAspectConfirmationRemove => l10n.removePositiveAspectConfirmationRemove;
 
   VoidCallback? addAspectCallToActionPressed(BuildContext context) =>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
 
   void onAddAspectCallToActionPressed(BuildContext context) {
+    // TODO generalize this
     context.push(Routes.addPositiveAspect);
   }
 
@@ -60,8 +66,17 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
 
   void _updateAspectsFromService() {
     final currentPatientDirective = _patientDirectiveService.currentPatientDirective;
+
+    final oldAspects = _aspects;
     _aspects = List.of(aspectListChoice(currentPatientDirective));
+
     _sortAspects();
+
+    for (final Aspect aspect in _aspects) {
+      if (!oldAspects.contains(aspect)) {
+        onAspectAdded?.call(aspect);
+      }
+    }
   }
 
   void _reactToPatientDirectiveChange() {

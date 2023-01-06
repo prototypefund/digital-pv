@@ -19,6 +19,13 @@ class AspectList extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
     final AspectListViewModel _viewModel = context.watch();
+
+    _viewModel.onAspectAdded = (Aspect newAspect) {
+      logger.d('adding new aspect to existing list in an animated way');
+      final int index = _viewModel.aspects.indexOf(newAspect);
+      _listKey.currentState?.insertItem(index);
+    };
+
     return Column(
       children: [
         if (_viewModel.showEmptyAspectListsMessage)

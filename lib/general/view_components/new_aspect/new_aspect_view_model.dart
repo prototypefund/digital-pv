@@ -11,15 +11,12 @@ import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/logging.dart';
 
 abstract class NewAspectViewModel with RootContextL10N, AspectViewModel, Logging, ChangeNotifier {
-  NewAspectViewModel({this.onAspectAdded}) : _patientDirectiveService = getIt.get() {
+  NewAspectViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     aspectTextFieldController.addListener(_reactToTextChange);
   }
 
   AspectListChoice get aspectListChoice;
-
-  /// this is called when an aspect has been added
-  final void Function(BuildContext context)? onAspectAdded;
 
   final PatientDirectiveService _patientDirectiveService;
 
@@ -66,8 +63,6 @@ abstract class NewAspectViewModel with RootContextL10N, AspectViewModel, Logging
     final List<Aspect> aspectsToManipulate = aspectListChoice(currentDirective);
     aspectsToManipulate.add(newAspect);
     _patientDirectiveService.currentPatientDirective = currentDirective;
-
-    onAspectAdded?.call(context);
   }
 
   VoidCallback? addAspect(BuildContext context) =>
