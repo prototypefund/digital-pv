@@ -8,26 +8,9 @@ import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
+import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations.dart';
-
-class Group {
-  Group({required this.title, required this.children});
-  String title;
-  List<Item> children;
-}
-
-class Item {
-  Item({required this.title, this.description});
-
-  String title;
-  String? description;
-  String get titleWithDescription {
-    return "$title\n${description ?? ""}";
-  }
-
-  bool isExpanded = false;
-}
 
 class FutureSituationsViewModel extends CreationProcessNavigationViewModel with AspectViewModel, Logging {
   FutureSituationsViewModel() : _patientDirectiveService = getIt.get() {
@@ -38,6 +21,7 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
   final PatientDirectiveService _patientDirectiveService;
 
   late GlobalKey<AnimatedListState> listKey;
+
   AnimatedListState? get _animatedList => listKey.currentState;
 
   double _weight = 0.5;
@@ -50,10 +34,15 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
   }
 
   String get futureSituationsTitle => l10n.futureSituationsTitle;
+
   String get futureSituationsTitleExplanation => l10n.futureSituationsTitleExplanation;
+
   String get addFutureSituationAspectTextfieldHint => l10n.addFutureSituationAspectTextfieldHint;
+
   String get addFutureSituationAspectText => l10n.addFutureSituationAspect;
+
   String get examplesTitle => l10n.examples;
+
   bool get addFutureSituationAspectActionEnabled => aspectTextFieldController.text.trim().isNotEmpty;
 
   void addFutureSituationAspect(BuildContext context) =>

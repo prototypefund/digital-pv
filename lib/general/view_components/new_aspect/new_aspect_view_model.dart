@@ -6,9 +6,9 @@ import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
+import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/logging.dart';
-import 'package:pd_app/use_cases/future_situations/future_situations_view_model.dart';
 
 abstract class NewAspectViewModel with RootContextL10N, AspectViewModel, Logging, ChangeNotifier {
   NewAspectViewModel({this.onAspectAdded}) : _patientDirectiveService = getIt.get() {

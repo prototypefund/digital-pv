@@ -2,7 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/paddings.dart';
-import 'package:pd_app/use_cases/future_situations/future_situations_view_model.dart';
+import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
 
 class Examples extends StatefulWidget {
   const Examples({super.key, required this.examples, required this.onExampleChosen});
