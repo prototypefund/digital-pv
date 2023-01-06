@@ -2,14 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 
-class TreatmentActivitiesSelectionViewModel with RootContextL10N, ChangeNotifier {
-  TreatmentActivitiesSelectionViewModel(
-      {required TreatmentActivityChoice hospitalizationSelection,
-      required TreatmentActivityChoice intensiveTreatmentSelection,
-      required TreatmentActivityChoice resuscitationSelection})
-      : _hospitalizationSelection = hospitalizationSelection,
-        _intensiveTreatmentSelection = intensiveTreatmentSelection,
-        _resuscitationSelection = resuscitationSelection;
+abstract class TreatmentActivitiesSelectionViewModel with RootContextL10N, ChangeNotifier {
+  TreatmentActivitiesSelectionViewModel();
 
   String get addTreatmentActivitiesSubHeadline => l10n.addTreatmentActivitiesSubHeadline;
 
@@ -19,30 +13,17 @@ class TreatmentActivitiesSelectionViewModel with RootContextL10N, ChangeNotifier
 
   String get addTreatmentActivitiesResuscitation => l10n.addTreatmentActivitiesResuscitation;
 
-  TreatmentActivityChoice _hospitalizationSelection;
-  TreatmentActivityChoice _intensiveTreatmentSelection;
-  TreatmentActivityChoice _resuscitationSelection;
+  TreatmentActivityChoice get hospitalizationSelection;
 
-  TreatmentActivityChoice get hospitalizationSelection => _hospitalizationSelection;
+  TreatmentActivityChoice get intensiveTreatmentSelection;
 
-  TreatmentActivityChoice get intensiveTreatmentSelection => _intensiveTreatmentSelection;
+  TreatmentActivityChoice get resuscitationSelection;
 
-  TreatmentActivityChoice get resuscitationSelection => _resuscitationSelection;
+  set hospitalizationSelection(TreatmentActivityChoice newValue);
 
-  set hospitalizationSelection(TreatmentActivityChoice newValue) {
-    _hospitalizationSelection = newValue;
-    notifyListeners();
-  }
+  set intensiveTreatmentSelection(TreatmentActivityChoice newValue);
 
-  set intensiveTreatmentSelection(TreatmentActivityChoice newValue) {
-    _intensiveTreatmentSelection = newValue;
-    notifyListeners();
-  }
-
-  set resuscitationSelection(TreatmentActivityChoice newValue) {
-    _resuscitationSelection = newValue;
-    notifyListeners();
-  }
+  set resuscitationSelection(TreatmentActivityChoice newValue);
 
   final List<TreatmentActivityChoice> hospitalizationList = [
     TreatmentActivityChoice.notSpecified,

@@ -10,13 +10,14 @@ import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_m
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/logging.dart';
 
-abstract class NewAspectViewModel with RootContextL10N, AspectViewModel, Logging, ChangeNotifier {
+abstract class NewAspectViewModel<AspectType extends Aspect>
+    with RootContextL10N, AspectViewModel, Logging, ChangeNotifier {
   NewAspectViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     aspectTextFieldController.addListener(_reactToTextChange);
   }
 
-  AspectListChoice get aspectListChoice;
+  AspectListChoice<AspectType> get aspectListChoice;
 
   final PatientDirectiveService _patientDirectiveService;
 
@@ -56,8 +57,11 @@ abstract class NewAspectViewModel with RootContextL10N, AspectViewModel, Logging
     notifyListeners();
   }
 
+  AspectType createNewAspect({required String name, required Weight weight});
+
   void onAddAspectActionPressed(BuildContext context) {
-    final Aspect newAspect = Aspect(name: aspectTextFieldController.text.trim(), weight: Weight(value: weight));
+    final Aspect newAspect =
+        createNewAspect(name: aspectTextFieldController.text.trim(), weight: Weight(value: weight));
     final PatientDirective currentDirective = _patientDirectiveService.currentPatientDirective;
 
     final List<Aspect> aspectsToManipulate = aspectListChoice(currentDirective);

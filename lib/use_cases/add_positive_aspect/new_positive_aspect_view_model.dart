@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
+import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
-class NewPositiveAspectViewModel extends NewAspectViewModel {
+class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
   @override
   String get addAspectActionText => l10n.addPositiveAspectCallToAction;
 
@@ -20,7 +22,7 @@ class NewPositiveAspectViewModel extends NewAspectViewModel {
   String get addAspectTitle => l10n.addPositiveAspectTitle;
 
   @override
-  AspectListChoice get aspectListChoice => (PatientDirective directive) => directive.positiveAspects;
+  AspectListChoice<Aspect> get aspectListChoice => (PatientDirective directive) => directive.positiveAspects;
 
   @override
   String get examplesText => l10n.examples;
@@ -52,5 +54,10 @@ class NewPositiveAspectViewModel extends NewAspectViewModel {
         Item(title: l10n.ridingTheBike),
       ]),
     ];
+  }
+
+  @override
+  Aspect createNewAspect({required String name, required Weight weight}) {
+    return Aspect(name: name, weight: weight);
   }
 }

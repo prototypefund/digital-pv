@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
+import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
@@ -12,18 +13,19 @@ import 'package:pd_app/logging.dart';
 /// The implementing model needs to define some concrete implementations. The model can then be provided to an AspectList
 /// and will correctly visualize and work with services
 /// Manipulation of the patient directive is done directly by this model
-abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
+abstract class AspectListViewModel<AspectType extends Aspect>
+    with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
   AspectListViewModel({this.onAspectAdded}) : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService();
   }
 
   /// can be used to manipulate the view to react to new aspects, for instance with animated lists
-  ValueChanged<Aspect>? onAspectAdded;
+  ValueChanged<AspectType>? onAspectAdded;
 
-  List<Aspect> _aspects = [];
+  List<AspectType> _aspects = <AspectType>[];
 
-  AspectListChoice get aspectListChoice;
+  AspectListChoice<AspectType> get aspectListChoice;
 
   final PatientDirectiveService _patientDirectiveService;
 
@@ -64,7 +66,7 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
 
     _sortAspects();
 
-    for (final Aspect aspect in _aspects) {
+    for (final AspectType aspect in _aspects) {
       if (!oldAspects.contains(aspect)) {
         onAspectAdded?.call(aspect);
       }
@@ -72,7 +74,7 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
   }
 
   void _reactToPatientDirectiveChange() {
-    final List<Aspect> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
+    final List<AspectType> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
     if (aspectsInService.length != _aspects.length) {
       logger.i("an aspect was removed or added, refreshing view's list of elements and sorting them anew");
       _updateAspectsFromService();
@@ -80,7 +82,7 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
     notifyListeners();
   }
 
-  void changeAspectWeight({required Aspect aspect, required double weight}) {
+  void changeAspectWeight({required AspectType aspect, required double weight}) {
     logger.v('changing weight of $aspect to $weight');
 
     final currentDirective = _patientDirectiveService.currentPatientDirective;
@@ -90,7 +92,9 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
     _patientDirectiveService.currentPatientDirective = currentDirective;
   }
 
-  AspectPositionChange onAspectWeightAdjustmentDone({required Aspect aspect}) {
+  void changeAspectTreatmentOption({required FutureSituation futureSituation}) {}
+
+  AspectPositionChange onAspectWeightAdjustmentDone({required AspectType aspect}) {
     final int oldIndex = _aspects.indexOf(aspect);
     _sortAspects();
     final int newIndex = _aspects.indexOf(aspect);
@@ -127,7 +131,7 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
     }
   }
 
-  List<Aspect> get aspects => _aspects;
+  List<AspectType> get aspects => _aspects;
 
   void _sortAspects() {
     _aspects.sort((aspect1, aspect2) => aspect2.weight.value.compareTo(aspect1.weight.value));

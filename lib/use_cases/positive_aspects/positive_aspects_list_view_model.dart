@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 
-class PositiveAspectsListViewModel extends AspectListViewModel {
+class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
   PositiveAspectsListViewModel();
 
   @override
@@ -15,7 +16,7 @@ class PositiveAspectsListViewModel extends AspectListViewModel {
   String get emptyAspectListsMessageText => l10n.positiveAspectsEmptyText;
 
   @override
-  AspectListChoice get aspectListChoice => (PatientDirective directive) => directive.positiveAspects;
+  AspectListChoice<Aspect> get aspectListChoice => (PatientDirective directive) => directive.positiveAspects;
 
   @override
   bool get showTreatmentOptions => false;

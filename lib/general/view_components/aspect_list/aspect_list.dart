@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
-import 'package:pd_app/general/model/treatment_activity.dart';
+import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
-import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view_model.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/dpv_box.dart';
 import 'package:pd_app/general/view_components/dpv_slider.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/future_situations/future_situation_treatment_activities_selection_view_model.dart';
 import 'package:provider/provider.dart';
 
-class AspectList extends StatelessWidget with Logging {
+class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
 
   AspectList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final AspectListViewModel _viewModel = context.watch();
+    final AspectListViewModel<AspectType> _viewModel = context.watch();
 
-    _viewModel.onAspectAdded = (Aspect newAspect) {
+    _viewModel.onAspectAdded = (AspectType newAspect) {
       logger.d('adding new aspect to existing list in an animated way');
       final int index = _viewModel.aspects.indexOf(newAspect);
       _listKey.currentState?.insertItem(index);
@@ -58,8 +58,8 @@ class AspectList extends StatelessWidget with Logging {
   }
 
   Widget buildListItem(BuildContext context, int index, Animation<double> animation) {
-    final AspectListViewModel _viewModel = context.watch();
-    final aspect = _viewModel.aspects[index];
+    final AspectListViewModel<AspectType> _viewModel = context.watch();
+    final AspectType aspect = _viewModel.aspects[index];
     return Padding(
       key: Key(aspect.name),
       padding: Paddings.listElementPadding,
@@ -70,7 +70,7 @@ class AspectList extends StatelessWidget with Logging {
 
   Widget _buildListItem(
       {required Animation<double> animation,
-      required Aspect aspect,
+      required AspectType aspect,
       required AspectListViewModel viewModel,
       required bool interactive,
       required int index}) {
@@ -78,7 +78,7 @@ class AspectList extends StatelessWidget with Logging {
       sizeFactor: animation,
       child: FadeTransition(
         opacity: animation,
-        child: AspectWidget(
+        child: AspectWidget<AspectType>(
             aspect: aspect,
             sliderDescription: viewModel.aspectSignificanceLabel,
             sliderHighLabel: viewModel.aspectSignificanceHighLabel,
@@ -115,7 +115,7 @@ class AspectList extends StatelessWidget with Logging {
   }
 }
 
-class AspectWidget extends StatelessWidget with Logging {
+class AspectWidget<AspectType extends Aspect> extends StatelessWidget with Logging {
   const AspectWidget(
       {Key? key,
       required this.aspect,
@@ -126,7 +126,7 @@ class AspectWidget extends StatelessWidget with Logging {
       this.onPositionChange})
       : super(key: key);
 
-  final Aspect aspect;
+  final AspectType aspect;
 
   final String sliderDescription;
   final String sliderLowLabel;
@@ -151,7 +151,8 @@ class AspectWidget extends StatelessWidget with Logging {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildSliderWithDescription(context: context, viewModel: _viewModel),
-          if (_viewModel.showTreatmentOptions) _buildTreatmentOptionsWidget()
+          if (_viewModel.showTreatmentOptions)
+            _buildTreatmentOptionsWidget(context: context, viewModel: _viewModel, aspect: aspect)
         ],
       ),
     );
@@ -168,7 +169,9 @@ class AspectWidget extends StatelessWidget with Logging {
               flex: 1,
               child: SizedBox.shrink(),
             ),
-          if (_viewModel.showTreatmentOptions) Flexible(flex: 5, child: _buildTreatmentOptionsWidget())
+          if (_viewModel.showTreatmentOptions)
+            Flexible(
+                flex: 5, child: _buildTreatmentOptionsWidget(context: context, viewModel: _viewModel, aspect: aspect))
         ],
       ),
     );
@@ -226,12 +229,14 @@ class AspectWidget extends StatelessWidget with Logging {
     );
   }
 
-  ChangeNotifierProvider<TreatmentActivitiesSelectionViewModel> _buildTreatmentOptionsWidget() {
-    return ChangeNotifierProvider(
-        create: (_) => TreatmentActivitiesSelectionViewModel(
-            hospitalizationSelection: TreatmentActivityChoice.notSpecified,
-            intensiveTreatmentSelection: TreatmentActivityChoice.notSpecified,
-            resuscitationSelection: TreatmentActivityChoice.notSpecified),
-        child: TreatmentActivitiesSelection());
+  Widget _buildTreatmentOptionsWidget(
+      {required BuildContext context, required AspectListViewModel viewModel, required AspectType aspect}) {
+    if (aspect is FutureSituation) {
+      return ChangeNotifierProvider(
+          create: (_) => FutureSituationTreatmentActivitiesSelectionViewModel(futureSituation: aspect),
+          child: TreatmentActivitiesSelection<FutureSituationTreatmentActivitiesSelectionViewModel>());
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }

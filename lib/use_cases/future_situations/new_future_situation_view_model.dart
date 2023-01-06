@@ -1,9 +1,11 @@
+import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
+import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
-class NewFutureSituationViewModel extends NewAspectViewModel {
+class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
   @override
   String get addAspectActionText => l10n.addFutureSituationCallToAction;
 
@@ -17,7 +19,8 @@ class NewFutureSituationViewModel extends NewAspectViewModel {
   String get addAspectTitle => l10n.addFutureSituationAspect;
 
   @override
-  AspectListChoice get aspectListChoice => (PatientDirective directive) => directive.futureSituationAspects;
+  AspectListChoice<FutureSituation> get aspectListChoice =>
+      (PatientDirective directive) => directive.futureSituationAspects;
 
   @override
   String get examplesText => l10n.examples;
@@ -46,5 +49,10 @@ class NewFutureSituationViewModel extends NewAspectViewModel {
         Item(title: l10n.futureSituationsExampleProcessOfDying),
       ]),
     ];
+  }
+
+  @override
+  FutureSituation createNewAspect({required String name, required Weight weight}) {
+    return FutureSituation(name: name, weight: weight);
   }
 }

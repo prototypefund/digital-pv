@@ -3,6 +3,7 @@ import 'package:pd_app/general/creation_process_navigation/creation_process_navi
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
+import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_activities_selection_view_model.dart';
 import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_activities_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -39,8 +40,9 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> with RootCont
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
-          ChangeNotifierProvider.value(
-              value: _viewModel.treatmentActivitiesSelectionViewModel, child: TreatmentActivitiesSelection())
+          ChangeNotifierProvider(
+              create: (_) => GeneralTreatmentActivitiesSelectionViewModel(),
+              child: TreatmentActivitiesSelection<GeneralTreatmentActivitiesSelectionViewModel>())
         ],
       ),
     );

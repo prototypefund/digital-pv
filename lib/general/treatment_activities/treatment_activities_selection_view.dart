@@ -6,10 +6,11 @@ import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/general/view_components/dpv_dropdown.dart';
 import 'package:provider/provider.dart';
 
-class TreatmentActivitiesSelection extends StatelessWidget with RootContextL10N {
+class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSelectionViewModel> extends StatelessWidget
+    with RootContextL10N {
   @override
   Widget build(BuildContext context) {
-    final TreatmentActivitiesSelectionViewModel _viewModel = context.watch();
+    final ViewModelType _viewModel = context.watch();
     return Column(
       children: [
         Center(
