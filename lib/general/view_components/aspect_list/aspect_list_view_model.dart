@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/weight.dart';
-import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
@@ -44,19 +42,14 @@ abstract class AspectListViewModel with Logging, RootContextL10N, ChangeNotifier
   String Function(String aspectName) get removeAspectConfirmationQuestionLocalizationFunction =>
       l10n.removePositiveAspectConfirmationQuestion;
 
-  // TODO generalize this
-  String get removeAspectConfirmationCancel => l10n.removePositiveAspectConfirmationCancel;
+  String get removeAspectConfirmationCancel;
 
-  // TODO generalize this
-  String get removeAspectConfirmationRemove => l10n.removePositiveAspectConfirmationRemove;
+  String get removeAspectConfirmationRemove;
 
   VoidCallback? addAspectCallToActionPressed(BuildContext context) =>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
 
-  void onAddAspectCallToActionPressed(BuildContext context) {
-    // TODO generalize this
-    context.push(Routes.addPositiveAspect);
-  }
+  void onAddAspectCallToActionPressed(BuildContext context);
 
   @override
   void dispose() {

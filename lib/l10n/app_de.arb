@@ -13,6 +13,14 @@
   "significanceSliderLabel": "",
   "significanceLow": "Geringe Bedeutung",
   "significanceHigh": "Hohe Bedeutung",
+  "removeFutureAspectConfirmationQuestion": "Soll die zukünftige Situation \"{aspectName}\" wirklich entfernt werden?",
+  "@removeFutureAspectConfirmationQuestion": {
+    "placeholders": {
+      "aspectName": {
+        "type": "String"
+      }
+    }
+  },
   "removePositiveAspectConfirmationQuestion": "Soll der positive Aspekt \"{aspectName}\" wirklich entfernt werden?",
   "@removePositiveAspectConfirmationQuestion": {
     "placeholders": {
@@ -23,6 +31,8 @@
   },
   "removePositiveAspectConfirmationRemove": "Positiven Aspekt entfernen",
   "removePositiveAspectConfirmationCancel": "Abbrechen",
+  "removeFutureAspectConfirmationRemove": "Zukünftige Situation entfernen",
+  "removeFutureAspectConfirmationCancel": "Abbrechen",
   "navigationSkip": "Überspringen",
   "welcomeViewPageOneTitle": "Herzlich willkommen bei d-PV, Ihrer digitalen Patientenverfügung!",
   "welcomeViewPageOneDescription": "Erstellen Sie in drei Schritten eine rechtskonforme Patientenverfügung. ",
