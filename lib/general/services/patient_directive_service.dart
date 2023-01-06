@@ -13,7 +13,9 @@ class PatientDirectiveService with ChangeNotifier {
     Aspect(name: "Reisen", weight: Weight(value: 0.4)),
     Aspect(name: "Essen", weight: Weight(value: 0.2)),
     Aspect(name: "Skifahren", weight: Weight(value: 0.25))
-  ], futureSituationAspects: [], treatmentGoal: TreatmentGoal.undefined);
+  ], futureSituationAspects: [
+    Aspect(name: "Sterbeprozess", weight: Weight(value: 0.8))
+  ], treatmentGoal: TreatmentGoal.undefined);
 
   PatientDirective get currentPatientDirective => _currentPatientDirective;
 
