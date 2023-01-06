@@ -36,7 +36,7 @@ class FutureSituations extends StatelessWidget {
           ChangeNotifierProvider.value(
               value: context.select((FutureSituationsViewModel viewModel) => viewModel.futureSituationsListViewModel),
               child: AspectList()),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ChangeNotifierProvider.value(
