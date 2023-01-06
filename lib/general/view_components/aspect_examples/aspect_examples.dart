@@ -4,17 +4,25 @@ import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations_view_model.dart';
 
-class Examples extends StatelessWidget {
-  const Examples({
-    Key? key,
-    required TabController controller,
-    required FutureSituationsViewModel viewModel,
-  })  : _controller = controller,
-        _viewModel = viewModel,
-        super(key: key);
+class Examples extends StatefulWidget {
+  const Examples({super.key, required this.examples, required this.onExampleChosen});
 
-  final TabController _controller;
-  final FutureSituationsViewModel _viewModel;
+  final List<Group> examples;
+  final ValueChanged<String> onExampleChosen;
+
+  @override
+  State<Examples> createState() => _ExamplesState();
+}
+
+class _ExamplesState extends State<Examples> with SingleTickerProviderStateMixin {
+  late TabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        TabController(length: widget.examples.length, vsync: this, animationDuration: const Duration(milliseconds: 1));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +44,7 @@ class Examples extends StatelessWidget {
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                 color: DefaultThemeColors.purple),
             controller: _controller,
-            tabs: _viewModel.examples
+            tabs: widget.examples
                 .map(
                   (e) => Tab(
                     child: Container(
@@ -60,7 +68,7 @@ class Examples extends StatelessWidget {
             height: 500,
             child: TabBarView(
               controller: _controller,
-              children: _viewModel.examples.asMap().entries.map((entry) {
+              children: widget.examples.asMap().entries.map((entry) {
                 return Container(
                   padding: const EdgeInsets.all(12),
                   child: Wrap(
@@ -69,7 +77,7 @@ class Examples extends StatelessWidget {
                         .entries
                         .map((child) => _Entry(
                               item: child.value,
-                              onPressed: () => _viewModel.chooseExample(child.value.title),
+                              onPressed: () => widget.onExampleChosen(child.value.title),
                             ))
                         .toList(),
                   ),
