@@ -17,17 +17,17 @@ class FutureSituationTreatmentActivitiesSelectionViewModel extends TreatmentActi
 
   @override
   TreatmentActivityChoice get hospitalizationSelection {
-    return _aspectFromPatientDirective().hospitalizationPreference;
+    return _aspectFromPatientDirective()?.hospitalizationPreference ?? TreatmentActivityChoice.notSpecified;
   }
 
   @override
   TreatmentActivityChoice get intensiveTreatmentSelection {
-    return _aspectFromPatientDirective().intensiveTreatmentPreference;
+    return _aspectFromPatientDirective()?.intensiveTreatmentPreference ?? TreatmentActivityChoice.notSpecified;
   }
 
   @override
   TreatmentActivityChoice get resuscitationSelection {
-    return _aspectFromPatientDirective().resuscitationPreference;
+    return _aspectFromPatientDirective()?.resuscitationPreference ?? TreatmentActivityChoice.notSpecified;
   }
 
   @override
@@ -54,9 +54,10 @@ class FutureSituationTreatmentActivitiesSelectionViewModel extends TreatmentActi
     _patientDirectiveService.currentPatientDirective = currentDirective;
   }
 
-  FutureSituation _aspectFromPatientDirective() =>
+  FutureSituation? _aspectFromPatientDirective() =>
       _patientDirectiveService.currentPatientDirective.futureSituationAspects
-          .firstWhere((element) => element == futureSituation);
+          .whereType<FutureSituation?>()
+          .firstWhere((element) => element == futureSituation, orElse: () => null);
 
   @override
   void dispose() {
