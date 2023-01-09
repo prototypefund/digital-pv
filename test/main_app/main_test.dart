@@ -85,7 +85,7 @@ void main() {
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
-    expect(find.text("Behandlungsmaßnahmen festlegen"), findsOneWidget);
+    expect(find.text("Meine Behandlungswünsche"), findsOneWidget);
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
@@ -119,7 +119,7 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Behandlungsmaßnahmen festlegen"), findsOneWidget);
+    expect(find.text("Meine Behandlungswünsche"), findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

@@ -9,14 +9,16 @@ import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view.da
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations.dart';
 import 'package:pd_app/use_cases/general_information_about_patient_directive/general_information_about_patient_directive.dart';
+import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_activities.dart';
 import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_objective.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view.dart';
 import 'package:pd_app/use_cases/personal_details/general_information_about_patient_directive.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
-import 'package:pd_app/use_cases/treatment_activities/treatment_activities.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
 class PatientDirectiveApp extends StatefulWidget {
   const PatientDirectiveApp({Key? key}) : super(key: key);
@@ -110,19 +112,21 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
+      builder: (newContext, orientation, screenType) {
         return MaterialApp.router(
+          scaffoldMessengerKey: _navigatorKey,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           title: 'DPV',
           theme: Themes().defaultTheme,
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
-          builder: (context, widget) {
-            _injectL10nIntoGetIt(context);
+          builder: (_, widget) {
+            _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
             return widget ?? const SizedBox();
           },
         );

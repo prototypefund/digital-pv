@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
+import 'package:pd_app/general/themes/extensions/dropdown_button_style.dart';
 import 'package:pd_app/general/themes/extensions/page_indicator_style.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -21,22 +22,21 @@ class Themes {
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 textStyle: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
-                primary: DefaultThemeColors.purple)),
+                backgroundColor: DefaultThemeColors.purple)),
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
-                primary: DefaultThemeColors.purple,
-                textStyle:
-                    const TextStyle(fontSize: 16, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
+                foregroundColor: DefaultThemeColors.purple,
+                textStyle: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
         textTheme: Typography.blackCupertino.merge(TextTheme(
             headlineLarge: TextStyle(
-                fontSize: 24.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
+                fontSize: 15.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
             headlineMedium: TextStyle(
-                fontSize: 20.sp, fontWeight: FontWeight.w300, color: DefaultThemeColors.black, height: 32 / 20),
-            bodyLarge: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
+                fontSize: 14.sp, fontWeight: FontWeight.w300, color: DefaultThemeColors.black, height: 32 / 20),
+            bodyLarge: TextStyle(fontSize: 15.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
             titleMedium: TextStyle(
-                fontSize: 20.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
+                fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
             labelLarge: TextStyle(
-                fontSize: 16.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
+                fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
             labelMedium: TextStyle(
                 fontSize: 13.sp,
                 color: DefaultThemeColors.blackTransparent,
@@ -47,9 +47,9 @@ class Themes {
                 color: DefaultThemeColors.blackTransparent,
                 fontWeight: FontWeight.normal,
                 height: 15 / 11),
-            bodyMedium: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
-        extensions: const <ThemeExtension<dynamic>>[
-          PageIndicatorStyle(
+            bodyMedium: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal))),
+        extensions: <ThemeExtension<dynamic>>[
+          const PageIndicatorStyle(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(30),
@@ -57,6 +57,11 @@ class Themes {
               color: DefaultThemeColors.purple,
             ),
           ),
+          DropdownButtonStyle(
+              textStyle: TextStyle(
+                  color: DefaultThemeColors.purple, fontSize: 10.sp, fontWeight: FontWeight.normal, height: 15 / 11),
+              underlineColor: Colors.deepPurpleAccent,
+              underlineHeight: 2.sp)
         ],
       );
 }

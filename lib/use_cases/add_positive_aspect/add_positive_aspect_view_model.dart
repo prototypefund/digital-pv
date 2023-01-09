@@ -3,18 +3,19 @@ import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/init/get_it.dart';
-import 'package:pd_app/general/model/aspect.dart';
-import 'package:pd_app/general/model/patient_directive.dart';
-import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
+import 'package:pd_app/use_cases/add_positive_aspect/new_positive_aspect_view_model.dart';
 
 class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with AspectViewModel {
   AddPositiveAspectViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
+    newPositiveAspectViewModel.addListener(_reactToAspectViewModelChange);
   }
 
   final PatientDirectiveService _patientDirectiveService;
+
+  final NewPositiveAspectViewModel newPositiveAspectViewModel = NewPositiveAspectViewModel();
 
   String get examplesText => l10n.examples;
 
@@ -26,12 +27,13 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
   void dispose() {
     super.dispose();
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChange);
+    newPositiveAspectViewModel.removeListener(_reactToAspectViewModelChange);
   }
 
   final TextEditingController aspectTextFieldController = TextEditingController();
 
   @override
-  bool get nextButtonEnabled => false;
+  bool get nextButtonEnabled => newPositiveAspectViewModel.addAspectActionEnabled;
 
   @override
   String get nextButtonText => l10n.addPositiveAspectNavigationButton;
@@ -43,7 +45,9 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
   double _weight = 0.5;
 
   @override
-  void onNextButtonPressed(BuildContext context) {}
+  void onNextButtonPressed(BuildContext context) {
+    newPositiveAspectViewModel.onAddAspectActionPressed(context);
+  }
 
   @override
   void onBackButtonPressed(BuildContext context) {
@@ -54,6 +58,10 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
     }
   }
 
+  void _reactToAspectViewModelChange() {
+    notifyListeners();
+  }
+
   bool get addPositiveAspectActionEnabled => aspectTextFieldController.text.trim().isNotEmpty;
 
   double get weight => _weight;
@@ -62,18 +70,6 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
     _weight = newWeight;
     notifyListeners();
   }
-
-  void onAddPositiveAspectActionPressed(BuildContext context) {
-    final Aspect newPositiveAspect = Aspect(name: aspectTextFieldController.text.trim(), weight: Weight(value: weight));
-    final PatientDirective currentDirective = _patientDirectiveService.currentPatientDirective;
-    currentDirective.positiveAspects.add(newPositiveAspect);
-    _patientDirectiveService.currentPatientDirective = currentDirective;
-
-    context.go(Routes.positiveAspects);
-  }
-
-  VoidCallback? addPositiveAspect(BuildContext context) =>
-      addPositiveAspectActionEnabled ? () => onAddPositiveAspectActionPressed(context) : null;
 
   void _reactToPatientDirectiveChange() {
     notifyListeners();

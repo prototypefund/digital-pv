@@ -5,12 +5,22 @@
   "positiveAspectsHeadline": "Was macht mir Freude?",
   "positiveAspectsExplanation": "Bestimmen Sie Aspekte aus Ihrem Leben, die Ihnen Freude machen.",
   "positiveAspectsEmptyText": "Bisher wurden noch keine positiven Aspekte angegeben.",
+  "futureSituationsEmptyText": "Bisher wurden noch keine zukünfigen Situationen angegeben.",
   "addPositiveAspectCallToAction": "Positiven Aspekt hinzufügen",
+  "addFutureSituationCallToAction": "Zukünfige Situation hinzufügen",
   "addPositiveAspectNavigationButton": "Aspekt hinzufügen",
   "addPositiveAspectTextFieldHint": "Positiver Aspekt",
   "significanceSliderLabel": "",
   "significanceLow": "Geringe Bedeutung",
   "significanceHigh": "Hohe Bedeutung",
+  "removeFutureAspectConfirmationQuestion": "Soll die mögliche künftige Situation \"{aspectName}\" wirklich entfernt werden?",
+  "@removeFutureAspectConfirmationQuestion": {
+    "placeholders": {
+      "aspectName": {
+        "type": "String"
+      }
+    }
+  },
   "removePositiveAspectConfirmationQuestion": "Soll der positive Aspekt \"{aspectName}\" wirklich entfernt werden?",
   "@removePositiveAspectConfirmationQuestion": {
     "placeholders": {
@@ -21,6 +31,8 @@
   },
   "removePositiveAspectConfirmationRemove": "Positiven Aspekt entfernen",
   "removePositiveAspectConfirmationCancel": "Abbrechen",
+  "removeFutureAspectConfirmationRemove": "Zukünftige Situation entfernen",
+  "removeFutureAspectConfirmationCancel": "Abbrechen",
   "navigationSkip": "Überspringen",
   "welcomeViewPageOneTitle": "Herzlich willkommen bei d-PV, Ihrer digitalen Patientenverfügung!",
   "welcomeViewPageOneDescription": "Erstellen Sie in drei Schritten eine rechtskonforme Patientenverfügung. ",
@@ -30,6 +42,10 @@
   "welcomeViewPageThreeDescription": "Die dPV entspricht den gesetzlichen Vorgaben in Deutschland",
   "welcomeViewPageFourTitle": "Vertrauensperson",
   "welcomeViewPageFourDescription": "Statt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen.",
+  "positiveAspectsGroupLeisure": "Freizeit",
+  "positiveAspectsGroupFamily": "Familie",
+  "positiveAspectsGroupSport": "Sport",
+  "positiveAspectsGroupWork": "Arbeit",
   "spendTimeWithFamily": "Zeit mit der Familie verbringen",
   "pet": "Haustier",
   "myHome": "Mein Zuhause",
@@ -42,5 +58,42 @@
   "writingBooks": "Bücher schreiben",
   "examples": "Beispiele",
   "addPositiveAspectTitle": "Aspekt hinzufügen",
-  "addPositiveAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht"
+  "addPositiveAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht",
+  "addTreatmentActivitiesTitle": "Meine Behandlungswünsche",
+  "addTreatmentActivitiesExplanation": "Hier können Sie optional zu ihrem Behandlungsziel ({treatmentGoal}) bestimmte Maßnahmen festlegen.",
+  "@addTreatmentActivitiesExplanation": {
+    "placeholders": {
+      "treatmentGoal": {
+        "type": "String"
+      }
+    }
+  },
+  "treatmentGoalUndefined": "undefiniert",
+  "treatmentGoalPalliative": "palliativ",
+  "treatmentGoalCurative": "curativ",
+  "addTreatmentActivitiesSubHeadline": "Medizinische Maßnahmen",
+  "addTreatmentActivitiesHospitalAdmission": "Aufnahme ins Krankenhaus",
+  "addTreatmentActivitiesIntensiveTreatment": "Intensivbehandlung",
+  "addTreatmentActivitiesResuscitation": "Wiederbelebung",
+  "futureSituationsTitle": "Was wäre wenn?",
+  "futureSituationsExampleDeadlyDisease": "Endstadium einer tödlichen Krankheit",
+  "futureSituationsExampleIntensiveCare": "Intensivbehandlung unklarer Dauer nach akutem Ereignis",
+  "futureSituationsExampleIntensiveCareDescription": "z.B. Infektion, Komplikationen bei/nach OP, akute Verschlechterung einer bestehenden Erkrankung",
+  "futureSituationsExampleProcessOfDying": "Sterbeprozess",
+  "futureSituationsExampleSevereImpairement": "Schwere, dauerhafte  körperliche Beeinträchtigung ...",
+  "futureSituationsExampleSevereImpairementDescription": "(Bettlägerigkeit, permanente Pflegedürftigkeit, Inkontinenz) bei gleichzeitigem Verlust der Einwilligungs- bzw. Urteilsfähigkeit",
+  "futureSituationsExampleIntellectualImpairment": "Schwere oder fortschreitende geistige Beeinträchtigung ...",
+  "futureSituationsExampleIntellectualImpairmentDescription": "z.B. unfallbedingte Hirnschädigung, Demenz",
+  "futureSituationsExampleWakingComa": "Wachkoma oder ähnliche Zustände ...",
+  "futureSituationsExampleWakingComaDescription": "Info: Ein Erwachen ist nicht ganz auszuschliessen, aber unwahrscheinlich. Es ist unklar, ob eine gewisse Empfindungsfähigkeit erhalten sein kann.",
+  "futureSituationsGroupTitleSevereImpairement": "Schwere Zustände",
+  "futureSituationsGroupTitleUncertainCondition": "Ungewisse Zustände",
+  "futureSituationsGroupDeathInescapable": "Tod unausweichlich",
+  "addFutureSituationAspectTextfieldHint": "Neue Angabe ...",
+  "futureSituationsTitleExplanation": "Hier können Sie optional für mögliche künftige Situationen bestimmte Maßnahmen festlegen",
+  "addFutureSituationAspect": "Hinzufügen",
+  "treatmentActivityNotSpecified": "Keine Angabe",
+  "treatmentActivityNo": "Nein",
+  "treatmentActivityYes": "Ja",
+  "treatmentActivitySymptomControl": "Ich möchte zwar in ein Krankenhaus eingewiesen werden, aber nur zur Kontrolle von Symptomen, die ambulant nicht behandelt werden können."
 }
