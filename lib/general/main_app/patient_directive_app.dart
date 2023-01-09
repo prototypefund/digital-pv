@@ -112,7 +112,6 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     );
   }
 
-  bool registered = false;
 
   @override
   Widget build(BuildContext context) {
