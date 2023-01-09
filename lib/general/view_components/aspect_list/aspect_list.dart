@@ -43,6 +43,7 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
               child: AnimatedList(
                 key: _listKey,
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 initialItemCount: _viewModel.aspects.length,
                 itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
               )),
