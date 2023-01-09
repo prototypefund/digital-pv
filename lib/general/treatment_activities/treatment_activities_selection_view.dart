@@ -29,7 +29,10 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
           height: 20,
         ),
         DPVDropDown<TreatmentActivityChoice>(
-            description: Text(_viewModel.addTreatmentActivitiesHospitalAdmission),
+            description: Text(
+              _viewModel.addTreatmentActivitiesHospitalAdmission,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
             initialValue: _viewModel.hospitalizationSelection,
             onChanged: (TreatmentActivityChoice? value) {
               final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
@@ -48,7 +51,8 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
           height: 20,
         ),
         DPVDropDown<TreatmentActivityChoice>(
-            description: Text(_viewModel.addTreatmentActivitiesIntensiveTreatment),
+            description: Text(_viewModel.addTreatmentActivitiesIntensiveTreatment,
+                style: Theme.of(context).textTheme.labelSmall),
             initialValue: _viewModel.intensiveTreatmentSelection,
             onChanged: (TreatmentActivityChoice? value) {
               final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
@@ -65,7 +69,11 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
           height: 20,
         ),
         DPVDropDown<TreatmentActivityChoice>(
-            description: Text(_viewModel.addTreatmentActivitiesResuscitation),
+            description: Text(
+              _viewModel.addTreatmentActivitiesResuscitation,
+              style: Theme.of(context).textTheme.labelSmall,
+              textAlign: TextAlign.left,
+            ),
             initialValue: _viewModel.resuscitationSelection,
             onChanged: (TreatmentActivityChoice? value) {
               final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;

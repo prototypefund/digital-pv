@@ -29,12 +29,12 @@ class DPVDropDown<Type> extends StatelessWidget {
             const Spacer(
               flex: 1,
             ),
-            Flexible(flex: 4, child: description),
+            Expanded(flex: 3, child: description),
             const Spacer(
               flex: 1,
             ),
-            Flexible(
-              flex: 5,
+            Expanded(
+              flex: 6,
               child: DropdownButton<Type>(
                 isExpanded: true,
                 value: initialValue,

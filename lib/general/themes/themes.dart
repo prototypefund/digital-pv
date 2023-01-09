@@ -59,7 +59,7 @@ class Themes {
           ),
           DropdownButtonStyle(
               textStyle: TextStyle(
-                  color: DefaultThemeColors.purple, fontSize: 14.sp, fontWeight: FontWeight.normal, height: 15 / 11),
+                  color: DefaultThemeColors.purple, fontSize: 10.sp, fontWeight: FontWeight.normal, height: 15 / 11),
               underlineColor: Colors.deepPurpleAccent,
               underlineHeight: 2.sp)
         ],
