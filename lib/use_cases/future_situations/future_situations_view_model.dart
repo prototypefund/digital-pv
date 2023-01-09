@@ -9,9 +9,7 @@ import 'package:pd_app/use_cases/future_situations/future_situations_list_view_m
 import 'package:pd_app/use_cases/future_situations/new_future_situation_view_model.dart';
 
 class FutureSituationsViewModel extends CreationProcessNavigationViewModel with AspectViewModel, Logging {
-  FutureSituationsViewModel() : _futureSituationsListViewModel = FutureSituationsListViewModel() {
-    _futureSituationsListViewModel.addListener(_reactToAspectListChange);
-  }
+  FutureSituationsViewModel() : _futureSituationsListViewModel = FutureSituationsListViewModel();
 
   final AspectListViewModel _futureSituationsListViewModel;
 
@@ -26,11 +24,8 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
   @override
   void dispose() {
     super.dispose();
-    _futureSituationsListViewModel.removeListener(_reactToAspectListChange);
     _futureSituationsListViewModel.dispose();
   }
-
-  void _reactToAspectListChange() {}
 
   @override
   void onBackButtonPressed(BuildContext context) {
