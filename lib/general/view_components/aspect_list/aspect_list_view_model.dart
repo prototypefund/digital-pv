@@ -65,7 +65,11 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     _aspects = List.of(aspectListChoice(currentPatientDirective));
 
     _sortAspects();
-    _aspects.toSet().difference(oldAspects.toSet()).map((aspect) => onAspectAdded?.call(aspect));
+
+    final newAspects = _aspects.toSet().difference(oldAspects.toSet());
+    for (final aspect in newAspects) {
+      onAspectAdded?.call(aspect);
+    }
   }
 
   void _reactToPatientDirectiveChange() {
