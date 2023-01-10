@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
@@ -34,10 +36,11 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
               floating: true,
               expandedHeight: sliverAppBarExpandedHeight,
               title: NavigationBarButtons<ViewModelType>(),
-              flexibleSpace: const FlexibleSpaceBar(
+              flexibleSpace: FlexibleSpaceBar(
                 background: Padding(
-                  padding: EdgeInsets.all(sliverBarContentPadding),
-                  child: FlutterLogo(),
+                  padding: const EdgeInsets.all(sliverBarContentPadding),
+                  child: ChangeNotifierProvider(
+                      create: (_) => AspectVisualizationViewModel(), child: AspectVisualization()),
                 ),
               ),
             ),
