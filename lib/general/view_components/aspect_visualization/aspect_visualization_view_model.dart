@@ -24,7 +24,7 @@ class AspectVisualizationViewModel with ChangeNotifier, Logging {
     // +1 = very positive should become PI
     // 0 = equal should become PI / 2
     final rotation = math.pi / 2 * aspectScore + math.pi / 2;
-    logger.d('aspect score is $aspectScore, resulting in rotation of $rotation rads');
+    logger.v('aspect score is $aspectScore, resulting in rotation of $rotation rads');
     return rotation;
   }
 

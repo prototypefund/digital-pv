@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/placeholder/placeholder_text.dart';
+import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  final getIt = GetIt.instance;
+  getIt.registerSingleton(PatientDirectiveService());
 
   testWidgets('Can display large content without RenderFlex exception', (WidgetTester tester) async {
     // Build our app and trigger a frame.
