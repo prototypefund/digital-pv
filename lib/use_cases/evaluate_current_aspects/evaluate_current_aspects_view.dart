@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
-import 'package:pd_app/general/placeholder/patient_directive_view_placeholder.dart';
+import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +16,24 @@ class EvaluateCurrentAspects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CreationProcessNavigation<EvaluateCurrentAspectsViewModel>(
-        widget: PatientDirectiveViewPlaceholder(title: 'Aspekte evaluieren'));
+    final EvaluateCurrentAspectsViewModel _viewModel = context.watch();
+    return CreationProcessNavigation<EvaluateCurrentAspectsViewModel>(
+        widget: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: Paddings.headlinePadding,
+        child: Text(_viewModel.headline, style: Theme.of(context).textTheme.headlineLarge),
+      ),
+      Padding(
+          padding: Paddings.headlineExplanationPadding,
+          child: Text(
+            _viewModel.summary,
+            style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          )),
+      const SizedBox(
+        height: 40,
+      ),
+      ChangeNotifierProvider(create: (_) => AspectVisualizationViewModel(), child: AspectVisualization()),
+    ]));
   }
 }
