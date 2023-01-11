@@ -6,10 +6,14 @@ import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
 
 class AspectVisualization extends StatelessWidget {
+  static Widget widgetWithViewModel() =>
+      ChangeNotifierProvider(create: (_) => AspectVisualizationViewModel(), child: AspectVisualization());
+
   @override
   Widget build(BuildContext context) {
     final AspectVisualizationViewModel _viewModel = context.watch();
     return Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Flexible(

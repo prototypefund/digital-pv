@@ -23,5 +23,7 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
 
   bool get backButtonVisible => true;
 
-  bool get showAspectVisualization;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization;
+
+  bool get showFloatingAspectVisualizationIfSpaceAvailable => false;
 }

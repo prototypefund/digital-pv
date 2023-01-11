@@ -60,5 +60,8 @@ class StubCreationProcessNavigationViewModel
   bool get nextButtonVisible => false;
 
   @override
-  bool get showAspectVisualization => false;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
+
+  @override
+  bool get showFloatingAspectVisualizationIfSpaceAvailable => false;
 }

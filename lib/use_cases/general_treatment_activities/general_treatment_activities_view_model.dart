@@ -39,5 +39,5 @@ class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewM
   }
 
   @override
-  bool get showAspectVisualization => false;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 }

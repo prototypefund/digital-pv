@@ -15,5 +15,5 @@ class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNa
   }
 
   @override
-  bool get showAspectVisualization => false;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 }

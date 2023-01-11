@@ -38,5 +38,8 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
   }
 
   @override
-  bool get showAspectVisualization => true;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => true;
+
+  @override
+  bool get showFloatingAspectVisualizationIfSpaceAvailable => true;
 }

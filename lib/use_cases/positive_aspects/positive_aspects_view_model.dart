@@ -41,5 +41,8 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   }
 
   @override
-  bool get showAspectVisualization => true;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => true;
+
+  @override
+  bool get showFloatingAspectVisualizationIfSpaceAvailable => true;
 }

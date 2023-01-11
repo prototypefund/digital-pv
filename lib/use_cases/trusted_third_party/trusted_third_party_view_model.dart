@@ -15,5 +15,5 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel {
   }
 
   @override
-  bool get showAspectVisualization => false;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 }

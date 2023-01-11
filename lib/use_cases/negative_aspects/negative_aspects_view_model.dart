@@ -38,5 +38,8 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
   }
 
   @override
-  bool get showAspectVisualization => true;
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => true;
+
+  @override
+  bool get showFloatingAspectVisualizationIfSpaceAvailable => true;
 }

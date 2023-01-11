@@ -3,19 +3,23 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/themes/heights.dart';
+import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
+import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
 import 'package:provider/provider.dart';
 
 class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
-  const CreationProcessNavigation({
-    Key? key,
-    required this.widget,
-  }) : super(key: key);
+  const CreationProcessNavigation({Key? key, required this.widget, this.floatingAddonWidget}) : super(key: key);
 
   final Widget widget;
 
+  /// if enough space is available, a floating widget will be displayed next to the scrolling content
+  final Widget? floatingAddonWidget;
+
   static const double maximumContentWidth = 1200;
+  static const double responsiveAddonThreshold = Thresholds.responsiveAddonContent;
   static const double sliverBarContentPadding = 8.0;
   static const double contentAreaPadding = 32.0;
   static const double sliverAppBarExpandedHeight = 160.0;
@@ -23,41 +27,64 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
   @override
   Widget build(BuildContext context) {
     final ViewModelType _viewModel = context.watch<ViewModelType>();
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final useExtendedWidthForContent = deviceWidth >= responsiveAddonThreshold;
     return Scaffold(
       body: Container(
         color: Theme.of(context).backgroundColor,
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              // disables back button if popping is possible
-              backgroundColor: Theme.of(context).primaryColor,
-              pinned: true,
-              snap: false,
-              floating: true,
-              expandedHeight: sliverAppBarExpandedHeight,
-              title: NavigationBarButtons<ViewModelType>(),
-              flexibleSpace: FlexibleSpaceBar(
-                background: Padding(
-                  padding: const EdgeInsets.all(sliverBarContentPadding),
-                  child: Visibility(
-                      visible: _viewModel.showAspectVisualization,
-                      child: ChangeNotifierProvider(
-                          create: (_) => AspectVisualizationViewModel(), child: AspectVisualization())),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: BackgroundContainer(
-                child: ConstrainedSliverWidth(
-                  maxWidth: maximumContentWidth,
-                  child: Padding(
-                    padding: const EdgeInsets.all(contentAreaPadding),
-                    child: widget,
+        child: Stack(
+          children: [
+            CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  // disables back button if popping is possible
+                  backgroundColor: Theme.of(context).primaryColor,
+                  pinned: true,
+                  snap: false,
+                  floating: true,
+                  collapsedHeight: Heights.toolbarHeight,
+                  expandedHeight: useExtendedWidthForContent ? Heights.toolbarHeight : sliverAppBarExpandedHeight,
+                  title: NavigationBarButtons<ViewModelType>(),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Padding(
+                      padding: const EdgeInsets.all(sliverBarContentPadding),
+                      child: Visibility(
+                          visible: deviceWidth < responsiveAddonThreshold &&
+                              _viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
+                          child: AspectVisualization.widgetWithViewModel()),
+                    ),
                   ),
                 ),
-              ),
-            )
+                SliverToBoxAdapter(
+                  child: BackgroundContainer(
+                    child: ConstrainedSliverWidth(
+                      maxWidth: maximumContentWidth,
+                      child: Padding(
+                        padding: const EdgeInsets.all(contentAreaPadding),
+                        // will just make empty space for the stack to be drawn upon further up the widget tree
+                        child: _viewModel.showFloatingAspectVisualizationIfSpaceAvailable
+                            ? ResponsiveAddonContent(
+                                extendedContent: const SizedBox.shrink(),
+                                widthThreshold: responsiveAddonThreshold,
+                                child: widget,
+                              )
+                            : widget,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            if (deviceWidth > responsiveAddonThreshold && _viewModel.showFloatingAspectVisualizationIfSpaceAvailable)
+              Positioned(
+                  left: deviceWidth * 0.6,
+                  right: 0,
+                  top: 0 + MediaQuery.of(context).padding.top + Heights.toolbarHeight,
+                  bottom: 0,
+                  child: Padding(
+                      padding: Paddings.floatingAspectVisualizationPadding,
+                      child: AspectVisualization.widgetWithViewModel()))
           ],
         ),
       ),

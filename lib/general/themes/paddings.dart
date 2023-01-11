@@ -13,4 +13,5 @@ mixin Paddings {
   static const EdgeInsets callToActionPadding = EdgeInsets.only(top: 16);
   static const EdgeInsets formSaveActionPadding = EdgeInsets.only(top: 32);
   static const EdgeInsets exampleButtonPadding = EdgeInsets.symmetric(horizontal: 2, vertical: 2);
+  static const EdgeInsets floatingAspectVisualizationPadding = EdgeInsets.symmetric(horizontal: 32, vertical: 32);
 }
