@@ -22,6 +22,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
 
   @override
   Widget build(BuildContext context) {
+    final ViewModelType _viewModel = context.watch<ViewModelType>();
     return Scaffold(
       body: Container(
         color: Theme.of(context).backgroundColor,
@@ -39,8 +40,10 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
               flexibleSpace: FlexibleSpaceBar(
                 background: Padding(
                   padding: const EdgeInsets.all(sliverBarContentPadding),
-                  child: ChangeNotifierProvider(
-                      create: (_) => AspectVisualizationViewModel(), child: AspectVisualization()),
+                  child: Visibility(
+                      visible: _viewModel.showAspectVisualization,
+                      child: ChangeNotifierProvider(
+                          create: (_) => AspectVisualizationViewModel(), child: AspectVisualization())),
                 ),
               ),
             ),

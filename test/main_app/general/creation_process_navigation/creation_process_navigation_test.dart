@@ -58,4 +58,7 @@ class StubCreationProcessNavigationViewModel
 
   @override
   bool get nextButtonVisible => false;
+
+  @override
+  bool get showAspectVisualization => false;
 }

@@ -94,4 +94,7 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
     aspectTextFieldController.text = text;
     notifyListeners();
   }
+
+  @override
+  bool get showAspectVisualization => true;
 }

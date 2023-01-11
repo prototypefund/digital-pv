@@ -36,4 +36,7 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
   void onNextButtonPressed(BuildContext context) {
     context.go(Routes.evaluateCurrentAspects);
   }
+
+  @override
+  bool get showAspectVisualization => true;
 }

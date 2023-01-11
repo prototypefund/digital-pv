@@ -22,4 +22,6 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
   bool get nextButtonVisible => true;
 
   bool get backButtonVisible => true;
+
+  bool get showAspectVisualization;
 }

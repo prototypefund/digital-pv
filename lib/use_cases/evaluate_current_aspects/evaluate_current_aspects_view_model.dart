@@ -55,4 +55,7 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
   void onConfirmPressed(BuildContext context) {
     context.go(Routes.generalTreatmentObjective);
   }
+
+  @override
+  bool get showAspectVisualization => false;
 }

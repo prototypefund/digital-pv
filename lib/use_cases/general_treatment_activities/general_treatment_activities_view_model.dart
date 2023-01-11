@@ -37,4 +37,7 @@ class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewM
   void onNextButtonPressed(BuildContext context) {
     context.go(Routes.futureSituations);
   }
+
+  @override
+  bool get showAspectVisualization => false;
 }
