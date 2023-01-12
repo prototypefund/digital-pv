@@ -28,6 +28,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
   Widget build(BuildContext context) {
     final ViewModelType _viewModel = context.watch<ViewModelType>();
     final double deviceWidth = MediaQuery.of(context).size.width;
+    final double paddingTop = MediaQuery.of(context).padding.top;
     final useExtendedWidthForContent = deviceWidth >= responsiveAddonThreshold;
     return Scaffold(
       body: Container(
@@ -80,7 +81,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
               Positioned(
                   left: deviceWidth * 0.6,
                   right: 0,
-                  top: 0 + MediaQuery.of(context).padding.top + Heights.toolbarHeight,
+                  top: 0 + paddingTop + Heights.toolbarHeight,
                   bottom: 0,
                   child: Padding(
                       padding: Paddings.floatingAspectVisualizationPadding,
