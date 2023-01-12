@@ -39,7 +39,8 @@ class EvaluateCurrentAspects extends StatelessWidget {
         ),
         ConstrainedBox(
             constraints: Constraints.aspectVisualizationConstraints,
-            child: ChangeNotifierProvider(create: (_) => AspectVisualizationViewModel(), child: AspectVisualization())),
+            child: ChangeNotifierProvider(
+                create: (_) => AspectVisualizationViewModel(showLabels: true), child: AspectVisualization())),
         const SizedBox(
           height: 24,
         ),

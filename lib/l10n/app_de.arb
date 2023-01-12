@@ -124,5 +124,11 @@
   "evaluateCurrentAspectsSummaryNegative": "Insgesamt überwiegen die negativen Aspekte die positiven",
   "evaluateCurrentAspectsConfirmationQuestion": "Entspricht das Ihrer Einschätzung?",
   "evaluateCurrentAspectsConfirm": "Ja",
-  "evaluateCurrentAspectsChangeAspectsIfNotMatching": "Falls nein, nehmen Sie bitte Änderungen an den positiven und negativen Aspekten vor."
+  "evaluateCurrentAspectsChangeAspectsIfNotMatching": "Falls nein, nehmen Sie bitte Änderungen an den positiven und negativen Aspekten vor.",
+  "aspectVisualizationPositive": "Positiv",
+  "aspectVisualizationNegative": "Negativ",
+  "aspectVisualizationCurative": "Kurativ",
+  "aspectVisualizationPalliative": "Palliativ",
+  "aspectVisualizationTreatmentGoal": "Behandlungsziel",
+  "aspectVisualizationQualityOfLife": "Lebensqualität"
 }

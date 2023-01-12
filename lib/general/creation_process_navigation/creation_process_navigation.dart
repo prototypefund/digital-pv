@@ -52,7 +52,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                       child: Visibility(
                           visible: deviceWidth < responsiveAddonThreshold &&
                               _viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
-                          child: AspectVisualization.widgetWithViewModel()),
+                          child: AspectVisualization.widgetWithViewModel(showLabels: false)),
                     ),
                   ),
                 ),
@@ -84,7 +84,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   bottom: 0,
                   child: Padding(
                       padding: Paddings.floatingAspectVisualizationPadding,
-                      child: AspectVisualization.widgetWithViewModel()))
+                      child: AspectVisualization.widgetWithViewModel(showLabels: true)))
           ],
         ),
       ),

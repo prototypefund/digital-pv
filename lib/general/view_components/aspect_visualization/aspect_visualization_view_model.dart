@@ -3,16 +3,31 @@ import "dart:math" as math;
 import 'package:flutter/cupertino.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
+import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/logging.dart';
 
-class AspectVisualizationViewModel with ChangeNotifier, Logging {
-  AspectVisualizationViewModel() : _patientDirectiveService = getIt.get() {
+class AspectVisualizationViewModel with ChangeNotifier, Logging, RootContextL10N {
+  AspectVisualizationViewModel({required this.showLabels}) : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
   }
 
   final PatientDirectiveService _patientDirectiveService;
 
   String get evaluationImageBackground => 'assets/images/placeholder.png';
+
+  String get treatmentGoalLabel => l10n.aspectVisualizationTreatmentGoal;
+
+  String get qualityOfLifeLabel => l10n.aspectVisualizationQualityOfLife;
+
+  String get positiveLabel => l10n.aspectVisualizationPositive;
+
+  String get negativeLabel => l10n.aspectVisualizationNegative;
+
+  String get curativeLabel => l10n.aspectVisualizationCurative;
+
+  String get palliativeLabel => l10n.aspectVisualizationPalliative;
+
+  final bool showLabels;
 
   /// arrow rotation in radians
   /// by default the arrow is pointing to the right (very negative)
