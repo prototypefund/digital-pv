@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/treatment_activity.dart';
@@ -25,10 +26,9 @@ class PatientDirective {
   /// 1 means all positive, -1 means all negative
   /// 0 if no aspects are defined
   double get currentAspectsScore {
-    final double negativeWeights =
-        negativeAspects.map((e) => e.weight.value).fold(0, (previousValue, newValue) => previousValue + newValue);
-    final double positiveWeights =
-        positiveAspects.map((e) => e.weight.value).fold(0, (previousValue, newValue) => previousValue + newValue);
+    final negativeWeights = negativeAspects.map((e) => e.weight.value).sum;
+
+    final double positiveWeights = positiveAspects.map((e) => e.weight.value).sum;
 
     final sumWeights = negativeWeights + positiveWeights;
 
