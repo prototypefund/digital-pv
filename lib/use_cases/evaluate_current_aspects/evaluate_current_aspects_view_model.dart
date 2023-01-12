@@ -19,7 +19,7 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
   }
 
   @override
-  bool get nextButtonEnabled => true; // TODO disable an adapt tests
+  bool get nextButtonEnabled => false;
 
   String get headline => l10n.evaluateCurrentAspectHeadline;
 
@@ -49,7 +49,6 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
 
   @override
   void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.generalTreatmentObjective); // TODO remove an adapt tests
   }
 
   void onConfirmPressed(BuildContext context) {

@@ -78,7 +78,10 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text("Meine Lebensqualität"), findsOneWidget);
-    await tester.tap(find.text(l10n.navigationNext));
+
+    await tester.ensureVisible(find.text(l10n.evaluateCurrentAspectsConfirm));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.evaluateCurrentAspectsConfirm));
     await tester.pumpAndSettle();
 
     expect(find.text("Behandlungsziel festlegen"), findsOneWidget);
