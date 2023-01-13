@@ -6,6 +6,7 @@ import 'package:flutter_arc_text/flutter_arc_text.dart';
 
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
+import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/extensions/aspect_visualization_style.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
 import 'package:pd_app/logging.dart';
@@ -190,12 +191,16 @@ class AspectVisualizationOverlayArrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: rotation,
-      child: CustomPaint(
-        painter: ArrowPainter(color: color, strokeWidth: strokeWidth),
-      ),
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      final arrowScaleFactor = constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth;
+
+      return Transform.rotate(
+        angle: rotation,
+        child: CustomPaint(
+          painter: ArrowPainter(color: color, strokeWidth: strokeWidth * arrowScaleFactor),
+        ),
+      );
+    });
   }
 }
 
