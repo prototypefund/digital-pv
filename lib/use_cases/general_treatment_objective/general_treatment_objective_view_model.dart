@@ -12,9 +12,6 @@ import 'package:pd_app/logging.dart';
 class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewModel with Logging {
   GeneralTreatmentObjectiveViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
-    if (_patientDirectiveService.currentPatientDirective.generalTreatmentGoal == null) {
-      _resetTreatmentGoalToValueDerivedFromAspects();
-    }
   }
 
   final PatientDirectiveService _patientDirectiveService;
@@ -34,7 +31,7 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   String get changeNeedleCallToAction => l10n.generalTreatmentChangeCompassNeedleCallToAction;
 
   String get summary {
-    if ((_patientDirectiveService.currentPatientDirective.generalTreatmentGoal?.value ?? 0) >= 0) {
+    if ((_patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value) >= 0) {
       return l10n.generalTreatmentCurativeGoalQuestion;
     } else {
       return l10n.generalTreatmentPalliativeGoalQuestion;

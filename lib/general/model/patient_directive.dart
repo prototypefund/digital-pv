@@ -9,17 +9,26 @@ class PatientDirective {
       {required this.positiveAspects,
       required this.futureSituationAspects,
       required this.negativeAspects,
-      this.generalTreatmentGoal});
+      TreatmentGoal? generalTreatmentGoal})
+      : _generalTreatmentGoal = generalTreatmentGoal;
 
   final List<Aspect> positiveAspects;
   final List<Aspect> negativeAspects;
   final List<FutureSituation> futureSituationAspects;
 
-  TreatmentGoal? generalTreatmentGoal;
+  TreatmentGoal? _generalTreatmentGoal;
 
   TreatmentActivityChoice generalHospitalizationPreference = TreatmentActivityChoice.notSpecified;
   TreatmentActivityChoice generalIntensiveTreatmentPreference = TreatmentActivityChoice.notSpecified;
   TreatmentActivityChoice generalResuscitationPreference = TreatmentActivityChoice.notSpecified;
+
+  TreatmentGoal get generalTreatmentGoal {
+    return _generalTreatmentGoal ?? TreatmentGoal(value: currentAspectsScore);
+  }
+
+  set generalTreatmentGoal(TreatmentGoal newValue) {
+    _generalTreatmentGoal = newValue;
+  }
 
   ///
   /// returns the score of all current aspects, normalized to -1 and 1.
