@@ -4,6 +4,7 @@ import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
 import 'package:pd_app/general/themes/colors.dart';
+import 'package:pd_app/general/themes/extensions/aspect_visualization_style.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,8 @@ class AspectVisualization extends StatelessWidget {
   Widget build(BuildContext context) {
     final AspectVisualizationViewModel _viewModel = context.watch();
 
+    final sectionLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.sectionLabelStyle!;
+    final tendencyLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.tendencyLabelStyle!;
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +34,7 @@ class AspectVisualization extends StatelessWidget {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
                           text: _viewModel.palliativeLabel,
-                          textStyle: Theme.of(context).textTheme.labelSmall!,
+                          textStyle: tendencyLabelStyle,
                           startAngle: (-math.pi / 2) + 0.1,
                           startAngleAlignment: StartAngleAlignment.start,
                           placement: Placement.outside,
@@ -46,7 +49,7 @@ class AspectVisualization extends StatelessWidget {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
                           text: _viewModel.curativeLabel,
-                          textStyle: Theme.of(context).textTheme.labelSmall!,
+                          textStyle: tendencyLabelStyle,
                           startAngle: (math.pi / 2) - 0.1,
                           startAngleAlignment: StartAngleAlignment.end,
                           placement: Placement.outside,
@@ -61,7 +64,7 @@ class AspectVisualization extends StatelessWidget {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
                           text: _viewModel.negativeLabel,
-                          textStyle: Theme.of(context).textTheme.labelSmall!,
+                          textStyle: tendencyLabelStyle,
                           startAngle: (math.pi / 2) + 0.1,
                           startAngleAlignment: StartAngleAlignment.start,
                           placement: Placement.outside,
@@ -76,7 +79,7 @@ class AspectVisualization extends StatelessWidget {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
                           text: _viewModel.positiveLabel,
-                          textStyle: Theme.of(context).textTheme.labelSmall!,
+                          textStyle: tendencyLabelStyle,
                           startAngle: (-math.pi / 2) - 0.1,
                           startAngleAlignment: StartAngleAlignment.end,
                           placement: Placement.outside,
@@ -89,9 +92,9 @@ class AspectVisualization extends StatelessWidget {
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
-                          radius: (constraints.maxWidth / 2) * 0.86,
+                          radius: (constraints.maxWidth / 2) * 0.88,
                           text: _viewModel.treatmentGoalLabel,
-                          textStyle: Theme.of(context).textTheme.labelMedium!,
+                          textStyle: sectionLabelStyle,
                           startAngle: 0,
                           startAngleAlignment: StartAngleAlignment.center,
                           placement: Placement.outside,
@@ -104,9 +107,9 @@ class AspectVisualization extends StatelessWidget {
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
-                          radius: (constraints.maxWidth / 2) * 0.86,
+                          radius: (constraints.maxWidth / 2) * 0.88,
                           text: _viewModel.qualityOfLifeLabel,
-                          textStyle: Theme.of(context).textTheme.labelMedium!,
+                          textStyle: sectionLabelStyle,
                           startAngle: math.pi,
                           startAngleAlignment: StartAngleAlignment.center,
                           placement: Placement.outside,
