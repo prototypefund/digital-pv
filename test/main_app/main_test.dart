@@ -84,8 +84,10 @@ void main() {
     await tester.tap(find.text(l10n.evaluateCurrentAspectsConfirm));
     await tester.pumpAndSettle();
 
-    expect(find.text("Behandlungsziel festlegen"), findsOneWidget);
-    await tester.tap(find.text(l10n.navigationNext));
+    expect(find.text("Mein Behandlungsziel"), findsOneWidget);
+    await tester.ensureVisible(find.text(l10n.generalTreatmentConfirm));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.generalTreatmentConfirm));
     await tester.pumpAndSettle();
 
     expect(find.text("Meine Behandlungswünsche"), findsOneWidget);
@@ -126,7 +128,7 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Behandlungsziel festlegen"), findsOneWidget);
+    expect(find.text("Mein Behandlungsziel"), findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
