@@ -12,6 +12,9 @@ import 'package:pd_app/logging.dart';
 class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewModel with Logging {
   GeneralTreatmentObjectiveViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
+    if (_patientDirectiveService.currentPatientDirective.generalTreatmentGoal == null) {
+      _resetTreatmentGoalToValueDerivedFromAspects();
+    }
   }
 
   final PatientDirectiveService _patientDirectiveService;
