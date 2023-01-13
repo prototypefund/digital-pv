@@ -10,7 +10,7 @@ void main() {
         positiveAspects: [],
         futureSituationAspects: [],
         negativeAspects: [],
-        generalTreatmentGoal: TreatmentGoal.undefined);
+        generalTreatmentGoal: TreatmentGoal(value: 0));
 
     expect(instance.currentAspectsScore, 0);
   });
@@ -19,7 +19,7 @@ void main() {
         positiveAspects: [Aspect(name: "test 1", weight: Weight(value: 0.7))],
         futureSituationAspects: [],
         negativeAspects: [],
-        generalTreatmentGoal: TreatmentGoal.undefined);
+        generalTreatmentGoal: TreatmentGoal(value: 0));
 
     expect(instance.currentAspectsScore, 1.0);
   });
@@ -37,7 +37,7 @@ void main() {
         name: "test 3",
         weight: Weight(value: 0.02),
       )
-    ], futureSituationAspects: [], negativeAspects: [], generalTreatmentGoal: TreatmentGoal.undefined);
+    ], futureSituationAspects: [], negativeAspects: [], generalTreatmentGoal: TreatmentGoal(value: 0));
 
     expect(instance.currentAspectsScore, 1.0);
   });
@@ -46,7 +46,7 @@ void main() {
         positiveAspects: [],
         futureSituationAspects: [],
         negativeAspects: [Aspect(name: "test 1", weight: Weight(value: 0.3))],
-        generalTreatmentGoal: TreatmentGoal.undefined);
+        generalTreatmentGoal: TreatmentGoal(value: 0));
 
     expect(instance.currentAspectsScore, -1);
   });
@@ -56,7 +56,7 @@ void main() {
       Aspect(name: "test 1", weight: Weight(value: 0.5)),
       Aspect(name: "test 2", weight: Weight(value: 0.1)),
       Aspect(name: "test 3", weight: Weight(value: 0.6))
-    ], generalTreatmentGoal: TreatmentGoal.undefined);
+    ], generalTreatmentGoal: TreatmentGoal(value: 0));
 
     expect(instance.currentAspectsScore, -1);
   });
@@ -87,7 +87,7 @@ void main() {
         name: "test 3 neg",
         weight: Weight(value: 0.2),
       ) // sum 0.8
-    ], generalTreatmentGoal: TreatmentGoal.undefined);
+    ], generalTreatmentGoal: TreatmentGoal(value: 0));
 
     expect(instance.currentAspectsScore, closeTo(0.2, 0.0000000001));
   });
@@ -118,7 +118,7 @@ void main() {
         name: "test 3 neg",
         weight: Weight(value: 0.6),
       ) // sum 2..1
-    ], generalTreatmentGoal: TreatmentGoal.undefined);
+    ], generalTreatmentGoal: TreatmentGoal(value: 0));
 
     expect(instance.currentAspectsScore, closeTo(-0.4237288136, 0.0000000001));
   });

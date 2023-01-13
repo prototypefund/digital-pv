@@ -29,17 +29,32 @@ class AspectVisualizationViewModel with ChangeNotifier, Logging, RootContextL10N
 
   final bool showLabels;
 
-  /// arrow rotation in radians
+  /// aspect evaluation arrow rotation in radians
   /// by default the arrow is pointing to the right (very negative)
   /// rotating by PI means pointing to the left (very positive)
   ///
-  double get arrowRotation {
+  double get aspectEvaluationArrowRotation {
     final aspectScore = _patientDirectiveService.currentPatientDirective.currentAspectsScore;
     // -1 = very negative should become 0
     // +1 = very positive should become PI
     // 0 = equal should become PI / 2
     final rotation = math.pi / 2 * aspectScore + math.pi / 2;
+
     logger.v('aspect score is $aspectScore, resulting in rotation of $rotation rads');
+    return rotation;
+  }
+
+  /// treatment goal arrow rotation in radians
+  /// by default the arrow is pointing to the right (completely palliative)
+  /// rotating by PI means pointing to the left (completely curative)
+  ///
+  double get treatmentGoalArrowRotation {
+    final treatmentGoalValue = _patientDirectiveService.currentPatientDirective.generalTreatmentGoal?.value ?? 0;
+    // -1 = very palliative should become PI
+    // +1 = very curative should become 0
+    // 0 = equal should become PI / 2
+    final rotation = math.pi / 2 * treatmentGoalValue - math.pi / 2;
+    logger.v('treatment goal value is $treatmentGoalValue, resulting in rotation of $rotation rads');
     return rotation;
   }
 

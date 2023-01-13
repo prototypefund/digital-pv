@@ -16,7 +16,9 @@ class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewM
   String get addTreatmentActivitiesTitle => l10n.addTreatmentActivitiesTitle;
 
   String get addTreatmentActivitiesExplanation => l10n.addTreatmentActivitiesExplanation(
-      _patientDirectiveService.currentPatientDirective.generalTreatmentGoal.localizedString(l10n));
+      (_patientDirectiveService.currentPatientDirective.generalTreatmentGoal?.tendency ??
+              TreatmentGoalTendency.undefined)
+          .localizedString(l10n));
 
   void _reactToPatientDirectiveChange() {
     notifyListeners();

@@ -9,13 +9,13 @@ class PatientDirective {
       {required this.positiveAspects,
       required this.futureSituationAspects,
       required this.negativeAspects,
-      required this.generalTreatmentGoal});
+      this.generalTreatmentGoal});
 
   final List<Aspect> positiveAspects;
   final List<Aspect> negativeAspects;
   final List<FutureSituation> futureSituationAspects;
 
-  final TreatmentGoal generalTreatmentGoal;
+  TreatmentGoal? generalTreatmentGoal;
 
   TreatmentActivityChoice generalHospitalizationPreference = TreatmentActivityChoice.notSpecified;
   TreatmentActivityChoice generalIntensiveTreatmentPreference = TreatmentActivityChoice.notSpecified;
