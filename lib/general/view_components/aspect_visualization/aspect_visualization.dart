@@ -22,9 +22,10 @@ class AspectVisualization extends StatelessWidget with Logging {
   /// right half has absolute values between 0 and PI/2
   final ValueChanged<double>? onDragAndRotate;
 
-  static Widget widgetWithViewModel({required bool showLabels, ValueChanged<double>? onDragAndRotate}) =>
+  static Widget widgetWithViewModel(
+          {required bool showLabels, required bool showTreatmentGoal, ValueChanged<double>? onDragAndRotate}) =>
       ChangeNotifierProvider(
-          create: (_) => AspectVisualizationViewModel(showLabels: showLabels),
+          create: (_) => AspectVisualizationViewModel(showLabels: showLabels, showTreatmentGoal: showTreatmentGoal),
           child: AspectVisualization(
             onDragAndRotate: onDragAndRotate,
           ));
@@ -141,13 +142,14 @@ class AspectVisualization extends StatelessWidget with Logging {
                     },
                   ),
                 ),
-              Positioned.fill(
-                child: AspectVisualizationOverlayArrow(
-                  rotation: _viewModel.treatmentGoalArrowRotation,
-                  color: treatmentGoalArrowColor,
-                  strokeWidth: treatmentGoalArrowStrokeWidth,
+              if (_viewModel.showTreatmentGoal)
+                Positioned.fill(
+                  child: AspectVisualizationOverlayArrow(
+                    rotation: _viewModel.treatmentGoalArrowRotation,
+                    color: treatmentGoalArrowColor,
+                    strokeWidth: treatmentGoalArrowStrokeWidth,
+                  ),
                 ),
-              ),
               Positioned.fill(
                 child: AspectVisualizationOverlayArrow(
                   rotation: _viewModel.aspectEvaluationArrowRotation,

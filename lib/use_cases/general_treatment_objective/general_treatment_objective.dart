@@ -49,7 +49,7 @@ class GeneralTreatmentObjective extends StatelessWidget {
         ConstrainedBox(
             constraints: Constraints.aspectVisualizationConstraints,
             child: ChangeNotifierProvider(
-                create: (_) => AspectVisualizationViewModel(showLabels: true),
+                create: (_) => AspectVisualizationViewModel(showLabels: true, showTreatmentGoal: true),
                 child: AspectVisualization(
                   onDragAndRotate: (double direction) {
                     _viewModel.adaptTreatmentGoal(direction);

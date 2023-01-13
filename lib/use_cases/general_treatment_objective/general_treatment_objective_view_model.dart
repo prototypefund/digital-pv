@@ -110,4 +110,7 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
 
     _patientDirectiveService.currentPatientDirective = directive;
   }
+
+  @override
+  bool get showTreatmentGoalInVisualization => true;
 }
