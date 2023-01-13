@@ -13,4 +13,7 @@ class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNa
   void onNextButtonPressed(BuildContext context) {
     context.go(Routes.personalDetails);
   }
+
+  @override
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 }

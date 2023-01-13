@@ -36,4 +36,10 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
   void onNextButtonPressed(BuildContext context) {
     context.go(Routes.trustedThirdParty);
   }
+
+  @override
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => true;
+
+  @override
+  bool get showFloatingAspectVisualizationIfSpaceAvailable => true;
 }

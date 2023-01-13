@@ -13,4 +13,7 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel {
   void onNextButtonPressed(BuildContext context) {
     context.go(Routes.generalInformationAboutPatientDirective);
   }
+
+  @override
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 }

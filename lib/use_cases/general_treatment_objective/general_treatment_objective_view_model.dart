@@ -13,4 +13,7 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   void onNextButtonPressed(BuildContext context) {
     context.go(Routes.treatmentActivities);
   }
+
+  @override
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 }

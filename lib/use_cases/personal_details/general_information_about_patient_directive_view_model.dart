@@ -14,4 +14,7 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel {
 
   @override
   void onNextButtonPressed(BuildContext context) {}
+
+  @override
+  bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 }

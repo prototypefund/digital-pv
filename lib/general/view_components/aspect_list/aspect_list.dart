@@ -3,6 +3,7 @@ import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/dpv_box.dart';
@@ -139,7 +140,7 @@ class AspectWidget<AspectType extends Aspect> extends StatelessWidget with Loggi
   Widget build(BuildContext context) {
     final AspectListViewModel _viewModel = context.watch();
     final MediaQueryData mediaQuery = MediaQuery.of(context);
-    if (mediaQuery.size.width < 800) {
+    if (mediaQuery.size.width < Thresholds.futureSituationsTwoColumnDisplayThreshold) {
       return _buildSmallScreenVersion(context, _viewModel);
     } else {
       return _buildLargeScreenVersion(context, _viewModel);

@@ -16,29 +16,30 @@ class PositiveAspects extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
     return CreationProcessNavigation<PositiveAspectsViewModel>(
-        widget: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: Paddings.headlinePadding,
-          child: Text(
-            context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectsHeadlineText),
-            textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.headlineLarge,
+      widget: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: Paddings.headlinePadding,
+            child: Text(
+              context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectsHeadlineText),
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
           ),
-        ),
-        Padding(
-          padding: Paddings.headlineExplanationPadding,
-          child: Text(
-            context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectsExplanationText),
-            textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.bodyLarge,
+          Padding(
+            padding: Paddings.headlineExplanationPadding,
+            child: Text(
+              context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectsExplanationText),
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
-        ),
-        ChangeNotifierProvider.value(
-            value: context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectListViewModel),
-            child: AspectList())
-      ],
-    ));
+          ChangeNotifierProvider.value(
+              value: context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectListViewModel),
+              child: AspectList())
+        ],
+      ),
+    );
   }
 }

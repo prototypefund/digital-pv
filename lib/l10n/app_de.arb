@@ -118,5 +118,17 @@
   "treatmentActivityNotSpecified": "Keine Angabe",
   "treatmentActivityNo": "Nein",
   "treatmentActivityYes": "Ja",
-  "treatmentActivitySymptomControl": "Ich möchte zwar in ein Krankenhaus eingewiesen werden, aber nur zur Kontrolle von Symptomen, die ambulant nicht behandelt werden können."
+  "treatmentActivitySymptomControl": "Ich möchte zwar in ein Krankenhaus eingewiesen werden, aber nur zur Kontrolle von Symptomen, die ambulant nicht behandelt werden können.",
+  "evaluateCurrentAspectHeadline": "Meine Lebensqualität",
+  "evaluateCurrentAspectsSummaryPositive": "Insgesamt überwiegen die positiven Aspekte die negativen",
+  "evaluateCurrentAspectsSummaryNegative": "Insgesamt überwiegen die negativen Aspekte die positiven",
+  "evaluateCurrentAspectsConfirmationQuestion": "Entspricht das Ihrer Einschätzung?",
+  "evaluateCurrentAspectsConfirm": "Ja",
+  "evaluateCurrentAspectsChangeAspectsIfNotMatching": "Falls nein, nehmen Sie bitte Änderungen an den positiven und negativen Aspekten vor.",
+  "aspectVisualizationPositive": "Positiv",
+  "aspectVisualizationNegative": "Negativ",
+  "aspectVisualizationCurative": "Kurativ",
+  "aspectVisualizationPalliative": "Palliativ",
+  "aspectVisualizationTreatmentGoal": "Behandlungsziel",
+  "aspectVisualizationQualityOfLife": "Lebensqualität"
 }

@@ -23,7 +23,7 @@ class PatientDirectiveService with ChangeNotifier {
         )
       ],
       generalTreatmentGoal: TreatmentGoal.undefined,
-      negativeAspects: []);
+      negativeAspects: [Aspect(name: "Rückenschmerzen", weight: Weight(value: 0.25))]);
 
   PatientDirective get currentPatientDirective => _currentPatientDirective;
 
