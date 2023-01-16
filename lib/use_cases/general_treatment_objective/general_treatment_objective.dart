@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
 import 'package:pd_app/general/view_components/explanation_box/explanation_box.dart';
@@ -65,7 +66,7 @@ class GeneralTreatmentObjective extends StatelessWidget {
               children: [
                 Text(_viewModel.resetLabel),
                 const SizedBox(
-                  width: 16,
+                  width: Sizes.elevatedButtonLabelIconDistance,
                 ),
                 Icon(_viewModel.resetIconData)
               ],

@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
+import 'package:pd_app/general/model/person_of_trust.dart';
 import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/model/treatment_goal.dart';
 
@@ -9,6 +10,7 @@ class PatientDirective {
       {required this.positiveAspects,
       required this.futureSituationAspects,
       required this.negativeAspects,
+      this.personsOfTrust = const [],
       TreatmentGoal? generalTreatmentGoal})
       : _generalTreatmentGoal = generalTreatmentGoal;
 
@@ -21,6 +23,8 @@ class PatientDirective {
   TreatmentActivityChoice generalHospitalizationPreference = TreatmentActivityChoice.notSpecified;
   TreatmentActivityChoice generalIntensiveTreatmentPreference = TreatmentActivityChoice.notSpecified;
   TreatmentActivityChoice generalResuscitationPreference = TreatmentActivityChoice.notSpecified;
+
+  List<PersonOfTrust> personsOfTrust;
 
   TreatmentGoal get generalTreatmentGoal {
     return _generalTreatmentGoal ?? TreatmentGoal(value: currentAspectsScore);
