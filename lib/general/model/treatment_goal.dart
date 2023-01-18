@@ -26,8 +26,6 @@ class TreatmentGoal {
   }
 }
 
-class InvalidTreatmentGoalValueException implements Exception {}
-
 enum TreatmentGoalTendency { undefined, curative, palliative }
 
 extension TreatmentGoalTendencyLocalization on TreatmentGoalTendency {
