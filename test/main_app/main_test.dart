@@ -98,7 +98,7 @@ void main() {
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
-    expect(find.text("Vertrauensperson"), findsOneWidget);
+    expect(find.text("Meine Vertretungsperson/en (optional)"), findsOneWidget);
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
@@ -116,7 +116,7 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Vertrauensperson"), findsOneWidget);
+    expect(find.text("Meine Vertretungsperson/en (optional)"), findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

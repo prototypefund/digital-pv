@@ -140,5 +140,39 @@
   "generalTreatmentCurativeExplanation": "Es wird alles medizinisch Mögliche und Sinnvolle getan, um mein Leben zu erhalten. Die mit der Lebenserhaltung verbundenen Belastungen nehme ich in Kauf.",
   "generalTreatmentPalliativeExplanationTitle": "Was bedeutet <<palliativ>>?",
   "generalTreatmentPalliativeExplanation": "Die Behandlung zielt vor allem darauf, mein Leiden zu lindern. Eine mögliche Verkürzung meiner Lebenszeit nehme ich in Kauf.",
-  "generalTreatmentConfirm": "Behandlungsziel bestätigen"
+  "generalTreatmentConfirm": "Behandlungsziel bestätigen",
+  "personOfTrustTitle": "Meine Vertretungsperson/en (optional)",
+  "personOfTrustExplanation": "Eine Vertretungsperson hat die Aufgabe, Ihrem Willen Geltung zu verschaffen.",
+  "personOfTrustRemoveConfirmation": "Soll diese Vertretungsperson aus Ihrer Patientenverfügung entfernt werden?",
+  "personOfTrustRemoveConfirmationYes": "Vertretungsperson entfernen",
+  "personOfTrustRemoveConfirmationNo": "Abbrechen",
+  "personOfTrustDesignatePerson": "{count,plural, =0{Ich benenne keine Vertretungsperson} =1{Ich benenne die folgende Vertretungsperson} other{Ich benenne die folgenden {count} Vertretungspersonen}}",
+  "@personOfTrustDesignatePerson": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "personOfTrustEnterContactDetailsCallToAction": "Bitte geben Sie die Kontaktdaten ein",
+  "personOfTrustFunction": "Die Vertretungsperson soll folgende Funktion einnehmen:",
+  "personOfTrustAgent": "Bevollmächtigter",
+  "personOfTrustAgentWithFunction": "Bevollmächtigter mit",
+  "personOfTrustAgentGroupPower": "Gesamtvertretungsmacht",
+  "personOfTrustAgentIndividualPower": "Einzelvertretungsmacht",
+  "personOfTrustAgentGuardianship": "Betreuer",
+  "personOfTrustAddPerson": "Vertretungsperson hinzufügen",
+  "personOfTrustValidationSurnameEmpty": "Bitte geben Sie den Nachnamen der Vertretungsperson an",
+  "personOfTrustValidationNameEmpty": "Bitte geben Sie den Vornamen der Vertretungsperson an",
+  "personOfTrustValidationPhoneEmpty": "Bitte geben Sie eine Telefonnummer der Vertretungsperson an",
+  "personOfTrustValidationAgentAndGuardianshipEmpty": "Entweder eine Bevollmächtigung oder Betreuung muss ausgewählt sein",
+  "personDetailsSurname": "Name",
+  "personDetailsName": "Vorname",
+  "personDetailsDateOfBirth": "Geburtstag",
+  "personDetailsAddress": "Straße & Hausnummer",
+  "personDetailsZipCode": "Postleitzahl",
+  "personDetailsCity": "Ort",
+  "personDetailsCountry": "Land",
+  "personDetailsEmail": "Email",
+  "personDetailsPhone": "Telefon"
 }

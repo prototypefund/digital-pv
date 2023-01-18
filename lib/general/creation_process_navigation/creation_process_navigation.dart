@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
-import 'package:pd_app/general/themes/heights.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
@@ -44,8 +44,8 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   pinned: true,
                   snap: false,
                   floating: true,
-                  collapsedHeight: Heights.toolbarHeight,
-                  expandedHeight: useExtendedWidthForContent ? Heights.toolbarHeight : sliverAppBarExpandedHeight,
+                  collapsedHeight: Sizes.toolbarHeight,
+                  expandedHeight: useExtendedWidthForContent ? Sizes.toolbarHeight : sliverAppBarExpandedHeight,
                   title: NavigationBarButtons<ViewModelType>(),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Padding(
@@ -82,7 +82,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
               Positioned(
                   left: deviceWidth * 0.6,
                   right: 0,
-                  top: 0 + paddingTop + Heights.toolbarHeight,
+                  top: 0 + paddingTop + Sizes.toolbarHeight,
                   bottom: 0,
                   child: Padding(
                       padding: Paddings.floatingAspectVisualizationPadding,
