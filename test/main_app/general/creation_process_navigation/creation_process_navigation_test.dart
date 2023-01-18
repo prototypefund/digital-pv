@@ -64,4 +64,7 @@ class StubCreationProcessNavigationViewModel
 
   @override
   bool get showFloatingAspectVisualizationIfSpaceAvailable => false;
+
+  @override
+  bool get showTreatmentGoalInVisualization => false;
 }

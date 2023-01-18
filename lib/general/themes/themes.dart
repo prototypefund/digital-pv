@@ -67,7 +67,11 @@ class Themes {
               sectionLabelStyle:
                   TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.bold, height: 1),
               tendencyLabelStyle:
-                  TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.normal, height: 1))
+                  TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.normal, height: 1),
+              aspectEvaluationArrowStrokeWidth: 4,
+              aspectEvaluationArrowColor: DefaultThemeColors.purple,
+              treatmentGoalArrowStrokeWidth: 12,
+              treatmentGoalArrowColor: Colors.red)
         ],
       );
 }

@@ -97,4 +97,7 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
 
   @override
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => true;
+
+  @override
+  bool get showTreatmentGoalInVisualization => false;
 }

@@ -130,5 +130,15 @@
   "aspectVisualizationCurative": "Kurativ",
   "aspectVisualizationPalliative": "Palliativ",
   "aspectVisualizationTreatmentGoal": "Behandlungsziel",
-  "aspectVisualizationQualityOfLife": "Lebensqualität"
+  "aspectVisualizationQualityOfLife": "Lebensqualität",
+  "generalTreatmentGoalHeadline": "Mein Behandlungsziel",
+  "generalTreatmentCurativeGoalQuestion": "Wünschen Sie eine kurative Behandlung?",
+  "generalTreatmentPalliativeGoalQuestion": "Wünschen Sie eine palliative Behandlung?",
+  "generalTreatmentChangeCompassNeedleCallToAction": "Tippen Sie die rote Kompassnadel an, um die Ausrichtung nach Ihren Wünschen anzupassen.",
+  "generalTreatmentResetCompass": "Zurücksetzen",
+  "generalTreatmentCurativeExplanationTitle": "Was bedeutet <<kurativ>>?",
+  "generalTreatmentCurativeExplanation": "Es wird alles medizinisch Mögliche und Sinnvolle getan, um mein Leben zu erhalten. Die mit der Lebenserhaltung verbundenen Belastungen nehme ich in Kauf.",
+  "generalTreatmentPalliativeExplanationTitle": "Was bedeutet <<palliativ>>?",
+  "generalTreatmentPalliativeExplanation": "Die Behandlung zielt vor allem darauf, mein Leiden zu lindern. Eine mögliche Verkürzung meiner Lebenszeit nehme ich in Kauf.",
+  "generalTreatmentConfirm": "Behandlungsziel bestätigen"
 }

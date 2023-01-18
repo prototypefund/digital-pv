@@ -48,8 +48,7 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
   }
 
   @override
-  void onNextButtonPressed(BuildContext context) {
-  }
+  void onNextButtonPressed(BuildContext context) {}
 
   void onConfirmPressed(BuildContext context) {
     context.go(Routes.generalTreatmentObjective);
@@ -57,4 +56,7 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
 
   @override
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
+
+  @override
+  bool get showTreatmentGoalInVisualization => false;
 }
