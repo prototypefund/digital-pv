@@ -1,14 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class TreatmentGoal {
-  TreatmentGoal({required this.value}) {
-    _validateTreatmentGoalValueInRange(value);
-  }
+  static const double valueUpperBound = 1;
+  static const double valueLowerBound = -1;
 
-  void _validateTreatmentGoalValueInRange(double valueToCheck) {
-    if (!((valueToCheck < 1) || (valueToCheck > -1))) {
-      throw InvalidTreatmentGoalValueException();
-    }
+  TreatmentGoal({required double value}) : value = _restrictValueToValidBounds(value);
+
+  static double _restrictValueToValidBounds(double valueToCheck) {
+    return max(min(valueToCheck, valueUpperBound), valueLowerBound);
   }
 
   // a value between -1 (palliative) and +1 (curative)
@@ -24,8 +25,6 @@ class TreatmentGoal {
     }
   }
 }
-
-class InvalidTreatmentGoalValueException implements Exception {}
 
 enum TreatmentGoalTendency { undefined, curative, palliative }
 

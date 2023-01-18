@@ -7,9 +7,11 @@ import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/treatment_goal.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/circular_quadrant_directions.dart';
 import 'package:pd_app/logging.dart';
 
-class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewModel with Logging {
+class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewModel
+    with Logging, CircularQuadrantDirections {
   GeneralTreatmentObjectiveViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
   }
@@ -91,12 +93,10 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
     // bottom right quadrant is interpreted as curative
 
     final double adjustedDirection;
-    if (math.pi / 2 < direction && direction < math.pi) {
-      // bottom left quadrant
-      adjustedDirection = -math.pi;
-    } else if (0 < direction && direction <= math.pi / 2) {
-      // bottom right quadrant
-      adjustedDirection = 0;
+    if (isBottomLeftQuadrant(direction)) {
+      adjustedDirection = CircularQuadrantDirections.leftCenter;
+    } else if (isBottomRightQuadrant(direction)) {
+      adjustedDirection = CircularQuadrantDirections.rightCenter;
     } else {
       adjustedDirection = direction;
     }

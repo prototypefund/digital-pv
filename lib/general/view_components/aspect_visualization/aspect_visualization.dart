@@ -15,11 +15,6 @@ import 'package:provider/provider.dart';
 class AspectVisualization extends StatelessWidget with Logging {
   const AspectVisualization({super.key, this.onDragAndRotate});
 
-  /// is notified of drag events and their rotation; can be used to change treatment goal or other aspects of the directive using gestures
-  /// top half has negative values
-  /// bottom half has positive values
-  /// left half has absolute values between PI/2 and PI
-  /// right half has absolute values between 0 and PI/2
   final ValueChanged<double>? onDragAndRotate;
 
   static Widget widgetWithViewModel(
