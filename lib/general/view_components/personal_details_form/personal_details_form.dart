@@ -12,19 +12,19 @@ class PersonalDetailsForm extends StatelessWidget {
       children: [
         Padding(
           padding: Paddings.textFieldPadding,
-          child: TextField(
-            controller: _viewModel.surnameTextFieldController,
-            style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.surnameLabel)),
-          ),
+          child: TextFormField(
+              controller: _viewModel.surnameTextFieldController,
+              style: Theme.of(context).textTheme.labelLarge,
+              decoration: InputDecoration(label: Text(_viewModel.surnameLabel)),
+              validator: _viewModel.surnameValidator),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
-          child: TextField(
-            controller: _viewModel.nameTextFieldController,
-            style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.nameLabel)),
-          ),
+          child: TextFormField(
+              controller: _viewModel.nameTextFieldController,
+              style: Theme.of(context).textTheme.labelLarge,
+              decoration: InputDecoration(label: Text(_viewModel.nameLabel)),
+              validator: _viewModel.nameValidator),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
@@ -68,7 +68,7 @@ class PersonalDetailsForm extends StatelessWidget {
         ),
         Padding(
           padding: Paddings.textFieldPadding,
-          child: TextField(
+          child: TextFormField(
             controller: _viewModel.emailTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
             decoration: InputDecoration(label: Text(_viewModel.emailLabel)),
@@ -76,10 +76,11 @@ class PersonalDetailsForm extends StatelessWidget {
         ),
         Padding(
           padding: Paddings.textFieldPadding,
-          child: TextField(
+          child: TextFormField(
             controller: _viewModel.phoneTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
             decoration: InputDecoration(label: Text(_viewModel.phoneLabel)),
+            validator: _viewModel.phoneNumberValidator,
           ),
         ),
       ],

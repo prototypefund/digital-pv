@@ -5,10 +5,12 @@ import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/general/view_components/personal_details_form/personal_details_form_view_model.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party_personal_details_view_model.dart';
 
 class TrustedThirdPartyFormViewModel with ChangeNotifier, RootContextL10N, Logging {
   TrustedThirdPartyFormViewModel({required this.readPersonFromService}) : _patientDirectiveService = getIt.get() {
-    personalDetailsFormViewModel = PersonalDetailsFormViewModel(personalDetails: personOfTrust.personalDetails);
+    personalDetailsFormViewModel =
+        TrustedThirdPartyPersonalDetailsViewModel(personalDetails: personOfTrust.personalDetails);
 
     personalDetailsFormViewModel.addListener(_reactToPersonalDetailsChange);
   }
@@ -24,8 +26,6 @@ class TrustedThirdPartyFormViewModel with ChangeNotifier, RootContextL10N, Loggi
   String get agentLabel => l10n.personOfTrustAgent;
 
   String get guardianshipLabel => l10n.personOfTrustAgentGuardianship;
-
-  bool get isAgent => personOfTrust.agent;
 
   bool get isAgentWithGuardianship => personOfTrust.guardianship;
 
@@ -56,7 +56,9 @@ class TrustedThirdPartyFormViewModel with ChangeNotifier, RootContextL10N, Loggi
   }
 
   void toggleIsAgent() {
-    personOfTrust.agent = !personOfTrust.agent;
+    personOfTrust.individualPowerOfAttorney = !personOfTrust.individualPowerOfAttorney;
+    personOfTrust.groupPowerOfAttorney = false;
+
     notifyListeners();
   }
 
@@ -101,5 +103,36 @@ class TrustedThirdPartyFormViewModel with ChangeNotifier, RootContextL10N, Loggi
       personsInService.remove(personOfTrust);
       _patientDirectiveService.currentPatientDirective = currentDirective;
     }
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  String? isAgentWithGuardianshipValidator(bool? value) {
+    if (!hasIndividualPowerOfAttorney && !hasGroupPowerOfAttorney && !isAgentWithGuardianship) {
+      return l10n.personOfTrustValidationAgentAndGuardianshipEmpty;
+    }
+    return null;
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  String? hasIndividualPowerOfAttorneyValidator(bool? value) {
+    if (!hasIndividualPowerOfAttorney && !hasGroupPowerOfAttorney && !isAgentWithGuardianship) {
+      return l10n.personOfTrustValidationAgentAndGuardianshipEmpty;
+    }
+    return null;
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  String? hasGroupPowerOfAttorneyValidator(bool? value) {
+    if (!hasIndividualPowerOfAttorney && !hasGroupPowerOfAttorney && !isAgentWithGuardianship) {
+      return l10n.personOfTrustValidationAgentAndGuardianshipEmpty;
+    }
+    return null;
+  }
+
+  bool isInputValid() {
+    return personalDetailsFormViewModel.isInputValid() &&
+        hasIndividualPowerOfAttorneyValidator(hasIndividualPowerOfAttorney) == null &&
+        hasGroupPowerOfAttorneyValidator(hasGroupPowerOfAttorney) == null &&
+        isAgentWithGuardianshipValidator(isAgentWithGuardianship) == null;
   }
 }

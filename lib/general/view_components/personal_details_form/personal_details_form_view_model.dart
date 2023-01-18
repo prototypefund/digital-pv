@@ -90,4 +90,16 @@ class PersonalDetailsFormViewModel with ChangeNotifier, RootContextL10N, Logging
     emailTextFieldController.removeListener(_updatePersonalDetailsObject);
     phoneTextFieldController.removeListener(_updatePersonalDetailsObject);
   }
+
+  String? phoneNumberValidator(String? value) => null;
+
+  String? nameValidator(String? value) => null;
+
+  String? surnameValidator(String? value) => null;
+
+  bool isInputValid() {
+    return phoneNumberValidator(personalDetails.phone) == null &&
+        nameValidator(personalDetails.name) == null &&
+        surnameValidator(personalDetails.surname) == null;
+  }
 }

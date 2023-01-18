@@ -82,4 +82,14 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel with
     super.dispose();
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChanges);
   }
+
+  @override
+  bool get nextButtonEnabled {
+    for (final TrustedThirdPartyFormViewModel formViewModel in _trustedThirdPartyFormViewModels) {
+      if (!formViewModel.isInputValid()) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
