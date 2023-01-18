@@ -85,11 +85,6 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel with
 
   @override
   bool get nextButtonEnabled {
-    for (final TrustedThirdPartyFormViewModel formViewModel in _trustedThirdPartyFormViewModels) {
-      if (!formViewModel.isInputValid()) {
-        return false;
-      }
-    }
     return true;
   }
 }
