@@ -102,8 +102,10 @@ void main() {
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
-    expect(find.text("Grundsätzliches zu meiner Patientenverfügung"), findsOneWidget);
-    await tester.tap(find.text(l10n.navigationNext));
+    expect(find.text(l10n.generalInfoConfirm), findsOneWidget);
+    await tester.ensureVisible(find.text(l10n.generalInfoConfirm));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.generalInfoConfirm));
     await tester.pumpAndSettle();
 
     expect(find.text("Persönliche Daten"), findsOneWidget);
@@ -112,7 +114,8 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Grundsätzliches zu meiner Patientenverfügung"), findsOneWidget);
+
+    expect(find.text(l10n.generalInfoConfirm), findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

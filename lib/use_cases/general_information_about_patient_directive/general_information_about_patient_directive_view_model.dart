@@ -1,10 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/asset_path_correction.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 
-class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNavigationViewModel {
+class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNavigationViewModel
+    with AssetPathCorrection {
   GeneralInformationAboutPatientDirectiveViewModel() {
     _loadContentMarkdown();
   }
@@ -20,7 +22,8 @@ class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNa
   void onNextButtonPressed(BuildContext context) {}
 
   Future<void> _loadContentMarkdown() async {
-    _contentMarkdown = await rootBundle.loadString(l10n.generalInfoMarkdownLocation);
+    final assetLocation = correctAssetPath(l10n.generalInfoMarkdownLocation);
+    _contentMarkdown = await rootBundle.loadString(assetLocation);
     notifyListeners();
   }
 

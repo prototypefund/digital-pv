@@ -175,6 +175,6 @@
   "personDetailsCountry": "Land",
   "personDetailsEmail": "Email",
   "personDetailsPhone": "Telefon",
-  "generalInfoMarkdownLocation": "markdown/de_general_information_about_directive.md",
+  "generalInfoMarkdownLocation": "assets/markdown/de_general_information_about_directive.md",
   "generalInfoConfirm": "Bestätigen"
 }
