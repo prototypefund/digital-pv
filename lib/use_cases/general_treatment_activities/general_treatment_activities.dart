@@ -31,7 +31,7 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> with RootCont
         children: [
           Padding(
             padding: Paddings.headlinePadding,
-            child: Text(_viewModel.addTreatmentActivitiesTitle, style: Theme.of(context).textTheme.headlineLarge),
+            child: Text(_viewModel.addTreatmentActivitiesTitle, style: Theme.of(context).textTheme.headlineSmall),
           ),
           Padding(
             padding: Paddings.headlineExplanationPadding,

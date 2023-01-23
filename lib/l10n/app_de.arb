@@ -174,5 +174,7 @@
   "personDetailsCity": "Ort",
   "personDetailsCountry": "Land",
   "personDetailsEmail": "Email",
-  "personDetailsPhone": "Telefon"
+  "personDetailsPhone": "Telefon",
+  "generalInfoMarkdownLocation": "markdown/de_general_information_about_directive.md",
+  "generalInfoConfirm": "Bestätigen"
 }

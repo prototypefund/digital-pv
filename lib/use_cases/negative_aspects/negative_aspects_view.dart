@@ -24,7 +24,7 @@ class NegativeAspects extends StatelessWidget {
       children: [
         Padding(
           padding: Paddings.headlinePadding,
-          child: Text(_viewModel.negativeAspectsTitle, style: Theme.of(context).textTheme.headlineLarge),
+          child: Text(_viewModel.negativeAspectsTitle, style: Theme.of(context).textTheme.headlineSmall),
         ),
         Padding(
           padding: Paddings.headlineExplanationPadding,
