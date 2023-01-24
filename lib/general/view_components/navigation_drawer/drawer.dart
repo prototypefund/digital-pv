@@ -29,6 +29,10 @@ class DPVDrawer extends StatelessWidget {
             title: Text(_viewModel.saveDirectiveLabel, style: Theme.of(context).textTheme.titleMedium),
             onTap: () => _viewModel.onSaveDirectiveTapped(context),
           ),
+          ListTile(
+            title: Text(_viewModel.loadDirectiveLabel, style: Theme.of(context).textTheme.titleMedium),
+            onTap: () => _viewModel.onLoadDirectiveTapped(context),
+          ),
         ],
       ), // Populate the Drawer in the next step.
     );

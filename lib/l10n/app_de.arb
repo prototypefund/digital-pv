@@ -183,5 +183,6 @@
   "personalDetailsForDirectiveValidationDateOfBirthEmpty": "Bitte geben Sie Ihren Geburtstag an",
   "personalDetailsForDirectiveDownloadDirective": "dPV als PDF abrufen",
   "drawerTitle": "dPV",
-  "drawerSaveDirective": "Zwischenstand speichern"
+  "drawerSaveDirective": "Zwischenstand speichern",
+  "drawerLoadDirective": "Patientenverfügung laden"
 }

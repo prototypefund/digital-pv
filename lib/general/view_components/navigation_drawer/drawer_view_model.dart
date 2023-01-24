@@ -11,9 +11,15 @@ class DrawerViewModel with ChangeNotifier, Logging, RootContextL10N {
 
   String get saveDirectiveLabel => l10n.drawerSaveDirective;
 
+  String get loadDirectiveLabel => l10n.drawerLoadDirective;
+
   String get drawerTitle => l10n.drawerTitle;
 
   void onSaveDirectiveTapped(BuildContext context) {
     _inputOutputService.savePatientDirectiveAsFile(context);
+  }
+
+  void onLoadDirectiveTapped(BuildContext context) {
+    _inputOutputService.loadPatientDirectiveFromFile(context);
   }
 }
