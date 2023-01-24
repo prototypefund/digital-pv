@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/person_of_trust.dart';
+import 'package:pd_app/general/model/personal_details.dart';
 import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/model/treatment_goal.dart';
 
@@ -25,6 +26,8 @@ class PatientDirective {
   TreatmentActivityChoice generalResuscitationPreference = TreatmentActivityChoice.notSpecified;
 
   List<PersonOfTrust> personsOfTrust;
+
+  PersonalDetails personalDetails = PersonalDetails();
 
   TreatmentGoal get generalTreatmentGoal {
     return _generalTreatmentGoal ?? TreatmentGoal(value: currentAspectsScore);
