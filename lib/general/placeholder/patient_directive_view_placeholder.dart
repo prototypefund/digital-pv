@@ -14,7 +14,7 @@ class PatientDirectiveViewPlaceholder extends StatelessWidget with PlaceholderTe
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.start,
           ),
           const SizedBox(
