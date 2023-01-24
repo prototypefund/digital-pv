@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
-
 import 'package:file_picker/file_picker.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pd_app/general/init/get_it.dart';
@@ -20,7 +18,6 @@ class InputOutputService with Logging {
     logger.i('saving current patient directive as file');
 
     final String directiveAsJson = jsonEncode(_patientDirectiveService.currentPatientDirective.toJson());
-    final String directiveAsBase64 = base64.encode(utf8.encode(directiveAsJson));
 
     if (kIsWeb) {
       String nameComponent = "";
@@ -31,12 +28,15 @@ class InputOutputService with Logging {
 
       final dateComponent = "-${DateTime.now().toIso8601String()}";
       final filename = "patient-directive$nameComponent$dateComponent.json";
-      AnchorElement(href: "data:application/octet-stream;charset=utf-16le;base64,$directiveAsBase64")
-        ..setAttribute("download", filename)
-        ..click();
+
+      startFileDownload(filename, Uint8List.fromList(utf8.encode(directiveAsJson)));
     } else {
       logger.w('downloading patient directive not implemented outside of web clients');
     }
+  }
+
+  Future<void> startFileDownload(String name, Uint8List bytes) async {
+    await FileSaver.instance.saveFile(name, bytes, "json", mimeType: MimeType.JSON);
   }
 
   Future<void> loadPatientDirectiveFromFile(BuildContext context) async {
