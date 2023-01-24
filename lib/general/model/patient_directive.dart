@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/person_of_trust.dart';
@@ -6,6 +7,9 @@ import 'package:pd_app/general/model/personal_details.dart';
 import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/model/treatment_goal.dart';
 
+part 'patient_directive.g.dart';
+
+@JsonSerializable()
 class PatientDirective {
   PatientDirective(
       {required this.positiveAspects,
@@ -14,6 +18,8 @@ class PatientDirective {
       this.personsOfTrust = const [],
       TreatmentGoal? generalTreatmentGoal})
       : _generalTreatmentGoal = generalTreatmentGoal;
+
+  factory PatientDirective.fromJson(Map<String, dynamic> json) => _$PatientDirectiveFromJson(json);
 
   final List<Aspect> positiveAspects;
   final List<Aspect> negativeAspects;
@@ -57,4 +63,6 @@ class PatientDirective {
 
     return normalizedPositive - normalizedNegative;
   }
+
+  Map<String, dynamic> toJson() => _$PatientDirectiveToJson(this);
 }
