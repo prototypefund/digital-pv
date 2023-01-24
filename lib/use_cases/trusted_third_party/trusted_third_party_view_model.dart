@@ -56,6 +56,8 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel with
     currentThirdParties.add(PersonOfTrust());
     currentDirective.personsOfTrust = currentThirdParties;
     _patientDirectiveService.currentPatientDirective = currentDirective;
+
+    _createThirdPartyFormViewModelsFromPatientDirective();
   }
 
   void _createThirdPartyFormViewModelsFromPatientDirective() {
@@ -68,23 +70,39 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel with
       final TrustedThirdPartyFormViewModel newViewModel = TrustedThirdPartyFormViewModel(
           readPersonFromService: () => _patientDirectiveService.currentPatientDirective.personsOfTrust[index]);
       formViewModels.add(newViewModel);
+      newViewModel.addListener(_reactToTrustedThirdPartyFormChanges);
     });
     _trustedThirdPartyFormViewModels = formViewModels;
   }
 
+  void _reactToTrustedThirdPartyFormChanges() {
+    _patientDirectiveService.notifyListeners();
+  }
+
   void _reactToPatientDirectiveChanges() {
-    _createThirdPartyFormViewModelsFromPatientDirective();
     notifyListeners();
   }
 
   @override
   void dispose() {
-    super.dispose();
+    for (final TrustedThirdPartyFormViewModel formViewModel in _trustedThirdPartyFormViewModels) {
+      formViewModel.removeListener(_reactToTrustedThirdPartyFormChanges);
+    }
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChanges);
+    super.dispose();
   }
 
   @override
   bool get nextButtonEnabled {
+    return isCurrentInputValid();
+  }
+
+  bool isCurrentInputValid() {
+    for (final TrustedThirdPartyFormViewModel formViewModel in _trustedThirdPartyFormViewModels) {
+      if (!formViewModel.isInputValid()) {
+        return false;
+      }
+    }
     return true;
   }
 }
