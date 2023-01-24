@@ -7,6 +7,7 @@ import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
+import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
 import 'package:provider/provider.dart';
 
@@ -27,20 +28,16 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
   @override
   Widget build(BuildContext context) {
     final ViewModelType _viewModel = context.watch<ViewModelType>();
-    final double deviceWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    final double paddingTop = MediaQuery
-        .of(context)
-        .padding
-        .top;
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double paddingTop = MediaQuery.of(context).padding.top;
     final useExtendedWidthForContent = deviceWidth >= responsiveAddonThreshold;
     return Scaffold(
+      drawer: const DPVDrawer(),
+      bottomNavigationBar: Card(
+          margin: EdgeInsets.zero,
+          child: Padding(padding: EdgeInsets.all(8), child: NavigationBarButtons<ViewModelType>())),
       body: Container(
-        color: Theme
-            .of(context)
-            .backgroundColor,
+        color: Theme.of(context).backgroundColor,
         child: Stack(
           children: [
             CustomScrollView(
@@ -48,15 +45,20 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                 SliverAppBar(
                   automaticallyImplyLeading: false,
                   // disables back button if popping is possible
-                  backgroundColor: Theme
-                      .of(context)
-                      .primaryColor,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  leading: Builder(builder: (context) {
+                    return IconButton(
+                      icon: const Icon(
+                        Icons.menu,
+                      ),
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                    );
+                  }),
                   pinned: true,
                   snap: false,
                   floating: true,
                   collapsedHeight: Sizes.toolbarHeight,
                   expandedHeight: useExtendedWidthForContent ? Sizes.toolbarHeight : sliverAppBarExpandedHeight,
-                  title: NavigationBarButtons<ViewModelType>(),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Padding(
                       padding: const EdgeInsets.all(sliverBarContentPadding),
@@ -77,10 +79,10 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                         // will just make empty space for the stack to be drawn upon further up the widget tree
                         child: _viewModel.showFloatingAspectVisualizationIfSpaceAvailable
                             ? ResponsiveAddonContent(
-                          extendedContent: const SizedBox.shrink(),
-                          widthThreshold: responsiveAddonThreshold,
-                          child: widget,
-                        )
+                                extendedContent: const SizedBox.shrink(),
+                                widthThreshold: responsiveAddonThreshold,
+                                child: widget,
+                              )
                             : widget,
                       ),
                     ),
@@ -117,9 +119,7 @@ class ConstrainedSliverWidth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery
-        .of(context)
-        .size;
+    final size = MediaQuery.of(context).size;
     final padding = (size.width - maxWidth) / 2;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: max(padding, 0)),
@@ -169,21 +169,21 @@ class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewMo
                     visible: _viewModel.nextButtonVisible,
                     child: _viewModel.nextButtonShowArrow
                         ? ElevatedButton.icon(
-                        icon: const Icon(
-                          Icons.arrow_forward_ios_sharp,
-                          size: iconSize,
-                        ),
-                        onPressed:
-                        _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
-                        label: Text(
-                          _viewModel.nextButtonText,
-                        ))
+                            icon: const Icon(
+                              Icons.arrow_forward_ios_sharp,
+                              size: iconSize,
+                            ),
+                            onPressed:
+                                _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                            label: Text(
+                              _viewModel.nextButtonText,
+                            ))
                         : ElevatedButton(
-                        onPressed:
-                        _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
-                        child: Text(
-                          _viewModel.nextButtonText,
-                        )),
+                            onPressed:
+                                _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                            child: Text(
+                              _viewModel.nextButtonText,
+                            )),
                   ),
                 ],
               ),

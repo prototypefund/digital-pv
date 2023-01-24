@@ -181,5 +181,7 @@
   "personalDetailsForDirectiveValidationSurnameEmpty": "Bitte geben Sie Ihren Nachnamen an",
   "personalDetailsForDirectiveValidationNameEmpty": "Bitte geben Sie Ihren Namen an",
   "personalDetailsForDirectiveValidationDateOfBirthEmpty": "Bitte geben Sie Ihren Geburtstag an",
-  "personalDetailsForDirectiveDownloadDirective": "dPV als PDF abrufen"
+  "personalDetailsForDirectiveDownloadDirective": "dPV als PDF abrufen",
+  "drawerTitle": "dPV",
+  "drawerSaveDirective": "Zwischenstand speichern"
 }
