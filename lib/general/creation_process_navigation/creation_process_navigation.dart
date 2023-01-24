@@ -8,6 +8,7 @@ import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
+import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
 import 'package:provider/provider.dart';
 
@@ -32,10 +33,10 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
     final double paddingTop = MediaQuery.of(context).padding.top;
     final useExtendedWidthForContent = deviceWidth >= responsiveAddonThreshold;
     return Scaffold(
-      drawer: const DPVDrawer(),
+      drawer: ChangeNotifierProvider(create: (_) => DrawerViewModel(), child: const DPVDrawer()),
       bottomNavigationBar: Card(
           margin: EdgeInsets.zero,
-          child: Padding(padding: EdgeInsets.all(8), child: NavigationBarButtons<ViewModelType>())),
+          child: Padding(padding: Paddings.bottomNavigationBarPadding, child: NavigationBarButtons<ViewModelType>())),
       body: Container(
         color: Theme.of(context).backgroundColor,
         child: Stack(

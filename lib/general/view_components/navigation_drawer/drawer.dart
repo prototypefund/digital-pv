@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
+import 'package:provider/provider.dart';
 
 class DPVDrawer extends StatelessWidget {
   const DPVDrawer({
@@ -8,6 +9,8 @@ class DPVDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DrawerViewModel _viewModel = context.watch();
+
     return Drawer(
       child: ListView(
         // Important: Remove any padding from the ListView.
@@ -18,13 +21,13 @@ class DPVDrawer extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             child: Text(
-              L10n.of(context).drawerTitle,
+              _viewModel.drawerTitle,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           ListTile(
-            title: Text(L10n.of(context).drawerSaveDirective, style: Theme.of(context).textTheme.titleMedium),
-            onTap: () {},
+            title: Text(_viewModel.saveDirectiveLabel, style: Theme.of(context).textTheme.titleMedium),
+            onTap: () => _viewModel.onSaveDirectiveTapped(context),
           ),
         ],
       ), // Populate the Drawer in the next step.
