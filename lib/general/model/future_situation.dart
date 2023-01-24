@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/treatment_activity.dart';
+import 'package:pd_app/general/model/weight.dart';
 
 part 'future_situation.g.dart';
 
@@ -19,5 +20,6 @@ class FutureSituation extends Aspect {
   TreatmentActivityChoice intensiveTreatmentPreference;
   TreatmentActivityChoice resuscitationPreference;
 
+  @override
   Map<String, dynamic> toJson() => _$FutureSituationToJson(this);
 }

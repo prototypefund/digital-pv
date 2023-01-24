@@ -36,7 +36,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^6.6.0
-  mockito: 5.3.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -44,6 +43,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   lint: 1.8.2
+  mockito: 5.3.2
 
 flutter:
   fonts:
