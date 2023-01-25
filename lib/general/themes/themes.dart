@@ -9,6 +9,7 @@ const Duration defaultDuration = Duration(milliseconds: 200);
 
 class Themes {
   ThemeData get defaultTheme => ThemeData(
+        appBarTheme: const AppBarTheme(iconTheme: IconThemeData(color: DefaultThemeColors.purple)),
         fontFamily: "Roboto",
         primaryColor: DefaultThemeColors.white,
         backgroundColor: DefaultThemeColors.white,

@@ -7,6 +7,8 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
 
   String get backButtonText => l10n.navigationBack;
 
+  bool get nextButtonShowArrow => true;
+
   void onBackButtonPressed(BuildContext context) {
     if (Navigator.of(context).canPop()) {
       context.pop();
