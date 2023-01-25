@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pd_app/general/asset_path_correction.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/markdown/local_markdown_content_loading.dart';
@@ -10,8 +9,7 @@ import 'package:pd_app/general/view_components/personal_details_form/personal_de
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/personal_details/personal_data_for_directive_view_model.dart';
 
-class PersonalDetailsViewModel extends CreationProcessNavigationViewModel
-    with AssetPathCorrection, LocalMarkdownContentLoading, Logging {
+class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with LocalMarkdownContentLoading, Logging {
   PersonalDetailsViewModel() : _patientDirectiveService = getIt.get() {
     personalDetailsFormViewModel = PersonalDataForDirectiveViewModel(
         personalDetails: _patientDirectiveService.currentPatientDirective.personalDetails);
