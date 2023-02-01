@@ -44,6 +44,7 @@ class InputOutputService with Logging {
       try {
         final FilePickerResult? result = await FilePicker.platform.pickFiles(
           type: FileType.custom,
+          allowMultiple: false,
           allowedExtensions: ['json'],
         );
 
