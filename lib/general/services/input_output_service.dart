@@ -54,7 +54,6 @@ class InputOutputService with Logging {
 
           final directiveContent = utf8.decode(bytes);
 
-          logger.d('directive content is $directiveContent');
           logger.d('decoding json file content to json map');
           final Map<String, dynamic> jsonMap = json.decode(directiveContent) as Map<String, dynamic>;
 

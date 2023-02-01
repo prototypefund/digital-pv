@@ -15,13 +15,16 @@ import 'package:pd_app/logging.dart';
 /// Manipulation of the patient directive is done directly by this model
 abstract class AspectListViewModel<AspectType extends Aspect>
     with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
-  AspectListViewModel({this.onAspectAdded}) : _patientDirectiveService = getIt.get() {
+  AspectListViewModel({this.onAspectAdded, this.onAspectRemoved}) : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService();
   }
 
   /// can be used to manipulate the view to react to new aspects, for instance with animated lists
   ValueChanged<AspectType>? onAspectAdded;
+
+  /// can be used to manipulate the view to react to removed aspects, for instance with animated lists
+  ValueChanged<AspectType>? onAspectRemoved;
 
   List<AspectType> _aspects = <AspectType>[];
 
@@ -62,17 +65,28 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     final currentPatientDirective = _patientDirectiveService.currentPatientDirective;
 
     final oldAspects = _aspects;
-    _aspects = List.of(aspectListChoice(currentPatientDirective));
+    final allAspectsFromDirective = List.of(aspectListChoice(currentPatientDirective));
+
+    final removedAspects = oldAspects.toSet().difference(allAspectsFromDirective.toSet());
+    logger.d('handling ${removedAspects.length} removed aspects');
+    for (final aspect in removedAspects) {
+      onAspectRemoved?.call(aspect);
+      _aspects.remove(aspect);
+    }
+
+    _aspects = allAspectsFromDirective;
 
     _sortAspects();
 
     final newAspects = _aspects.toSet().difference(oldAspects.toSet());
+    logger.d('handling ${newAspects.length} new aspects');
     for (final aspect in newAspects) {
       onAspectAdded?.call(aspect);
     }
   }
 
   void _reactToPatientDirectiveChange() {
+    logger.d('aspect list reacting to patient directive change');
     final List<AspectType> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
     if (aspectsInService.length != _aspects.length) {
       logger.i("an aspect was removed or added, refreshing view's list of elements and sorting them anew");
