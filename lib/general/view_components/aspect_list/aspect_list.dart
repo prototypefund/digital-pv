@@ -27,6 +27,15 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
       _listKey.currentState?.insertItem(index);
     };
 
+    _viewModel.onAspectRemoved = (AspectType removedAspect) {
+      logger.d('removing removed aspect in an animated way');
+      final int oldIndex = _viewModel.aspects.indexOf(removedAspect);
+      _listKey.currentState?.removeItem(
+          oldIndex,
+          (context, animation) => _buildListItem(
+              animation: animation, aspect: removedAspect, viewModel: _viewModel, interactive: false, index: oldIndex));
+    };
+
     return Column(
       children: [
         if (_viewModel.showEmptyAspectListsMessage)
@@ -85,19 +94,6 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
             sliderDescription: viewModel.aspectSignificanceLabel,
             sliderHighLabel: viewModel.aspectSignificanceHighLabel,
             sliderLowLabel: viewModel.aspectsSignificanceLowLabel,
-            onRemove: !interactive
-                ? null
-                : () async {
-                    logger.i('removing list item with index $index');
-                    _listKey.currentState?.removeItem(
-                        index,
-                        (context, animation) => _buildListItem(
-                            animation: animation,
-                            aspect: aspect,
-                            viewModel: viewModel,
-                            interactive: false,
-                            index: index));
-                  },
             onPositionChange: !interactive
                 ? null
                 : (oldIndex, newIndex) {

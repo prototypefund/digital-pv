@@ -7,6 +7,8 @@ import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
+import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
+import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +33,10 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
     final double paddingTop = MediaQuery.of(context).padding.top;
     final useExtendedWidthForContent = deviceWidth >= responsiveAddonThreshold;
     return Scaffold(
+      drawer: ChangeNotifierProvider(create: (_) => DrawerViewModel(), child: const DPVDrawer()),
+      bottomNavigationBar: Card(
+          margin: EdgeInsets.zero,
+          child: Padding(padding: Paddings.bottomNavigationBarPadding, child: NavigationBarButtons<ViewModelType>())),
       body: Container(
         color: Theme.of(context).backgroundColor,
         child: Stack(
@@ -41,12 +47,19 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   automaticallyImplyLeading: false,
                   // disables back button if popping is possible
                   backgroundColor: Theme.of(context).primaryColor,
+                  leading: Builder(builder: (context) {
+                    return IconButton(
+                      icon: const Icon(
+                        Icons.menu,
+                      ),
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                    );
+                  }),
                   pinned: true,
                   snap: false,
                   floating: true,
                   collapsedHeight: Sizes.toolbarHeight,
                   expandedHeight: useExtendedWidthForContent ? Sizes.toolbarHeight : sliverAppBarExpandedHeight,
-                  title: NavigationBarButtons<ViewModelType>(),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Padding(
                       padding: const EdgeInsets.all(sliverBarContentPadding),
@@ -155,15 +168,23 @@ class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewMo
                   ),
                   Visibility(
                     visible: _viewModel.nextButtonVisible,
-                    child: ElevatedButton.icon(
-                        icon: const Icon(
-                          Icons.arrow_forward_ios_sharp,
-                          size: iconSize,
-                        ),
-                        onPressed: _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
-                        label: Text(
-                          _viewModel.nextButtonText,
-                        )),
+                    child: _viewModel.nextButtonShowArrow
+                        ? ElevatedButton.icon(
+                            icon: const Icon(
+                              Icons.arrow_forward_ios_sharp,
+                              size: iconSize,
+                            ),
+                            onPressed:
+                                _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                            label: Text(
+                              _viewModel.nextButtonText,
+                            ))
+                        : ElevatedButton(
+                            onPressed:
+                                _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                            child: Text(
+                              _viewModel.nextButtonText,
+                            )),
                   ),
                 ],
               ),

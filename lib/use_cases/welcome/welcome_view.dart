@@ -52,7 +52,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                               child: Text(
                                 viewModel.title,
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.headlineLarge,
+                                style: Theme.of(context).textTheme.headlineSmall,
                               ),
                             ),
                           ),

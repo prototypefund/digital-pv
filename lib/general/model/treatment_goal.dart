@@ -1,12 +1,18 @@
 import 'dart:math';
 
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'treatment_goal.g.dart';
+
+@JsonSerializable()
 class TreatmentGoal {
   static const double valueUpperBound = 1;
   static const double valueLowerBound = -1;
 
   TreatmentGoal({required double value}) : value = _restrictValueToValidBounds(value);
+
+  factory TreatmentGoal.fromJson(Map<String, dynamic> json) => _$TreatmentGoalFromJson(json);
 
   static double _restrictValueToValidBounds(double valueToCheck) {
     return max(min(valueToCheck, valueUpperBound), valueLowerBound);
@@ -24,6 +30,8 @@ class TreatmentGoal {
       return TreatmentGoalTendency.curative;
     }
   }
+
+  Map<String, dynamic> toJson() => _$TreatmentGoalToJson(this);
 }
 
 enum TreatmentGoalTendency { undefined, curative, palliative }

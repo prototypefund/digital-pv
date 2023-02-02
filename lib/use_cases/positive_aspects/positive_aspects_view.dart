@@ -24,7 +24,7 @@ class PositiveAspects extends StatelessWidget with Logging {
             child: Text(
               context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectsHeadlineText),
               textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
           Padding(

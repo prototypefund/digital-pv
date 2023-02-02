@@ -67,4 +67,7 @@ class StubCreationProcessNavigationViewModel
 
   @override
   bool get showTreatmentGoalInVisualization => false;
+
+  @override
+  bool get nextButtonShowArrow => true;
 }

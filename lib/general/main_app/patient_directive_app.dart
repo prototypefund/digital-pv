@@ -12,7 +12,7 @@ import 'package:pd_app/use_cases/general_information_about_patient_directive/gen
 import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_activities.dart';
 import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_objective.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view.dart';
-import 'package:pd_app/use_cases/personal_details/general_information_about_patient_directive.dart';
+import 'package:pd_app/use_cases/personal_details/personal_details.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
@@ -111,7 +111,6 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
       child: child,
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

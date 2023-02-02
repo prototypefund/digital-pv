@@ -97,9 +97,12 @@ class PersonalDetailsFormViewModel with ChangeNotifier, RootContextL10N, Logging
 
   String? surnameValidator(String? value) => null;
 
+  String? dateOfBirthValidator(String? value) => null;
+
   bool isInputValid() {
     return phoneNumberValidator(personalDetails.phone) == null &&
         nameValidator(personalDetails.name) == null &&
-        surnameValidator(personalDetails.surname) == null;
+        surnameValidator(personalDetails.surname) == null &&
+        dateOfBirthValidator(personalDetails.dateOfBirth) == null;
   }
 }
