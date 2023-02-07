@@ -1,0 +1,78 @@
+[
+  {
+    "example": {
+      "id": 13,
+      "group": "Schwere Zustände",
+      "title": "Intensivbehandlung unklarer Dauer nach akutem Ereignis",
+      "contextual_help": {
+        "id": 1,
+        "title": null,
+        "content": "z.B. Infektion, Komplikationen bei/nach OP, akute Verschlechterung einer bestehenden Erkrankung"
+      }
+    },
+    "id": 13,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 14,
+      "group": "Schwere Zustände",
+      "title": "Schwere, dauerhafte körperliche Beeinträchtigung",
+      "contextual_help": {
+        "id": 2,
+        "title": null,
+        "content": "(Bettlägerigkeit, permanente Pflegedürftigkeit, Inkontinenz) bei gleichzeitigem Verlust der Einwilligungs- bzw. Urteilsfähigkeit"
+      }
+    },
+    "id": 14,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 15,
+      "group": "Schwere Zustände",
+      "title": "Schwere oder fortschreitende geistige Beeinträchtigung",
+      "contextual_help": {
+        "id": 3,
+        "title": null,
+        "content": "z.B. unfallbedingte Hirnschädigung, Demenz"
+      }
+    },
+    "id": 15,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 16,
+      "group": "Ungewisse Zustände",
+      "title": "Wachkoma oder ähnliche Zustände",
+      "contextual_help": {
+        "id": 4,
+        "title": null,
+        "content": "Info: Ein Erwachen ist nicht ganz auszuschliessen, aber unwahrscheinlich. Es ist unklar, ob eine gewisse Empfindungsfähigkeit erhalten sein kann."
+      }
+    },
+    "id": 16,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 17,
+      "group": "Tod unausweichlich",
+      "title": "Endstadium einer tödlichen Krankheit",
+      "contextual_help": null
+    },
+    "id": 17,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 18,
+      "group": "Tod unausweichlich",
+      "title": "Sterbeprozess",
+      "contextual_help": null
+    },
+    "id": 18,
+    "locale": "de"
+  }
+]

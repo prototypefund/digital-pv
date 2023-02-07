@@ -75,21 +75,6 @@ class AddPositiveAspectViewModel extends CreationProcessNavigationViewModel with
     notifyListeners();
   }
 
-  List<String> get examples {
-    return [
-      l10n.spendTimeWithFamily,
-      l10n.pet,
-      l10n.myHome,
-      l10n.personalContacts,
-      l10n.myWork,
-      l10n.travelling,
-      l10n.jogging,
-      l10n.ridingTheBike,
-      l10n.cooking,
-      l10n.writingBooks,
-    ];
-  }
-
   void chooseExample(String text) {
     aspectTextFieldController.text = text;
     notifyListeners();

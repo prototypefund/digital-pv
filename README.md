@@ -2,6 +2,33 @@
 
 Digital Patient Directive
 
+## Content Management System
+
+Dynamic content is managed using Strapi as Content Management System.
+
+### Current dynamic content
+
+Dynamic content is currently managed at https://strapi.dpv.staging.deyan7.de/admin
+
+Content is saved as asset files in /assets/cms. Asset files can be updated by running cms_asset_generator.dart. You need
+to
+specify the environment variable `CMS_API_TOKEN`.
+
+Content will not be updated at runtime at this moment.
+
+Dynamic content comprises:
+
+- Examples of positive aspects
+- Examples of negatives aspects
+- Examples of future situations
+
+### Planned dynamic content
+
+- Entry and outro test of every page as markdown
+- Context help regarding every page
+- Onboarding pages
+- Text content of generated pdf
+
 ## Coding style
 
 We prefer `Clean Code` as defined by Robert C. Martin.

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
+import 'package:pd_app/general/dynamic_content/aspects_example.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
@@ -79,7 +80,21 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     notifyListeners();
   }
 
-  List<Group> get examples;
+  List<AspectsExample> get aspectExamples;
+
+  List<Group> get examples {
+    final List<AspectsExample> examplesContent = aspectExamples;
+
+    final Set<String> groups = examplesContent.map((e) => e.example.group).toSet();
+    final Map<String, Group> groupMap = {};
+    for (final String group in groups) {
+      groupMap[group] = Group(title: group, children: []);
+    }
+    for (final AspectsExample example in examplesContent) {
+      groupMap[example.example.group]!.children.add(Item(title: example.example.title));
+    }
+    return groupMap.values.toList();
+  }
 
   void chooseExample(String text) {
     aspectTextFieldController.text = text;

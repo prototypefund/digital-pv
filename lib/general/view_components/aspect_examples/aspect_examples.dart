@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
+import 'package:pd_app/logging.dart';
 
 class Examples extends StatefulWidget {
   const Examples({super.key, required this.examples, required this.onExampleChosen});
@@ -14,7 +15,7 @@ class Examples extends StatefulWidget {
   State<Examples> createState() => _ExamplesState();
 }
 
-class _ExamplesState extends State<Examples> with SingleTickerProviderStateMixin {
+class _ExamplesState extends State<Examples> with TickerProviderStateMixin, Logging {
   late TabController _controller;
 
   @override
@@ -22,6 +23,16 @@ class _ExamplesState extends State<Examples> with SingleTickerProviderStateMixin
     super.initState();
     _controller =
         TabController(length: widget.examples.length, vsync: this, animationDuration: const Duration(milliseconds: 1));
+  }
+
+  @override
+  void didUpdateWidget(covariant Examples oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.examples.length != oldWidget.examples.length) {
+      _controller = TabController(
+          length: widget.examples.length, vsync: this, animationDuration: const Duration(milliseconds: 1));
+    }
   }
 
   @override

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/dynamic_content/aspects_example.dart';
+import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/navigation/routes.dart';
-import 'package:pd_app/general/view_components/aspect_examples/aspect_examples_model.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
 class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
+  NewPositiveAspectViewModel() : _contentService = getIt.get();
+
+  final ContentService _contentService;
+
   @override
   String get addAspectActionText => l10n.addPositiveAspectCallToAction;
 
@@ -34,30 +40,10 @@ class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
   }
 
   @override
-  List<Group> get examples {
-    return [
-      Group(title: l10n.positiveAspectsGroupFamily, children: [
-        Item(title: l10n.spendTimeWithFamily),
-        Item(title: l10n.pet),
-      ]),
-      Group(title: l10n.positiveAspectsGroupLeisure, children: [
-        Item(title: l10n.personalContacts),
-        Item(title: l10n.myHome),
-        Item(title: l10n.travelling),
-      ]),
-      Group(title: l10n.positiveAspectsGroupWork, children: [
-        Item(title: l10n.myWork),
-        Item(title: l10n.writingBooks),
-      ]),
-      Group(title: l10n.positiveAspectsGroupSport, children: [
-        Item(title: l10n.jogging),
-        Item(title: l10n.ridingTheBike),
-      ]),
-    ];
-  }
-
-  @override
   Aspect createNewAspect({required String name, required Weight weight}) {
     return Aspect(name: name, weight: weight);
   }
+
+  @override
+  List<AspectsExample> get aspectExamples => _contentService.positiveAspectsExamples;
 }
