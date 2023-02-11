@@ -28,10 +28,11 @@ class PersonalDetailsForm extends StatelessWidget {
         ),
         Padding(
           padding: Paddings.textFieldPadding,
-          child: TextField(
+          child: TextFormField(
             controller: _viewModel.dateOfBirthTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
             decoration: InputDecoration(label: Text(_viewModel.dateOfBirthLabel)),
+            validator: _viewModel.dateOfBirthValidator,
           ),
         ),
         Padding(

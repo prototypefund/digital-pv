@@ -24,7 +24,7 @@ class TrustedThirdParty extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Padding(
           padding: Paddings.headlinePadding,
-          child: Text(_viewModel.headline, style: Theme.of(context).textTheme.headlineLarge),
+          child: Text(_viewModel.headline, style: Theme.of(context).textTheme.headlineSmall),
         ),
         const SizedBox(
           height: 24,
