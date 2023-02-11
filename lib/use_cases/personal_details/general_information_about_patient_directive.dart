@@ -16,9 +16,8 @@ class PersonalDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     // PLACEHOLDER PDF VIEWER
     final widget = FutureBuilder<Widget>(
-      future: PdfService(PdfViewModel()).displayPdf(), // function where you call your api
+      future: PdfService(PdfViewModel()).displayPdf(),
       builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-        // AsyncSnapshot<Your object type>
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: Text('Please wait its loading...'));
         } else {
@@ -26,10 +25,7 @@ class PersonalDetails extends StatelessWidget {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             return ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 900, maxWidth: 1000),
-                child: Center(
-                    child: snapshot
-                        .data)); // snapshot.data  :- get your object which is pass from your downloadData() function
+                constraints: const BoxConstraints(maxHeight: 900, maxWidth: 1000), child: Center(child: snapshot.data));
           }
         }
       },
