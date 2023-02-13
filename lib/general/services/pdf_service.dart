@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:pd_app/general/services/download_pdf_mobile.dart'
+    if (dart.library.html) 'package:pd_app/general/services/download_pdf_web.dart' as downloader;
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/use_cases/pdf/pdf_view_model.dart';
 import 'package:pdf/pdf.dart';
@@ -15,6 +18,16 @@ import 'package:printing/printing.dart';
 class PdfService with RootContextL10N {
   PdfService(PdfViewModel pdfViewModel) : _pdfViewModel = pdfViewModel;
   final PdfViewModel _pdfViewModel;
+
+  Future<void> downloadPdf() async {
+    final bytes = generatePdf();
+    final filename = generateFilename(_pdfViewModel.patientName);
+    final path = kIsWeb == false ? await _generateFilePath(filename) : '';
+    if (!kIsWeb) {
+      await _createFile(bytes, path);
+    }
+    downloader.downloadPdf(await bytes, filename, path);
+  }
 
   Future<Uint8List> generatePdf() async {
     final pw.Document pdf = pw.Document();
@@ -215,12 +228,17 @@ class PdfService with RootContextL10N {
   }
 
   Future<String> _generateFilePath(String name) async {
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getTemporaryDirectory();
+    final fileName = generateFilename(name);
+    return p.join(directory.path, fileName);
+  }
+
+  String generateFilename(String name) {
     final now = DateTime.now();
     final formatter = DateFormat('dd-MM-yyyy');
     final formattedDate = formatter.format(now);
     final fileName = 'dPV-$formattedDate-$name.pdf';
-    return p.join(directory.path, fileName);
+    return fileName;
   }
 
   Future<void> _createFile(Future<Uint8List> bytes, String filePath) async {

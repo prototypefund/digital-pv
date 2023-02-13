@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
@@ -5,8 +8,10 @@ import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/markdown/local_markdown_content_loading.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
+import 'package:pd_app/general/services/pdf_service.dart';
 import 'package:pd_app/general/view_components/personal_details_form/personal_details_form_view_model.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/pdf/pdf_view_model.dart';
 import 'package:pd_app/use_cases/personal_details/personal_data_for_directive_view_model.dart';
 
 class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with LocalMarkdownContentLoading, Logging {
@@ -82,5 +87,8 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
 
   void onDownloadDirectivePressed(BuildContext context) {
     logger.w('downloading directive not implemented yet');
+    final model = PdfViewModel();
+    final service = PdfService(model);
+    unawaited(service.downloadPdf());
   }
 }

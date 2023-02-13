@@ -34,6 +34,7 @@ dependencies:
   responsive_sizer: ^3.0.8
   retry: ^3.1.0
   rxdart: ^0.27.3
+  share_plus: ^6.3.1
   stack_trace: 1.11.0
 
 dev_dependencies:
