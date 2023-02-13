@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
-    final ViewModelClass _viewModel = context.watch();
+    final ViewModelClass viewModel = context.watch();
 
     return Column(
       children: [
@@ -20,27 +20,27 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
               Padding(
                 padding: Paddings.textFieldPadding,
                 child: TextField(
-                  controller: _viewModel.aspectTextFieldController,
+                  controller: viewModel.aspectTextFieldController,
                   style: Theme.of(context).textTheme.labelLarge,
-                  decoration: InputDecoration(hintText: _viewModel.addAspectTextfieldHint),
+                  decoration: InputDecoration(hintText: viewModel.addAspectTextfieldHint),
                   autofocus: true,
                 ),
               ),
               DPVSlider(
-                sliderDescription: _viewModel.aspectSignificanceLabel,
-                showLabels: _viewModel.showAspectSignificanceLabel,
-                sliderLowLabel: _viewModel.aspectsSignificanceLowLabel,
-                sliderHighLabel: _viewModel.aspectSignificanceHighLabel,
-                value: _viewModel.weight,
+                sliderDescription: viewModel.aspectSignificanceLabel,
+                showLabels: viewModel.showAspectSignificanceLabel,
+                sliderLowLabel: viewModel.aspectsSignificanceLowLabel,
+                sliderHighLabel: viewModel.aspectSignificanceHighLabel,
+                value: viewModel.weight,
                 padding: Paddings.newAspectSliderPadding,
                 onChanged: (double value) {
-                  _viewModel.weight = value;
+                  viewModel.weight = value;
                 },
               ),
               ElevatedButton.icon(
-                onPressed: _viewModel.addAspect(context),
+                onPressed: viewModel.addAspect(context),
                 icon: const Icon(Icons.add),
-                label: Text(_viewModel.addAspectActionText),
+                label: Text(viewModel.addAspectActionText),
               )
             ],
           ),
@@ -48,14 +48,14 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
         const SizedBox(
           height: 40,
         ),
-        Text(_viewModel.examplesTitle),
+        Text(viewModel.examplesTitle),
         const SizedBox(
           height: 10,
         ),
         Examples(
-          examples: _viewModel.examples,
+          examples: viewModel.examples,
           onExampleChosen: (String value) {
-            _viewModel.chooseExample(value);
+            viewModel.chooseExample(value);
           },
         ),
       ],

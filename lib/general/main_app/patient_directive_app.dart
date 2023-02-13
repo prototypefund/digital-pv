@@ -21,7 +21,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
 class PatientDirectiveApp extends StatefulWidget {
-  const PatientDirectiveApp({Key? key}) : super(key: key);
+  const PatientDirectiveApp({super.key});
 
   @override
   State<PatientDirectiveApp> createState() => _PatientDirectiveAppState();

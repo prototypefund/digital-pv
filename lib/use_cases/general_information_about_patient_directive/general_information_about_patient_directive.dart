@@ -5,7 +5,7 @@ import 'package:pd_app/use_cases/general_information_about_patient_directive/gen
 import 'package:provider/provider.dart';
 
 class GeneralInformationAboutPatientDirective extends StatelessWidget {
-  const GeneralInformationAboutPatientDirective({Key? key}) : super(key: key);
+  const GeneralInformationAboutPatientDirective({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(
@@ -15,17 +15,17 @@ class GeneralInformationAboutPatientDirective extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GeneralInformationAboutPatientDirectiveViewModel _viewModel = context.watch();
+    final GeneralInformationAboutPatientDirectiveViewModel viewModel = context.watch();
     return CreationProcessNavigation<GeneralInformationAboutPatientDirectiveViewModel>(
         widget: Column(
       children: [
-        MarkdownBody(content: _viewModel.contentMarkdown),
+        MarkdownBody(content: viewModel.contentMarkdown),
         const SizedBox(
           height: 24,
         ),
         ElevatedButton(
-          onPressed: () => _viewModel.onConfirmPressed(context),
-          child: Text(_viewModel.confirmLabel),
+          onPressed: () => viewModel.onConfirmPressed(context),
+          child: Text(viewModel.confirmLabel),
         )
       ],
     ));

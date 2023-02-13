@@ -4,7 +4,7 @@ import 'package:pd_app/general/themes/paddings.dart';
 
 class DPVSlider extends StatelessWidget {
   const DPVSlider(
-      {Key? key,
+      {super.key,
       required this.sliderDescription,
       this.onChanged,
       this.onChangeEnd,
@@ -13,8 +13,7 @@ class DPVSlider extends StatelessWidget {
       required this.showLabels,
       required this.value,
       this.padding = Paddings.sliderPadding,
-      this.constraints = Constraints.sliderConstraints})
-      : super(key: key);
+      this.constraints = Constraints.sliderConstraints});
 
   final String sliderDescription;
   final String sliderLowLabel;

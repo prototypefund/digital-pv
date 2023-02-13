@@ -8,7 +8,7 @@ import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_
 import 'package:provider/provider.dart';
 
 class TreatmentActivities extends StatefulWidget {
-  const TreatmentActivities({Key? key}) : super(key: key);
+  const TreatmentActivities({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(

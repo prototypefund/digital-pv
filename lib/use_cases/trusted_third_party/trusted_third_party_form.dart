@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class TrustedThirdPartyForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final TrustedThirdPartyFormViewModel _viewModel = context.watch();
+    final TrustedThirdPartyFormViewModel viewModel = context.watch();
 
     return Form(
       autovalidateMode: AutovalidateMode.always,
@@ -21,12 +21,12 @@ class TrustedThirdPartyForm extends StatelessWidget {
             children: [
               IconButton(
                   onPressed: () async {
-                    await _viewModel.removePersonOfTrust(context);
+                    await viewModel.removePersonOfTrust(context);
                   },
                   icon: const Icon(Icons.remove_circle_outline)),
             ],
           ),
-          ChangeNotifierProvider.value(value: _viewModel.personalDetailsFormViewModel, child: PersonalDetailsForm()),
+          ChangeNotifierProvider.value(value: viewModel.personalDetailsFormViewModel, child: PersonalDetailsForm()),
           Padding(
             padding: Paddings.trustedPersonPowerPadding,
             child: DPVBox(
@@ -34,71 +34,71 @@ class TrustedThirdPartyForm extends StatelessWidget {
               children: [
                 SizedBox(
                   width: double.infinity,
-                  child: Text(_viewModel.functionLabel,
+                  child: Text(viewModel.functionLabel,
                       textAlign: TextAlign.start, style: Theme.of(context).textTheme.titleMedium),
                 ),
-                if (!_viewModel.showPowerSharingOptions)
+                if (!viewModel.showPowerSharingOptions)
                   Padding(
                     padding: Paddings.checkboxPadding,
                     child: CheckboxListTileFormField(
-                      initialValue: _viewModel.hasIndividualPowerOfAttorney,
+                      initialValue: viewModel.hasIndividualPowerOfAttorney,
                       controlAffinity: ListTileControlAffinity.leading,
                       onChanged: (_) {
-                        _viewModel.toggleIndividualPowerOfAttorney();
+                        viewModel.toggleIndividualPowerOfAttorney();
                       },
-                      title: Text(_viewModel.agentLabel),
-                      validator: _viewModel.hasIndividualPowerOfAttorneyValidator,
+                      title: Text(viewModel.agentLabel),
+                      validator: viewModel.hasIndividualPowerOfAttorneyValidator,
                     ),
                   ),
-                if (_viewModel.showPowerSharingOptions)
+                if (viewModel.showPowerSharingOptions)
                   Padding(
                     padding: Paddings.subHeadlinePadding,
                     child: SizedBox(
                       width: double.infinity,
-                      child: Text(_viewModel.powerSharingIntroductionLabel,
+                      child: Text(viewModel.powerSharingIntroductionLabel,
                           textAlign: TextAlign.start, style: Theme.of(context).textTheme.titleMedium),
                     ),
                   ),
-                if (_viewModel.showPowerSharingOptions)
+                if (viewModel.showPowerSharingOptions)
                   Padding(
                     padding: Paddings.checkboxPadding + Paddings.groupPowerOfAttorneyCheckboxPadding,
                     child: CheckboxListTileFormField(
-                      initialValue: _viewModel.hasIndividualPowerOfAttorney,
+                      initialValue: viewModel.hasIndividualPowerOfAttorney,
                       controlAffinity: ListTileControlAffinity.leading,
                       onChanged: (_) {
-                        _viewModel.toggleIndividualPowerOfAttorney();
+                        viewModel.toggleIndividualPowerOfAttorney();
                       },
-                      validator: _viewModel.hasIndividualPowerOfAttorneyValidator,
-                      title: Text(_viewModel.hasIndividualPowerOfAttorneyLabel),
+                      validator: viewModel.hasIndividualPowerOfAttorneyValidator,
+                      title: Text(viewModel.hasIndividualPowerOfAttorneyLabel),
                     ),
                   ),
-                if (_viewModel.showPowerSharingOptions)
+                if (viewModel.showPowerSharingOptions)
                   Padding(
                     padding: Paddings.checkboxPadding + Paddings.groupPowerOfAttorneyCheckboxPadding,
                     child: CheckboxListTileFormField(
-                      initialValue: _viewModel.hasGroupPowerOfAttorney,
+                      initialValue: viewModel.hasGroupPowerOfAttorney,
                       controlAffinity: ListTileControlAffinity.leading,
                       onChanged: (_) {
-                        _viewModel.toggleGroupPowerOfAttorney();
+                        viewModel.toggleGroupPowerOfAttorney();
                       },
-                      validator: _viewModel.hasGroupPowerOfAttorneyValidator,
-                      title: Text(_viewModel.hasGroupPowerOfAttorneyLabel),
+                      validator: viewModel.hasGroupPowerOfAttorneyValidator,
+                      title: Text(viewModel.hasGroupPowerOfAttorneyLabel),
                     ),
                   ),
-                if (_viewModel.showPowerSharingOptions)
+                if (viewModel.showPowerSharingOptions)
                   const SizedBox(
                     height: Sizes.checkboxGroupDistance,
                   ),
                 Padding(
                   padding: Paddings.checkboxPadding,
                   child: CheckboxListTileFormField(
-                    initialValue: _viewModel.isAgentWithGuardianship,
+                    initialValue: viewModel.isAgentWithGuardianship,
                     controlAffinity: ListTileControlAffinity.leading,
                     onChanged: (_) {
-                      _viewModel.toggleHasGuardianship();
+                      viewModel.toggleHasGuardianship();
                     },
-                    title: Text(_viewModel.guardianshipLabel),
-                    validator: _viewModel.isAgentWithGuardianshipValidator,
+                    title: Text(viewModel.guardianshipLabel),
+                    validator: viewModel.isAgentWithGuardianshipValidator,
                   ),
                 ),
               ],

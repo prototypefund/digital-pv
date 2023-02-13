@@ -26,10 +26,9 @@ dependencies:
   intl: 0.17.0
   json_annotation: ^4.8.0
   logger: 1.1.0
-  mockito: 5.1.0
-  package_info_plus: 1.4.2
   path_provider: ^2.0.12
   pdf: ^3.9.0
+  pdfx: ^2.3.0
   printing: ^5.10.1
   provider: 6.0.2
   responsive_sizer: ^3.0.8
@@ -48,7 +47,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  lint: 1.8.2
+  lint: ^2.0.1
   mockito: 5.3.2
 
 flutter:

@@ -3,8 +3,7 @@ import 'package:pd_app/general/themes/extensions/dropdown_button_style.dart';
 
 class DPVDropDown<Type> extends StatelessWidget {
   const DPVDropDown(
-      {Key? key, required this.description, this.initialValue, required this.onChanged, required this.items})
-      : super(key: key);
+      {super.key, required this.description, this.initialValue, required this.onChanged, required this.items});
 
   final Widget description;
   final Type? initialValue;

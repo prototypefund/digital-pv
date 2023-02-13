@@ -13,7 +13,7 @@ import 'package:pd_app/general/view_components/responsive_addon_content/responsi
 import 'package:provider/provider.dart';
 
 class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
-  const CreationProcessNavigation({Key? key, required this.widget, this.floatingAddonWidget}) : super(key: key);
+  const CreationProcessNavigation({super.key, required this.widget, this.floatingAddonWidget});
 
   final Widget widget;
 
@@ -28,7 +28,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
 
   @override
   Widget build(BuildContext context) {
-    final ViewModelType _viewModel = context.watch<ViewModelType>();
+    final ViewModelType viewModel = context.watch<ViewModelType>();
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double paddingTop = MediaQuery.of(context).padding.top;
     final useExtendedWidthForContent = deviceWidth >= responsiveAddonThreshold;
@@ -37,8 +37,8 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
       bottomNavigationBar: Card(
           margin: EdgeInsets.zero,
           child: Padding(padding: Paddings.bottomNavigationBarPadding, child: NavigationBarButtons<ViewModelType>())),
-      body: Container(
-        color: Theme.of(context).backgroundColor,
+      body: ColoredBox(
+        color: Theme.of(context).colorScheme.background,
         child: Stack(
           children: [
             CustomScrollView(
@@ -65,9 +65,9 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                       padding: const EdgeInsets.all(sliverBarContentPadding),
                       child: Visibility(
                           visible: deviceWidth < responsiveAddonThreshold &&
-                              _viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
+                              viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
                           child: AspectVisualization.widgetWithViewModel(
-                              showLabels: false, showTreatmentGoal: _viewModel.showTreatmentGoalInVisualization)),
+                              showLabels: false, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
                     ),
                   ),
                 ),
@@ -78,7 +78,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                       child: Padding(
                         padding: const EdgeInsets.all(contentAreaPadding),
                         // will just make empty space for the stack to be drawn upon further up the widget tree
-                        child: _viewModel.showFloatingAspectVisualizationIfSpaceAvailable
+                        child: viewModel.showFloatingAspectVisualizationIfSpaceAvailable
                             ? ResponsiveAddonContent(
                                 extendedContent: const SizedBox.shrink(),
                                 widthThreshold: responsiveAddonThreshold,
@@ -91,7 +91,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                 )
               ],
             ),
-            if (deviceWidth > responsiveAddonThreshold && _viewModel.showFloatingAspectVisualizationIfSpaceAvailable)
+            if (deviceWidth > responsiveAddonThreshold && viewModel.showFloatingAspectVisualizationIfSpaceAvailable)
               Positioned(
                   left: deviceWidth * 0.6,
                   right: 0,
@@ -100,7 +100,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   child: Padding(
                       padding: Paddings.floatingAspectVisualizationPadding,
                       child: AspectVisualization.widgetWithViewModel(
-                          showLabels: true, showTreatmentGoal: _viewModel.showTreatmentGoalInVisualization)))
+                          showLabels: true, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
           ],
         ),
       ),
@@ -113,10 +113,10 @@ class ConstrainedSliverWidth extends StatelessWidget {
   final double maxWidth;
 
   const ConstrainedSliverWidth({
-    Key? key,
+    super.key,
     required this.child,
     required this.maxWidth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -131,12 +131,12 @@ class ConstrainedSliverWidth extends StatelessWidget {
 
 class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
   const NavigationBarButtons({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final ViewModelType _viewModel = context.watch();
+    final ViewModelType viewModel = context.watch();
 
     const iconSize = 16.0;
 
@@ -153,37 +153,37 @@ class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewMo
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Visibility(
-                    visible: _viewModel.backButtonVisible,
+                    visible: viewModel.backButtonVisible,
                     child: ElevatedButton.icon(
                       icon: const Icon(
                         Icons.arrow_back_ios_sharp,
                         size: iconSize,
                       ),
-                      onPressed: _viewModel.backButtonEnabled ? () => _viewModel.onBackButtonPressed(context) : null,
-                      label: Text(_viewModel.backButtonText),
+                      onPressed: viewModel.backButtonEnabled ? () => viewModel.onBackButtonPressed(context) : null,
+                      label: Text(viewModel.backButtonText),
                     ),
                   ),
                   const Expanded(
                     child: SizedBox(),
                   ),
                   Visibility(
-                    visible: _viewModel.nextButtonVisible,
-                    child: _viewModel.nextButtonShowArrow
+                    visible: viewModel.nextButtonVisible,
+                    child: viewModel.nextButtonShowArrow
                         ? ElevatedButton.icon(
                             icon: const Icon(
                               Icons.arrow_forward_ios_sharp,
                               size: iconSize,
                             ),
                             onPressed:
-                                _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                                viewModel.nextButtonEnabled ? () => viewModel.onNextButtonPressed(context) : null,
                             label: Text(
-                              _viewModel.nextButtonText,
+                              viewModel.nextButtonText,
                             ))
                         : ElevatedButton(
                             onPressed:
-                                _viewModel.nextButtonEnabled ? () => _viewModel.onNextButtonPressed(context) : null,
+                                viewModel.nextButtonEnabled ? () => viewModel.onNextButtonPressed(context) : null,
                             child: Text(
-                              _viewModel.nextButtonText,
+                              viewModel.nextButtonText,
                             )),
                   ),
                 ],
