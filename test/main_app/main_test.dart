@@ -47,7 +47,6 @@ void main() {
     await tester.tap(find.text(l10n.createDigitalPatientDirective, skipOffstage: false));
     await tester.pumpAndSettle();
 
-    print('content service intro is ${contentService.positiveAspectsPage.intro}');
     expect(
         find.byWidgetPredicate(
             (widget) => widget is MarkdownBody && widget.content == contentService.positiveAspectsPage.intro),
