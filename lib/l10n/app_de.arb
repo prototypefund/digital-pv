@@ -243,7 +243,7 @@
   },
   "pdfPersonsOfTrust": "Vertretungsperson/en:",
   "pdfParagraphTreatmentTargetTitleCurative": "{paragraph}. Mein grundsätzliches Behandlungsziel ist kurativ",
-  "@pdfTreatmentTargetTitle": {
+  "@pdfParagraphTreatmentTargetTitleCurative": {
     "placeholders": {
       "paragraph": {
         "type": "String"
@@ -361,7 +361,6 @@
       "email": {
         "type": "String"
       }
-
     }
   },
   "pdfParagraphEnclosedExplanationTitle": "{paragraph}. Hinweis auf beigefügte Erläuterungen zur Patientenverfügung",
@@ -391,9 +390,5 @@
     }
   },
   "pdfParagraphAdvice": "Ich habe mich vor Erstellung dieser Patientenverfügung informiert und beraten lassen. Ich bin mir des Inhaltes und der Konsequenzen meiner darin getroffenen Entscheidungen bewusst."
-
-
-
-
 }
 
