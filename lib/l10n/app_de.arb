@@ -184,7 +184,7 @@
   "personalDetailsForDirectiveDownloadDirective": "dPV als PDF abrufen",
   "drawerTitle": "dPV",
   "drawerSaveDirective": "Zwischenstand speichern",
-  "drawerLoadDirective": "Patientenverfügung laden"
+  "drawerLoadDirective": "Patientenverfügung laden",
   "pdfHeaderTitle": "Patientenverfügung",
   "pdfFooterPlaceAndDate": "Ort/Datum",
   "pdfFooterSignature": "Unterschrift",
