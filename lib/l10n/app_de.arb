@@ -199,7 +199,7 @@
       }
     }
   },
-  "pdfIntroductionParagraph": "Diese Patientenverfügung gilt für den Fall, dass ich, {surname} {name}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country} meinen Willen nicht mehr bilden oder verständlich äußern kann.",
+  "pdfIntroductionParagraph": "Diese Patientenverfügung gilt für den Fall, dass ich,  {name} {surname}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country} meinen Willen nicht mehr bilden oder verständlich äußern kann.",
   "@pdfIntroductionParagraph": {
     "placeholders": {
       "surname": {
@@ -222,7 +222,7 @@
       }
     }
   },
-  "pdfDirectiveOf": "dPV von {surname} {name}",
+  "pdfDirectiveOf": "dPV von {name} {surname}",
   "@pdfDirectiveOf": {
     "placeholders": {
       "surname": {
@@ -334,7 +334,7 @@
       }
     }
   },
-  "pdfParagraphRepresentatives": "Ich benenne {surname} {name}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country}, erreichbar unter {phone} oder {email} (E- Mail) zu meine-(r/m) Vorsorgebevollmächtigten mit Einzelvertretungsmacht.",
+  "pdfParagraphRepresentatives": "Ich benenne {name} {surname}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country}, erreichbar unter {phone} oder {email} (E- Mail) zu meine-(r/m) Vorsorgebevollmächtigten mit Einzelvertretungsmacht.",
   "@pdfParagraphRepresentatives": {
     "placeholders": {
       "surname": {

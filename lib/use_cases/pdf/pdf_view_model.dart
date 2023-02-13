@@ -30,22 +30,20 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
   }
 
   String get directiveOf {
-    final surname = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.surname!;
-    final name = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.name!;
-
+    final personalDetails = _patientDirectiveService.currentPatientDirective.personalDetails;
+    final surname = personalDetails.surname!;
+    final name = personalDetails.name!;
     return l10n.pdfDirectiveOf(surname, name);
   }
 
   String get introductionParagraph {
-    // Still missing _patientDirectiveService.currentPatientDirective.patient.personalDetails.
-    // Following are just placeholders
-    final surname = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.surname!;
-    final name = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.name!;
-    final dateOfBirth =
-        _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.dateOfBirth!;
-    final city = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.city!;
-    final zipCode = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.zipCode!;
-    final country = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.country!;
+    final personalDetails = _patientDirectiveService.currentPatientDirective.personalDetails;
+    final surname = personalDetails.surname!;
+    final name = personalDetails.name!;
+    final dateOfBirth = personalDetails.dateOfBirth!;
+    final city = personalDetails.city!;
+    final zipCode = personalDetails.zipCode!;
+    final country = personalDetails.country!;
 
     return l10n.pdfIntroductionParagraph(surname, name, dateOfBirth, zipCode, city, country);
   }
@@ -90,29 +88,31 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
   String get paragraphReleaseSecrecyTitle => l10n.pdfParagraphReleaseSecrecyTitle('V. ');
   String get paragraphReleaseSecrecy => l10n.pdfParagraphReleaseSecrecy;
   String get representativesTitle => l10n.pdfParagraphRepresentativesTitle('VI. ');
+
   String get representatives {
-    // Still missing _patientDirectiveService.currentPatientDirective.patient.personalDetails.
-    // Following are just placeholders
-    final surname = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.surname!;
-    final name = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.name!;
-    final dateOfBirth =
-        _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.dateOfBirth!;
-    final city = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.city!;
-    final zipCode = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.zipCode!;
-    final country = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.country!;
-    final phone = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.phone!;
-    final email = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.email!;
-    return l10n.pdfParagraphRepresentatives(surname, name, dateOfBirth, zipCode, city, country, phone, email);
+    final buffer = StringBuffer();
+
+    for (final person in _patientDirectiveService.currentPatientDirective.personsOfTrust) {
+      final personalDetails = person.personalDetails;
+      final surname = personalDetails.surname!;
+      final name = personalDetails.name!;
+      final dateOfBirth = personalDetails.dateOfBirth!;
+      final city = personalDetails.city!;
+      final zipCode = personalDetails.zipCode!;
+      final country = personalDetails.country!;
+      final phone = personalDetails.phone!;
+      final email = personalDetails.email!;
+      buffer.write(l10n.pdfParagraphRepresentatives(surname, name, dateOfBirth, zipCode, city, country, phone, email));
+      buffer.write('\n');
+    }
+    return buffer.toString();
   }
 
   String get qrCodeData => "https://digital-pv.gitlab.io/app/develop/web/";
 
   String get patientName {
-    // Still missing _patientDirectiveService.currentPatientDirective.patient.personalDetails.
-    // Following are just placeholders
-    final name = _patientDirectiveService.currentPatientDirective.personsOfTrust.first.personalDetails.name!;
-
-    return name;
+    final personalDetails = _patientDirectiveService.currentPatientDirective.personalDetails;
+    return personalDetails.surname!;
   }
 
   Future<pw.ImageProvider> get profilePicture {
