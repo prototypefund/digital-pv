@@ -29,6 +29,35 @@ class PdfService with RootContextL10N {
     downloader.downloadPdf(await bytes, filename, path);
   }
 
+  pw.Widget header(pw.Context pdfContext, pw.ImageProvider icon) =>
+      pw.Center(child: pw.Container(alignment: pw.Alignment.topCenter, width: 50, height: 50, child: pw.Image(icon)));
+
+  pw.Widget footer(pw.Context pdfContext) {
+    return pw.Column(
+      children: [
+        pw.Table.fromTextArray(context: pdfContext, tableWidth: pw.TableWidth.max, data: <List<String>>[
+          <String>['', ''],
+          <String>[_pdfViewModel.footerPlaceAndDate, _pdfViewModel.footerSignature],
+        ]),
+        pw.SizedBox(height: 20),
+        pw.Footer(
+          leading: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [pw.Text(_pdfViewModel.directiveOf), pw.Text(_pdfViewModel.createdAt)]),
+          title: pw.Text(_pdfViewModel.pageNumberOfTotalPages(
+              pageNumber: pdfContext.pageNumber, pagesCount: pdfContext.pagesCount)),
+          trailing: pw.BarcodeWidget(
+            width: 40,
+            height: 40,
+            color: PdfColors.black,
+            barcode: pw.Barcode.qrCode(),
+            data: _pdfViewModel.qrCodeData,
+          ),
+        ),
+      ],
+    );
+  }
+
   Future<Uint8List> generatePdf() async {
     final pw.Document pdf = pw.Document();
     final icon = await imageFromAssetBundle('assets/images/icon.png');
@@ -38,30 +67,10 @@ class PdfService with RootContextL10N {
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(30),
         header: (pw.Context pdfContext) {
-          return pw.Center(
-              child: pw.Container(alignment: pw.Alignment.topCenter, width: 50, height: 50, child: pw.Image(icon)));
+          return header(pdfContext, icon);
         },
         footer: (pw.Context pdfContext) {
-          return pw.Column(
-            children: [
-              pw.Table.fromTextArray(context: pdfContext, tableWidth: pw.TableWidth.max, data: <List<String>>[
-                <String>['', ''],
-                <String>[_pdfViewModel.footerPlaceAndDate, _pdfViewModel.footerSignature],
-              ]),
-              pw.SizedBox(height: 20),
-              pw.Footer(
-                title: pw.Text(_pdfViewModel.pageNumberOfTotalPages(
-                    pageNumber: pdfContext.pageNumber, pagesCount: pdfContext.pagesCount)),
-                trailing: pw.BarcodeWidget(
-                  width: 40,
-                  height: 40,
-                  color: PdfColors.black,
-                  barcode: pw.Barcode.qrCode(),
-                  data: _pdfViewModel.qrCodeData,
-                ),
-              ),
-            ],
-          );
+          return footer(pdfContext);
         },
         build: (pw.Context context) {
           return <pw.Widget>[
@@ -133,33 +142,10 @@ class PdfService with RootContextL10N {
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(30),
         header: (pw.Context pdfContext) {
-          return pw.Center(
-              child: pw.Container(alignment: pw.Alignment.topCenter, width: 50, height: 50, child: pw.Image(icon)));
+          return header(pdfContext, icon);
         },
         footer: (pw.Context pdfContext) {
-          return pw.Column(
-            children: [
-              pw.Table.fromTextArray(context: pdfContext, tableWidth: pw.TableWidth.max, data: <List<String>>[
-                <String>['', ''],
-                <String>[_pdfViewModel.footerPlaceAndDate, _pdfViewModel.footerSignature],
-              ]),
-              pw.SizedBox(height: 20),
-              pw.Footer(
-                leading: pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [pw.Text(_pdfViewModel.directiveOf), pw.Text(_pdfViewModel.createdAt)]),
-                title: pw.Text(_pdfViewModel.pageNumberOfTotalPages(
-                    pageNumber: pdfContext.pageNumber, pagesCount: pdfContext.pagesCount)),
-                trailing: pw.BarcodeWidget(
-                  width: 40,
-                  height: 40,
-                  color: PdfColor.fromHex("#000000"),
-                  barcode: pw.Barcode.qrCode(),
-                  data: _pdfViewModel.qrCodeData,
-                ),
-              ),
-            ],
-          );
+          return footer(pdfContext);
         },
         build: (pw.Context context) {
           return <pw.Widget>[
