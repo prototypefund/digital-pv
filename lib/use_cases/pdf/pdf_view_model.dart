@@ -66,7 +66,7 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
   String get treatmentGoal {
     final goal = _patientDirectiveService.currentPatientDirective.generalTreatmentGoal;
 
-    const paragraph = 'I.';
+    const paragraph = 'I';
     if (goal.tendency == TreatmentGoalTendency.curative) {
       return l10n.pdfParagraphTreatmentTargetTitleCurative(paragraph);
     } else if (goal.tendency == TreatmentGoalTendency.palliative) {
@@ -78,16 +78,16 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
 
   String get paragraphTreatmentTarget => l10n.pdfParagraphTreatmentTarget;
 
-  String get paragraphPrincipleWishTitle => l10n.pdfParagraphPrincipleWishTitle('II. ');
-  String get paragraphSpecificMeasuresTitle => l10n.pdfParagraphSpecificMeasuresTitle('III. ');
+  String get paragraphPrincipleWishTitle => l10n.pdfParagraphPrincipleWishTitle('II');
+  String get paragraphSpecificMeasuresTitle => l10n.pdfParagraphSpecificMeasuresTitle('III');
   String get paragraphSpecificMeasures => l10n.paragraphSpecificMeasures;
 
-  String get paragraphValidityTitle => l10n.pdfParagraphValidityTitle('IV. ');
+  String get paragraphValidityTitle => l10n.pdfParagraphValidityTitle('IV');
   String get paragraphValidity => l10n.pdfParagraphValidity;
 
-  String get paragraphReleaseSecrecyTitle => l10n.pdfParagraphReleaseSecrecyTitle('V. ');
+  String get paragraphReleaseSecrecyTitle => l10n.pdfParagraphReleaseSecrecyTitle('V');
   String get paragraphReleaseSecrecy => l10n.pdfParagraphReleaseSecrecy;
-  String get representativesTitle => l10n.pdfParagraphRepresentativesTitle('VI. ');
+  String get representativesTitle => l10n.pdfParagraphRepresentativesTitle('VI');
 
   String get representatives {
     final buffer = StringBuffer();
@@ -119,11 +119,11 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
     return networkImage('https://www.nfet.net/nfet.jpg');
   }
 
-  String get paragraphEnclosedExplanationTitle => l10n.pdfParagraphEnclosedExplanationTitle('VII. ');
+  String get paragraphEnclosedExplanationTitle => l10n.pdfParagraphEnclosedExplanationTitle('VII');
   String get paragraphEnclosedExplanation => l10n.pdfParagraphEnclosedExplanation;
-  String get pdfParagraphConclusionTitle => l10n.pdfParagraphConclusionTitle('VIII. ');
+  String get pdfParagraphConclusionTitle => l10n.pdfParagraphConclusionTitle('VIII');
   String get pdfParagraphConclusion => l10n.pdfParagraphConclusion;
-  String get pdfParagraphAdviceTitle => l10n.pdfParagraphAdviceTitle('IX. ');
+  String get pdfParagraphAdviceTitle => l10n.pdfParagraphAdviceTitle('IX');
   String get pdfParagraphAdvice => l10n.pdfParagraphAdvice;
 
   String pageNumberOfTotalPages({required int pageNumber, required int pagesCount}) {

@@ -241,7 +241,7 @@
       }
     }
   },
-  "pdfPersonsOfTrust": "Vertretungsperson/en:",
+  "pdfPersonsOfTrust": "Vertretungsperson/en",
   "pdfParagraphTreatmentTargetTitleCurative": "{paragraph}. Mein grundsätzliches Behandlungsziel ist kurativ",
   "@pdfParagraphTreatmentTargetTitleCurative": {
     "placeholders": {
