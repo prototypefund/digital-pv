@@ -86,7 +86,6 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
   }
 
   void onDownloadDirectivePressed(BuildContext context) {
-    logger.w('downloading directive not implemented yet');
     final model = PdfViewModel();
     final service = PdfService(model);
     unawaited(service.downloadPdf());
