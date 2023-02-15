@@ -8,7 +8,7 @@ import 'package:pd_app/use_cases/future_situations/new_future_situation_view_mod
 import 'package:provider/provider.dart';
 
 class FutureSituations extends StatelessWidget {
-  const FutureSituations({Key? key}) : super(key: key);
+  const FutureSituations({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => FutureSituationsViewModel(), child: const FutureSituations());
@@ -16,7 +16,7 @@ class FutureSituations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FutureSituationsViewModel _viewModel = context.watch();
+    final FutureSituationsViewModel viewModel = context.watch();
 
     return CreationProcessNavigation<FutureSituationsViewModel>(
       widget: Column(
@@ -24,12 +24,12 @@ class FutureSituations extends StatelessWidget {
         children: [
           Padding(
             padding: Paddings.headlinePadding,
-            child: Text(_viewModel.futureSituationsTitle, style: Theme.of(context).textTheme.headlineSmall),
+            child: Text(viewModel.futureSituationsTitle, style: Theme.of(context).textTheme.headlineSmall),
           ),
           Padding(
             padding: Paddings.headlineExplanationPadding,
             child: Text(
-              _viewModel.futureSituationsTitleExplanation,
+              viewModel.futureSituationsTitleExplanation,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
@@ -40,7 +40,7 @@ class FutureSituations extends StatelessWidget {
             height: 20,
           ),
           ChangeNotifierProvider.value(
-              value: _viewModel.newFutureSituationViewModel, child: NewAspect<NewFutureSituationViewModel>())
+              value: viewModel.newFutureSituationViewModel, child: NewAspect<NewFutureSituationViewModel>())
         ],
       ),
     );

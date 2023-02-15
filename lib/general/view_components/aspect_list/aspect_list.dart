@@ -19,30 +19,30 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
 
   @override
   Widget build(BuildContext context) {
-    final AspectListViewModel<AspectType> _viewModel = context.watch();
+    final AspectListViewModel<AspectType> viewModel = context.watch();
 
-    _viewModel.onAspectAdded = (AspectType newAspect) {
+    viewModel.onAspectAdded = (AspectType newAspect) {
       logger.d('adding new aspect to existing list in an animated way');
-      final int index = _viewModel.aspects.indexOf(newAspect);
+      final int index = viewModel.aspects.indexOf(newAspect);
       _listKey.currentState?.insertItem(index);
     };
 
-    _viewModel.onAspectRemoved = (AspectType removedAspect) {
+    viewModel.onAspectRemoved = (AspectType removedAspect) {
       logger.d('removing removed aspect in an animated way');
-      final int oldIndex = _viewModel.aspects.indexOf(removedAspect);
+      final int oldIndex = viewModel.aspects.indexOf(removedAspect);
       _listKey.currentState?.removeItem(
           oldIndex,
           (context, animation) => _buildListItem(
-              animation: animation, aspect: removedAspect, viewModel: _viewModel, interactive: false, index: oldIndex));
+              animation: animation, aspect: removedAspect, viewModel: viewModel, interactive: false, index: oldIndex));
     };
 
     return Column(
       children: [
-        if (_viewModel.showEmptyAspectListsMessage)
+        if (viewModel.showEmptyAspectListsMessage)
           Padding(
             padding: Paddings.emptyViewPadding,
             child: Text(
-              _viewModel.emptyAspectListsMessageText,
+              viewModel.emptyAspectListsMessageText,
               textAlign: TextAlign.start,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -54,28 +54,28 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
                 key: _listKey,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                initialItemCount: _viewModel.aspects.length,
+                initialItemCount: viewModel.aspects.length,
                 itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
               )),
-        if (_viewModel.showAddAspectCallToAction)
+        if (viewModel.showAddAspectCallToAction)
           Padding(
             padding: Paddings.callToActionPadding,
             child: ElevatedButton(
-                onPressed: _viewModel.addAspectCallToActionPressed(context),
-                child: Text(_viewModel.addAspectCallToActionText)),
+                onPressed: viewModel.addAspectCallToActionPressed(context),
+                child: Text(viewModel.addAspectCallToActionText)),
           ),
       ],
     );
   }
 
   Widget buildListItem(BuildContext context, int index, Animation<double> animation) {
-    final AspectListViewModel<AspectType> _viewModel = context.watch();
-    final AspectType aspect = _viewModel.aspects[index];
+    final AspectListViewModel<AspectType> viewModel = context.watch();
+    final AspectType aspect = viewModel.aspects[index];
     return Padding(
       key: Key(aspect.name),
       padding: Paddings.listElementPadding,
       child:
-          _buildListItem(animation: animation, aspect: aspect, viewModel: _viewModel, interactive: true, index: index),
+          _buildListItem(animation: animation, aspect: aspect, viewModel: viewModel, interactive: true, index: index),
     );
   }
 
@@ -115,14 +115,13 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
 
 class AspectWidget<AspectType extends Aspect> extends StatelessWidget with Logging {
   const AspectWidget(
-      {Key? key,
+      {super.key,
       required this.aspect,
       required this.sliderDescription,
       required this.sliderHighLabel,
       required this.sliderLowLabel,
       this.onRemove,
-      this.onPositionChange})
-      : super(key: key);
+      this.onPositionChange});
 
   final AspectType aspect;
 
@@ -134,42 +133,42 @@ class AspectWidget<AspectType extends Aspect> extends StatelessWidget with Loggi
 
   @override
   Widget build(BuildContext context) {
-    final AspectListViewModel _viewModel = context.watch();
+    final AspectListViewModel viewModel = context.watch();
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     if (mediaQuery.size.width < Thresholds.futureSituationsTwoColumnDisplayThreshold) {
-      return _buildSmallScreenVersion(context, _viewModel);
+      return _buildSmallScreenVersion(context, viewModel);
     } else {
-      return _buildLargeScreenVersion(context, _viewModel);
+      return _buildLargeScreenVersion(context, viewModel);
     }
   }
 
-  DPVBox _buildSmallScreenVersion(BuildContext context, AspectListViewModel _viewModel) {
+  DPVBox _buildSmallScreenVersion(BuildContext context, AspectListViewModel viewModel) {
     return DPVBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _buildSliderWithDescription(context: context, viewModel: _viewModel),
-          if (_viewModel.showTreatmentOptions)
-            _buildTreatmentOptionsWidget(context: context, viewModel: _viewModel, aspect: aspect)
+          _buildSliderWithDescription(context: context, viewModel: viewModel),
+          if (viewModel.showTreatmentOptions)
+            _buildTreatmentOptionsWidget(context: context, viewModel: viewModel, aspect: aspect)
         ],
       ),
     );
   }
 
-  DPVBox _buildLargeScreenVersion(BuildContext context, AspectListViewModel _viewModel) {
+  DPVBox _buildLargeScreenVersion(BuildContext context, AspectListViewModel viewModel) {
     return DPVBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Flexible(flex: 5, child: _buildSliderWithDescription(context: context, viewModel: _viewModel)),
-          if (_viewModel.showTreatmentOptions)
+          Flexible(flex: 5, child: _buildSliderWithDescription(context: context, viewModel: viewModel)),
+          if (viewModel.showTreatmentOptions)
             const Flexible(
               flex: 1,
               child: SizedBox.shrink(),
             ),
-          if (_viewModel.showTreatmentOptions)
+          if (viewModel.showTreatmentOptions)
             Flexible(
-                flex: 5, child: _buildTreatmentOptionsWidget(context: context, viewModel: _viewModel, aspect: aspect))
+                flex: 5, child: _buildTreatmentOptionsWidget(context: context, viewModel: viewModel, aspect: aspect))
         ],
       ),
     );

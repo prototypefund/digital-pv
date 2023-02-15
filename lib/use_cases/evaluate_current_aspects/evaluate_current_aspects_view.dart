@@ -8,7 +8,7 @@ import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspec
 import 'package:provider/provider.dart';
 
 class EvaluateCurrentAspects extends StatelessWidget {
-  const EvaluateCurrentAspects({Key? key}) : super(key: key);
+  const EvaluateCurrentAspects({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(
@@ -17,20 +17,20 @@ class EvaluateCurrentAspects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EvaluateCurrentAspectsViewModel _viewModel = context.watch();
+    final EvaluateCurrentAspectsViewModel viewModel = context.watch();
     return CreationProcessNavigation<EvaluateCurrentAspectsViewModel>(
         widget: SizedBox(
       width: double.infinity,
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Padding(
           padding: Paddings.headlinePadding,
-          child: Text(_viewModel.headline, style: Theme.of(context).textTheme.headlineSmall),
+          child: Text(viewModel.headline, style: Theme.of(context).textTheme.headlineSmall),
         ),
         const SizedBox(
           height: 24,
         ),
         Text(
-          _viewModel.summary,
+          viewModel.summary,
           style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
@@ -46,7 +46,7 @@ class EvaluateCurrentAspects extends StatelessWidget {
           height: 24,
         ),
         Text(
-          _viewModel.confirmEvaluationQuestion,
+          viewModel.confirmEvaluationQuestion,
           style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
@@ -54,14 +54,14 @@ class EvaluateCurrentAspects extends StatelessWidget {
           height: 24,
         ),
         ElevatedButton(
-          onPressed: () => _viewModel.onConfirmPressed(context),
-          child: Text(_viewModel.confirmEvaluation),
+          onPressed: () => viewModel.onConfirmPressed(context),
+          child: Text(viewModel.confirmEvaluation),
         ),
         const SizedBox(
           height: 24,
         ),
         Text(
-          _viewModel.changeAspectsIfNoMatchCallToAction,
+          viewModel.changeAspectsIfNoMatchCallToAction,
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         )

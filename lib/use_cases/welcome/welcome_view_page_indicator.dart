@@ -5,11 +5,11 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WelcomeViewPageIndicator extends StatelessWidget {
   const WelcomeViewPageIndicator({
-    Key? key,
+    super.key,
     required this.currentPage,
     required this.context,
     required this.index,
-  }) : super(key: key);
+  });
 
   final int currentPage;
   final BuildContext context;

@@ -93,10 +93,9 @@ class _ExamplesState extends State<Examples> with SingleTickerProviderStateMixin
 
 class _Entry extends StatelessWidget {
   const _Entry({
-    Key? key,
     required this.item,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   final Item item;
   final VoidCallback onPressed;
@@ -175,7 +174,7 @@ class _Entry extends StatelessWidget {
 class _Border extends StatelessWidget {
   final Widget child;
 
-  const _Border({Key? key, required this.child}) : super(key: key);
+  const _Border({required this.child});
 
   static const _borderColor = DefaultThemeColors.darkGreyTransparent;
 
@@ -201,7 +200,7 @@ class ExpandableWrapper extends StatelessWidget {
   final Widget child;
   final Icon icon;
 
-  const ExpandableWrapper({Key? key, required this.child, required this.icon}) : super(key: key);
+  const ExpandableWrapper({super.key, required this.child, required this.icon});
 
   @override
   Widget build(BuildContext context) {

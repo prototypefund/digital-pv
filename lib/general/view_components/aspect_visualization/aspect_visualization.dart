@@ -27,7 +27,7 @@ class AspectVisualization extends StatelessWidget with Logging {
 
   @override
   Widget build(BuildContext context) {
-    final AspectVisualizationViewModel _viewModel = context.watch();
+    final AspectVisualizationViewModel viewModel = context.watch();
 
     final sectionLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.sectionLabelStyle!;
     final tendencyLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.tendencyLabelStyle!;
@@ -46,14 +46,14 @@ class AspectVisualization extends StatelessWidget with Logging {
         Flexible(
           child: Stack(
             children: [
-              Image.asset(_viewModel.evaluationImageBackground),
-              if (_viewModel.showLabels)
+              Image.asset(viewModel.evaluationImageBackground),
+              if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
-                          text: _viewModel.palliativeLabel,
+                          text: viewModel.palliativeLabel,
                           textStyle: tendencyLabelStyle,
                           startAngle: (-math.pi / 2) + 0.1,
                           startAngleAlignment: StartAngleAlignment.start,
@@ -62,13 +62,13 @@ class AspectVisualization extends StatelessWidget with Logging {
                     },
                   ),
                 ),
-              if (_viewModel.showLabels)
+              if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
-                          text: _viewModel.curativeLabel,
+                          text: viewModel.curativeLabel,
                           textStyle: tendencyLabelStyle,
                           startAngle: (math.pi / 2) - 0.1,
                           startAngleAlignment: StartAngleAlignment.end,
@@ -77,13 +77,13 @@ class AspectVisualization extends StatelessWidget with Logging {
                     },
                   ),
                 ),
-              if (_viewModel.showLabels)
+              if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
-                          text: _viewModel.negativeLabel,
+                          text: viewModel.negativeLabel,
                           textStyle: tendencyLabelStyle,
                           startAngle: (math.pi / 2) + 0.1,
                           startAngleAlignment: StartAngleAlignment.start,
@@ -92,13 +92,13 @@ class AspectVisualization extends StatelessWidget with Logging {
                     },
                   ),
                 ),
-              if (_viewModel.showLabels)
+              if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
-                          text: _viewModel.positiveLabel,
+                          text: viewModel.positiveLabel,
                           textStyle: tendencyLabelStyle,
                           startAngle: (-math.pi / 2) - 0.1,
                           startAngleAlignment: StartAngleAlignment.end,
@@ -107,13 +107,13 @@ class AspectVisualization extends StatelessWidget with Logging {
                     },
                   ),
                 ),
-              if (_viewModel.showLabels)
+              if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
-                          text: _viewModel.treatmentGoalLabel,
+                          text: viewModel.treatmentGoalLabel,
                           textStyle: sectionLabelStyle,
                           startAngle: 0,
                           startAngleAlignment: StartAngleAlignment.center,
@@ -122,13 +122,13 @@ class AspectVisualization extends StatelessWidget with Logging {
                     },
                   ),
                 ),
-              if (_viewModel.showLabels)
+              if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return ArcText(
                           radius: (constraints.maxWidth / 2) * 0.88,
-                          text: _viewModel.qualityOfLifeLabel,
+                          text: viewModel.qualityOfLifeLabel,
                           textStyle: sectionLabelStyle,
                           startAngle: math.pi,
                           startAngleAlignment: StartAngleAlignment.center,
@@ -137,17 +137,17 @@ class AspectVisualization extends StatelessWidget with Logging {
                     },
                   ),
                 ),
-              if (_viewModel.showTreatmentGoal)
+              if (viewModel.showTreatmentGoal)
                 Positioned.fill(
                   child: AspectVisualizationOverlayArrow(
-                    rotation: _viewModel.treatmentGoalArrowRotation,
+                    rotation: viewModel.treatmentGoalArrowRotation,
                     color: treatmentGoalArrowColor,
                     strokeWidth: treatmentGoalArrowStrokeWidth,
                   ),
                 ),
               Positioned.fill(
                 child: AspectVisualizationOverlayArrow(
-                  rotation: _viewModel.aspectEvaluationArrowRotation,
+                  rotation: viewModel.aspectEvaluationArrowRotation,
                   color: aspectEvaluationArrowColor,
                   strokeWidth: aspectEvaluationArrowStrokeWidth,
                 ),
@@ -179,8 +179,7 @@ class AspectVisualization extends StatelessWidget with Logging {
 
 class AspectVisualizationOverlayArrow extends StatelessWidget {
   const AspectVisualizationOverlayArrow(
-      {Key? key, required this.rotation, required this.strokeWidth, required this.color})
-      : super(key: key);
+      {super.key, required this.rotation, required this.strokeWidth, required this.color});
 
   final double rotation;
   final Color color;

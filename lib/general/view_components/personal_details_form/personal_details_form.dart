@@ -6,82 +6,82 @@ import 'package:provider/provider.dart';
 class PersonalDetailsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final PersonalDetailsFormViewModel _viewModel = context.watch();
+    final PersonalDetailsFormViewModel viewModel = context.watch();
 
     return Column(
       children: [
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextFormField(
-              controller: _viewModel.surnameTextFieldController,
+              controller: viewModel.surnameTextFieldController,
               style: Theme.of(context).textTheme.labelLarge,
-              decoration: InputDecoration(label: Text(_viewModel.surnameLabel)),
-              validator: _viewModel.surnameValidator),
+              decoration: InputDecoration(label: Text(viewModel.surnameLabel)),
+              validator: viewModel.surnameValidator),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextFormField(
-              controller: _viewModel.nameTextFieldController,
+              controller: viewModel.nameTextFieldController,
               style: Theme.of(context).textTheme.labelLarge,
-              decoration: InputDecoration(label: Text(_viewModel.nameLabel)),
-              validator: _viewModel.nameValidator),
+              decoration: InputDecoration(label: Text(viewModel.nameLabel)),
+              validator: viewModel.nameValidator),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextFormField(
-            controller: _viewModel.dateOfBirthTextFieldController,
+            controller: viewModel.dateOfBirthTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.dateOfBirthLabel)),
-            validator: _viewModel.dateOfBirthValidator,
+            decoration: InputDecoration(label: Text(viewModel.dateOfBirthLabel)),
+            validator: viewModel.dateOfBirthValidator,
           ),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextField(
-            controller: _viewModel.addressTextFieldController,
+            controller: viewModel.addressTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.addressLabel)),
+            decoration: InputDecoration(label: Text(viewModel.addressLabel)),
           ),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextField(
-            controller: _viewModel.zipCodeTextFieldController,
+            controller: viewModel.zipCodeTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.zipCodeLabel)),
+            decoration: InputDecoration(label: Text(viewModel.zipCodeLabel)),
           ),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextField(
-            controller: _viewModel.cityTextFieldController,
+            controller: viewModel.cityTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.cityLabel)),
+            decoration: InputDecoration(label: Text(viewModel.cityLabel)),
           ),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextField(
-            controller: _viewModel.countryTextFieldController,
+            controller: viewModel.countryTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.countryLabel)),
-          ),
-        ),
-        Padding(
-          padding: Paddings.textFieldPadding,
-          child: TextFormField(
-            controller: _viewModel.emailTextFieldController,
-            style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.emailLabel)),
+            decoration: InputDecoration(label: Text(viewModel.countryLabel)),
           ),
         ),
         Padding(
           padding: Paddings.textFieldPadding,
           child: TextFormField(
-            controller: _viewModel.phoneTextFieldController,
+            controller: viewModel.emailTextFieldController,
             style: Theme.of(context).textTheme.labelLarge,
-            decoration: InputDecoration(label: Text(_viewModel.phoneLabel)),
-            validator: _viewModel.phoneNumberValidator,
+            decoration: InputDecoration(label: Text(viewModel.emailLabel)),
+          ),
+        ),
+        Padding(
+          padding: Paddings.textFieldPadding,
+          child: TextFormField(
+            controller: viewModel.phoneTextFieldController,
+            style: Theme.of(context).textTheme.labelLarge,
+            decoration: InputDecoration(label: Text(viewModel.phoneLabel)),
+            validator: viewModel.phoneNumberValidator,
           ),
         ),
       ],

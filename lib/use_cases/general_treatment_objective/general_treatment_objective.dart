@@ -10,7 +10,7 @@ import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_o
 import 'package:provider/provider.dart';
 
 class GeneralTreatmentObjective extends StatelessWidget {
-  const GeneralTreatmentObjective({Key? key}) : super(key: key);
+  const GeneralTreatmentObjective({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(
@@ -19,20 +19,20 @@ class GeneralTreatmentObjective extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GeneralTreatmentObjectiveViewModel _viewModel = context.watch();
+    final GeneralTreatmentObjectiveViewModel viewModel = context.watch();
     return CreationProcessNavigation<GeneralTreatmentObjectiveViewModel>(
         widget: SizedBox(
       width: double.infinity,
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Padding(
           padding: Paddings.headlinePadding,
-          child: Text(_viewModel.headline, style: Theme.of(context).textTheme.headlineSmall),
+          child: Text(viewModel.headline, style: Theme.of(context).textTheme.headlineSmall),
         ),
         const SizedBox(
           height: 24,
         ),
         Text(
-          _viewModel.summary,
+          viewModel.summary,
           style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
@@ -40,7 +40,7 @@ class GeneralTreatmentObjective extends StatelessWidget {
           height: 24,
         ),
         Text(
-          _viewModel.changeNeedleCallToAction,
+          viewModel.changeNeedleCallToAction,
           style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
@@ -53,38 +53,38 @@ class GeneralTreatmentObjective extends StatelessWidget {
                 create: (_) => AspectVisualizationViewModel(showLabels: true, showTreatmentGoal: true),
                 child: AspectVisualization(
                   onDragAndRotate: (double direction) {
-                    _viewModel.adaptTreatmentGoal(direction);
+                    viewModel.adaptTreatmentGoal(direction);
                   },
                 ))),
         const SizedBox(
           height: 24,
         ),
         ElevatedButton(
-            onPressed: () => _viewModel.resetTreatmentGoal(context),
+            onPressed: () => viewModel.resetTreatmentGoal(context),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(_viewModel.resetLabel),
+                Text(viewModel.resetLabel),
                 const SizedBox(
                   width: Sizes.elevatedButtonLabelIconDistance,
                 ),
-                Icon(_viewModel.resetIconData)
+                Icon(viewModel.resetIconData)
               ],
             )),
         const SizedBox(
           height: 40,
         ),
-        ExplanationBox(title: _viewModel.curativeExplanationTitle, explanation: _viewModel.curativeExplanation),
+        ExplanationBox(title: viewModel.curativeExplanationTitle, explanation: viewModel.curativeExplanation),
         const SizedBox(
           height: 24,
         ),
-        ExplanationBox(title: _viewModel.palliativeExplanationTitle, explanation: _viewModel.palliativeExplanation),
+        ExplanationBox(title: viewModel.palliativeExplanationTitle, explanation: viewModel.palliativeExplanation),
         const SizedBox(
           height: 24,
         ),
         ElevatedButton(
-          onPressed: () => _viewModel.onConfirmPressed(context),
-          child: Text(_viewModel.confirmLabel),
+          onPressed: () => viewModel.onConfirmPressed(context),
+          child: Text(viewModel.confirmLabel),
         ),
       ]),
     ));

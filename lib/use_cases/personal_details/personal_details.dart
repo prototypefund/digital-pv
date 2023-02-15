@@ -6,7 +6,7 @@ import 'package:pd_app/use_cases/personal_details/personal_details_view_model.da
 import 'package:provider/provider.dart';
 
 class PersonalDetails extends StatelessWidget {
-  const PersonalDetails({Key? key}) : super(key: key);
+  const PersonalDetails({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => PersonalDetailsViewModel(), child: const PersonalDetails());
@@ -14,21 +14,33 @@ class PersonalDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PersonalDetailsViewModel _viewModel = context.watch();
+    final PersonalDetailsViewModel viewModel = context.watch();
     return CreationProcessNavigation<PersonalDetailsViewModel>(
         widget: Column(
       children: [
-        MarkdownBody(content: _viewModel.introductionMarkdownContent),
+        MarkdownBody(content: viewModel.introductionMarkdownContent),
         Form(
           autovalidateMode: AutovalidateMode.always,
           child: ChangeNotifierProvider.value(
-            value: _viewModel.personalDetailsFormViewModel,
+            value: viewModel.personalDetailsFormViewModel,
             child: PersonalDetailsForm(),
           ),
         ),
         const SizedBox(height: 32),
-        ElevatedButton(
-            onPressed: _viewModel.downloadDirectiveAction(context), child: Text(_viewModel.downloadDirectiveLabel))
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: viewModel.downloadDirectiveAction(context), child: Text(viewModel.downloadDirectiveLabel)),
+              const SizedBox(
+                width: 20,
+              ),
+              ElevatedButton(
+                  onPressed: viewModel.showDirectiveAction(context), child: Text(viewModel.showDirectiveLabel))
+            ],
+          ),
+        )
       ],
     ));
   }

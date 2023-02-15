@@ -9,7 +9,7 @@ class DPVDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DrawerViewModel _viewModel = context.watch();
+    final DrawerViewModel viewModel = context.watch();
 
     return Drawer(
       child: ListView(
@@ -21,17 +21,17 @@ class DPVDrawer extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             child: Text(
-              _viewModel.drawerTitle,
+              viewModel.drawerTitle,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           ListTile(
-            title: Text(_viewModel.saveDirectiveLabel, style: Theme.of(context).textTheme.titleMedium),
-            onTap: () => _viewModel.onSaveDirectiveTapped(context),
+            title: Text(viewModel.saveDirectiveLabel, style: Theme.of(context).textTheme.titleMedium),
+            onTap: () => viewModel.onSaveDirectiveTapped(context),
           ),
           ListTile(
-            title: Text(_viewModel.loadDirectiveLabel, style: Theme.of(context).textTheme.titleMedium),
-            onTap: () => _viewModel.onLoadDirectiveTapped(context),
+            title: Text(viewModel.loadDirectiveLabel, style: Theme.of(context).textTheme.titleMedium),
+            onTap: () => viewModel.onLoadDirectiveTapped(context),
           ),
         ],
       ), // Populate the Drawer in the next step.
