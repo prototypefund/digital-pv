@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pd_app/general/init/get_it.dart';
+import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/model/treatment_goal.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
@@ -50,17 +51,17 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
 
   String get generalHospitalizationPreference {
     return l10n.pdfGeneralHospitalizationPreference(
-        _patientDirectiveService.currentPatientDirective.generalHospitalizationPreference.name);
+        _patientDirectiveService.currentPatientDirective.generalHospitalizationPreference.localizedString(l10n));
   }
 
   String get generalIntensiveTreatmentPreference {
     return l10n.pdfGeneralIntensiveTreatmentPreference(
-        _patientDirectiveService.currentPatientDirective.generalIntensiveTreatmentPreference.name);
+        _patientDirectiveService.currentPatientDirective.generalIntensiveTreatmentPreference.localizedString(l10n));
   }
 
   String get generalResuscitationPreference {
     return l10n.pdfGeneralResuscitationPreference(
-        _patientDirectiveService.currentPatientDirective.generalResuscitationPreference.name);
+        _patientDirectiveService.currentPatientDirective.generalResuscitationPreference.localizedString(l10n));
   }
 
   String get treatmentGoal {

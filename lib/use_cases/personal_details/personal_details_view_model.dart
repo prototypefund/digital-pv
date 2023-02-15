@@ -47,6 +47,14 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
     }
   }
 
+  VoidCallback? showDirectiveAction(BuildContext context) {
+    if (personalDetailsFormViewModel.isInputValid()) {
+      return () => onShowDirectivePressed(context);
+    } else {
+      return null;
+    }
+  }
+
   @override
   void onBackButtonPressed(BuildContext context) {
     context.go(Routes.generalInformationAboutPatientDirective);
@@ -67,6 +75,7 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
   bool get showTreatmentGoalInVisualization => true;
 
   String get downloadDirectiveLabel => l10n.personalDetailsForDirectiveDownloadDirective;
+  String get showDirectiveLabel => l10n.personalDetailsForDirectiveShowDirective;
 
   void _reactToPatientDirectiveChanges() {
     notifyListeners();
@@ -89,5 +98,9 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
     final model = PdfViewModel();
     final service = PdfService(model);
     unawaited(service.downloadPdf());
+  }
+
+  void onShowDirectivePressed(BuildContext context) {
+    context.go(Routes.pdf);
   }
 }

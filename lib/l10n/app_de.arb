@@ -182,6 +182,7 @@
   "personalDetailsForDirectiveValidationNameEmpty": "Bitte geben Sie Ihren Namen an",
   "personalDetailsForDirectiveValidationDateOfBirthEmpty": "Bitte geben Sie Ihren Geburtstag an",
   "personalDetailsForDirectiveDownloadDirective": "dPV als PDF abrufen",
+  "personalDetailsForDirectiveShowDirective": "dPV anzeigen",
   "drawerTitle": "dPV",
   "drawerSaveDirective": "Zwischenstand speichern",
   "drawerLoadDirective": "Patientenverfügung laden",
@@ -334,7 +335,7 @@
       }
     }
   },
-  "pdfParagraphRepresentatives": "Ich benenne {name} {surname}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country}, erreichbar unter {phone} oder {email} (E- Mail) zu meine-(r/m) Vorsorgebevollmächtigten mit Einzelvertretungsmacht.",
+  "pdfParagraphRepresentatives": "Ich benenne {name} {surname}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country}, erreichbar unter {phone} oder {email} (E-Mail) zu meine-(r/m) Vorsorgebevollmächtigten mit Einzelvertretungsmacht.",
   "@pdfParagraphRepresentatives": {
     "placeholders": {
       "surname": {

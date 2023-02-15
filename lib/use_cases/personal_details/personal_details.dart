@@ -27,8 +27,20 @@ class PersonalDetails extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 32),
-        ElevatedButton(
-            onPressed: viewModel.downloadDirectiveAction(context), child: Text(viewModel.downloadDirectiveLabel))
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: viewModel.downloadDirectiveAction(context), child: Text(viewModel.downloadDirectiveLabel)),
+              const SizedBox(
+                width: 20,
+              ),
+              ElevatedButton(
+                  onPressed: viewModel.showDirectiveAction(context), child: Text(viewModel.showDirectiveLabel))
+            ],
+          ),
+        )
       ],
     ));
   }
