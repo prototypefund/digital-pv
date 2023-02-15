@@ -98,7 +98,6 @@ class _WelcomeViewState extends State<WelcomeView> {
             },
             child: Text(
               _viewModel.skipButtonText,
-              style: TextStyle(color: Theme.of(context).primaryColor),
             ),
           ),
           Row(
