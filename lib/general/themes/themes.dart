@@ -11,10 +11,7 @@ class Themes {
   ThemeData get defaultTheme => ThemeData(
         appBarTheme: const AppBarTheme(iconTheme: IconThemeData(color: DefaultThemeColors.purple)),
         fontFamily: "Roboto",
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: DefaultThemeColors.purple,
-            background: DefaultThemeColors.white,
-            primary: DefaultThemeColors.white),
+        colorScheme: ColorScheme.fromSeed(seedColor: DefaultThemeColors.purple),
         inputDecorationTheme: const InputDecorationTheme(
             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: DefaultThemeColors.purple)),
             focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: DefaultThemeColors.purple))),

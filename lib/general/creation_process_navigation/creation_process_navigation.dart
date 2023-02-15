@@ -46,7 +46,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                 SliverAppBar(
                   automaticallyImplyLeading: false,
                   // disables back button if popping is possible
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   leading: Builder(builder: (context) {
                     return IconButton(
                       icon: const Icon(
