@@ -6,7 +6,7 @@ import 'package:pd_app/use_cases/add_positive_aspect/new_positive_aspect_view_mo
 import 'package:provider/provider.dart';
 
 class AddPositiveAspect extends StatefulWidget {
-  const AddPositiveAspect({Key? key}) : super(key: key);
+  const AddPositiveAspect({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => AddPositiveAspectViewModel(), child: const AddPositiveAspect());
@@ -19,14 +19,14 @@ class AddPositiveAspect extends StatefulWidget {
 class _AddPositiveAspectState extends State<AddPositiveAspect> {
   @override
   Widget build(BuildContext context) {
-    final AddPositiveAspectViewModel _viewModel = context.watch();
+    final AddPositiveAspectViewModel viewModel = context.watch();
 
     return CreationProcessNavigation<AddPositiveAspectViewModel>(
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ChangeNotifierProvider.value(
-              value: _viewModel.newPositiveAspectViewModel, child: NewAspect<NewPositiveAspectViewModel>())
+              value: viewModel.newPositiveAspectViewModel, child: NewAspect<NewPositiveAspectViewModel>())
         ],
       ),
     );

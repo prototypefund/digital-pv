@@ -147,7 +147,214 @@
   "personalDetailsForDirectiveValidationNameEmpty": "Bitte geben Sie Ihren Namen an",
   "personalDetailsForDirectiveValidationDateOfBirthEmpty": "Bitte geben Sie Ihren Geburtstag an",
   "personalDetailsForDirectiveDownloadDirective": "dPV als PDF abrufen",
+  "personalDetailsForDirectiveShowDirective": "dPV anzeigen",
   "drawerTitle": "dPV",
   "drawerSaveDirective": "Zwischenstand speichern",
-  "drawerLoadDirective": "Patientenverfügung laden"
+  "drawerLoadDirective": "Patientenverfügung laden",
+  "pdfHeaderTitle": "Patientenverfügung",
+  "pdfFooterPlaceAndDate": "Ort/Datum",
+  "pdfFooterSignature": "Unterschrift",
+  "pdfPageNumberOfTotalPages": "Seite {pageNumber} / {totalPagesCount}",
+  "@pdfPageNumberOfTotalPages": {
+    "placeholders": {
+      "pageNumber": {
+        "type": "int"
+      },
+      "totalPagesCount": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfIntroductionParagraph": "Diese Patientenverfügung gilt für den Fall, dass ich,  {name} {surname}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country} meinen Willen nicht mehr bilden oder verständlich äußern kann.",
+  "@pdfIntroductionParagraph": {
+    "placeholders": {
+      "surname": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "dateOfBirth": {
+        "type": "String"
+      },
+      "zipCode": {
+        "type": "String"
+      },
+      "city": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfDirectiveOf": "dPV von {name} {surname}",
+  "@pdfDirectiveOf": {
+    "placeholders": {
+      "surname": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfCreatedAt": "erstellt am: {formattedDate}",
+  "@pdfCreatedAt": {
+    "placeholders": {
+      "formattedDate": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfPersonsOfTrust": "Vertretungsperson/en",
+  "pdfParagraphTreatmentTargetTitleCurative": "{paragraph}. Mein grundsätzliches Behandlungsziel ist kurativ",
+  "@pdfParagraphTreatmentTargetTitleCurative": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphTreatmentTargetTitlePalliative": "{paragraph}. Mein grundsätzliches Behandlungsziel ist palliativ",
+  "@pdfParagraphTreatmentTargetTitlePalliative": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphTreatmentTargetTitleUndefined": "{paragraph}. Mein grundsätzliches Behandlungsziel ist undefiniert",
+  "@pdfParagraphTreatmentTargetTitleUndefined": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphTreatmentTarget": "Es wird alles medizinisch Mögliche und Sinnvolle getan, um mein Leben zu erhalten. Die mit der Lebenserhaltung verbundenen Belastungen nehme ich in Kauf.",
+  "pdfGeneralHospitalizationPreference": "Aufnahme ins Krankenhaus: {value}",
+  "@pdfGeneralHospitalizationPreference": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfGeneralIntensiveTreatmentPreference": "Intensivbehandlung: {value}",
+  "@pdfGeneralIntensiveTreatmentPreference": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfGeneralResuscitationPreference": "Wiederbelebung: {value}",
+  "@pdfGeneralResuscitationPreference": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphPrincipleWishTitle": "{paragraph}. Ich wünsche grundsätzlich",
+  "@pdfParagraphPrincipleWishTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphSpecificMeasuresTitle": "{paragraph}. In folgenden Situationen wünsche ich die genannten spezifischen Maßnahmen",
+  "@pdfParagraphSpecificMeasuresTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "paragraphSpecificMeasures": "Dadurch kann sich ein Behandlungsziel ergeben, das vom grundsätzlichen abweicht. Dieser Tatsache bin ich mir bewusst.",
+  "pdfParagraphValidityTitle": "{paragraph}. Gültigkeit",
+  "@pdfParagraphValidityTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphValidity": "Diese Patientenverfügung gilt, solange ich sie nicht widerrufen habe. Unklare Situationen sollen im Konsens meiner Vertretungsperson/en und dem Behandlungsteam geklärt werden.",
+  "pdfParagraphReleaseSecrecyTitle": "{paragraph}. Entbindung der Schweigepflicht",
+  "@pdfParagraphReleaseSecrecyTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphReleaseSecrecy": "Ich entbinde alle mich behandelnden Ärzte sowie nicht-ärztliche Gesundheitsfachpersonen von der Schweigepflicht gegenüber den genannten Vertretungspersonen.",
+  "pdfParagraphRepresentativesTitle": "{paragraph}. Vertretungsperson/en",
+  "@pdfParagraphRepresentativesTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphRepresentatives": "Ich benenne {name} {surname}, geboren am {dateOfBirth}, wohnhaft in {zipCode} {city} in {country}, erreichbar unter {phone} oder {email} (E-Mail) zu meine-(r/m) Vorsorgebevollmächtigten mit Einzelvertretungsmacht.",
+  "@pdfParagraphRepresentatives": {
+    "placeholders": {
+      "surname": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "dateOfBirth": {
+        "type": "String"
+      },
+      "zipCode": {
+        "type": "String"
+      },
+      "city": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      },
+      "phone": {
+        "type": "String"
+      },
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphEnclosedExplanationTitle": "{paragraph}. Hinweis auf beigefügte Erläuterungen zur Patientenverfügung",
+  "@pdfParagraphEnclosedExplanationTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphEnclosedExplanation": "Es wurden keine Anlagen angefügt.",
+  "pdfParagraphConclusionTitle": "{paragraph}. Schlussformel und Schlussbemerkung",
+  "@pdfParagraphConclusionTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphConclusion": "Soweit ich bestimmte Behandlungen wünsche oder ablehne, verzichte ich ausdrücklich auf eine (weitere) ärztliche Aufklärung.\nMir ist die Möglichkeit der Änderung und des Widerrufs einer Patientenverfügung bekannt.\nIch habe diese Patientenverfügung in eigener Verantwortung und ohne äußeren Druck erstellt. Ich bin im Vollbesitz meiner geistigen Kräfte.",
+  "pdfParagraphAdviceTitle": "{paragraph}. Information und Beratung",
+  "@pdfParagraphAdviceTitle": {
+    "placeholders": {
+      "paragraph": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfParagraphAdvice": "Ich habe mich vor Erstellung dieser Patientenverfügung informiert und beraten lassen. Ich bin mir des Inhaltes und der Konsequenzen meiner darin getroffenen Entscheidungen bewusst."
 }
+

@@ -10,7 +10,7 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
     with RootContextL10N {
   @override
   Widget build(BuildContext context) {
-    final ViewModelType _viewModel = context.watch();
+    final ViewModelType viewModel = context.watch();
     return Column(
       children: [
         Center(
@@ -18,7 +18,7 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
             padding: Paddings.headlineExplanationPadding,
             child: Center(
               child: Text(
-                _viewModel.addTreatmentActivitiesSubHeadline,
+                viewModel.addTreatmentActivitiesSubHeadline,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
@@ -30,15 +30,15 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
         ),
         DPVDropDown<TreatmentActivityChoice>(
             description: Text(
-              _viewModel.addTreatmentActivitiesHospitalAdmission,
+              viewModel.addTreatmentActivitiesHospitalAdmission,
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            initialValue: _viewModel.hospitalizationSelection,
+            initialValue: viewModel.hospitalizationSelection,
             onChanged: (TreatmentActivityChoice? value) {
               final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
-              _viewModel.hospitalizationSelection = newValue;
+              viewModel.hospitalizationSelection = newValue;
             },
-            items: _viewModel.hospitalizationList
+            items: viewModel.hospitalizationList
                 .map<DropdownMenuItem<TreatmentActivityChoice>>((TreatmentActivityChoice value) {
               return DropdownMenuItem<TreatmentActivityChoice>(
                 value: value,
@@ -51,14 +51,14 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
           height: 20,
         ),
         DPVDropDown<TreatmentActivityChoice>(
-            description: Text(_viewModel.addTreatmentActivitiesIntensiveTreatment,
-                style: Theme.of(context).textTheme.labelSmall),
-            initialValue: _viewModel.intensiveTreatmentSelection,
+            description:
+                Text(viewModel.addTreatmentActivitiesIntensiveTreatment, style: Theme.of(context).textTheme.labelSmall),
+            initialValue: viewModel.intensiveTreatmentSelection,
             onChanged: (TreatmentActivityChoice? value) {
               final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
-              _viewModel.intensiveTreatmentSelection = newValue;
+              viewModel.intensiveTreatmentSelection = newValue;
             },
-            items: _viewModel.intensiveTreatmentList
+            items: viewModel.intensiveTreatmentList
                 .map<DropdownMenuItem<TreatmentActivityChoice>>((TreatmentActivityChoice value) {
               return DropdownMenuItem<TreatmentActivityChoice>(
                 value: value,
@@ -70,16 +70,16 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
         ),
         DPVDropDown<TreatmentActivityChoice>(
             description: Text(
-              _viewModel.addTreatmentActivitiesResuscitation,
+              viewModel.addTreatmentActivitiesResuscitation,
               style: Theme.of(context).textTheme.labelSmall,
               textAlign: TextAlign.left,
             ),
-            initialValue: _viewModel.resuscitationSelection,
+            initialValue: viewModel.resuscitationSelection,
             onChanged: (TreatmentActivityChoice? value) {
               final TreatmentActivityChoice newValue = value ?? TreatmentActivityChoice.notSpecified;
-              _viewModel.resuscitationSelection = newValue;
+              viewModel.resuscitationSelection = newValue;
             },
-            items: _viewModel.resuscitationList
+            items: viewModel.resuscitationList
                 .map<DropdownMenuItem<TreatmentActivityChoice>>((TreatmentActivityChoice value) {
               return DropdownMenuItem<TreatmentActivityChoice>(
                 value: value,

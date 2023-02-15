@@ -14,4 +14,5 @@ class Routes {
   static const trustedThirdParty = '/${patientDirective}trusted-third-party';
   static const generalInformationAboutPatientDirective = '/${patientDirective}general-information';
   static const personalDetails = '/${patientDirective}personal-details';
+  static const pdf = '/${patientDirective}directive-pdf';
 }

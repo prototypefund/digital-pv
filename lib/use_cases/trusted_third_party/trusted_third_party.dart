@@ -9,7 +9,7 @@ import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party_view_mo
 import 'package:provider/provider.dart';
 
 class TrustedThirdParty extends StatelessWidget {
-  const TrustedThirdParty({Key? key}) : super(key: key);
+  const TrustedThirdParty({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => TrustedThirdPartyViewModel(), child: const TrustedThirdParty());
@@ -17,20 +17,20 @@ class TrustedThirdParty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TrustedThirdPartyViewModel _viewModel = context.watch();
+    final TrustedThirdPartyViewModel viewModel = context.watch();
     return CreationProcessNavigation<TrustedThirdPartyViewModel>(
         widget: SizedBox(
       width: double.infinity,
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Padding(
           padding: Paddings.headlinePadding,
-          child: Text(_viewModel.headline, style: Theme.of(context).textTheme.headlineSmall),
+          child: Text(viewModel.headline, style: Theme.of(context).textTheme.headlineSmall),
         ),
         const SizedBox(
           height: 24,
         ),
         Text(
-          _viewModel.summary,
+          viewModel.summary,
           style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
@@ -38,7 +38,7 @@ class TrustedThirdParty extends StatelessWidget {
           height: 40,
         ),
         Text(
-          _viewModel.designatePersonLabel,
+          viewModel.designatePersonLabel,
           style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
@@ -49,7 +49,7 @@ class TrustedThirdParty extends StatelessWidget {
           padding: Paddings.listPadding,
           child: ListView(
             shrinkWrap: true,
-            children: _viewModel.trustedPersonViewModels
+            children: viewModel.trustedPersonViewModels
                 .map((trustedThirdPartyFormViewModel) =>
                     _buildPersonOfTrustForm(context: context, viewModel: trustedThirdPartyFormViewModel))
                 .toList(),
@@ -58,15 +58,15 @@ class TrustedThirdParty extends StatelessWidget {
         Padding(
           padding: Paddings.callToActionPadding,
           child: ElevatedButton(
-              onPressed: () => _viewModel.addPersonOfTrust(context),
+              onPressed: () => viewModel.addPersonOfTrust(context),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(_viewModel.addPersonOfTrustActionLabel),
+                  Text(viewModel.addPersonOfTrustActionLabel),
                   const SizedBox(
                     width: Sizes.elevatedButtonLabelIconDistance,
                   ),
-                  Icon(_viewModel.addPersonOfTrustActionIcon)
+                  Icon(viewModel.addPersonOfTrustActionIcon)
                 ],
               )),
         ),

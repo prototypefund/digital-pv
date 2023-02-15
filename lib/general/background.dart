@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pd_app/general/themes/images.dart';
 
 class BackgroundContainer extends StatelessWidget {
-  const BackgroundContainer({Key? key, required this.child}) : super(key: key);
+  const BackgroundContainer({super.key, required this.child});
 
   final Widget child;
 

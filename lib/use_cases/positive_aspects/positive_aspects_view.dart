@@ -7,7 +7,7 @@ import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.da
 import 'package:provider/provider.dart';
 
 class PositiveAspects extends StatelessWidget with Logging {
-  PositiveAspects({Key? key}) : super(key: key);
+  PositiveAspects({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => PositiveAspectsViewModel(), child: PositiveAspects());

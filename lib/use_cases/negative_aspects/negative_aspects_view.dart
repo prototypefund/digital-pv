@@ -8,7 +8,7 @@ import 'package:pd_app/use_cases/negative_aspects/new_negative_aspect_view_model
 import 'package:provider/provider.dart';
 
 class NegativeAspects extends StatelessWidget {
-  const NegativeAspects({Key? key}) : super(key: key);
+  const NegativeAspects({super.key});
 
   static Widget page() {
     return ChangeNotifierProvider(create: (_) => NegativeAspectsViewModel(), child: const NegativeAspects());
@@ -16,7 +16,7 @@ class NegativeAspects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NegativeAspectsViewModel _viewModel = context.watch<NegativeAspectsViewModel>();
+    final NegativeAspectsViewModel viewModel = context.watch<NegativeAspectsViewModel>();
 
     return CreationProcessNavigation<NegativeAspectsViewModel>(
         widget: Column(
@@ -24,12 +24,12 @@ class NegativeAspects extends StatelessWidget {
       children: [
         Padding(
           padding: Paddings.headlinePadding,
-          child: Text(_viewModel.negativeAspectsTitle, style: Theme.of(context).textTheme.headlineSmall),
+          child: Text(viewModel.negativeAspectsTitle, style: Theme.of(context).textTheme.headlineSmall),
         ),
         Padding(
           padding: Paddings.headlineExplanationPadding,
           child: Text(
-            _viewModel.negativeAspectsTitleExplanation,
+            viewModel.negativeAspectsTitleExplanation,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
@@ -40,7 +40,7 @@ class NegativeAspects extends StatelessWidget {
           height: 20,
         ),
         ChangeNotifierProvider.value(
-            value: _viewModel.newNegativeAspectViewModel, child: NewAspect<NewNegativeAspectViewModel>())
+            value: viewModel.newNegativeAspectViewModel, child: NewAspect<NewNegativeAspectViewModel>())
       ],
     ));
   }

@@ -13,6 +13,7 @@ import 'package:pd_app/use_cases/general_information_about_patient_directive/gen
 import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_activities.dart';
 import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_objective.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view.dart';
+import 'package:pd_app/use_cases/pdf/directive_pdf_view.dart';
 import 'package:pd_app/use_cases/personal_details/personal_details.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
@@ -22,7 +23,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
 class PatientDirectiveApp extends StatefulWidget {
-  const PatientDirectiveApp({Key? key}) : super(key: key);
+  const PatientDirectiveApp({super.key});
 
   @override
   State<PatientDirectiveApp> createState() => _PatientDirectiveAppState();
@@ -40,60 +41,65 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           GoRoute(
             path: Routes.welcome,
             pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: WelcomeView.page()),
+                buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
           ),
           GoRoute(
             path: Routes.positiveAspects,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: PositiveAspects.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<PositiveAspects>(
+                context: context, state: state, child: PositiveAspects.page()),
           ),
           GoRoute(
             path: Routes.addPositiveAspect,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: AddPositiveAspect.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<AddPositiveAspect>(
+                context: context, state: state, child: AddPositiveAspect.page()),
           ),
           GoRoute(
             path: Routes.negativeAspects,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: NegativeAspects.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<NegativeAspects>(
+                context: context, state: state, child: NegativeAspects.page()),
           ),
           GoRoute(
             path: Routes.evaluateCurrentAspects,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: EvaluateCurrentAspects.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<EvaluateCurrentAspects>(
+                context: context, state: state, child: EvaluateCurrentAspects.page()),
           ),
           GoRoute(
             path: Routes.generalTreatmentObjective,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: GeneralTreatmentObjective.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<GeneralTreatmentObjective>(
+                context: context, state: state, child: GeneralTreatmentObjective.page()),
           ),
           GoRoute(
             path: Routes.treatmentActivities,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: TreatmentActivities.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<TreatmentActivities>(
+                context: context, state: state, child: TreatmentActivities.page()),
           ),
           GoRoute(
             path: Routes.futureSituations,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: FutureSituations.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<FutureSituations>(
+                context: context, state: state, child: FutureSituations.page()),
           ),
           GoRoute(
             path: Routes.trustedThirdParty,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: TrustedThirdParty.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<TrustedThirdParty>(
+                context: context, state: state, child: TrustedThirdParty.page()),
           ),
           GoRoute(
             path: Routes.generalInformationAboutPatientDirective,
-            pageBuilder: (context, state) => buildPageWithDefaultTransition(
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<GeneralInformationAboutPatientDirective>(
                 context: context, state: state, child: GeneralInformationAboutPatientDirective.page()),
           ),
           GoRoute(
             path: Routes.personalDetails,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition(context: context, state: state, child: PersonalDetails.page()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<PersonalDetails>(
+                context: context, state: state, child: PersonalDetails.page()),
+          ),
+          GoRoute(
+            path: Routes.pdf,
+            pageBuilder: (context, state) => buildPageWithDefaultTransition<DirectivePdfView>(
+                context: context, state: state, child: DirectivePdfView()),
           ),
         ],
-        redirect: (state) {
+        redirect: (context, state) {
           return null;
         });
   }
@@ -119,6 +125,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
       builder: (newContext, orientation, screenType) {
         return MaterialApp.router(
           scaffoldMessengerKey: _navigatorKey,
+          routeInformationProvider: _router.routeInformationProvider,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           title: 'DPV',
