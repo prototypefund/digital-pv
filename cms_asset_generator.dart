@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
-import 'package:pd_app/general/dynamic_content/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
 import 'package:pd_app/general/dynamic_content/json_serializable.dart';
-import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
 import 'package:pd_app/logging.dart';
 
 const List<String> locales = ['de', 'en'];
@@ -92,53 +92,33 @@ Future<void> _createLocalAssetFiles(String apiToken) async {
   final loader = CMSLoader(scheme: 'https', host: 'strapi.dpv.staging.deyan7.de', port: 443, apiToken: apiToken);
   final cmsDirectory = File('assets/cms/');
 
+  final List<Future> assetGenerationFutures = [];
   for (final String locale in locales) {
-    await CMSToAssetsCache().saveEntitiesToAssets(
-        baseDirectory: cmsDirectory,
-        entities: await loader.loadEntitiesFromCMS(
-            isSingleEntity: false,
-            locale: locale,
-            entityName: 'aspect-examples',
-            populateFields: 'example,example.contextual_help',
-            buildObjectFunction: (baseMap, attributesMap) => AspectsExample.fromCMSJson(baseMap, attributesMap),
-            queryParameters: {'filters[show_as_positive_aspect_example][\$eq]': 'true'}),
-        entityName: 'positive-aspects-examples',
-        locale: locale);
+    for (final ContentDefinition definition in CmsContentDefinitions.definitions) {
+      assetGenerationFutures.add(
+          _createLocalAssetFile(definition: definition, cmsDirectory: cmsDirectory, loader: loader, locale: locale));
+    }
+    logger.i('waiting for asset generation to complete');
+    await Future.wait<void>(assetGenerationFutures);
 
-    await CMSToAssetsCache().saveEntitiesToAssets(
-        baseDirectory: cmsDirectory,
-        entities: await loader.loadEntitiesFromCMS(
-            isSingleEntity: false,
-            locale: locale,
-            entityName: 'aspect-examples',
-            populateFields: 'example,example.contextual_help',
-            buildObjectFunction: (baseMap, attributesMap) => AspectsExample.fromCMSJson(baseMap, attributesMap),
-            queryParameters: {'filters[show_as_negative_aspect_example][\$eq]': 'true'}),
-        entityName: 'negative-aspects-examples',
-        locale: locale);
-
-    await CMSToAssetsCache().saveEntitiesToAssets(
-        baseDirectory: cmsDirectory,
-        entities: await loader.loadEntitiesFromCMS(
-            isSingleEntity: false,
-            locale: locale,
-            entityName: 'aspect-examples',
-            populateFields: 'example,example.contextual_help',
-            buildObjectFunction: (baseMap, attributesMap) => AspectsExample.fromCMSJson(baseMap, attributesMap),
-            queryParameters: {'filters[show_as_future_situation_example][\$eq]': 'true'}),
-        entityName: 'future-situations-examples',
-        locale: locale);
-
-    await CMSToAssetsCache().saveEntitiesToAssets(
-        baseDirectory: cmsDirectory,
-        entities: await loader.loadEntitiesFromCMS(
-            isSingleEntity: true,
-            locale: locale,
-            entityName: 'positive-aspects-page',
-            populateFields: '',
-            buildObjectFunction: (baseMap, attributesMap) => PositiveAspectsPage.fromCMSJson(attributesMap),
-            queryParameters: {}),
-        entityName: 'positive-aspects-page',
-        locale: locale);
+    logger.i('asset generation done');
   }
+}
+
+Future<void> _createLocalAssetFile(
+    {required ContentDefinition definition,
+    required File cmsDirectory,
+    required CMSLoader loader,
+    required String locale}) async {
+  await CMSToAssetsCache().saveEntitiesToAssets(
+      baseDirectory: cmsDirectory,
+      entities: await loader.loadEntitiesFromCMS(
+          isSingleEntity: definition.isSingleEntity,
+          locale: locale,
+          entityName: definition.cmsEntityName,
+          populateFields: definition.fieldsToPopulate.join(','),
+          buildObjectFunction: definition.buildObjectFunction,
+          queryParameters: definition.queryParameters),
+      entityName: definition.localEntityName,
+      locale: locale);
 }
