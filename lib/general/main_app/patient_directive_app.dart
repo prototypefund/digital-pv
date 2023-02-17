@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/themes/themes.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view.dart';
@@ -145,6 +146,9 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
 
     if (!getIt.isRegistered<L10n>()) {
       getIt.registerFactory(() => L10n.of(context));
+    }
+    if (!getIt.isRegistered<ContentService>()) {
+      getIt.registerSingleton(ContentService(locale: L10n.of(context).localeName));
     }
   }
 }

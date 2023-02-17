@@ -1,0 +1,32 @@
+[
+  {
+    "example": {
+      "id": 10,
+      "group": "Familie",
+      "title": "Tod des Partners",
+      "contextual_help": null
+    },
+    "id": 10,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 11,
+      "group": "Schmerzen",
+      "title": "Rückenschmerzen",
+      "contextual_help": null
+    },
+    "id": 11,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 12,
+      "group": "Lebenssituation",
+      "title": "Finanzielle Sorgen",
+      "contextual_help": null
+    },
+    "id": 12,
+    "locale": "de"
+  }
+]

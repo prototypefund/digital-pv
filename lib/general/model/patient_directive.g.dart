@@ -7,17 +7,15 @@ part of 'patient_directive.dart';
 // **************************************************************************
 
 PatientDirective _$PatientDirectiveFromJson(Map<String, dynamic> json) => PatientDirective(
-      positiveAspects: (json['positiveAspects'] as List<dynamic>)
-          .map((dynamic e) => Aspect.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      positiveAspects:
+          (json['positiveAspects'] as List<dynamic>).map((e) => Aspect.fromJson(e as Map<String, dynamic>)).toList(),
       futureSituationAspects: (json['futureSituationAspects'] as List<dynamic>)
-          .map((dynamic e) => FutureSituation.fromJson(e as Map<String, dynamic>))
+          .map((e) => FutureSituation.fromJson(e as Map<String, dynamic>))
           .toList(),
-      negativeAspects: (json['negativeAspects'] as List<dynamic>)
-          .map((dynamic e) => Aspect.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      negativeAspects:
+          (json['negativeAspects'] as List<dynamic>).map((e) => Aspect.fromJson(e as Map<String, dynamic>)).toList(),
       personsOfTrust: (json['personsOfTrust'] as List<dynamic>?)
-              ?.map((dynamic e) => PersonOfTrust.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => PersonOfTrust.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       generalTreatmentGoal: json['generalTreatmentGoal'] == null

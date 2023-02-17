@@ -1,0 +1,82 @@
+[
+  {
+    "example": {
+      "id": 1,
+      "group": "Familie",
+      "title": "Zeit mit der Familie verbringen",
+      "contextual_help": null
+    },
+    "id": 1,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 2,
+      "group": "Familie",
+      "title": "Mein Haustier",
+      "contextual_help": null
+    },
+    "id": 2,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 4,
+      "group": "Freizeit",
+      "title": "Persönliche Kontakte pflegen",
+      "contextual_help": null
+    },
+    "id": 4,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 5,
+      "group": "Freizeit",
+      "title": "Mein Zuhause",
+      "contextual_help": null
+    },
+    "id": 5,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 6,
+      "group": "Arbeit",
+      "title": "Meine Arbeit",
+      "contextual_help": null
+    },
+    "id": 6,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 7,
+      "group": "Arbeit",
+      "title": "Bücher schreiben",
+      "contextual_help": null
+    },
+    "id": 7,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 8,
+      "group": "Sport",
+      "title": "Joggen",
+      "contextual_help": null
+    },
+    "id": 8,
+    "locale": "de"
+  },
+  {
+    "example": {
+      "id": 9,
+      "group": "Sport",
+      "title": "Radfahren",
+      "contextual_help": null
+    },
+    "id": 9,
+    "locale": "de"
+  }
+]

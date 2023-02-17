@@ -1,0 +1,22 @@
+[
+  {
+    "example": {
+      "id": 3,
+      "group": "Family",
+      "title": "Spend time with my family",
+      "contextual_help": null
+    },
+    "id": 3,
+    "locale": "en"
+  },
+  {
+    "example": {
+      "id": 19,
+      "group": "Family",
+      "title": "My pet",
+      "contextual_help": null
+    },
+    "id": 19,
+    "locale": "en"
+  }
+]

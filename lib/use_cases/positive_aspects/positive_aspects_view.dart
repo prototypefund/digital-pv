@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
-import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.dart';
@@ -19,25 +19,16 @@ class PositiveAspects extends StatelessWidget with Logging {
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: Paddings.headlinePadding,
-            child: Text(
-              context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectsHeadlineText),
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ),
-          Padding(
-            padding: Paddings.headlineExplanationPadding,
-            child: Text(
-              context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectsExplanationText),
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
+          MarkdownBody(
+              content: context.select((PositiveAspectsViewModel viewModel) => viewModel.pageContent).intro ?? ''),
           ChangeNotifierProvider.value(
               value: context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectListViewModel),
-              child: AspectList())
+              child: AspectList()),
+          const SizedBox(
+            height: 24,
+          ),
+          MarkdownBody(
+              content: context.select((PositiveAspectsViewModel viewModel) => viewModel.pageContent).outro ?? ''),
         ],
       ),
     );
