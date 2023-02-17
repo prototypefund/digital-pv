@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/l10n_de.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pd_app/general/dynamic_content/cms_cache.dart';
+import 'package:pd_app/general/dynamic_content/cms_content_definitions.dart';
 import 'package:pd_app/general/main_app/patient_directive_app.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/services/content_service.dart';
@@ -20,7 +21,7 @@ void main() {
     await GetIt.instance.reset();
     GetIt.instance.registerSingleton(PatientDirectiveService());
     GetIt.instance.registerSingleton(l10n);
-    GetIt.instance.registerSingleton(CMSCache());
+    GetIt.instance.registerSingleton(CMSCache(definitions: CmsContentDefinitions.definitions));
     contentService = ContentService(locale: l10n.localeName);
     await contentService.reloadContent();
     GetIt.instance.registerSingleton(contentService);

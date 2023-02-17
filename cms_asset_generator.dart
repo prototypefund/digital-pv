@@ -117,7 +117,7 @@ Future<void> _createLocalAssetFile(
           locale: locale,
           entityName: definition.cmsEntityName,
           populateFields: definition.fieldsToPopulate.join(','),
-          buildObjectFunction: definition.buildObjectFunction,
+          buildObjectFunction: definition.cmsLoadingFunction,
           queryParameters: definition.queryParameters),
       entityName: definition.localEntityName,
       locale: locale);
