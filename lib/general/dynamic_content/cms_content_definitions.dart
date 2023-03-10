@@ -1,5 +1,6 @@
 import 'package:pd_app/general/dynamic_content/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
+import 'package:pd_app/general/dynamic_content/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
 
 mixin CmsContentDefinitions {
@@ -39,10 +40,20 @@ mixin CmsContentDefinitions {
       assetLoadingFunction: (json) => PositiveAspectsPage.fromJson(json),
       queryParameters: {});
 
+  static ContentDefinition<Onboarding> onboardingPage = ContentDefinition<Onboarding>(
+      isSingleEntity: true,
+      cmsEntityName: 'onboarding',
+      fieldsToPopulate: ['pages', 'pages.logo'],
+      cmsLoadingFunction: (baseMap, attributesMap) => Onboarding.fromCMSJson(attributesMap),
+      localEntityName: 'onboarding',
+      assetLoadingFunction: (json) => Onboarding.fromJson(json),
+      queryParameters: {});
+
   static List<ContentDefinition> definitions = [
     positiveAspectExamples,
     negativeAspectExamples,
     futureSituationExamples,
     positiveAspectPage,
+    onboardingPage
   ];
 }
