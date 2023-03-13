@@ -58,31 +58,16 @@ void main() {
         findsOneWidget);
     expect(find.text('Testen von Anwendungen', skipOffstage: false), findsNothing);
 
-    await tester.ensureVisible(find.text(l10n.addPositiveAspectCallToAction));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.addPositiveAspectCallToAction));
-    await tester.pumpAndSettle();
-
-    // go to add positive aspect and add a new one
-    expect(find.text(l10n.addPositiveAspectTextFieldHint, skipOffstage: false), findsOneWidget);
-    await tester.ensureVisible(find.text(l10n.addPositiveAspectTextFieldHint));
+    //  add a new positive aspect
+    expect(find.text(contentService.positiveAspectsPage.addAspectWidget.emptyTextFieldHint, skipOffstage: false),
+        findsOneWidget);
+    await tester.ensureVisible(find.text(contentService.positiveAspectsPage.addAspectWidget.emptyTextFieldHint));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), 'Testen von Anwendungen');
-    await tester.ensureVisible(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.ensureVisible(find.text(contentService.positiveAspectsPage.addAspectWidget.addAspectActionLabel));
     await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.addPositiveAspectCallToAction));
+    await tester.tap(find.text(contentService.positiveAspectsPage.addAspectWidget.addAspectActionLabel));
     await tester.pumpAndSettle();
-
-    // go to add positive aspect and hit back button
-    await tester.ensureVisible(find.text(l10n.addPositiveAspectCallToAction));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.addPositiveAspectCallToAction));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.navigationBack));
-    await tester.pumpAndSettle();
-
-    // should still have exactly one entry of the new aspect
-    expect(find.text('Testen von Anwendungen', skipOffstage: false), findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
