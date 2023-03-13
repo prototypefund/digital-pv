@@ -99,7 +99,14 @@ void main() {
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
-    expect(find.text("Was wäre wenn?"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.futureSituationsPage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == (contentService.futureSituationsPage.outro ?? '')),
+        findsOneWidget);
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
@@ -130,7 +137,14 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Was wäre wenn?"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.futureSituationsPage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == (contentService.futureSituationsPage.outro ?? '')),
+        findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

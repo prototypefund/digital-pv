@@ -13,17 +13,17 @@ class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
   final ContentService _contentService;
 
   @override
-  String get addAspectActionText => "Zukünftige Situation hinzufügen";
+  String get addAspectActionText => _contentService.futureSituationsPage.addAspectWidget.addAspectActionLabel;
 
   @override
-  String get addAspectTextfieldHint => l10n.addFutureSituationAspectTextfieldHint;
+  String get addAspectTextfieldHint => _contentService.futureSituationsPage.addAspectWidget.emptyTextFieldHint;
 
   @override
   AspectListChoice<FutureSituation> get aspectListChoice =>
       (PatientDirective directive) => directive.futureSituationAspects;
 
   @override
-  String get examplesText => l10n.examples;
+  String get examplesText => _contentService.futureSituationsPage.examplesTitle;
 
   @override
   FutureSituation createNewAspect({required String name, required Weight weight}) {

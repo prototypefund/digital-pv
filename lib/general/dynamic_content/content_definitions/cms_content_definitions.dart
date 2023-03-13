@@ -1,5 +1,6 @@
 import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/future_situations_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
@@ -58,6 +59,15 @@ mixin CmsConfiguration {
       assetLoadingFunction: (json) => NegativeAspectsPage.fromJson(json),
       queryParameters: {});
 
+  static ContentDefinition<FutureSituationsPage> futureSituationsPage = ContentDefinition<FutureSituationsPage>(
+      isSingleEntity: true,
+      cmsEntityName: 'future-situations-page',
+      fieldsToPopulate: ["add_aspect_widget", "aspect_list_widget"],
+      cmsLoadingFunction: (baseMap, attributesMap) => FutureSituationsPage.fromCMSJson(attributesMap),
+      localEntityName: 'future-situations-page',
+      assetLoadingFunction: (json) => FutureSituationsPage.fromJson(json),
+      queryParameters: {});
+
   static ContentDefinition<Onboarding> onboarding = ContentDefinition<Onboarding>(
       isSingleEntity: true,
       cmsEntityName: 'onboarding',
@@ -73,6 +83,7 @@ mixin CmsConfiguration {
     futureSituationExamples,
     positiveAspectPage,
     negativeAspectsPage,
+    futureSituationsPage,
     onboarding
   ];
 }

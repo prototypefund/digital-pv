@@ -3,6 +3,7 @@ import 'package:pd_app/general/dynamic_content/components/add_aspect_widget.dart
 import 'package:pd_app/general/dynamic_content/components/aspect_list_widget.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/future_situations_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
@@ -54,6 +55,24 @@ class ContentService with Logging, ChangeNotifier {
   NegativeAspectsPage get negativeAspectsPage =>
       _cmsCache.value<NegativeAspectsPage>(contentDefinition: CmsConfiguration.negativeAspectsPage, defaultValue: [
         NegativeAspectsPage(
+            intro: null,
+            outro: null,
+            locale: locale,
+            examplesTitle: '',
+            aspectListWidget: AspectListWidget(
+                deleteConfirmationQuestion: '',
+                lowSignificanceLabel: '',
+                highSignificanceLabel: '',
+                deleteConfirmationCancel: '',
+                deleteConfirmationConfirm: '',
+                emptyListMessage: ''),
+            addAspectWidget: AddAspectWidget(
+                emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))
+      ]).first;
+
+  FutureSituationsPage get futureSituationsPage =>
+      _cmsCache.value<FutureSituationsPage>(contentDefinition: CmsConfiguration.futureSituationsPage, defaultValue: [
+        FutureSituationsPage(
             intro: null,
             outro: null,
             locale: locale,
