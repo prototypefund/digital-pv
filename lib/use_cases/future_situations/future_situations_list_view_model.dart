@@ -8,9 +8,6 @@ class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation>
   FutureSituationsListViewModel();
 
   @override
-  String get addAspectCallToActionText => l10n.addFutureSituationCallToAction;
-
-  @override
   String get emptyAspectListsMessageText => l10n.futureSituationsEmptyText;
 
   @override
@@ -19,9 +16,6 @@ class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation>
 
   @override
   bool get showTreatmentOptions => true;
-
-  @override
-  bool get showAddAspectCallToAction => false;
 
   @override
   void onAddAspectCallToActionPressed(BuildContext context) {}

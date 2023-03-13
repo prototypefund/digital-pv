@@ -57,13 +57,6 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
                 initialItemCount: viewModel.aspects.length,
                 itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
               )),
-        if (viewModel.showAddAspectCallToAction)
-          Padding(
-            padding: Paddings.callToActionPadding,
-            child: ElevatedButton(
-                onPressed: viewModel.addAspectCallToActionPressed(context),
-                child: Text(viewModel.addAspectCallToActionText)),
-          ),
       ],
     );
   }

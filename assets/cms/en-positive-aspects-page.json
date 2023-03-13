@@ -2,6 +2,19 @@
   {
     "locale": "en",
     "intro": "# What brings me joy\n\nIdentify aspects of your life that bring you joy.",
-    "outro": null
+    "aspectListWidget": {
+      "delete_confirmation_question": "Are you sure you want to delete this positive aspect?",
+      "low_significance_label": "Low Significance",
+      "high_significance_label": "High Significance",
+      "empty_list_message": "No positive aspects were added"
+    },
+    "addAspectWidget": {
+      "empty_textfield_hint": "Positive Aspect",
+      "low_significance_label": "Low Significance",
+      "high_significance_label": "High Significance",
+      "add_aspect_action_label": "Add Positive Aspect"
+    },
+    "outro": null,
+    "examples_title": "Examples"
   }
 ]

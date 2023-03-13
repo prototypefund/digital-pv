@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 
 class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
-  PositiveAspectsListViewModel();
+  PositiveAspectsListViewModel() {
+    _contentService.addListener(notifyListeners);
+  }
 
-  @override
-  String get addAspectCallToActionText => l10n.addPositiveAspectCallToAction;
+  final ContentService _contentService = getIt.get();
 
   @override
   String get emptyAspectListsMessageText => l10n.positiveAspectsEmptyText;
@@ -18,9 +21,6 @@ class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
 
   @override
   bool get showTreatmentOptions => false;
-
-  @override
-  bool get showAddAspectCallToAction => false;
 
   @override
   void onAddAspectCallToActionPressed(BuildContext context) {}
@@ -34,5 +34,11 @@ class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
   @override
   String getRemoveAspectConfirmationQuestionLocalization(String aspectName) {
     return l10n.removePositiveAspectConfirmationQuestion(aspectName);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _contentService.removeListener(notifyListeners);
   }
 }

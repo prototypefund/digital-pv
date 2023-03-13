@@ -24,10 +24,6 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
 
   String get examplesText;
 
-  String get addAspectTitle;
-
-  String get addAspectExplanation;
-
   @override
   void dispose() {
     super.dispose();

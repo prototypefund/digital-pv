@@ -13,16 +13,10 @@ class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
   final ContentService _contentService;
 
   @override
-  String get addAspectActionText => l10n.addFutureSituationCallToAction;
-
-  @override
-  String get addAspectExplanation => l10n.addPositiveAspectExplanation;
+  String get addAspectActionText => "Zukünftige Situation hinzufügen";
 
   @override
   String get addAspectTextfieldHint => l10n.addFutureSituationAspectTextfieldHint;
-
-  @override
-  String get addAspectTitle => l10n.addFutureSituationAspect;
 
   @override
   AspectListChoice<FutureSituation> get aspectListChoice =>

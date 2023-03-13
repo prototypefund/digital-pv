@@ -8,9 +8,6 @@ class NegativeAspectsListViewModel extends AspectListViewModel<Aspect> {
   NegativeAspectsListViewModel();
 
   @override
-  String get addAspectCallToActionText => l10n.addNegativeAspectCallToAction;
-
-  @override
   String get emptyAspectListsMessageText => l10n.negativeAspectsEmptyText;
 
   @override
@@ -18,9 +15,6 @@ class NegativeAspectsListViewModel extends AspectListViewModel<Aspect> {
 
   @override
   bool get showTreatmentOptions => false;
-
-  @override
-  bool get showAddAspectCallToAction => false;
 
   @override
   String get removeAspectConfirmationCancel => l10n.removeNegativeAspectConfirmationCancel;

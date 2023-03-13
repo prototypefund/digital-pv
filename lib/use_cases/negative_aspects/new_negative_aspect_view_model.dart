@@ -16,16 +16,10 @@ class NewNegativeAspectViewModel extends NewAspectViewModel<Aspect> {
   final ContentService _contentService;
 
   @override
-  String get addAspectActionText => l10n.addNegativeAspectCallToAction;
-
-  @override
-  String get addAspectExplanation => l10n.addNegativeAspectExplanation;
+  String get addAspectActionText => "Negativen Aspekt hinzufügen";
 
   @override
   String get addAspectTextfieldHint => l10n.addNegativeAspectTextFieldHint;
-
-  @override
-  String get addAspectTitle => l10n.addNegativeAspect;
 
   @override
   AspectListChoice<Aspect> get aspectListChoice => (PatientDirective directive) => directive.negativeAspects;

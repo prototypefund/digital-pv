@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:pd_app/general/dynamic_content/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/cms_cache.dart';
 import 'package:pd_app/general/dynamic_content/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/components/add_aspect_widget.dart';
+import 'package:pd_app/general/dynamic_content/components/aspect_list_widget.dart';
 import 'package:pd_app/general/dynamic_content/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
@@ -30,9 +32,21 @@ class ContentService with Logging, ChangeNotifier {
         .value<AspectsExample>(contentDefinition: CmsConfiguration.futureSituationExamples, defaultValue: []);
   }
 
-  PositiveAspectsPage get positiveAspectsPage => _cmsCache.value<PositiveAspectsPage>(
-      contentDefinition: CmsConfiguration.positiveAspectPage,
-      defaultValue: [PositiveAspectsPage(intro: null, outro: null, locale: locale)]).first;
+  PositiveAspectsPage get positiveAspectsPage =>
+      _cmsCache.value<PositiveAspectsPage>(contentDefinition: CmsConfiguration.positiveAspectPage, defaultValue: [
+        PositiveAspectsPage(
+            intro: null,
+            outro: null,
+            locale: locale,
+            examplesTitle: '',
+            aspectListWidget: AspectListWidget(
+                deleteConfirmationQuestion: '',
+                lowSignificanceLabel: '',
+                highSignificanceLabel: '',
+                emptyListMessage: ''),
+            addAspectWidget: AddAspectWidget(
+                emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))
+      ]).first;
 
   Onboarding get onboarding => _cmsCache.value<Onboarding>(
       contentDefinition: CmsConfiguration.onboarding,

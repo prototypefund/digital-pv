@@ -4,9 +4,6 @@
   "positiveAspectsEmptyText": "Bisher wurden noch keine positiven Aspekte angegeben.",
   "negativeAspectsEmptyText": "Bisher wurden noch keine negativen Aspekte angegeben.",
   "futureSituationsEmptyText": "Bisher wurden noch keine zukünfigen Situationen angegeben.",
-  "addPositiveAspectCallToAction": "Positiven Aspekt hinzufügen",
-  "addNegativeAspectCallToAction": "Negativen Aspekt hinzufügen",
-  "addFutureSituationCallToAction": "Zukünfige Situation hinzufügen",
   "addPositiveAspectNavigationButton": "Aspekt hinzufügen",
   "addPositiveAspectTextFieldHint": "Positiver Aspekt",
   "addNegativeAspectTextFieldHint": "Negativer Aspekt",
@@ -48,8 +45,6 @@
   "navigationSkip": "Überspringen",
   "examples": "Beispiele",
   "addPositiveAspectTitle": "Aspekt hinzufügen",
-  "addPositiveAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht",
-  "addNegativeAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihre Lebensqualität aktuell negativ beeinflusst",
   "addTreatmentActivitiesTitle": "Meine Behandlungswünsche",
   "addTreatmentActivitiesExplanation": "Hier können Sie optional zu ihrem Behandlungsziel ({treatmentGoal}) bestimmte Maßnahmen festlegen.",
   "@addTreatmentActivitiesExplanation": {

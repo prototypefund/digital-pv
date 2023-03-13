@@ -42,7 +42,7 @@ mixin CmsConfiguration {
   static ContentDefinition<PositiveAspectsPage> positiveAspectPage = ContentDefinition<PositiveAspectsPage>(
       isSingleEntity: true,
       cmsEntityName: 'positive-aspects-page',
-      fieldsToPopulate: [],
+      fieldsToPopulate: ["add_positive_aspect_widget", "aspect_list_widget"],
       cmsLoadingFunction: (baseMap, attributesMap) => PositiveAspectsPage.fromCMSJson(attributesMap),
       localEntityName: 'positive-aspects-page',
       assetLoadingFunction: (json) => PositiveAspectsPage.fromJson(json),
