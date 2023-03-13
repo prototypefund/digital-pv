@@ -27,7 +27,7 @@ class _WelcomeViewState extends State<WelcomeView> {
   @override
   Widget build(BuildContext context) {
     _viewModel = context.watch();
-    WelcomeViewPageController _controller = _viewModel.pageController;
+    final WelcomeViewPageController controller = _viewModel.pageController;
 
     return Scaffold(
       body: SafeArea(
@@ -37,10 +37,10 @@ class _WelcomeViewState extends State<WelcomeView> {
               flex: 3,
               child: PageView.builder(
                 controller: _viewModel.pageController,
-                onPageChanged: (value) => setState(() => _controller.currentPage = value),
+                onPageChanged: (value) => setState(() => controller.currentPage = value),
                 itemCount: _viewModel.pageController.numberOfPages,
                 itemBuilder: (context, pageIndex) {
-                  final viewModel = _controller.modelAtIndex(pageIndex);
+                  final viewModel = controller.modelAtIndex(pageIndex);
                   return Padding(
                     padding: EdgeInsets.fromLTRB(10.0.w, 4.0.h, 10.0.w, 2.0.h),
                     child: Column(
@@ -66,7 +66,7 @@ class _WelcomeViewState extends State<WelcomeView> {
               flex: 0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [if (_controller.isLastPage) _lastPage(_viewModel, context) else _firstPages(context)],
+                children: [if (controller.isLastPage) _lastPage(_viewModel, context) else _firstPages(context)],
               ),
             ),
           ],
