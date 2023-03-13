@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:logger/logger.dart';
-import 'package:pd_app/general/dynamic_content/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/cms_content_definitions.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_asset_generator.dart';
 
 const List<String> locales = ['de', 'en'];

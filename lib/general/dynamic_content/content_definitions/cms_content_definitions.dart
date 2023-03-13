@@ -1,8 +1,9 @@
-import 'package:pd_app/general/dynamic_content/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
-import 'package:pd_app/general/dynamic_content/onboarding.dart';
-import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
 
 mixin CmsConfiguration {
   static const String scheme = 'https';
@@ -42,10 +43,19 @@ mixin CmsConfiguration {
   static ContentDefinition<PositiveAspectsPage> positiveAspectPage = ContentDefinition<PositiveAspectsPage>(
       isSingleEntity: true,
       cmsEntityName: 'positive-aspects-page',
-      fieldsToPopulate: ["add_positive_aspect_widget", "aspect_list_widget"],
+      fieldsToPopulate: ["add_aspect_widget", "aspect_list_widget"],
       cmsLoadingFunction: (baseMap, attributesMap) => PositiveAspectsPage.fromCMSJson(attributesMap),
       localEntityName: 'positive-aspects-page',
       assetLoadingFunction: (json) => PositiveAspectsPage.fromJson(json),
+      queryParameters: {});
+
+  static ContentDefinition<NegativeAspectsPage> negativeAspectsPage = ContentDefinition<NegativeAspectsPage>(
+      isSingleEntity: true,
+      cmsEntityName: 'negative-aspects-page',
+      fieldsToPopulate: ["add_aspect_widget", "aspect_list_widget"],
+      cmsLoadingFunction: (baseMap, attributesMap) => NegativeAspectsPage.fromCMSJson(attributesMap),
+      localEntityName: 'negative-aspects-page',
+      assetLoadingFunction: (json) => NegativeAspectsPage.fromJson(json),
       queryParameters: {});
 
   static ContentDefinition<Onboarding> onboarding = ContentDefinition<Onboarding>(
@@ -62,6 +72,7 @@ mixin CmsConfiguration {
     negativeAspectExamples,
     futureSituationExamples,
     positiveAspectPage,
+    negativeAspectsPage,
     onboarding
   ];
 }

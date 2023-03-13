@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
-import 'package:pd_app/general/dynamic_content/aspects_example.dart';
-import 'package:pd_app/general/dynamic_content/cms_cache.dart';
-import 'package:pd_app/general/dynamic_content/cms_content_definitions.dart';
 import 'package:pd_app/general/dynamic_content/components/add_aspect_widget.dart';
 import 'package:pd_app/general/dynamic_content/components/aspect_list_widget.dart';
-import 'package:pd_app/general/dynamic_content/onboarding.dart';
-import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/loading/cms_cache.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/logging.dart';
 
@@ -43,6 +44,26 @@ class ContentService with Logging, ChangeNotifier {
                 deleteConfirmationQuestion: '',
                 lowSignificanceLabel: '',
                 highSignificanceLabel: '',
+                deleteConfirmationCancel: '',
+                deleteConfirmationConfirm: '',
+                emptyListMessage: ''),
+            addAspectWidget: AddAspectWidget(
+                emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))
+      ]).first;
+
+  NegativeAspectsPage get negativeAspectsPage =>
+      _cmsCache.value<NegativeAspectsPage>(contentDefinition: CmsConfiguration.negativeAspectsPage, defaultValue: [
+        NegativeAspectsPage(
+            intro: null,
+            outro: null,
+            locale: locale,
+            examplesTitle: '',
+            aspectListWidget: AspectListWidget(
+                deleteConfirmationQuestion: '',
+                lowSignificanceLabel: '',
+                highSignificanceLabel: '',
+                deleteConfirmationCancel: '',
+                deleteConfirmationConfirm: '',
                 emptyListMessage: ''),
             addAspectWidget: AddAspectWidget(
                 emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pd_app/general/dynamic_content/components/onboarding_page.dart';
-import 'package:pd_app/general/dynamic_content/json_serializable.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
+import 'package:pd_app/general/dynamic_content/loading/json_serializable.dart';
 
 part 'onboarding.g.dart';
 

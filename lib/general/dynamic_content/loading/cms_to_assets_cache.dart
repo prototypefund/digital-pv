@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:pd_app/general/dynamic_content/json_serializable.dart';
+import 'package:pd_app/general/dynamic_content/loading/json_serializable.dart';
 import 'package:pd_app/logging.dart';
 
 class CMSToAssetsCache with Logging {

@@ -1,4 +1,4 @@
-import 'package:pd_app/general/dynamic_content/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/patient_directive.dart';

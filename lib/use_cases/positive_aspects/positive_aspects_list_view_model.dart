@@ -14,7 +14,7 @@ class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
   final ContentService _contentService = getIt.get();
 
   @override
-  String get emptyAspectListsMessageText => l10n.positiveAspectsEmptyText;
+  String get emptyAspectListsMessageText => _contentService.positiveAspectsPage.aspectListWidget.emptyListMessage;
 
   @override
   AspectListChoice<Aspect> get aspectListChoice => (PatientDirective directive) => directive.positiveAspects;
@@ -26,14 +26,16 @@ class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
   void onAddAspectCallToActionPressed(BuildContext context) {}
 
   @override
-  String get removeAspectConfirmationCancel => l10n.removePositiveAspectConfirmationCancel;
+  String get removeAspectConfirmationCancel =>
+      _contentService.positiveAspectsPage.aspectListWidget.deleteConfirmationCancel;
 
   @override
-  String get removeAspectConfirmationRemove => l10n.removePositiveAspectConfirmationRemove;
+  String get removeAspectConfirmationRemove =>
+      _contentService.positiveAspectsPage.aspectListWidget.deleteConfirmationConfirm;
 
   @override
   String getRemoveAspectConfirmationQuestionLocalization(String aspectName) {
-    return l10n.removePositiveAspectConfirmationQuestion(aspectName);
+    return _contentService.positiveAspectsPage.aspectListWidget.deleteConfirmationQuestion;
   }
 
   @override

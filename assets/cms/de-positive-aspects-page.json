@@ -4,6 +4,8 @@
     "intro": "# Was macht mir Freude?\n\nBestimmen Sie Aspekte aus Ihrem Leben, die Ihnen Freude machen.",
     "aspectListWidget": {
       "delete_confirmation_question": "Soll der positive Aspekt wirklich entfernt werden?",
+      "delete_confirmation_cancel": "Abbrechen",
+      "delete_confirmation_confirm": "Positiven Aspekt entfernen",
       "low_significance_label": "Geringe Bedeutung",
       "high_significance_label": "Hohe Bedeutung",
       "empty_list_message": "Bisher wurden noch keine positiven Aspekte angegeben"

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n_de.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pd_app/general/dynamic_content/cms_cache.dart';
-import 'package:pd_app/general/dynamic_content/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/loading/cms_cache.dart';
 import 'package:pd_app/general/main_app/patient_directive_app.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/services/content_service.dart';
@@ -71,8 +71,14 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
-
-    expect(find.text("Was bereitet mir Kummer?"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.negativeAspectsPage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == (contentService.negativeAspectsPage.outro ?? '')),
+        findsOneWidget);
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
@@ -140,7 +146,14 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Was bereitet mir Kummer?"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.negativeAspectsPage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == (contentService.negativeAspectsPage.outro ?? '')),
+        findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
@@ -150,7 +163,7 @@ void main() {
         findsOneWidget);
     expect(
         find.byWidgetPredicate(
-            (widget) => widget is MarkdownBody && widget.content == contentService.positiveAspectsPage.outro),
+            (widget) => widget is MarkdownBody && widget.content == (contentService.positiveAspectsPage.outro ?? '')),
         findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));

@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pd_app/general/dynamic_content/components/add_aspect_widget.dart';
 import 'package:pd_app/general/dynamic_content/components/aspect_list_widget.dart';
-import 'package:pd_app/general/dynamic_content/json_serializable.dart';
+import 'package:pd_app/general/dynamic_content/loading/json_serializable.dart';
 
-part 'positive_aspects_page.g.dart';
+part 'negative_aspects_page.g.dart';
 
 @JsonSerializable()
-class PositiveAspectsPage with SerializableAsset {
-  PositiveAspectsPage(
+class NegativeAspectsPage with SerializableAsset {
+  NegativeAspectsPage(
       {required this.intro,
       required this.examplesTitle,
       required this.aspectListWidget,
@@ -15,14 +15,14 @@ class PositiveAspectsPage with SerializableAsset {
       required this.locale,
       required this.addAspectWidget});
 
-  factory PositiveAspectsPage.fromJson(Map<String, dynamic> json) => _$PositiveAspectsPageFromJson(json);
+  factory NegativeAspectsPage.fromJson(Map<String, dynamic> json) => _$NegativeAspectsPageFromJson(json);
 
-  factory PositiveAspectsPage.fromCMSJson(Map<String, dynamic> attributesJson) => PositiveAspectsPage(
+  factory NegativeAspectsPage.fromCMSJson(Map<String, dynamic> attributesJson) => NegativeAspectsPage(
       intro: attributesJson['intro'] as String?,
       outro: attributesJson['outro'] as String?,
       examplesTitle: attributesJson['examples_title'] as String,
       aspectListWidget: AspectListWidget.fromJson(attributesJson['aspect_list_widget'] as Map<String, dynamic>),
-      addAspectWidget: AddAspectWidget.fromJson(attributesJson['add_positive_aspect_widget'] as Map<String, dynamic>),
+      addAspectWidget: AddAspectWidget.fromJson(attributesJson['add_aspect_widget'] as Map<String, dynamic>),
       locale: attributesJson['locale'] as String);
 
   final String locale;
@@ -39,5 +39,5 @@ class PositiveAspectsPage with SerializableAsset {
   final String examplesTitle;
 
   @override
-  Map<String, dynamic> toJson() => _$PositiveAspectsPageToJson(this);
+  Map<String, dynamic> toJson() => _$NegativeAspectsPageToJson(this);
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
-import 'package:pd_app/general/dynamic_content/json_serializable.dart';
+import 'package:pd_app/general/dynamic_content/loading/json_serializable.dart';
 import 'package:pd_app/logging.dart';
 
 class CMSCache with Logging {

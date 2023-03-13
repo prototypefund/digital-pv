@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
-import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';

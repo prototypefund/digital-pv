@@ -1,6 +1,6 @@
 // ignore_for_file: unused_import
 
-import 'package:pd_app/general/dynamic_content/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
@@ -16,16 +16,16 @@ class NewNegativeAspectViewModel extends NewAspectViewModel<Aspect> {
   final ContentService _contentService;
 
   @override
-  String get addAspectActionText => "Negativen Aspekt hinzufügen";
+  String get addAspectActionText => _contentService.negativeAspectsPage.addAspectWidget.addAspectActionLabel;
 
   @override
-  String get addAspectTextfieldHint => l10n.addNegativeAspectTextFieldHint;
+  String get addAspectTextfieldHint => _contentService.negativeAspectsPage.addAspectWidget.emptyTextFieldHint;
 
   @override
   AspectListChoice<Aspect> get aspectListChoice => (PatientDirective directive) => directive.negativeAspects;
 
   @override
-  String get examplesText => l10n.examples;
+  String get examplesText => _contentService.negativeAspectsPage.examplesTitle;
 
   @override
   Aspect createNewAspect({required String name, required Weight weight}) {

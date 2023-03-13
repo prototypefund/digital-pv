@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
-import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view_model.dart';
@@ -22,17 +22,8 @@ class NegativeAspects extends StatelessWidget {
         widget: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: Paddings.headlinePadding,
-          child: Text(viewModel.negativeAspectsTitle, style: Theme.of(context).textTheme.headlineSmall),
-        ),
-        Padding(
-          padding: Paddings.headlineExplanationPadding,
-          child: Text(
-            viewModel.negativeAspectsTitleExplanation,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
+        MarkdownBody(
+            content: context.select((NegativeAspectsViewModel viewModel) => viewModel.pageContent).intro ?? ''),
         ChangeNotifierProvider.value(
             value: context.select((NegativeAspectsViewModel viewModel) => viewModel.negativeAspectsListViewModel),
             child: AspectList()),
@@ -40,7 +31,12 @@ class NegativeAspects extends StatelessWidget {
           height: 20,
         ),
         ChangeNotifierProvider.value(
-            value: viewModel.newNegativeAspectViewModel, child: NewAspect<NewNegativeAspectViewModel>())
+            value: viewModel.newNegativeAspectViewModel, child: NewAspect<NewNegativeAspectViewModel>()),
+        const SizedBox(
+          height: 20,
+        ),
+        MarkdownBody(
+            content: context.select((NegativeAspectsViewModel viewModel) => viewModel.pageContent).outro ?? ''),
       ],
     ));
   }
