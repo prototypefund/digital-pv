@@ -7,9 +7,9 @@ part of 'onboarding.dart';
 // **************************************************************************
 
 Onboarding _$OnboardingFromJson(Map<String, dynamic> json) => Onboarding(
-      skipLabel: json['skipLabel'] as String?,
+      skipLabel: json['skipLabel'] as String,
       pages: (json['pages'] as List<dynamic>).map((e) => OnboardingPage.fromJson(e as Map<String, dynamic>)).toList(),
-      nextButtonLabel: json['nextButtonLabel'] as String?,
+      nextButtonLabel: json['nextButtonLabel'] as String,
       callToActionLabel: json['callToActionLabel'] as String,
     );
 

@@ -1,9 +1,17 @@
 import 'package:pd_app/general/dynamic_content/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
+import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
 import 'package:pd_app/general/dynamic_content/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
 
-mixin CmsContentDefinitions {
+mixin CmsConfiguration {
+  static const String scheme = 'https';
+  static const String host = 'strapi.dpv.staging.deyan7.de';
+  static const int port = 443;
+  static const String cmsDirectoryPath = 'assets/cms/';
+
+  static CmsConfig cmsConfig =
+      CmsConfig(assetBasePath: cmsDirectoryPath, baseUri: Uri(scheme: scheme, host: host, port: port));
   static ContentDefinition<AspectsExample> positiveAspectExamples = ContentDefinition<AspectsExample>(
       isSingleEntity: false,
       cmsEntityName: 'aspect-examples',
@@ -40,11 +48,11 @@ mixin CmsContentDefinitions {
       assetLoadingFunction: (json) => PositiveAspectsPage.fromJson(json),
       queryParameters: {});
 
-  static ContentDefinition<Onboarding> onboardingPage = ContentDefinition<Onboarding>(
+  static ContentDefinition<Onboarding> onboarding = ContentDefinition<Onboarding>(
       isSingleEntity: true,
       cmsEntityName: 'onboarding',
       fieldsToPopulate: ['pages', 'pages.logo'],
-      cmsLoadingFunction: (baseMap, attributesMap) => Onboarding.fromCMSJson(attributesMap),
+      cmsLoadingFunction: (baseMap, attributesMap) => Onboarding.fromCMSJson(attributesMap, cmsConfig: cmsConfig),
       localEntityName: 'onboarding',
       assetLoadingFunction: (json) => Onboarding.fromJson(json),
       queryParameters: {});
@@ -54,6 +62,6 @@ mixin CmsContentDefinitions {
     negativeAspectExamples,
     futureSituationExamples,
     positiveAspectPage,
-    onboardingPage
+    onboarding
   ];
 }

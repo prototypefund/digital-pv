@@ -9,5 +9,5 @@ final getIt = GetIt.instance;
 void initGetIt() {
   getIt.registerSingleton(PatientDirectiveService());
   getIt.registerSingleton(InputOutputService());
-  getIt.registerSingleton(CMSCache(definitions: CmsContentDefinitions.definitions));
+  getIt.registerSingleton(CMSCache(definitions: CmsConfiguration.definitions));
 }

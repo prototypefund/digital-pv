@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:pd_app/general/themes/themes.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_model.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_controller.dart';
@@ -21,12 +22,12 @@ class WelcomeView extends StatefulWidget {
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
-  final _controller = WelcomeViewPageController();
   late WelcomeViewModel _viewModel;
 
   @override
   Widget build(BuildContext context) {
     _viewModel = context.watch();
+    WelcomeViewPageController _controller = _viewModel.pageController;
 
     return Scaffold(
       body: SafeArea(
@@ -35,9 +36,9 @@ class _WelcomeViewState extends State<WelcomeView> {
             Expanded(
               flex: 3,
               child: PageView.builder(
-                controller: _controller,
+                controller: _viewModel.pageController,
                 onPageChanged: (value) => setState(() => _controller.currentPage = value),
-                itemCount: _controller.numberOfPages,
+                itemCount: _viewModel.pageController.numberOfPages,
                 itemBuilder: (context, pageIndex) {
                   final viewModel = _controller.modelAtIndex(pageIndex);
                   return Padding(
@@ -49,22 +50,10 @@ class _WelcomeViewState extends State<WelcomeView> {
                           child: Center(
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 4.0.w, 2.0.h),
-                              child: Text(
-                                viewModel.title,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.headlineSmall,
+                              child: MarkdownBody(
+                                data: viewModel.markdown,
                               ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.0.h,
-                        ),
-                        Flexible(
-                          child: Text(
-                            viewModel.description,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],
@@ -87,6 +76,8 @@ class _WelcomeViewState extends State<WelcomeView> {
   }
 
   Padding _firstPages(BuildContext context) {
+    _viewModel = context.watch();
+    final controller = _viewModel.pageController;
     return Padding(
       padding: EdgeInsets.fromLTRB(10.0.w, 2.0.h, 10.0.w, 2.0.h),
       child: Row(
@@ -94,7 +85,7 @@ class _WelcomeViewState extends State<WelcomeView> {
         children: [
           TextButton(
             onPressed: () {
-              _controller.jumpToLastPage();
+              controller.jumpToLastPage();
             },
             child: Text(
               _viewModel.skipButtonText,
@@ -103,13 +94,13 @@ class _WelcomeViewState extends State<WelcomeView> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                _controller.numberOfPages,
+                controller.numberOfPages,
                 (int index) =>
-                    WelcomeViewPageIndicator(currentPage: _controller.currentPage, context: context, index: index),
+                    WelcomeViewPageIndicator(currentPage: controller.currentPage, context: context, index: index),
               )),
           ElevatedButton(
             onPressed: () {
-              _controller.nextPage(
+              controller.nextPage(
                 duration: defaultDuration,
                 curve: Curves.easeIn,
               );

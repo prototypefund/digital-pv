@@ -8,22 +8,15 @@ const List<String> locales = ['de', 'en'];
 
 final Logger logger = Logger();
 
-const String scheme = 'https';
-const String host = 'strapi.dpv.staging.deyan7.de';
-const int port = 443;
-const String cmsDirectoryPath = 'assets/cms/';
-
 void main() async {
   final String? apiTokenFromEnv = Platform.environment['CMS_API_TOKEN'];
 
   if (apiTokenFromEnv != null) {
     final String apiToken = apiTokenFromEnv;
     final assetGenerator = CmsAssetGenerator(
-        contentDefinitions: CmsContentDefinitions.definitions,
-        cmsDirectory: File(cmsDirectoryPath),
-        scheme: scheme,
-        host: host,
-        port: port,
+        contentDefinitions: CmsConfiguration.definitions,
+        cmsDirectory: File(CmsConfiguration.cmsConfig.assetBasePath),
+        cmsConfig: CmsConfiguration.cmsConfig,
         apiToken: apiToken,
         locales: locales);
     await assetGenerator.createLocalAssetFiles();

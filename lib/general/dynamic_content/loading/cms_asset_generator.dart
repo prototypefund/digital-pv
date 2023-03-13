@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
+import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_loader.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_to_assets_cache.dart';
 import 'package:pd_app/logging.dart';
@@ -8,23 +9,19 @@ import 'package:pd_app/logging.dart';
 class CmsAssetGenerator with Logging {
   CmsAssetGenerator(
       {required this.cmsDirectory,
-      required this.scheme,
-      required this.host,
-      required this.port,
+      required this.cmsConfig,
       required this.apiToken,
       required this.locales,
       required this.contentDefinitions});
 
-  final String scheme;
-  final String host;
-  final int port;
+  final CmsConfig cmsConfig;
   final String apiToken;
   final List<String> locales;
   final File cmsDirectory;
   final List<ContentDefinition> contentDefinitions;
 
   Future<void> createLocalAssetFiles() async {
-    final loader = CMSLoader(scheme: scheme, host: host, port: port, apiToken: apiToken);
+    final loader = CMSLoader(cmsConfig: cmsConfig, apiToken: apiToken);
 
     final List<Future<LocalAssetFileCreationResult>> assetGenerationFutures = [];
     for (final String locale in locales) {

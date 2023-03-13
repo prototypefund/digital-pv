@@ -2,14 +2,13 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
+import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
 import 'package:pd_app/logging.dart';
 
 class CMSLoader with Logging {
-  CMSLoader({required this.scheme, required this.host, required this.port, required this.apiToken});
+  CMSLoader({required this.cmsConfig, required this.apiToken});
 
-  final String scheme;
-  final String host;
-  final int port;
+  final CmsConfig cmsConfig;
   final String apiToken;
 
   Future<CmsLoadingResult<T>> loadEntitiesFromCMS<T>(
@@ -23,8 +22,12 @@ class CMSLoader with Logging {
     final Map<String, String> completeQueryParameters = <String, String>{"populate": populateFields, 'locale': locale};
     completeQueryParameters.addAll(queryParameters);
 
-    final requestUri =
-        Uri(path: "api/$entityName", scheme: scheme, host: host, port: port, queryParameters: completeQueryParameters);
+    final requestUri = Uri(
+        path: "api/$entityName",
+        scheme: cmsConfig.baseUri.scheme,
+        host: cmsConfig.baseUri.host,
+        port: cmsConfig.baseUri.port,
+        queryParameters: completeQueryParameters);
 
     final response = await http.get(requestUri, headers: headers);
 
@@ -88,7 +91,8 @@ class CMSLoader with Logging {
   Future<Uint8List> downloadMediaUri(Uri uri) async {
     final headers = {"authorization": "Bearer $apiToken"};
 
-    final requestUri = Uri(path: uri.path, scheme: scheme, host: host, port: port);
+    final requestUri = Uri(
+        path: uri.path, scheme: cmsConfig.baseUri.scheme, host: cmsConfig.baseUri.host, port: cmsConfig.baseUri.port);
 
     logger.d('requesting image $uri');
     final response = await http.get(requestUri, headers: headers);

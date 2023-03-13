@@ -21,7 +21,7 @@ void main() {
     await GetIt.instance.reset();
     GetIt.instance.registerSingleton(PatientDirectiveService());
     GetIt.instance.registerSingleton(l10n);
-    GetIt.instance.registerSingleton(CMSCache(definitions: CmsContentDefinitions.definitions));
+    GetIt.instance.registerSingleton(CMSCache(definitions: CmsConfiguration.definitions));
     contentService = ContentService(locale: l10n.localeName);
     await contentService.reloadContent();
     GetIt.instance.registerSingleton(contentService);
@@ -38,14 +38,14 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(WelcomeView), findsOneWidget);
 
-    await tester.tap(find.text(l10n.navigationNext));
+    await tester.tap(find.text(contentService.onboarding.nextButtonLabel));
     await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.navigationNext));
+    await tester.tap(find.text(contentService.onboarding.nextButtonLabel));
     await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.navigationNext));
+    await tester.tap(find.text(contentService.onboarding.nextButtonLabel));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text(l10n.createDigitalPatientDirective, skipOffstage: false));
+    await tester.tap(find.text(contentService.onboarding.callToActionLabel, skipOffstage: false));
     await tester.pumpAndSettle();
 
     expect(

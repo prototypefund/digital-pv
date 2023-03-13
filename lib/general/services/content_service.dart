@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:pd_app/general/dynamic_content/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/cms_cache.dart';
 import 'package:pd_app/general/dynamic_content/cms_content_definitions.dart';
+import 'package:pd_app/general/dynamic_content/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/logging.dart';
 
-class ContentService with Logging {
+class ContentService with Logging, ChangeNotifier {
   ContentService({required this.locale}) : _cmsCache = getIt.get() {
     reloadContent();
   }
@@ -16,25 +17,30 @@ class ContentService with Logging {
 
   List<AspectsExample> get positiveAspectsExamples {
     return _cmsCache
-        .value<AspectsExample>(contentDefinition: CmsContentDefinitions.positiveAspectExamples, defaultValue: []);
+        .value<AspectsExample>(contentDefinition: CmsConfiguration.positiveAspectExamples, defaultValue: []);
   }
 
   List<AspectsExample> get negativeAspectsExamples {
     return _cmsCache
-        .value<AspectsExample>(contentDefinition: CmsContentDefinitions.negativeAspectExamples, defaultValue: []);
+        .value<AspectsExample>(contentDefinition: CmsConfiguration.negativeAspectExamples, defaultValue: []);
   }
 
   List<AspectsExample> get futureSituationsExamples {
     return _cmsCache
-        .value<AspectsExample>(contentDefinition: CmsContentDefinitions.futureSituationExamples, defaultValue: []);
+        .value<AspectsExample>(contentDefinition: CmsConfiguration.futureSituationExamples, defaultValue: []);
   }
 
   PositiveAspectsPage get positiveAspectsPage => _cmsCache.value<PositiveAspectsPage>(
-      contentDefinition: CmsContentDefinitions.positiveAspectPage,
+      contentDefinition: CmsConfiguration.positiveAspectPage,
       defaultValue: [PositiveAspectsPage(intro: null, outro: null, locale: locale)]).first;
+
+  Onboarding get onboarding => _cmsCache.value<Onboarding>(
+      contentDefinition: CmsConfiguration.onboarding,
+      defaultValue: [Onboarding(skipLabel: '', pages: [], nextButtonLabel: '', callToActionLabel: '')]).first;
 
   @visibleForTesting
   Future<void> reloadContent() async {
     await _cmsCache.reloadAll(locale: locale);
+    notifyListeners();
   }
 }

@@ -9,7 +9,8 @@
         "logo": {
           "id": 2,
           "name": "placeholder.png",
-          "uri": "/uploads/placeholder_a37b918ac4.png"
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
         }
       },
       {
@@ -17,7 +18,8 @@
         "logo": {
           "id": 2,
           "name": "placeholder.png",
-          "uri": "/uploads/placeholder_a37b918ac4.png"
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
         }
       },
       {
@@ -25,7 +27,8 @@
         "logo": {
           "id": 2,
           "name": "placeholder.png",
-          "uri": "/uploads/placeholder_a37b918ac4.png"
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
         }
       },
       {
@@ -33,7 +36,8 @@
         "logo": {
           "id": 2,
           "name": "placeholder.png",
-          "uri": "/uploads/placeholder_a37b918ac4.png"
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
         }
       }
     ]
