@@ -48,4 +48,7 @@ class FutureSituationTreatmentActivitiesSelectionViewModel extends TreatmentActi
         activityId: activity.id,
         choiceId: choiceId);
   }
+
+  @override
+  String get addTreatmentActivitiesSubHeadline => _contentService.futureSituationsPage.treatmentActivitiesTitle;
 }

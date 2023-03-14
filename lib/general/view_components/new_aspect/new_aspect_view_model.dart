@@ -43,7 +43,7 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
 
   double get weight => _weight;
 
-  String get examplesTitle => l10n.examples;
+  String get examplesTitle;
 
   set weight(double newWeight) {
     _weight = newWeight;

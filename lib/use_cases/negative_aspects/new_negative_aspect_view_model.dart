@@ -34,4 +34,7 @@ class NewNegativeAspectViewModel extends NewAspectViewModel<Aspect> {
 
   @override
   List<AspectsExample> get aspectExamples => _contentService.negativeAspectsExamples;
+
+  @override
+  String get examplesTitle => _contentService.negativeAspectsPage.examplesTitle;
 }

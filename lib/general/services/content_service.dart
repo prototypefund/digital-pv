@@ -7,6 +7,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/future_situat
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_cache.dart';
 import 'package:pd_app/general/init/get_it.dart';
@@ -82,6 +83,7 @@ class ContentService with Logging, ChangeNotifier {
             intro: null,
             outro: null,
             locale: locale,
+            treatmentActivitiesTitle: '',
             examplesTitle: '',
             aspectListWidget: AspectListWidget(
                 deleteConfirmationQuestion: '',
@@ -97,6 +99,10 @@ class ContentService with Logging, ChangeNotifier {
   Onboarding get onboarding => _cmsCache.value<Onboarding>(
       contentDefinition: CmsConfiguration.onboarding,
       defaultValue: [Onboarding(skipLabel: '', pages: [], nextButtonLabel: '', callToActionLabel: '')]).first;
+
+  TreatmentActivitiesPage get treatmentActivitiesPage => _cmsCache.value<TreatmentActivitiesPage>(
+      contentDefinition: CmsConfiguration.treatmentActivitiesPage,
+      defaultValue: [TreatmentActivitiesPage(intro: '', outro: '', treatmentActivitiesTitle: '')]).first;
 
   @visibleForTesting
   Future<void> reloadContent() async {

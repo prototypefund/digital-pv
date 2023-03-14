@@ -8,6 +8,7 @@ part of 'future_situations_page.dart';
 
 FutureSituationsPage _$FutureSituationsPageFromJson(Map<String, dynamic> json) => FutureSituationsPage(
       intro: json['intro'] as String?,
+      treatmentActivitiesTitle: json['treatment_activities_title'] as String,
       examplesTitle: json['examples_title'] as String,
       aspectListWidget: AspectListWidget.fromJson(json['aspectListWidget'] as Map<String, dynamic>),
       outro: json['outro'] as String?,
@@ -21,5 +22,6 @@ Map<String, dynamic> _$FutureSituationsPageToJson(FutureSituationsPage instance)
       'aspectListWidget': instance.aspectListWidget,
       'addAspectWidget': instance.addAspectWidget,
       'outro': instance.outro,
+      'treatment_activities_title': instance.treatmentActivitiesTitle,
       'examples_title': instance.examplesTitle,
     };

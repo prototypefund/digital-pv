@@ -38,33 +38,9 @@
   "removeFutureAspectConfirmationRemove": "Zukünftige Situation entfernen",
   "removeFutureAspectConfirmationCancel": "Abbrechen",
   "navigationSkip": "Überspringen",
-  "examples": "Beispiele",
-  "addPositiveAspectTitle": "Aspekt hinzufügen",
-  "addTreatmentActivitiesTitle": "Meine Behandlungswünsche",
-  "addTreatmentActivitiesExplanation": "Hier können Sie optional zu ihrem Behandlungsziel ({treatmentGoal}) bestimmte Maßnahmen festlegen.",
-  "@addTreatmentActivitiesExplanation": {
-    "placeholders": {
-      "treatmentGoal": {
-        "type": "String"
-      }
-    }
-  },
   "treatmentGoalUndefined": "undefiniert",
   "treatmentGoalPalliative": "palliativ",
   "treatmentGoalCurative": "curativ",
-  "addTreatmentActivitiesSubHeadline": "Medizinische Maßnahmen",
-  "addTreatmentActivitiesHospitalAdmission": "Aufnahme ins Krankenhaus",
-  "addTreatmentActivitiesIntensiveTreatment": "Intensivbehandlung",
-  "addTreatmentActivitiesResuscitation": "Wiederbelebung",
-  "futureSituationsTitle": "Was wäre wenn?",
-  "addFutureSituationAspectTextfieldHint": "Neue Angabe ...",
-  "futureSituationsTitleExplanation": "Hier können Sie optional für mögliche künftige Situationen bestimmte Maßnahmen festlegen",
-  "addFutureSituationAspect": "Hinzufügen",
-  "addNegativeAspect": "Hinzufügen",
-  "treatmentActivityNotSpecified": "Keine Angabe",
-  "treatmentActivityNo": "Nein",
-  "treatmentActivityYes": "Ja",
-  "treatmentActivitySymptomControl": "Ich möchte zwar in ein Krankenhaus eingewiesen werden, aber nur zur Kontrolle von Symptomen, die ambulant nicht behandelt werden können.",
   "evaluateCurrentAspectHeadline": "Meine Lebensqualität",
   "evaluateCurrentAspectsSummaryPositive": "Insgesamt überwiegen die positiven Aspekte die negativen",
   "evaluateCurrentAspectsSummaryNegative": "Insgesamt überwiegen die negativen Aspekte die positiven",

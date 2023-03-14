@@ -39,4 +39,7 @@ class GeneralTreatmentActivitiesSelectionViewModel extends TreatmentActivitiesSe
     _patientDirectiveService.updateGeneralTreatmentPreference(
         activity: activity.activity, choice: choice, choiceId: choiceId, activityId: activity.id);
   }
+
+  @override
+  String get addTreatmentActivitiesSubHeadline => _contentService.treatmentActivitiesPage.treatmentActivitiesTitle;
 }

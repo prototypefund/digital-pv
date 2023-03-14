@@ -32,4 +32,7 @@ class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
 
   @override
   List<AspectsExample> get aspectExamples => _contentService.futureSituationsExamples;
+
+  @override
+  String get examplesTitle => _contentService.futureSituationsPage.examplesTitle;
 }

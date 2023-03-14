@@ -9,6 +9,7 @@ part 'future_situations_page.g.dart';
 class FutureSituationsPage with SerializableAsset {
   FutureSituationsPage(
       {required this.intro,
+      required this.treatmentActivitiesTitle,
       required this.examplesTitle,
       required this.aspectListWidget,
       required this.outro,
@@ -21,6 +22,7 @@ class FutureSituationsPage with SerializableAsset {
       intro: attributesJson['intro'] as String?,
       outro: attributesJson['outro'] as String?,
       examplesTitle: attributesJson['examples_title'] as String,
+      treatmentActivitiesTitle: attributesJson['treatment_activities_title'] as String,
       aspectListWidget: AspectListWidget.fromJson(attributesJson['aspect_list_widget'] as Map<String, dynamic>),
       addAspectWidget: AddAspectWidget.fromJson(attributesJson['add_aspect_widget'] as Map<String, dynamic>),
       locale: attributesJson['locale'] as String);
@@ -34,6 +36,9 @@ class FutureSituationsPage with SerializableAsset {
   final AddAspectWidget addAspectWidget;
 
   final String? outro;
+
+  @JsonKey(name: "treatment_activities_title")
+  final String treatmentActivitiesTitle;
 
   @JsonKey(name: "examples_title")
   final String examplesTitle;

@@ -13,5 +13,5 @@ abstract class TreatmentActivitiesSelectionViewModel with RootContextL10N, Chang
 
   void updateChoice(TreatmentActivity activity, String? choice);
 
-  String get addTreatmentActivitiesSubHeadline => l10n.addTreatmentActivitiesSubHeadline;
+  String get addTreatmentActivitiesSubHeadline;
 }

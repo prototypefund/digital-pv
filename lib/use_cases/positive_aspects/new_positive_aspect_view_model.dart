@@ -48,4 +48,7 @@ class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
     super.dispose();
     _contentService.removeListener(notifyListeners);
   }
+
+  @override
+  String get examplesTitle => _contentService.positiveAspectsPage.examplesTitle;
 }
