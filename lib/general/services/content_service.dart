@@ -7,6 +7,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/future_situat
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_cache.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/logging.dart';
@@ -32,6 +33,11 @@ class ContentService with Logging, ChangeNotifier {
   List<AspectsExample> get futureSituationsExamples {
     return _cmsCache
         .value<AspectsExample>(contentDefinition: CmsConfiguration.futureSituationExamples, defaultValue: []);
+  }
+
+  List<TreatmentActivity> get treatmentActivities {
+    return _cmsCache
+        .value<TreatmentActivity>(contentDefinition: CmsConfiguration.treatmentActivities, defaultValue: []);
   }
 
   PositiveAspectsPage get positiveAspectsPage =>

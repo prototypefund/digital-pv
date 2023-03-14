@@ -4,6 +4,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/future_situat
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
 
 mixin CmsConfiguration {
@@ -77,6 +78,15 @@ mixin CmsConfiguration {
       assetLoadingFunction: (json) => Onboarding.fromJson(json),
       queryParameters: {});
 
+  static ContentDefinition<TreatmentActivity> treatmentActivities = ContentDefinition<TreatmentActivity>(
+      isSingleEntity: false,
+      cmsEntityName: 'treatment-activities',
+      fieldsToPopulate: ['choices', 'default_value'],
+      cmsLoadingFunction: (baseMap, attributesMap) => TreatmentActivity.fromCMSJson(baseMap, attributesMap),
+      localEntityName: 'treatment-activites',
+      assetLoadingFunction: (json) => TreatmentActivity.fromJson(json),
+      queryParameters: {});
+
   static List<ContentDefinition> definitions = [
     positiveAspectExamples,
     negativeAspectExamples,
@@ -84,6 +94,7 @@ mixin CmsConfiguration {
     positiveAspectPage,
     negativeAspectsPage,
     futureSituationsPage,
+    treatmentActivities,
     onboarding
   ];
 }

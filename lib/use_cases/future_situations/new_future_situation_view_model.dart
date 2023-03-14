@@ -27,7 +27,7 @@ class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
 
   @override
   FutureSituation createNewAspect({required String name, required Weight weight}) {
-    return FutureSituation(name: name, weight: weight);
+    return FutureSituation(name: name, weight: weight, treatmentActivitiyPreferences: []);
   }
 
   @override
