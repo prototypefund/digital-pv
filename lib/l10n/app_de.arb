@@ -1,42 +1,6 @@
 {
   "navigationBack": "Zurück",
   "navigationNext": "Weiter",
-  "futureSituationsEmptyText": "Bisher wurden noch keine zukünfigen Situationen angegeben.",
-  "addPositiveAspectNavigationButton": "Aspekt hinzufügen",
-  "addPositiveAspectTextFieldHint": "Positiver Aspekt",
-  "significanceSliderLabel": "",
-  "significanceLow": "Geringe Bedeutung",
-  "significanceHigh": "Hohe Bedeutung",
-  "removeFutureAspectConfirmationQuestion": "Soll die mögliche künftige Situation \"{aspectName}\" wirklich entfernt werden?",
-  "@removeFutureAspectConfirmationQuestion": {
-    "placeholders": {
-      "aspectName": {
-        "type": "String"
-      }
-    }
-  },
-  "removeNegativeAspectConfirmationQuestion": "Soll der negative Aspekt \"{aspectName}\" wirklich entfernt werden?",
-  "@removeNegativeAspectConfirmationQuestion": {
-    "placeholders": {
-      "aspectName": {
-        "type": "String"
-      }
-    }
-  },
-  "removeNegativeAspectConfirmationRemove": "Negative Aspekt entfernen",
-  "removeNegativeAspectConfirmationCancel": "Abbrechen",
-  "removePositiveAspectConfirmationQuestion": "Soll der positive Aspekt \"{aspectName}\" wirklich entfernt werden?",
-  "@removePositiveAspectConfirmationQuestion": {
-    "placeholders": {
-      "aspectName": {
-        "type": "String"
-      }
-    }
-  },
-  "removePositiveAspectConfirmationRemove": "Positiven Aspekt entfernen",
-  "removePositiveAspectConfirmationCancel": "Abbrechen",
-  "removeFutureAspectConfirmationRemove": "Zukünftige Situation entfernen",
-  "removeFutureAspectConfirmationCancel": "Abbrechen",
   "navigationSkip": "Überspringen",
   "treatmentGoalUndefined": "undefiniert",
   "treatmentGoalPalliative": "palliativ",

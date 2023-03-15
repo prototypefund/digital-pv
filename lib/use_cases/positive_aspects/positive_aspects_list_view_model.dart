@@ -43,4 +43,10 @@ class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
     super.dispose();
     _contentService.removeListener(notifyListeners);
   }
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.positiveAspectsPage.aspectListWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.positiveAspectsPage.aspectListWidget.lowSignificanceLabel;
 }

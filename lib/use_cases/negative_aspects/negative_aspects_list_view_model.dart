@@ -43,4 +43,10 @@ class NegativeAspectsListViewModel extends AspectListViewModel<Aspect> {
     super.dispose();
     _contentService.removeListener(notifyListeners);
   }
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.negativeAspectsPage.aspectListWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.negativeAspectsPage.aspectListWidget.lowSignificanceLabel;
 }

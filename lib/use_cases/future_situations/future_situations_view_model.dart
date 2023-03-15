@@ -51,4 +51,10 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
 
   @override
   bool get showTreatmentGoalInVisualization => true;
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.futureSituationsPage.addAspectWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.futureSituationsPage.addAspectWidget.lowSignificanceLabel;
 }

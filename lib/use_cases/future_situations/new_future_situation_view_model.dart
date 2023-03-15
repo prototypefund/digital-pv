@@ -35,4 +35,10 @@ class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
 
   @override
   String get examplesTitle => _contentService.futureSituationsPage.examplesTitle;
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.futureSituationsPage.addAspectWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.futureSituationsPage.addAspectWidget.lowSignificanceLabel;
 }

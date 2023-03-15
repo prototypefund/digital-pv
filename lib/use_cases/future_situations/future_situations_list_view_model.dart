@@ -44,4 +44,10 @@ class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation>
     super.dispose();
     _contentService.removeListener(notifyListeners);
   }
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.futureSituationsPage.aspectListWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.futureSituationsPage.aspectListWidget.lowSignificanceLabel;
 }

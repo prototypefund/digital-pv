@@ -37,4 +37,10 @@ class NewNegativeAspectViewModel extends NewAspectViewModel<Aspect> {
 
   @override
   String get examplesTitle => _contentService.negativeAspectsPage.examplesTitle;
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.negativeAspectsPage.addAspectWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.negativeAspectsPage.addAspectWidget.lowSignificanceLabel;
 }

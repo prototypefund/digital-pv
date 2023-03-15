@@ -95,7 +95,14 @@ void main() {
     await tester.tap(find.text(l10n.generalTreatmentConfirm));
     await tester.pumpAndSettle();
 
-    expect(find.text("Meine Behandlungswünsche"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.treatmentActivitiesPage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate((widget) =>
+            widget is MarkdownBody && widget.content == (contentService.treatmentActivitiesPage.outro ?? '')),
+        findsOneWidget);
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
@@ -148,7 +155,14 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Meine Behandlungswünsche"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.treatmentActivitiesPage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate((widget) =>
+            widget is MarkdownBody && widget.content == (contentService.treatmentActivitiesPage.outro ?? '')),
+        findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

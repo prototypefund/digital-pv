@@ -51,4 +51,10 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
 
   @override
   bool get showTreatmentGoalInVisualization => false;
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.negativeAspectsPage.aspectListWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.negativeAspectsPage.aspectListWidget.lowSignificanceLabel;
 }
