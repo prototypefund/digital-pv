@@ -1,11 +1,11 @@
 [
   {
-    "callToActionLabel": "dPV erstellen",
-    "skipLabel": "Überspringen",
-    "nextButtonLabel": "Weiter",
+    "callToActionLabel": "Create dPV",
+    "skipLabel": "Skip",
+    "nextButtonLabel": "Next",
     "pages": [
       {
-        "content": "# Vertrauensperson\n\nHerzlich Willkommen bei d-PV, Ihrer digitalen Patientenverfügung\n\nErstellen Sie in drei Schritten eine rechtsichere Patientenverfügung",
+        "content": "# Welcome to d-PV, your digital advance directive\n\nCreate a legally secure advance directive in three steps",
         "logo": {
           "id": 2,
           "name": "placeholder.png",
@@ -14,7 +14,7 @@
         }
       },
       {
-        "content": "# Medizinische Behandlung festlegen\n\nMit einer Patientenverfügung können Sie Ihre medizinische Behandlung für den Fall einer späteren Entscheidungs- bzw. Urteilsunfähigkeit im Voraus schriftlich festlegen.",
+        "content": "# Specify medical treatment\n\nWith a living will, you can specify your medical treatment in advance in writing in the event that you later become incapable of making decisions or judgements.",
         "logo": {
           "id": 2,
           "name": "placeholder.png",
@@ -23,7 +23,7 @@
         }
       },
       {
-        "content": "# Gesetzeskonform\n\nDie dPV entspricht den gesetzlichen Vorgaben in Deutschland",
+        "content": "# Compliant with the law\n\nThe dPV complies with the legal requirements in Germany",
         "logo": {
           "id": 2,
           "name": "placeholder.png",
@@ -32,7 +32,7 @@
         }
       },
       {
-        "content": "# Vertrauensperson\n\nStatt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen.",
+        "content": "# Person of trust\n\nInstead of creating a complete advance directive, you can in principle leave all decisions to the trusted representative. In this case, you can name the representative directly here.",
         "logo": {
           "id": 2,
           "name": "placeholder.png",

@@ -131,22 +131,22 @@ void main() {
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
-    expect(find.text(l10n.generalInfoConfirm), findsOneWidget);
-    await tester.ensureVisible(find.text(l10n.generalInfoConfirm));
+    expect(find.text(contentService.generalInformationAboutDirectivePage.confirmActionLabel), findsOneWidget);
+    await tester.ensureVisible(find.text(contentService.generalInformationAboutDirectivePage.confirmActionLabel));
     await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.generalInfoConfirm));
+    await tester.tap(find.text(contentService.generalInformationAboutDirectivePage.confirmActionLabel));
     await tester.pumpAndSettle();
 
-    expect(find.text(l10n.personalDetailsForDirectiveDownloadDirective), findsAtLeastNWidgets(1));
-    await tester.ensureVisible(find.text(l10n.personalDetailsForDirectiveDownloadDirective).first);
+    expect(find.text(contentService.personalDetailsPage.downloadAsPdfActionLabel), findsAtLeastNWidgets(1));
+    await tester.ensureVisible(find.text(contentService.personalDetailsPage.downloadAsPdfActionLabel).first);
     await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.personalDetailsForDirectiveDownloadDirective).first);
+    await tester.tap(find.text(contentService.personalDetailsPage.downloadAsPdfActionLabel).first);
     await tester.pumpAndSettle();
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
 
-    expect(find.text(l10n.generalInfoConfirm), findsOneWidget);
+    expect(find.text(contentService.generalInformationAboutDirectivePage.confirmActionLabel), findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

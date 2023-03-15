@@ -5,8 +5,10 @@ import 'package:pd_app/general/dynamic_content/components/contextual_help.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/cms_content_definitions.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/future_situations_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/general_information_about_directive_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/personal_details_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_life_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
@@ -130,6 +132,15 @@ class ContentService with Logging, ChangeNotifier {
             intro: '',
             confirmTreatmentGoalActionLabel: '')
       ]).first;
+
+  GeneralInformationAboutDirectivePage get generalInformationAboutDirectivePage =>
+      _cmsCache.value<GeneralInformationAboutDirectivePage>(
+          contentDefinition: CmsConfiguration.generalInformationAboutDirectivePage,
+          defaultValue: [GeneralInformationAboutDirectivePage(intro: '', confirmActionLabel: '')]).first;
+
+  PersonalDetailsPage get personalDetailsPage => _cmsCache.value<PersonalDetailsPage>(
+      contentDefinition: CmsConfiguration.personalDetailsPage,
+      defaultValue: [PersonalDetailsPage(intro: '', downloadAsPdfActionLabel: '', showDirectiveActionLabel: '')]).first;
 
   @visibleForTesting
   Future<void> reloadContent() async {

@@ -1,6 +1,7 @@
 import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/future_situations_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/general_information_about_directive_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
@@ -9,6 +10,8 @@ import 'package:pd_app/general/dynamic_content/content_definitions/treatment_act
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_goal_page.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
+
+import 'personal_details_page.dart';
 
 mixin CmsConfiguration {
   static const String scheme = 'https';
@@ -118,6 +121,26 @@ mixin CmsConfiguration {
       assetLoadingFunction: (json) => TreatmentGoalPage.fromJson(json),
       queryParameters: {});
 
+  static ContentDefinition<GeneralInformationAboutDirectivePage> generalInformationAboutDirectivePage =
+      ContentDefinition<GeneralInformationAboutDirectivePage>(
+          isSingleEntity: true,
+          cmsEntityName: 'general-information-about-directive-page',
+          fieldsToPopulate: [],
+          cmsLoadingFunction: (baseMap, attributesMap) =>
+              GeneralInformationAboutDirectivePage.fromCMSJson(attributesMap),
+          localEntityName: 'general-information-about-directive-page',
+          assetLoadingFunction: (json) => GeneralInformationAboutDirectivePage.fromJson(json),
+          queryParameters: {});
+
+  static ContentDefinition<PersonalDetailsPage> personalDetailsPage = ContentDefinition<PersonalDetailsPage>(
+      isSingleEntity: true,
+      cmsEntityName: 'personal-details-page',
+      fieldsToPopulate: [],
+      cmsLoadingFunction: (baseMap, attributesMap) => PersonalDetailsPage.fromCMSJson(attributesMap),
+      localEntityName: 'personal-details-page',
+      assetLoadingFunction: (json) => PersonalDetailsPage.fromJson(json),
+      queryParameters: {});
+
   static List<ContentDefinition> definitions = [
     positiveAspectExamples,
     negativeAspectExamples,
@@ -129,6 +152,8 @@ mixin CmsConfiguration {
     onboarding,
     treatmentActivitiesPage,
     qualityOfLifePage,
-    treatmentGoalPage
+    treatmentGoalPage,
+    generalInformationAboutDirectivePage,
+    personalDetailsPage
   ];
 }
