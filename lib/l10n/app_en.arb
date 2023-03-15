@@ -1,0 +1,12 @@
+{
+  "navigationBack": "Back",
+  "navigationNext": "Next",
+  "navigationSkip": "Skip",
+  "aspectVisualizationPositive": "Positive",
+  "aspectVisualizationNegative": "Negative",
+  "aspectVisualizationCurative": "Curative",
+  "aspectVisualizationPalliative": "Palliative",
+  "aspectVisualizationTreatmentGoal": "Treatment Goal",
+  "aspectVisualizationQualityOfLife": "Quality of Life"
+}
+
