@@ -55,6 +55,7 @@ class CMSCache with Logging {
     for (final ContentDefinition definition in definitions) {
       futures.add(_loadEntitiesFromCMS(locale: locale, contentDefinition: definition));
     }
+
     await Future.wait<void>(futures);
     logger.i('reloading all cms cache content from cms with locale $locale DONE');
   }

@@ -19,12 +19,14 @@ import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/logging.dart';
 
 class ContentService with Logging, ChangeNotifier {
-  ContentService({required this.locale}) : _cmsCache = getIt.get() {
+  ContentService({required this.locale, this.loadOnlineContent = true}) : _cmsCache = getIt.get() {
     reloadContent();
   }
 
   final CMSCache _cmsCache;
   final String locale;
+
+  final bool loadOnlineContent;
 
   List<AspectsExample> get positiveAspectsExamples {
     return _cmsCache
@@ -146,9 +148,13 @@ class ContentService with Logging, ChangeNotifier {
   Future<void> reloadContent() async {
     await _cmsCache.reloadAllFromAssets(locale: locale);
     notifyListeners();
-    logger.i('content from asset cache loaded successfully, will now update content from cms');
-    await _cmsCache.reloadAllFromCms(locale: locale);
-    notifyListeners();
-    logger.i('content successfully updated from cms');
+    logger.i('content from asset cache loaded successfully');
+
+    if (loadOnlineContent) {
+      logger.i('will now update content from cms');
+      await _cmsCache.reloadAllFromCms(locale: locale);
+      notifyListeners();
+      logger.i('content successfully updated from cms');
+    }
   }
 }
