@@ -1,0 +1,10 @@
+[
+  {
+    "intro": "# My quality of life",
+    "positive_quality_of_life_explanation": "Overall, the positive aspects outweigh the negative ones",
+    "negative_quality_of_life_explanation": "Overall, the negative aspects outweigh the positive ones",
+    "confirmation_question": "Does this match your assessment?",
+    "confirm_action_label": "Yes",
+    "outro": "If no, please make changes to the positive and negative aspects"
+  }
+]

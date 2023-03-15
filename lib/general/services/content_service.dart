@@ -7,6 +7,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/future_situat
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_life_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_cache.dart';
@@ -103,6 +104,17 @@ class ContentService with Logging, ChangeNotifier {
   TreatmentActivitiesPage get treatmentActivitiesPage => _cmsCache.value<TreatmentActivitiesPage>(
       contentDefinition: CmsConfiguration.treatmentActivitiesPage,
       defaultValue: [TreatmentActivitiesPage(intro: '', outro: '', treatmentActivitiesTitle: '')]).first;
+
+  QualityOfLifePage get qualityOfLifePage =>
+      _cmsCache.value<QualityOfLifePage>(contentDefinition: CmsConfiguration.qualityOfLifePage, defaultValue: [
+        QualityOfLifePage(
+            intro: '',
+            outro: '',
+            positiveQualityOfLifeExplanation: '',
+            negativeQualityOfLifeExplanation: '',
+            confirmationQuestion: '',
+            confirmActionLabel: '')
+      ]).first;
 
   @visibleForTesting
   Future<void> reloadContent() async {

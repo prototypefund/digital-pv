@@ -82,7 +82,14 @@ void main() {
     await tester.tap(find.text(l10n.navigationNext));
     await tester.pumpAndSettle();
 
-    expect(find.text("Meine Lebensqualität"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.qualityOfLifePage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == (contentService.qualityOfLifePage.outro ?? '')),
+        findsOneWidget);
 
     await tester.ensureVisible(find.text(l10n.evaluateCurrentAspectsConfirm));
     await tester.pumpAndSettle();
@@ -170,7 +177,14 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Meine Lebensqualität"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.qualityOfLifePage.intro),
+        findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == (contentService.qualityOfLifePage.outro ?? '')),
+        findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

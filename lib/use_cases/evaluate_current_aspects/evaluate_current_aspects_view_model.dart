@@ -1,17 +1,22 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_life_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/logging.dart';
 
 class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel with Logging {
   EvaluateCurrentAspectsViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
+    _contentService.addListener(notifyListeners);
   }
 
   final PatientDirectiveService _patientDirectiveService;
+
+  final ContentService _contentService = getIt.get();
 
   @override
   void onBackButtonPressed(BuildContext context) {
@@ -21,26 +26,17 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
   @override
   bool get nextButtonEnabled => false;
 
-  String get headline => l10n.evaluateCurrentAspectHeadline;
-
-  String get summary {
-    if (_patientDirectiveService.currentPatientDirective.currentAspectsScore >= 0) {
-      return l10n.evaluateCurrentAspectsSummaryPositive;
-    } else {
-      return l10n.evaluateCurrentAspectsSummaryNegative;
-    }
+  bool get showPositiveSummary {
+    return _patientDirectiveService.currentPatientDirective.currentAspectsScore >= 0;
   }
 
-  String get confirmEvaluationQuestion => l10n.evaluateCurrentAspectsConfirmationQuestion;
-
-  String get confirmEvaluation => l10n.evaluateCurrentAspectsConfirm;
-
-  String get changeAspectsIfNoMatchCallToAction => l10n.evaluateCurrentAspectsChangeAspectsIfNotMatching;
+  QualityOfLifePage get pageContent => _contentService.qualityOfLifePage;
 
   @override
   void dispose() {
     super.dispose();
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChanges);
+    _contentService.removeListener(notifyListeners);
   }
 
   void _reactToPatientDirectiveChanges() {

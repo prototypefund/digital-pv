@@ -4,6 +4,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/future_situat
 import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/onboarding.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_life_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
@@ -98,6 +99,15 @@ mixin CmsConfiguration {
           assetLoadingFunction: (json) => TreatmentActivitiesPage.fromJson(json),
           queryParameters: {});
 
+  static ContentDefinition<QualityOfLifePage> qualityOfLifePage = ContentDefinition<QualityOfLifePage>(
+      isSingleEntity: true,
+      cmsEntityName: 'quality-of-life-page',
+      fieldsToPopulate: [],
+      cmsLoadingFunction: (baseMap, attributesMap) => QualityOfLifePage.fromCMSJson(attributesMap),
+      localEntityName: 'quality-of-life-page',
+      assetLoadingFunction: (json) => QualityOfLifePage.fromJson(json),
+      queryParameters: {});
+
   static List<ContentDefinition> definitions = [
     positiveAspectExamples,
     negativeAspectExamples,
@@ -107,6 +117,7 @@ mixin CmsConfiguration {
     futureSituationsPage,
     treatmentActivities,
     onboarding,
-    treatmentActivitiesPage
+    treatmentActivitiesPage,
+    qualityOfLifePage
   ];
 }
