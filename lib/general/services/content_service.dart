@@ -144,7 +144,11 @@ class ContentService with Logging, ChangeNotifier {
 
   @visibleForTesting
   Future<void> reloadContent() async {
-    await _cmsCache.reloadAll(locale: locale);
+    await _cmsCache.reloadAllFromAssets(locale: locale);
     notifyListeners();
+    logger.i('content from asset cache loaded successfully, will now update content from cms');
+    await _cmsCache.reloadAllFromCms(locale: locale);
+    notifyListeners();
+    logger.i('content successfully updated from cms');
   }
 }

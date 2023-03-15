@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
+import 'package:pd_app/general/dynamic_content/components/content_definition.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
+import 'package:pd_app/general/dynamic_content/loading/json_serializable.dart';
 import 'package:pd_app/logging.dart';
 
 class CMSLoader with Logging {
@@ -11,13 +13,14 @@ class CMSLoader with Logging {
   final CmsConfig cmsConfig;
   final String apiToken;
 
-  Future<CmsLoadingResult<T>> loadEntitiesFromCMS<T>(
-      {required String locale,
-      required String entityName,
-      required String populateFields,
-      bool isSingleEntity = false,
-      Map<String, String> queryParameters = const {},
-      required T Function(Map<String, dynamic> baseMap, Map<String, dynamic> attributeMap) buildObjectFunction}) async {
+  Future<CmsLoadingResult<T>> loadEntitiesFromCMS<T extends SerializableAsset>(
+      {required String locale, required ContentDefinition<T> contentDefinition}) async {
+    final isSingleEntity = contentDefinition.isSingleEntity;
+    final entityName = contentDefinition.cmsEntityName;
+    final populateFields = contentDefinition.fieldsToPopulate.join(',');
+    final buildObjectFunction = contentDefinition.cmsLoadingFunction;
+    final queryParameters = contentDefinition.queryParameters;
+
     final headers = {'accept': "application/json", "authorization": "Bearer $apiToken"};
     final Map<String, String> completeQueryParameters = <String, String>{"populate": populateFields, 'locale': locale};
     completeQueryParameters.addAll(queryParameters);

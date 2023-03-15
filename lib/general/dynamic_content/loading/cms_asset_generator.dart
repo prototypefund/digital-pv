@@ -56,13 +56,7 @@ class CmsAssetGenerator with Logging {
       required File cmsDirectory,
       required CMSLoader loader,
       required String locale}) async {
-    final loadingResult = await loader.loadEntitiesFromCMS(
-        isSingleEntity: definition.isSingleEntity,
-        locale: locale,
-        entityName: definition.cmsEntityName,
-        populateFields: definition.fieldsToPopulate.join(','),
-        buildObjectFunction: definition.cmsLoadingFunction,
-        queryParameters: definition.queryParameters);
+    final loadingResult = await loader.loadEntitiesFromCMS(locale: locale, contentDefinition: definition);
     final entities = loadingResult.entities;
 
     await CMSToAssetsCache().saveEntitiesToAssets(
