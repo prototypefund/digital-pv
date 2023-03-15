@@ -87,7 +87,9 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
       groupMap[group] = Group(title: group, children: []);
     }
     for (final AspectsExample example in examplesContent) {
-      groupMap[example.example.group]!.children.add(Item(title: example.example.title));
+      groupMap[example.example.group]!
+          .children
+          .add(Item(title: example.example.title, help: example.example.contextualHelp));
     }
     return groupMap.values.toList();
   }
