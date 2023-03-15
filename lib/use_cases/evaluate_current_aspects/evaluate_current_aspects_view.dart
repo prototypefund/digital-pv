@@ -23,14 +23,16 @@ class EvaluateCurrentAspects extends StatelessWidget {
       width: double.infinity,
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         MarkdownBody(
-            content: context.select((EvaluateCurrentAspectsViewModel viewModel) => viewModel.pageContent).intro),
+            content: context.select((EvaluateCurrentAspectsViewModel viewModel) => viewModel.pageContent).intro,
+            textAlignment: WrapAlignment.center),
         const SizedBox(
           height: 24,
         ),
         MarkdownBody(
             content: context.select((EvaluateCurrentAspectsViewModel viewModel) => viewModel.showPositiveSummary
                 ? viewModel.pageContent.positiveQualityOfLifeExplanation
-                : viewModel.pageContent.negativeQualityOfLifeExplanation)),
+                : viewModel.pageContent.negativeQualityOfLifeExplanation),
+            textAlignment: WrapAlignment.center),
         const SizedBox(
           height: 40,
         ),
@@ -45,7 +47,8 @@ class EvaluateCurrentAspects extends StatelessWidget {
         MarkdownBody(
             content: context
                 .select((EvaluateCurrentAspectsViewModel viewModel) => viewModel.pageContent)
-                .confirmationQuestion),
+                .confirmationQuestion,
+            textAlignment: WrapAlignment.center),
         const SizedBox(
           height: 24,
         ),
@@ -57,7 +60,9 @@ class EvaluateCurrentAspects extends StatelessWidget {
           height: 24,
         ),
         MarkdownBody(
-            content: context.select((EvaluateCurrentAspectsViewModel viewModel) => viewModel.pageContent).outro ?? ''),
+          content: context.select((EvaluateCurrentAspectsViewModel viewModel) => viewModel.pageContent).outro ?? '',
+          textAlignment: WrapAlignment.center,
+        )
       ]),
     ));
   }

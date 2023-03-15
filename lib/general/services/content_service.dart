@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:pd_app/general/dynamic_content/components/add_aspect_widget.dart';
 import 'package:pd_app/general/dynamic_content/components/aspect_list_widget.dart';
+import 'package:pd_app/general/dynamic_content/components/contextual_help.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/cms_content_definitions.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/future_situations_page.dart';
@@ -10,6 +11,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspe
 import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_life_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/treatment_goal_page.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_cache.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/logging.dart';
@@ -114,6 +116,19 @@ class ContentService with Logging, ChangeNotifier {
             negativeQualityOfLifeExplanation: '',
             confirmationQuestion: '',
             confirmActionLabel: '')
+      ]).first;
+
+  TreatmentGoalPage get treatmentGoalPage =>
+      _cmsCache.value<TreatmentGoalPage>(contentDefinition: CmsConfiguration.treatmentGoalPage, defaultValue: [
+        TreatmentGoalPage(
+            treatmentGoalCurativeQuestion: '',
+            treatmentGoalPalliativeQuestion: '',
+            adjustArrowExplanation: ContextualHelp(id: -1, title: '', content: ''),
+            resetArrowActionLabel: '',
+            curativeExplanation: ContextualHelp(id: -1, title: '', content: ''),
+            palliativeExplanation: ContextualHelp(id: -1, title: '', content: ''),
+            intro: '',
+            confirmTreatmentGoalActionLabel: '')
       ]).first;
 
   @visibleForTesting

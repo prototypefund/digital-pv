@@ -96,10 +96,13 @@ void main() {
     await tester.tap(find.text(l10n.evaluateCurrentAspectsConfirm));
     await tester.pumpAndSettle();
 
-    expect(find.text("Mein Behandlungsziel"), findsOneWidget);
-    await tester.ensureVisible(find.text(l10n.generalTreatmentConfirm));
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.treatmentGoalPage.intro),
+        findsOneWidget);
+    await tester.ensureVisible(find.text(contentService.treatmentGoalPage.confirmTreatmentGoalActionLabel));
     await tester.pumpAndSettle();
-    await tester.tap(find.text(l10n.generalTreatmentConfirm));
+    await tester.tap(find.text(contentService.treatmentGoalPage.confirmTreatmentGoalActionLabel));
     await tester.pumpAndSettle();
 
     expect(
@@ -173,7 +176,10 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.text("Mein Behandlungsziel"), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (widget) => widget is MarkdownBody && widget.content == contentService.treatmentGoalPage.intro),
+        findsOneWidget);
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();

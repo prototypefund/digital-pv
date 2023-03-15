@@ -7,6 +7,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspe
 import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_life_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/treatment_goal_page.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
 
 mixin CmsConfiguration {
@@ -108,6 +109,15 @@ mixin CmsConfiguration {
       assetLoadingFunction: (json) => QualityOfLifePage.fromJson(json),
       queryParameters: {});
 
+  static ContentDefinition<TreatmentGoalPage> treatmentGoalPage = ContentDefinition<TreatmentGoalPage>(
+      isSingleEntity: true,
+      cmsEntityName: 'treatment-goal-page',
+      fieldsToPopulate: ["curative_explanation", "palliative_explanation", "adjust_arrow_explanation"],
+      cmsLoadingFunction: (baseMap, attributesMap) => TreatmentGoalPage.fromCMSJson(attributesMap),
+      localEntityName: 'treatment-goal-page',
+      assetLoadingFunction: (json) => TreatmentGoalPage.fromJson(json),
+      queryParameters: {});
+
   static List<ContentDefinition> definitions = [
     positiveAspectExamples,
     negativeAspectExamples,
@@ -118,6 +128,7 @@ mixin CmsConfiguration {
     treatmentActivities,
     onboarding,
     treatmentActivitiesPage,
-    qualityOfLifePage
+    qualityOfLifePage,
+    treatmentGoalPage
   ];
 }
