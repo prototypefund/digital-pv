@@ -22,10 +22,12 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
 class PatientDirectiveApp extends StatefulWidget {
-  const PatientDirectiveApp({super.key});
+  const PatientDirectiveApp({super.key, this.locale});
 
   @override
   State<PatientDirectiveApp> createState() => _PatientDirectiveAppState();
+
+  final Locale? locale;
 }
 
 class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging {
@@ -126,6 +128,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           theme: Themes().defaultTheme,
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
+          locale: widget.locale,
           builder: (_, widget) {
             _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
             return widget ?? const SizedBox();

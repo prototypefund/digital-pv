@@ -46,7 +46,9 @@ void main() {
   });
 
   testWidgets('Navigate through all screens with minimal input, and back', (WidgetTester tester) async {
-    await tester.pumpWidget(const PatientDirectiveApp());
+    await tester.pumpWidget(PatientDirectiveApp(
+      locale: Locale(l10n.localeName),
+    ));
     await tester.pumpAndSettle();
     expect(find.byType(WelcomeView), findsOneWidget);
 
