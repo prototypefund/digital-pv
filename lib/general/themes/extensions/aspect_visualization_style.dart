@@ -10,6 +10,8 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
     required this.aspectEvaluationArrowColor,
     required this.treatmentGoalArrowStrokeWidth,
     required this.treatmentGoalArrowColor,
+    required this.aspectCircleColor,
+    required this.aspectCircleGradient,
   });
 
   final TextStyle? sectionLabelStyle;
@@ -18,6 +20,8 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
   final Color? aspectEvaluationArrowColor;
   final double? treatmentGoalArrowStrokeWidth;
   final Color? treatmentGoalArrowColor;
+  final Color? aspectCircleColor;
+  final Gradient? aspectCircleGradient;
 
   @override
   AspectVisualizationStyle copyWith(
@@ -26,14 +30,18 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
       double? aspectEvaluationArrowStrokeWidth,
       Color? aspectEvaluationArrowColor,
       double? treatmentGoalArrowStrokeWidth,
-      Color? treatmentGoalArrowColor}) {
+      Color? treatmentGoalArrowColor,
+      Color? aspectCircleColor,
+      Gradient? aspectCircleGradient}) {
     return AspectVisualizationStyle(
         sectionLabelStyle: sectionLabelStyle ?? this.sectionLabelStyle,
         tendencyLabelStyle: tendencyLabelStyle ?? this.tendencyLabelStyle,
         aspectEvaluationArrowStrokeWidth: aspectEvaluationArrowStrokeWidth ?? this.aspectEvaluationArrowStrokeWidth,
         aspectEvaluationArrowColor: aspectEvaluationArrowColor ?? this.aspectEvaluationArrowColor,
         treatmentGoalArrowStrokeWidth: treatmentGoalArrowStrokeWidth ?? this.treatmentGoalArrowStrokeWidth,
-        treatmentGoalArrowColor: treatmentGoalArrowColor ?? this.treatmentGoalArrowColor);
+        treatmentGoalArrowColor: treatmentGoalArrowColor ?? this.treatmentGoalArrowColor,
+        aspectCircleColor: aspectCircleColor ?? this.aspectCircleColor,
+        aspectCircleGradient: aspectCircleGradient ?? this.aspectCircleGradient);
   }
 
   @override
@@ -49,6 +57,8 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
       aspectEvaluationArrowColor: Color.lerp(aspectEvaluationArrowColor, other.aspectEvaluationArrowColor, t),
       treatmentGoalArrowStrokeWidth: lerpDouble(treatmentGoalArrowStrokeWidth, other.treatmentGoalArrowStrokeWidth, t),
       treatmentGoalArrowColor: Color.lerp(treatmentGoalArrowColor, other.treatmentGoalArrowColor, t),
+      aspectCircleColor: Color.lerp(aspectCircleColor, other.aspectCircleColor, t),
+      aspectCircleGradient: Gradient.lerp(aspectCircleGradient, other.aspectCircleGradient, t),
     );
   }
 
