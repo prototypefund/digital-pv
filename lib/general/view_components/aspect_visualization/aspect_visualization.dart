@@ -3,12 +3,15 @@ import 'dart:math' as math;
 import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
-
+import 'package:pd_app/general/model/aspect.dart';
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/extensions/aspect_visualization_style.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/aspect_positions.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/coordinate.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/sector.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +42,9 @@ class AspectVisualization extends StatelessWidget with Logging {
         Theme.of(context).extension<AspectVisualizationStyle>()!.treatmentGoalArrowColor ?? Colors.black;
     final treatmentGoalArrowStrokeWidth =
         Theme.of(context).extension<AspectVisualizationStyle>()!.treatmentGoalArrowStrokeWidth ?? 9;
+    final aspectCircleGradient = Theme.of(context).extension<AspectVisualizationStyle>()!.aspectCircleGradient ??
+        const RadialGradient(colors: [Colors.white, Colors.black]);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -162,6 +168,27 @@ class AspectVisualization extends StatelessWidget with Logging {
                           _handleMouseGestureEvent(details.localPosition, centerOfGestureDetector));
                 },
               )),
+
+              /// positive aspects
+              Positioned.fill(
+                child: AspectsVisualization(
+                  aspects: viewModel.positiveAspects,
+                  angleForVisualisation: viewModel.aspectEvaluationArrowRotation,
+                  aspectCircleGradient: aspectCircleGradient,
+                ),
+              ),
+
+              /// negative aspects
+              Positioned.fill(
+                child: Transform.rotate(
+                  angle: viewModel.aspectEvaluationArrowRotation,
+                  child: AspectsVisualization(
+                    aspects: viewModel.negativeAspects,
+                    angleForVisualisation: math.pi - viewModel.aspectEvaluationArrowRotation,
+                    aspectCircleGradient: aspectCircleGradient,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -226,4 +253,72 @@ class ArrowPainter extends CustomPainter with Logging {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
+}
+
+class AspectsVisualization extends StatelessWidget {
+  const AspectsVisualization({
+    required this.aspects,
+    required this.angleForVisualisation,
+    required this.aspectCircleGradient,
+  });
+
+  final List<Aspect> aspects;
+  final double angleForVisualisation;
+  final Gradient aspectCircleGradient;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final radiusScaleFactor = constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth;
+
+        final Sector aspectsSector = Sector(angle: angleForVisualisation, radius: constraints.maxWidth / 2);
+
+        final List<AspectVisualizationInformation> aspectVisualizationInformation =
+            AspectsPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
+
+        final List<CustomPaint> children = aspectVisualizationInformation
+            .map(
+              (e) => CustomPaint(
+                painter: AspectCirclePainter(
+                  coordinate: e.coordinate,
+                  // TODO: remove hardcoded factors and explain how to use them
+                  radius: (e.weight.value + 0.9) * 13 * radiusScaleFactor,
+                  gradient: aspectCircleGradient,
+                ),
+              ),
+            )
+            .toList();
+
+        return Stack(
+          alignment: AlignmentDirectional.center,
+          children: children,
+        );
+      },
+    );
+  }
+}
+
+class AspectCirclePainter extends CustomPainter {
+  const AspectCirclePainter({
+    required this.coordinate,
+    required this.radius,
+    required this.gradient,
+  });
+
+  final Coordinate coordinate;
+  final double radius;
+  final Gradient gradient;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Offset center = Offset(coordinate.x, coordinate.y);
+
+    final paint = Paint()..shader = gradient.createShader(center & Size(radius, radius));
+
+    canvas.drawCircle(center, radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
