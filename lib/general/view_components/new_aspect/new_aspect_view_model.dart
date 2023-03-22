@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
-import 'package:pd_app/general/dynamic_content/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
@@ -24,10 +24,6 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
 
   String get examplesText;
 
-  String get addAspectTitle;
-
-  String get addAspectExplanation;
-
   @override
   void dispose() {
     super.dispose();
@@ -47,7 +43,7 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
 
   double get weight => _weight;
 
-  String get examplesTitle => l10n.examples;
+  String get examplesTitle;
 
   set weight(double newWeight) {
     _weight = newWeight;
@@ -91,7 +87,9 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
       groupMap[group] = Group(title: group, children: []);
     }
     for (final AspectsExample example in examplesContent) {
-      groupMap[example.example.group]!.children.add(Item(title: example.example.title));
+      groupMap[example.example.group]!
+          .children
+          .add(Item(title: example.example.title, help: example.example.contextualHelp));
     }
     return groupMap.values.toList();
   }

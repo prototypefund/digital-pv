@@ -1,0 +1,24 @@
+[
+  {
+    "intro": "# My treatment goal",
+    "treatment_goal_curative_confirmation_question": "Do you want curative treatment?",
+    "treatment_goal_palliative_confirmation_question": "Do you wish to receive palliative treatment?",
+    "adjust_arrow_explanation": {
+      "id": 9,
+      "title": "Adjust treatment target",
+      "content": "Tap the red compass needle to adjust the orientation to your liking."
+    },
+    "reset_arrow_action_label": "Reset",
+    "curative_explanation": {
+      "id": 10,
+      "title": "What does curative mean?",
+      "content": "Everything medically possible and sensible is done to preserve my life. I accept the burdens associated with life support."
+    },
+    "palliative_explanation": {
+      "id": 11,
+      "title": "What does palliative mean?",
+      "content": "The treatment is primarily aimed at alleviating my suffering. I accept a possible shortening of my lifespan."
+    },
+    "confirm_treatment_goal_action_label": "Confirm treatment goal"
+  }
+]

@@ -1,3 +1,5 @@
+import 'package:pd_app/general/dynamic_content/components/contextual_help.dart';
+
 class Group {
   Group({required this.title, required this.children});
 
@@ -6,14 +8,10 @@ class Group {
 }
 
 class Item {
-  Item({required this.title, this.description});
+  Item({required this.title, this.help});
 
   String title;
-  String? description;
-
-  String get titleWithDescription {
-    return "$title\n${description ?? ""}";
-  }
+  ContextualHelp? help;
 
   bool isExpanded = false;
 }

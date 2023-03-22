@@ -1,0 +1,23 @@
+[
+  {
+    "locale": "de",
+    "intro": "# Was wäre wenn?\n\nHier können Sie für mögliche künftige Situationen bestimme Maßnahmen festlegen",
+    "aspectListWidget": {
+      "delete_confirmation_question": "Soll die mögliche künftige Situation wirklich entfernt werden?",
+      "delete_confirmation_cancel": "Abbrechen",
+      "delete_confirmation_confirm": "Zukünftige Situation entfernen",
+      "low_significance_label": "Geringe Bedeutung",
+      "high_significance_label": "Hohe Bedeutung",
+      "empty_list_message": "Bisher wurden noch keine zukünftigen Situationen angegeben"
+    },
+    "addAspectWidget": {
+      "empty_textfield_hint": "Zukünftige Situation",
+      "low_significance_label": "Geringe Bedeutung",
+      "high_significance_label": "Hohe Bedeutung",
+      "add_aspect_action_label": "Situation hinzufügen"
+    },
+    "outro": "",
+    "treatment_activities_title": "Medizinische Maßnahmen",
+    "examples_title": "Beispiele"
+  }
+]

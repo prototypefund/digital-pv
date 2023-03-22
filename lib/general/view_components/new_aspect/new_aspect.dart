@@ -27,8 +27,8 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
                 ),
               ),
               DPVSlider(
-                sliderDescription: viewModel.aspectSignificanceLabel,
-                showLabels: viewModel.showAspectSignificanceLabel,
+                sliderDescription: '',
+                showLabels: false,
                 sliderLowLabel: viewModel.aspectsSignificanceLowLabel,
                 sliderHighLabel: viewModel.aspectSignificanceHighLabel,
                 value: viewModel.weight,

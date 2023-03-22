@@ -2,22 +2,27 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/negative_aspects_page.dart';
+import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_list_view_model.dart';
 import 'package:pd_app/use_cases/negative_aspects/new_negative_aspect_view_model.dart';
 
 class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with AspectViewModel, Logging {
-  NegativeAspectsViewModel() : _negativeAspectsListViewModel = NegativeAspectsListViewModel();
+  NegativeAspectsViewModel() : _negativeAspectsListViewModel = NegativeAspectsListViewModel() {
+    _contentService.addListener(notifyListeners);
+  }
+
+  final ContentService _contentService = getIt.get();
 
   final AspectListViewModel _negativeAspectsListViewModel;
 
   final NewNegativeAspectViewModel newNegativeAspectViewModel = NewNegativeAspectViewModel();
 
-  String get negativeAspectsTitle => l10n.negativeAspectsHeadline;
-
-  String get negativeAspectsTitleExplanation => l10n.negativeAspectsTitleExplanation;
+  NegativeAspectsPage get pageContent => _contentService.negativeAspectsPage;
 
   AspectListViewModel get negativeAspectsListViewModel => _negativeAspectsListViewModel;
 
@@ -25,6 +30,7 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
   void dispose() {
     super.dispose();
     _negativeAspectsListViewModel.dispose();
+    _contentService.removeListener(notifyListeners);
   }
 
   @override
@@ -45,4 +51,10 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
 
   @override
   bool get showTreatmentGoalInVisualization => false;
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.negativeAspectsPage.aspectListWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.negativeAspectsPage.aspectListWidget.lowSignificanceLabel;
 }

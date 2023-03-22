@@ -32,8 +32,6 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
   final PatientDirectiveService _patientDirectiveService;
 
-  String get addAspectCallToActionText;
-
   bool get showTreatmentOptions;
 
   bool get showEmptyAspectListsMessage => _aspects.isEmpty;
@@ -41,8 +39,6 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   String get emptyAspectListsMessageText;
 
   bool get isAddAspectCallToActionEnabled => true;
-
-  bool get showAddAspectCallToAction;
 
   String getRemoveAspectConfirmationQuestionLocalization(String aspectName);
 

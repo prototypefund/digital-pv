@@ -8,7 +8,7 @@ part of 'contextual_help.dart';
 
 ContextualHelp _$ContextualHelpFromJson(Map<String, dynamic> json) => ContextualHelp(
       id: json['id'] as int,
-      title: json['title'] as String?,
+      title: json['title'] as String,
       content: json['content'] as String,
     );
 

@@ -6,7 +6,6 @@ import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/themes/themes.dart';
 import 'package:pd_app/logging.dart';
-import 'package:pd_app/use_cases/add_positive_aspect/add_positive_aspect_view.dart';
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations.dart';
 import 'package:pd_app/use_cases/general_information_about_patient_directive/general_information_about_patient_directive.dart';
@@ -23,10 +22,12 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
 class PatientDirectiveApp extends StatefulWidget {
-  const PatientDirectiveApp({super.key});
+  const PatientDirectiveApp({super.key, this.locale});
 
   @override
   State<PatientDirectiveApp> createState() => _PatientDirectiveAppState();
+
+  final Locale? locale;
 }
 
 class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging {
@@ -47,11 +48,6 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
             path: Routes.positiveAspects,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<PositiveAspects>(
                 context: context, state: state, child: PositiveAspects.page()),
-          ),
-          GoRoute(
-            path: Routes.addPositiveAspect,
-            pageBuilder: (context, state) => buildPageWithDefaultTransition<AddPositiveAspect>(
-                context: context, state: state, child: AddPositiveAspect.page()),
           ),
           GoRoute(
             path: Routes.negativeAspects,
@@ -132,6 +128,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           theme: Themes().defaultTheme,
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
+          locale: widget.locale,
           builder: (_, widget) {
             _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
             return widget ?? const SizedBox();

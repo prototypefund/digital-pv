@@ -3,9 +3,12 @@ import "dart:math" as math;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
+import 'package:pd_app/general/dynamic_content/components/contextual_help.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/treatment_goal_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/treatment_goal.dart';
 import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/circular_quadrant_directions.dart';
 import 'package:pd_app/logging.dart';
@@ -14,7 +17,10 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
     with Logging, CircularQuadrantDirections {
   GeneralTreatmentObjectiveViewModel() : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
+    _contentService.addListener(notifyListeners);
   }
+
+  final ContentService _contentService = getIt.get();
 
   final PatientDirectiveService _patientDirectiveService;
 
@@ -28,31 +34,27 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   @override
   bool get nextButtonEnabled => false;
 
-  String get headline => l10n.generalTreatmentGoalHeadline;
+  String get intro => pageContent.intro;
 
-  String get changeNeedleCallToAction => l10n.generalTreatmentChangeCompassNeedleCallToAction;
+  ContextualHelp get adjustArrowExplanation => pageContent.adjustArrowExplanation;
 
   String get summary {
     if ((_patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value) >= 0) {
-      return l10n.generalTreatmentCurativeGoalQuestion;
+      return pageContent.treatmentGoalCurativeQuestion;
     } else {
-      return l10n.generalTreatmentPalliativeGoalQuestion;
+      return pageContent.treatmentGoalPalliativeQuestion;
     }
   }
 
-  String get confirmLabel => l10n.generalTreatmentConfirm;
+  String get confirmLabel => pageContent.confirmTreatmentGoalActionLabel;
 
-  String get resetLabel => l10n.generalTreatmentResetCompass;
+  String get resetLabel => pageContent.resetArrowActionLabel;
 
   IconData get resetIconData => Icons.undo;
+  
+  ContextualHelp get curativeExplanation => pageContent.curativeExplanation;
 
-  String get curativeExplanationTitle => l10n.generalTreatmentCurativeExplanationTitle;
-
-  String get curativeExplanation => l10n.generalTreatmentCurativeExplanation;
-
-  String get palliativeExplanationTitle => l10n.generalTreatmentPalliativeExplanationTitle;
-
-  String get palliativeExplanation => l10n.generalTreatmentPalliativeExplanation;
+  ContextualHelp get palliativeExplanation => pageContent.palliativeExplanation;
 
   @override
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
@@ -61,6 +63,7 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   void dispose() {
     super.dispose();
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChanges);
+    _contentService.removeListener(notifyListeners);
   }
 
   void resetTreatmentGoal(BuildContext context) {
@@ -113,4 +116,6 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
 
   @override
   bool get showTreatmentGoalInVisualization => true;
+
+  TreatmentGoalPage get pageContent => _contentService.treatmentGoalPage;
 }

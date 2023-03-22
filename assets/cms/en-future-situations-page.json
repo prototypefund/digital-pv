@@ -1,0 +1,23 @@
+[
+  {
+    "locale": "en",
+    "intro": "# What if?\n\nHere you can define specific actions for potential future situations",
+    "aspectListWidget": {
+      "delete_confirmation_question": "Should the potential situation really be removed?",
+      "delete_confirmation_cancel": "Cancel",
+      "delete_confirmation_confirm": "Remove potential situation",
+      "low_significance_label": "Low Significance",
+      "high_significance_label": "High Significance",
+      "empty_list_message": "No potential situations have been specified yet"
+    },
+    "addAspectWidget": {
+      "empty_textfield_hint": "Potential Situations",
+      "low_significance_label": "Low Significance",
+      "high_significance_label": "High Significance",
+      "add_aspect_action_label": "Add Potential Situation"
+    },
+    "outro": null,
+    "treatment_activities_title": "Medical measures",
+    "examples_title": "Examples"
+  }
+]

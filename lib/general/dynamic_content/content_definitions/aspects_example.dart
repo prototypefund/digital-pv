@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pd_app/general/dynamic_content/components/example.dart';
-import 'package:pd_app/general/dynamic_content/json_serializable.dart';
+import 'package:pd_app/general/dynamic_content/loading/json_serializable.dart';
 
 part 'aspects_example.g.dart';
 

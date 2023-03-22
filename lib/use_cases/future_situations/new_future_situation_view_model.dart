@@ -1,4 +1,4 @@
-import 'package:pd_app/general/dynamic_content/aspects_example.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
@@ -13,29 +13,32 @@ class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
   final ContentService _contentService;
 
   @override
-  String get addAspectActionText => l10n.addFutureSituationCallToAction;
+  String get addAspectActionText => _contentService.futureSituationsPage.addAspectWidget.addAspectActionLabel;
 
   @override
-  String get addAspectExplanation => l10n.addPositiveAspectExplanation;
-
-  @override
-  String get addAspectTextfieldHint => l10n.addFutureSituationAspectTextfieldHint;
-
-  @override
-  String get addAspectTitle => l10n.addFutureSituationAspect;
+  String get addAspectTextfieldHint => _contentService.futureSituationsPage.addAspectWidget.emptyTextFieldHint;
 
   @override
   AspectListChoice<FutureSituation> get aspectListChoice =>
       (PatientDirective directive) => directive.futureSituationAspects;
 
   @override
-  String get examplesText => l10n.examples;
+  String get examplesText => _contentService.futureSituationsPage.examplesTitle;
 
   @override
   FutureSituation createNewAspect({required String name, required Weight weight}) {
-    return FutureSituation(name: name, weight: weight);
+    return FutureSituation(name: name, weight: weight, treatmentActivitiyPreferences: []);
   }
 
   @override
   List<AspectsExample> get aspectExamples => _contentService.futureSituationsExamples;
+
+  @override
+  String get examplesTitle => _contentService.futureSituationsPage.examplesTitle;
+
+  @override
+  String get aspectSignificanceHighLabel => _contentService.futureSituationsPage.addAspectWidget.highSignificanceLabel;
+
+  @override
+  String get aspectsSignificanceLowLabel => _contentService.futureSituationsPage.addAspectWidget.lowSignificanceLabel;
 }

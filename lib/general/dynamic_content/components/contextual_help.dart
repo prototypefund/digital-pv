@@ -9,7 +9,7 @@ class ContextualHelp {
   factory ContextualHelp.fromJson(Map<String, dynamic> json) => _$ContextualHelpFromJson(json);
 
   final int id;
-  final String? title;
+  final String title;
   final String content;
 
   Map<String, dynamic> toJson() => _$ContextualHelpToJson(this);

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
-import 'package:pd_app/general/dynamic_content/positive_aspects_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/positive_aspects/new_positive_aspect_view_model.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_list_view_model.dart';
 
 class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging {
@@ -22,6 +23,8 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   PositiveAspectsPage get pageContent => _contentService.positiveAspectsPage;
 
   AspectListViewModel get positiveAspectListViewModel => _positiveAspectListViewModel;
+
+  final NewPositiveAspectViewModel newPositiveAspectViewModel = NewPositiveAspectViewModel();
 
   @override
   void dispose() {
