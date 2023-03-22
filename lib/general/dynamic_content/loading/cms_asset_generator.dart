@@ -24,31 +24,29 @@ class CmsAssetGenerator with Logging {
     final loader = CMSLoader(cmsConfig: cmsConfig, apiToken: apiToken);
 
     final List<Future<LocalAssetFileCreationResult>> assetGenerationFutures = [];
+
     for (final String locale in locales) {
       for (final ContentDefinition definition in contentDefinitions) {
         assetGenerationFutures.add(
             _createLocalAssetFile(definition: definition, cmsDirectory: cmsDirectory, loader: loader, locale: locale));
       }
-      logger.i('waiting for asset generation to complete');
-      final List<LocalAssetFileCreationResult> results =
-          await Future.wait<LocalAssetFileCreationResult>(assetGenerationFutures);
-
-      final includedUris =
-          results.map((e) => e.containedUris).fold<Set<Uri>>(<Uri>{}, (Set<Uri> previousValue, Set<Uri> newValue) {
-        previousValue.addAll(newValue);
-        return previousValue;
-      });
-
-      logger.i('there are ${includedUris.length} distinct uris in the cms dataset - will download them to assets');
-
-      for (final uri in includedUris) {
-        logger.d('downloading uri $uri');
-        final mediaBytes = await loader.downloadMediaUri(uri);
-        await CMSToAssetsCache().saveMediaToAssets(bytes: mediaBytes, baseUri: uri, baseDirectory: cmsDirectory);
-      }
-
-      logger.i('asset generation done');
     }
+
+    logger.i('waiting for asset generation to complete');
+    final List<LocalAssetFileCreationResult> results =
+        await Future.wait<LocalAssetFileCreationResult>(assetGenerationFutures);
+
+    final includedUris = results.expand((e) => e.containedUris).toSet();
+
+    logger.i('there are ${includedUris.length} distinct uris in the cms dataset - will download them to assets');
+
+    for (final uri in includedUris) {
+      logger.d('downloading uri $uri');
+      final mediaBytes = await loader.downloadMediaUri(uri);
+      await CMSToAssetsCache().saveMediaToAssets(bytes: mediaBytes, baseUri: uri, baseDirectory: cmsDirectory);
+    }
+
+    logger.i('asset generation done');
   }
 
   Future<LocalAssetFileCreationResult> _createLocalAssetFile(

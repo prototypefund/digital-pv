@@ -21,38 +21,42 @@ class CMSLoader with Logging {
     final buildObjectFunction = contentDefinition.cmsLoadingFunction;
     final queryParameters = contentDefinition.queryParameters;
 
-    final headers = {'accept': "application/json", "authorization": "Bearer $apiToken"};
-    final Map<String, String> completeQueryParameters = <String, String>{"populate": populateFields, 'locale': locale};
+    final headers = {
+      'accept': "application/json",
+      "authorization": "Bearer $apiToken",
+    };
+    final Map<String, String> completeQueryParameters = {
+      "populate": populateFields,
+      'locale': locale,
+    };
     completeQueryParameters.addAll(queryParameters);
 
     final requestUri = Uri(
-        path: "api/$entityName",
-        scheme: cmsConfig.baseUri.scheme,
-        host: cmsConfig.baseUri.host,
-        port: cmsConfig.baseUri.port,
-        queryParameters: completeQueryParameters);
+      path: "api/$entityName",
+      scheme: cmsConfig.baseUri.scheme,
+      host: cmsConfig.baseUri.host,
+      port: cmsConfig.baseUri.port,
+      queryParameters: completeQueryParameters,
+    );
 
     final response = await http.get(requestUri, headers: headers);
+    final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+    final List<dynamic> dataItems = isSingleEntity
+        ? <dynamic>[responseJson['data'] as Map<String, dynamic>]
+        : responseJson['data'] as List<dynamic>;
 
-    final Map<String, dynamic> responseJson = jsonDecode(response.body) as Map<String, dynamic>;
-    final List<dynamic> dataItems;
-    final Set<Uri> parsedUris;
-    if (isSingleEntity) {
-      final jsonData = responseJson['data'] as Map<String, dynamic>;
-      dataItems = <dynamic>[jsonData];
-      parsedUris = findIncludedUris(jsonData);
-    } else {
-      dataItems = responseJson['data'] as List<dynamic>;
-      parsedUris = dataItems
-          .whereType<Map<String, dynamic>>()
-          .map<Set<Uri>>((e) => findIncludedUris(e))
-          .fold<Set<Uri>>(<Uri>{}, (Set<Uri> previousValue, Set<Uri> newValue) {
-        previousValue.addAll(newValue);
-        return previousValue;
-      });
-    }
+    final Set<Uri> parsedUris = dataItems
+        .whereType<Map<String, dynamic>>()
+        .map<Set<Uri>>(findIncludedUris)
+        .fold<Set<Uri>>(<Uri>{}, (previousValue, newValue) {
+      previousValue.addAll(newValue);
+      return previousValue;
+    });
 
-    final List<T> results = dataItems.map((dynamic e) => buildObjectFunction(_baseMap(e), _attributesMap(e))).toList();
+    final List<T> results = dataItems
+        .whereType<Map<String, dynamic>>()
+        .map<T>((dynamic e) => buildObjectFunction(_baseMap(e), _attributesMap(e)))
+        .toList();
 
     return CmsLoadingResult(entities: results, containedUris: parsedUris);
   }

@@ -51,12 +51,11 @@ class CMSCache with Logging {
 
   Future<void> reloadAllFromCms({required String locale}) async {
     logger.i('reloading all cms cache content from cms with locale $locale');
-    final List<Future<void>> futures = [];
-    for (final ContentDefinition definition in definitions) {
-      futures.add(_loadEntitiesFromCMS(locale: locale, contentDefinition: definition));
-    }
-
-    await Future.wait<void>(futures);
+    await Future.wait<void>(
+      definitions.map(
+        (definition) => _loadEntitiesFromCMS(locale: locale, contentDefinition: definition),
+      ),
+    );
     logger.i('reloading all cms cache content from cms with locale $locale DONE');
   }
 
