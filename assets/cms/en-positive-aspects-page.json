@@ -1,7 +1,7 @@
 [
   {
     "locale": "en",
-    "intro": "# What brings me joy\n\nIdentify aspects of your life that bring you joy.",
+    "intro": "# What brings me joy?\n\nIdentify aspects of your life that bring you joy.",
     "aspectListWidget": {
       "delete_confirmation_question": "Are you sure you want to delete this positive aspect?",
       "delete_confirmation_cancel": "Cancel",
