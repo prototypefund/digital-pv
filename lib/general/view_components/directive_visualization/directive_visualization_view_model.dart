@@ -37,6 +37,8 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
 
   List<Aspect> get negativeAspects => _patientDirectiveService.currentPatientDirective.negativeAspects;
 
+  List<Aspect> get futureAspects => _patientDirectiveService.currentPatientDirective.futureSituationAspects;
+
   /// aspect evaluation arrow rotation in radians
   /// by default the arrow is pointing to the right (very negative)
   /// rotating by PI means pointing to the left (very positive)

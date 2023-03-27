@@ -187,6 +187,18 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   ),
                 ),
               ),
+
+              /// future aspects
+              Positioned.fill(
+                child: Transform.rotate(
+                  angle: math.pi,
+                  child: AspectsVisualization(
+                    aspects: viewModel.futureAspects,
+                    angleForVisualisation: math.pi,
+                    aspectCircleGradient: aspectCircleGradient,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
