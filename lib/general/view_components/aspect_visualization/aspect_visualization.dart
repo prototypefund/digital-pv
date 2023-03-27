@@ -9,9 +9,9 @@ import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/extensions/aspect_visualization_style.dart';
+import 'package:pd_app/general/view_components/aspect_visualization/aspect_circle_painter.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_positions.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/coordinate.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/sector.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
@@ -280,11 +280,11 @@ class AspectsVisualization extends StatelessWidget {
 
         final List<CustomPaint> aspectCircles = aspectVisualizationInformation
             .map(
-              (e) => CustomPaint(
+              (visualizationInformaion) => CustomPaint(
                 painter: AspectCirclePainter(
-                  coordinate: e.coordinate,
+                  coordinate: visualizationInformaion.coordinate,
                   // TODO: remove hardcoded factors and explain how to use them
-                  radius: (e.weight.value + 0.9) * 13 * radiusScaleFactor,
+                  radius: (visualizationInformaion.weight.value + 0.9) * 13 * radiusScaleFactor,
                   gradient: aspectCircleGradient,
                 ),
               ),
@@ -298,28 +298,4 @@ class AspectsVisualization extends StatelessWidget {
       },
     );
   }
-}
-
-class AspectCirclePainter extends CustomPainter {
-  const AspectCirclePainter({
-    required this.coordinate,
-    required this.radius,
-    required this.gradient,
-  });
-
-  final Coordinate coordinate;
-  final double radius;
-  final Gradient gradient;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Offset center = Offset(coordinate.x, coordinate.y);
-
-    final paint = Paint()..shader = gradient.createShader(center & Size(radius, radius));
-
-    canvas.drawCircle(center, radius, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
