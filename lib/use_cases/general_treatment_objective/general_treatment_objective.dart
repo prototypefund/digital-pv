@@ -3,8 +3,8 @@ import 'package:pd_app/general/creation_process_navigation/creation_process_navi
 import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/sizes.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
+import 'package:pd_app/general/view_components/directive_visualization/directive_visualization.dart';
+import 'package:pd_app/general/view_components/directive_visualization/directive_visualization_view_model.dart';
 import 'package:pd_app/general/view_components/explanation_box/explanation_box.dart';
 import 'package:pd_app/use_cases/general_treatment_objective/general_treatment_objective_view_model.dart';
 import 'package:provider/provider.dart';
@@ -39,8 +39,8 @@ class GeneralTreatmentObjective extends StatelessWidget {
         ConstrainedBox(
             constraints: Constraints.aspectVisualizationConstraints,
             child: ChangeNotifierProvider(
-                create: (_) => AspectVisualizationViewModel(showLabels: true, showTreatmentGoal: true),
-                child: AspectVisualization(
+                create: (_) => DirectiveVisualizationViewModel(showLabels: true, showTreatmentGoal: true),
+                child: DirectiveVisualization(
                   onDragAndRotate: (double direction) {
                     viewModel.adaptTreatmentGoal(direction);
                   },

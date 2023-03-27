@@ -6,7 +6,7 @@ import 'package:pd_app/general/creation_process_navigation/creation_process_navi
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization.dart';
+import 'package:pd_app/general/view_components/directive_visualization/directive_visualization.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
@@ -66,7 +66,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                       child: Visibility(
                           visible: deviceWidth < responsiveAddonThreshold &&
                               viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
-                          child: AspectVisualization.widgetWithViewModel(
+                          child: DirectiveVisualization.widgetWithViewModel(
                               showLabels: false, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
                     ),
                   ),
@@ -99,7 +99,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   bottom: 0,
                   child: Padding(
                       padding: Paddings.floatingAspectVisualizationPadding,
-                      child: AspectVisualization.widgetWithViewModel(
+                      child: DirectiveVisualization.widgetWithViewModel(
                           showLabels: true, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
           ],
         ),

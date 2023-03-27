@@ -1,7 +1,7 @@
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/weight.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/coordinate.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/sector.dart';
+import 'package:pd_app/general/view_components/directive_visualization/coordinate.dart';
+import 'package:pd_app/general/view_components/directive_visualization/sector.dart';
 
 class AspectPositions {
   final List<Aspect> aspects;

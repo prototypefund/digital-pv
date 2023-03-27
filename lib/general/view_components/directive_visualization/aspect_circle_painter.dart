@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/coordinate.dart';
+import 'package:pd_app/general/view_components/directive_visualization/coordinate.dart';
 
 class AspectCirclePainter extends CustomPainter {
   const AspectCirclePainter({

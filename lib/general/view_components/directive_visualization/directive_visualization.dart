@@ -3,35 +3,32 @@ import 'dart:math' as math;
 import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
-import 'package:pd_app/general/model/aspect.dart';
 
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/extensions/aspect_visualization_style.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_circle_painter.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_positions.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/sector.dart';
+import 'package:pd_app/general/view_components/directive_visualization/aspects_visualization.dart';
+import 'package:pd_app/general/view_components/directive_visualization/directive_visualization_view_model.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
 
-class AspectVisualization extends StatelessWidget with Logging {
-  const AspectVisualization({super.key, this.onDragAndRotate});
+class DirectiveVisualization extends StatelessWidget with Logging {
+  const DirectiveVisualization({super.key, this.onDragAndRotate});
 
   final ValueChanged<double>? onDragAndRotate;
 
   static Widget widgetWithViewModel(
           {required bool showLabels, required bool showTreatmentGoal, ValueChanged<double>? onDragAndRotate}) =>
       ChangeNotifierProvider(
-          create: (_) => AspectVisualizationViewModel(showLabels: showLabels, showTreatmentGoal: showTreatmentGoal),
-          child: AspectVisualization(
+          create: (_) => DirectiveVisualizationViewModel(showLabels: showLabels, showTreatmentGoal: showTreatmentGoal),
+          child: DirectiveVisualization(
             onDragAndRotate: onDragAndRotate,
           ));
 
   @override
   Widget build(BuildContext context) {
-    final AspectVisualizationViewModel viewModel = context.watch();
+    final DirectiveVisualizationViewModel viewModel = context.watch();
 
     final sectionLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.sectionLabelStyle!;
     final tendencyLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.tendencyLabelStyle!;
@@ -253,49 +250,5 @@ class ArrowPainter extends CustomPainter with Logging {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
-  }
-}
-
-class AspectsVisualization extends StatelessWidget {
-  const AspectsVisualization({
-    required this.aspects,
-    required this.angleForVisualisation,
-    required this.aspectCircleGradient,
-  });
-
-  final List<Aspect> aspects;
-  final double angleForVisualisation;
-  final Gradient aspectCircleGradient;
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final radiusScaleFactor = constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth;
-
-        final Sector aspectsSector = Sector(angle: angleForVisualisation, radius: constraints.maxWidth / 2);
-
-        final List<AspectVisualizationInformation> aspectVisualizationInformation =
-            AspectPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
-
-        final List<CustomPaint> aspectCircles = aspectVisualizationInformation
-            .map(
-              (visualizationInformaion) => CustomPaint(
-                painter: AspectCirclePainter(
-                  coordinate: visualizationInformaion.coordinate,
-                  // TODO: remove hardcoded factors and explain how to use them
-                  radius: (visualizationInformaion.weight.value + 0.9) * 13 * radiusScaleFactor,
-                  gradient: aspectCircleGradient,
-                ),
-              ),
-            )
-            .toList();
-
-        return Stack(
-          alignment: AlignmentDirectional.center,
-          children: aspectCircles,
-        );
-      },
-    );
   }
 }

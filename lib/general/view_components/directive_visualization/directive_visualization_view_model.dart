@@ -7,8 +7,8 @@ import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/logging.dart';
 
-class AspectVisualizationViewModel with ChangeNotifier, Logging, RootContextL10N {
-  AspectVisualizationViewModel({required this.showLabels, required this.showTreatmentGoal})
+class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL10N {
+  DirectiveVisualizationViewModel({required this.showLabels, required this.showTreatmentGoal})
       : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
   }

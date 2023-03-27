@@ -10,7 +10,7 @@ import 'package:pd_app/general/model/treatment_goal.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/circular_quadrant_directions.dart';
+import 'package:pd_app/general/view_components/directive_visualization/circular_quadrant_directions.dart';
 import 'package:pd_app/logging.dart';
 
 class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewModel
@@ -51,7 +51,7 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   String get resetLabel => pageContent.resetArrowActionLabel;
 
   IconData get resetIconData => Icons.undo;
-  
+
   ContextualHelp get curativeExplanation => pageContent.curativeExplanation;
 
   ContextualHelp get palliativeExplanation => pageContent.palliativeExplanation;
