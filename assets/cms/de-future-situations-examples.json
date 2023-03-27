@@ -6,7 +6,7 @@
       "title": "Intensivbehandlung unklarer Dauer nach akutem Ereignis",
       "contextual_help": {
         "id": 1,
-        "title": null,
+        "title": "Was bedeutet das? ",
         "content": "z.B. Infektion, Komplikationen bei/nach OP, akute Verschlechterung einer bestehenden Erkrankung"
       }
     },
@@ -20,7 +20,7 @@
       "title": "Schwere, dauerhafte körperliche Beeinträchtigung",
       "contextual_help": {
         "id": 2,
-        "title": null,
+        "title": "Was bedeutet das?",
         "content": "(Bettlägerigkeit, permanente Pflegedürftigkeit, Inkontinenz) bei gleichzeitigem Verlust der Einwilligungs- bzw. Urteilsfähigkeit"
       }
     },
@@ -34,7 +34,7 @@
       "title": "Schwere oder fortschreitende geistige Beeinträchtigung",
       "contextual_help": {
         "id": 3,
-        "title": null,
+        "title": "Was bedeutet das?",
         "content": "z.B. unfallbedingte Hirnschädigung, Demenz"
       }
     },
@@ -48,7 +48,7 @@
       "title": "Wachkoma oder ähnliche Zustände",
       "contextual_help": {
         "id": 4,
-        "title": null,
+        "title": "Was bedeutet das?",
         "content": "Info: Ein Erwachen ist nicht ganz auszuschliessen, aber unwahrscheinlich. Es ist unklar, ob eine gewisse Empfindungsfähigkeit erhalten sein kann."
       }
     },

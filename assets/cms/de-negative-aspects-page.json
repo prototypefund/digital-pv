@@ -1,0 +1,22 @@
+[
+  {
+    "locale": "de",
+    "intro": "# Was bereitet mir Kummer?\n\nBestimmen Sie Aspekte aus Ihrem Leben, die Ihre Lebensqualität negativ beeinflussen",
+    "aspectListWidget": {
+      "delete_confirmation_question": "Soll der negative Aspekt wirklich entfernt werden?",
+      "delete_confirmation_cancel": "Abbrechen",
+      "delete_confirmation_confirm": "Negativen Aspekt entfernen",
+      "low_significance_label": "Geringe Bedeutung",
+      "high_significance_label": "Hohe Bedeutung",
+      "empty_list_message": "Bisher wurden noch keine negativen Aspekte angegeben"
+    },
+    "addAspectWidget": {
+      "empty_textfield_hint": "Negativer Aspekt",
+      "low_significance_label": "Geringe Bedeutung",
+      "high_significance_label": "Hohe Bedeutung",
+      "add_aspect_action_label": "Negativen Aspekt hinzufügen"
+    },
+    "outro": null,
+    "examples_title": "Beispiele"
+  }
+]

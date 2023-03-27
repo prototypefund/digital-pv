@@ -57,13 +57,6 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
                 initialItemCount: viewModel.aspects.length,
                 itemBuilder: (context, index, animation) => buildListItem(context, index, animation),
               )),
-        if (viewModel.showAddAspectCallToAction)
-          Padding(
-            padding: Paddings.callToActionPadding,
-            child: ElevatedButton(
-                onPressed: viewModel.addAspectCallToActionPressed(context),
-                child: Text(viewModel.addAspectCallToActionText)),
-          ),
       ],
     );
   }
@@ -91,7 +84,7 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
         opacity: animation,
         child: AspectWidget<AspectType>(
             aspect: aspect,
-            sliderDescription: viewModel.aspectSignificanceLabel,
+            sliderDescription: '',
             sliderHighLabel: viewModel.aspectSignificanceHighLabel,
             sliderLowLabel: viewModel.aspectsSignificanceLowLabel,
             onPositionChange: !interactive
@@ -208,7 +201,7 @@ class AspectWidget<AspectType extends Aspect> extends StatelessWidget with Loggi
         ),
         DPVSlider(
           sliderDescription: sliderDescription,
-          showLabels: viewModel.showAspectSignificanceLabel,
+          showLabels: false,
           sliderLowLabel: sliderLowLabel,
           sliderHighLabel: sliderHighLabel,
           value: aspect.weight.value,

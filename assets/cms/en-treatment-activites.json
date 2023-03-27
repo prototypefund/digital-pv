@@ -1,0 +1,72 @@
+[
+  {
+    "activity": "Hospital admission",
+    "id": 2,
+    "choices": [
+      {
+        "choice": "Not specified",
+        "id": 5
+      },
+      {
+        "choice": "Yes",
+        "id": 7
+      },
+      {
+        "choice": "No",
+        "id": 8
+      },
+      {
+        "choice": "I do want to be hospitalized, but only to control symptoms that cannot be treated as an outpatient",
+        "id": 6
+      }
+    ],
+    "default_value": {
+      "choice": "Not specified",
+      "id": 5
+    }
+  },
+  {
+    "activity": "Intensive treatment",
+    "id": 4,
+    "choices": [
+      {
+        "choice": "Not specified",
+        "id": 5
+      },
+      {
+        "choice": "Yes",
+        "id": 7
+      },
+      {
+        "choice": "No",
+        "id": 8
+      }
+    ],
+    "default_value": {
+      "choice": "Not specified",
+      "id": 5
+    }
+  },
+  {
+    "activity": "Resuscitation",
+    "id": 6,
+    "choices": [
+      {
+        "choice": "Not specified",
+        "id": 5
+      },
+      {
+        "choice": "Yes",
+        "id": 7
+      },
+      {
+        "choice": "No",
+        "id": 8
+      }
+    ],
+    "default_value": {
+      "choice": "Not specified",
+      "id": 5
+    }
+  }
+]

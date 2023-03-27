@@ -127,54 +127,35 @@ class _Entry extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: Theme(
             data: Theme.of(context).copyWith(dividerColor: Colors.transparent, cardColor: Colors.transparent),
-            child: item.description == null
-                ? Wrap(
-                    children: [
-                      Text(
-                        item.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ],
-                  )
-                : ExpandableNotifier(
-                    child: Wrap(children: [
-                      ExpandableTheme(
-                        // Duration.zero resulted in issues
-                        data: const ExpandableThemeData(animationDuration: Duration(milliseconds: 1)),
-                        child: Expandable(
-                          collapsed: ExpandableWrapper(
-                            icon: const Icon(
-                              Icons.info,
-                              color: DefaultThemeColors.purple,
-                            ),
-                            child: Text(
-                              item.title,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                          ),
-                          expanded: ExpandableWrapper(
-                            icon: const Icon(
-                              Icons.close,
-                              color: DefaultThemeColors.purple,
-                            ),
-                            child: Text(
-                              item.titleWithDescription,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ]),
+            child: Wrap(
+              children: [
+                Text(
+                  item.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18.0,
                   ),
+                ),
+                if (item.help != null)
+                  IconButton(
+                      constraints: const BoxConstraints(),
+                      padding: EdgeInsets.zero,
+                      visualDensity: VisualDensity.compact,
+                      onPressed: () {
+                        showDialog<void>(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text(item.help!.title),
+                                  content: Text(item.help!.content),
+                                  actions: const [],
+                                ));
+                      },
+                      icon: Icon(
+                        Icons.info,
+                        color: Theme.of(context).iconTheme.color,
+                      ))
+              ],
+            ),
           ),
         ),
       ),

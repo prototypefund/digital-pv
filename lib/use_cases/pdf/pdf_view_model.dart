@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pd_app/general/init/get_it.dart';
-import 'package:pd_app/general/model/treatment_activity.dart';
 import 'package:pd_app/general/model/treatment_goal.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
@@ -49,21 +48,6 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
     return l10n.pdfIntroductionParagraph(surname, name, dateOfBirth, zipCode, city, country);
   }
 
-  String get generalHospitalizationPreference {
-    return l10n.pdfGeneralHospitalizationPreference(
-        _patientDirectiveService.currentPatientDirective.generalHospitalizationPreference.localizedString(l10n));
-  }
-
-  String get generalIntensiveTreatmentPreference {
-    return l10n.pdfGeneralIntensiveTreatmentPreference(
-        _patientDirectiveService.currentPatientDirective.generalIntensiveTreatmentPreference.localizedString(l10n));
-  }
-
-  String get generalResuscitationPreference {
-    return l10n.pdfGeneralResuscitationPreference(
-        _patientDirectiveService.currentPatientDirective.generalResuscitationPreference.localizedString(l10n));
-  }
-
   String get treatmentGoal {
     final goal = _patientDirectiveService.currentPatientDirective.generalTreatmentGoal;
 
@@ -80,14 +64,19 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
   String get paragraphTreatmentTarget => l10n.pdfParagraphTreatmentTarget;
 
   String get paragraphPrincipleWishTitle => l10n.pdfParagraphPrincipleWishTitle('II');
+
   String get paragraphSpecificMeasuresTitle => l10n.pdfParagraphSpecificMeasuresTitle('III');
+
   String get paragraphSpecificMeasures => l10n.paragraphSpecificMeasures;
 
   String get paragraphValidityTitle => l10n.pdfParagraphValidityTitle('IV');
+
   String get paragraphValidity => l10n.pdfParagraphValidity;
 
   String get paragraphReleaseSecrecyTitle => l10n.pdfParagraphReleaseSecrecyTitle('V');
+
   String get paragraphReleaseSecrecy => l10n.pdfParagraphReleaseSecrecy;
+
   String get representativesTitle => l10n.pdfParagraphRepresentativesTitle('VI');
 
   String get representatives {
@@ -121,10 +110,15 @@ class PdfViewModel with ChangeNotifier, Logging, RootContextL10N {
   }
 
   String get paragraphEnclosedExplanationTitle => l10n.pdfParagraphEnclosedExplanationTitle('VII');
+
   String get paragraphEnclosedExplanation => l10n.pdfParagraphEnclosedExplanation;
+
   String get pdfParagraphConclusionTitle => l10n.pdfParagraphConclusionTitle('VIII');
+
   String get pdfParagraphConclusion => l10n.pdfParagraphConclusion;
+
   String get pdfParagraphAdviceTitle => l10n.pdfParagraphAdviceTitle('IX');
+
   String get pdfParagraphAdvice => l10n.pdfParagraphAdvice;
 
   String pageNumberOfTotalPages({required int pageNumber, required int pagesCount}) {

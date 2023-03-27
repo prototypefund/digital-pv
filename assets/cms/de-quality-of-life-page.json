@@ -1,0 +1,10 @@
+[
+  {
+    "intro": "# Meine Lebensqualität",
+    "positive_quality_of_life_explanation": "Insgesamt überwiegen die positiven Aspekte die negativen",
+    "negative_quality_of_life_explanation": "Insgesamt überwiegen die negativen Aspekte die positiven",
+    "confirmation_question": "Entspricht das Ihrer Einschätzung?",
+    "confirm_action_label": "Ja",
+    "outro": "Falls nein, nehmen Sie bitte Änderungen an den positiven und negativen Aspekten vor"
+  }
+]

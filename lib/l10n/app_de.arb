@@ -1,89 +1,10 @@
 {
-  "createDigitalPatientDirective": "dPV erstellen",
   "navigationBack": "Zurück",
   "navigationNext": "Weiter",
-  "positiveAspectsEmptyText": "Bisher wurden noch keine positiven Aspekte angegeben.",
-  "negativeAspectsEmptyText": "Bisher wurden noch keine negativen Aspekte angegeben.",
-  "futureSituationsEmptyText": "Bisher wurden noch keine zukünfigen Situationen angegeben.",
-  "addPositiveAspectCallToAction": "Positiven Aspekt hinzufügen",
-  "addNegativeAspectCallToAction": "Negativen Aspekt hinzufügen",
-  "addFutureSituationCallToAction": "Zukünfige Situation hinzufügen",
-  "addPositiveAspectNavigationButton": "Aspekt hinzufügen",
-  "addPositiveAspectTextFieldHint": "Positiver Aspekt",
-  "addNegativeAspectTextFieldHint": "Negativer Aspekt",
-  "negativeAspectsHeadline": "Was bereitet mir Kummer?",
-  "negativeAspectsTitleExplanation": "Bestimmen Sie Aspekte aus Ihrem Leben, die Ihre Lebensqualität negativ beeinflussen.",
-  "significanceSliderLabel": "",
-  "significanceLow": "Geringe Bedeutung",
-  "significanceHigh": "Hohe Bedeutung",
-  "removeFutureAspectConfirmationQuestion": "Soll die mögliche künftige Situation \"{aspectName}\" wirklich entfernt werden?",
-  "@removeFutureAspectConfirmationQuestion": {
-    "placeholders": {
-      "aspectName": {
-        "type": "String"
-      }
-    }
-  },
-  "removeNegativeAspectConfirmationQuestion": "Soll der negative Aspekt \"{aspectName}\" wirklich entfernt werden?",
-  "@removeNegativeAspectConfirmationQuestion": {
-    "placeholders": {
-      "aspectName": {
-        "type": "String"
-      }
-    }
-  },
-  "removeNegativeAspectConfirmationRemove": "Negative Aspekt entfernen",
-  "removeNegativeAspectConfirmationCancel": "Abbrechen",
-  "removePositiveAspectConfirmationQuestion": "Soll der positive Aspekt \"{aspectName}\" wirklich entfernt werden?",
-  "@removePositiveAspectConfirmationQuestion": {
-    "placeholders": {
-      "aspectName": {
-        "type": "String"
-      }
-    }
-  },
-  "removePositiveAspectConfirmationRemove": "Positiven Aspekt entfernen",
-  "removePositiveAspectConfirmationCancel": "Abbrechen",
-  "removeFutureAspectConfirmationRemove": "Zukünftige Situation entfernen",
-  "removeFutureAspectConfirmationCancel": "Abbrechen",
   "navigationSkip": "Überspringen",
-  "welcomeViewPageOneTitle": "Herzlich willkommen bei d-PV, Ihrer digitalen Patientenverfügung!",
-  "welcomeViewPageOneDescription": "Erstellen Sie in drei Schritten eine rechtskonforme Patientenverfügung. ",
-  "welcomeViewPageTwoTitle": "Medizinische Behandlung festlegen",
-  "welcomeViewPageTwoDescription": "Mit einer Patientenverfügung können Sie Ihre medizinische Behandlung für den Fall einer späteren Entscheidungs- bzw. Urteilsunfähigkeit im Voraus schriftlich festlegen. ",
-  "welcomeViewPageThreeTitle": "Gesetzeskonform",
-  "welcomeViewPageThreeDescription": "Die dPV entspricht den gesetzlichen Vorgaben in Deutschland",
-  "welcomeViewPageFourTitle": "Vertrauensperson",
-  "welcomeViewPageFourDescription": "Statt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen.",
-  "examples": "Beispiele",
-  "addPositiveAspectTitle": "Aspekt hinzufügen",
-  "addPositiveAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihnen aktuell Freude macht",
-  "addNegativeAspectExplanation": "Beschreiben Sie einen Aspekt aus Ihrem Leben, der Ihre Lebensqualität aktuell negativ beeinflusst",
-  "addTreatmentActivitiesTitle": "Meine Behandlungswünsche",
-  "addTreatmentActivitiesExplanation": "Hier können Sie optional zu ihrem Behandlungsziel ({treatmentGoal}) bestimmte Maßnahmen festlegen.",
-  "@addTreatmentActivitiesExplanation": {
-    "placeholders": {
-      "treatmentGoal": {
-        "type": "String"
-      }
-    }
-  },
   "treatmentGoalUndefined": "undefiniert",
   "treatmentGoalPalliative": "palliativ",
   "treatmentGoalCurative": "curativ",
-  "addTreatmentActivitiesSubHeadline": "Medizinische Maßnahmen",
-  "addTreatmentActivitiesHospitalAdmission": "Aufnahme ins Krankenhaus",
-  "addTreatmentActivitiesIntensiveTreatment": "Intensivbehandlung",
-  "addTreatmentActivitiesResuscitation": "Wiederbelebung",
-  "futureSituationsTitle": "Was wäre wenn?",
-  "addFutureSituationAspectTextfieldHint": "Neue Angabe ...",
-  "futureSituationsTitleExplanation": "Hier können Sie optional für mögliche künftige Situationen bestimmte Maßnahmen festlegen",
-  "addFutureSituationAspect": "Hinzufügen",
-  "addNegativeAspect": "Hinzufügen",
-  "treatmentActivityNotSpecified": "Keine Angabe",
-  "treatmentActivityNo": "Nein",
-  "treatmentActivityYes": "Ja",
-  "treatmentActivitySymptomControl": "Ich möchte zwar in ein Krankenhaus eingewiesen werden, aber nur zur Kontrolle von Symptomen, die ambulant nicht behandelt werden können.",
   "evaluateCurrentAspectHeadline": "Meine Lebensqualität",
   "evaluateCurrentAspectsSummaryPositive": "Insgesamt überwiegen die positiven Aspekte die negativen",
   "evaluateCurrentAspectsSummaryNegative": "Insgesamt überwiegen die negativen Aspekte die positiven",
@@ -96,16 +17,6 @@
   "aspectVisualizationPalliative": "Palliativ",
   "aspectVisualizationTreatmentGoal": "Behandlungsziel",
   "aspectVisualizationQualityOfLife": "Lebensqualität",
-  "generalTreatmentGoalHeadline": "Mein Behandlungsziel",
-  "generalTreatmentCurativeGoalQuestion": "Wünschen Sie eine kurative Behandlung?",
-  "generalTreatmentPalliativeGoalQuestion": "Wünschen Sie eine palliative Behandlung?",
-  "generalTreatmentChangeCompassNeedleCallToAction": "Tippen Sie die rote Kompassnadel an, um die Ausrichtung nach Ihren Wünschen anzupassen.",
-  "generalTreatmentResetCompass": "Zurücksetzen",
-  "generalTreatmentCurativeExplanationTitle": "Was bedeutet <<kurativ>>?",
-  "generalTreatmentCurativeExplanation": "Es wird alles medizinisch Mögliche und Sinnvolle getan, um mein Leben zu erhalten. Die mit der Lebenserhaltung verbundenen Belastungen nehme ich in Kauf.",
-  "generalTreatmentPalliativeExplanationTitle": "Was bedeutet <<palliativ>>?",
-  "generalTreatmentPalliativeExplanation": "Die Behandlung zielt vor allem darauf, mein Leiden zu lindern. Eine mögliche Verkürzung meiner Lebenszeit nehme ich in Kauf.",
-  "generalTreatmentConfirm": "Behandlungsziel bestätigen",
   "personOfTrustTitle": "Meine Vertretungsperson/en (optional)",
   "personOfTrustExplanation": "Eine Vertretungsperson hat die Aufgabe, Ihrem Willen Geltung zu verschaffen.",
   "personOfTrustRemoveConfirmation": "Soll diese Vertretungsperson aus Ihrer Patientenverfügung entfernt werden?",
@@ -140,14 +51,9 @@
   "personDetailsCountry": "Land",
   "personDetailsEmail": "Email",
   "personDetailsPhone": "Telefon",
-  "generalInfoMarkdownLocation": "assets/markdown/de_general_information_about_directive.md",
-  "generalInfoConfirm": "Bestätigen",
-  "personalDetailsForDirectiveIntroductionMarkdownPath": "assets/markdown/de_personal_details_for_directive_introduction.md",
   "personalDetailsForDirectiveValidationSurnameEmpty": "Bitte geben Sie Ihren Nachnamen an",
   "personalDetailsForDirectiveValidationNameEmpty": "Bitte geben Sie Ihren Namen an",
   "personalDetailsForDirectiveValidationDateOfBirthEmpty": "Bitte geben Sie Ihren Geburtstag an",
-  "personalDetailsForDirectiveDownloadDirective": "dPV als PDF abrufen",
-  "personalDetailsForDirectiveShowDirective": "dPV anzeigen",
   "drawerTitle": "dPV",
   "drawerSaveDirective": "Zwischenstand speichern",
   "drawerLoadDirective": "Patientenverfügung laden",

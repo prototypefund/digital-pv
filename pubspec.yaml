@@ -93,5 +93,5 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/markdown/
     - assets/cms/
+    - assets/cms/uploads/

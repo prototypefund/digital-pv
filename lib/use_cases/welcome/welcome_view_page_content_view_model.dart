@@ -1,7 +1,6 @@
 class WelcomeViewPageContentViewModel {
-  final String title;
+  final String markdown;
   final String image;
-  final String description;
 
-  WelcomeViewPageContentViewModel({required this.title, required this.image, required this.description});
+  WelcomeViewPageContentViewModel({required this.markdown, required this.image});
 }

@@ -76,3 +76,12 @@ We want to use `MVVM` (Model-View-ViewMode).
 When changing or adding to services, or adapting serializable models, it might be necessary to regenerate mocks. This
 can be done using the
 command `flutter pub run build_runner build`
+
+## Fetching content from Strapi
+
+[Strapi Admin Login](https://strapi.dpv.staging.deyan7.de/admin/)
+When running cms_asset_generator (with ENV variable CMS_API_TOKEN=API_TOKEN_GOES_HERE_AND_CAN_BE_FOUND_IN_PASSWORD_VAULT) the content from Strapi is downloaded and created as asset files.
+The token is in getIt right now too - it's a read only token for the system. In the long run and for more load, you might want to put an Http cache in front of Strapi anyway, which can then also hide the API token.
+The output is searched for media urls, and these are also created as assets.
+The content is accessed in the app via the ContentService. This loads the content into memory.
+After the local assets are loaded, the view is built and then the CMS content is updated live.

@@ -1,4 +1,4 @@
-import 'package:pd_app/general/dynamic_content/json_serializable.dart';
+import 'package:pd_app/general/dynamic_content/loading/json_serializable.dart';
 
 class ContentDefinition<ContentClass extends SerializableAsset> {
   ContentDefinition(

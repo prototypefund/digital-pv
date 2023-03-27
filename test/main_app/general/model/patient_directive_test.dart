@@ -10,7 +10,8 @@ void main() {
         positiveAspects: [],
         futureSituationAspects: [],
         negativeAspects: [],
-        generalTreatmentGoal: TreatmentGoal(value: 0));
+        generalTreatmentGoal: TreatmentGoal(value: 0),
+        generalTreatmentPreferences: []);
 
     expect(instance.currentAspectsScore, 0);
   });
@@ -19,25 +20,31 @@ void main() {
         positiveAspects: [Aspect(name: "test 1", weight: Weight(value: 0.7))],
         futureSituationAspects: [],
         negativeAspects: [],
-        generalTreatmentGoal: TreatmentGoal(value: 0));
+        generalTreatmentGoal: TreatmentGoal(value: 0),
+        generalTreatmentPreferences: []);
 
     expect(instance.currentAspectsScore, 1.0);
   });
   test("test current aspect score with three positive aspects", () {
-    final PatientDirective instance = PatientDirective(positiveAspects: [
-      Aspect(
-        name: "test 1",
-        weight: Weight(value: 0.7),
-      ),
-      Aspect(
-        name: "test 2",
-        weight: Weight(value: 0.2),
-      ),
-      Aspect(
-        name: "test 3",
-        weight: Weight(value: 0.02),
-      )
-    ], futureSituationAspects: [], negativeAspects: [], generalTreatmentGoal: TreatmentGoal(value: 0));
+    final PatientDirective instance = PatientDirective(
+        positiveAspects: [
+          Aspect(
+            name: "test 1",
+            weight: Weight(value: 0.7),
+          ),
+          Aspect(
+            name: "test 2",
+            weight: Weight(value: 0.2),
+          ),
+          Aspect(
+            name: "test 3",
+            weight: Weight(value: 0.02),
+          )
+        ],
+        futureSituationAspects: [],
+        negativeAspects: [],
+        generalTreatmentGoal: TreatmentGoal(value: 0),
+        generalTreatmentPreferences: []);
 
     expect(instance.currentAspectsScore, 1.0);
   });
@@ -46,79 +53,94 @@ void main() {
         positiveAspects: [],
         futureSituationAspects: [],
         negativeAspects: [Aspect(name: "test 1", weight: Weight(value: 0.3))],
-        generalTreatmentGoal: TreatmentGoal(value: 0));
+        generalTreatmentGoal: TreatmentGoal(value: 0),
+        generalTreatmentPreferences: []);
 
     expect(instance.currentAspectsScore, -1);
   });
   test("test current aspect score with three negative aspects", () {
-    final PatientDirective instance =
-        PatientDirective(positiveAspects: [], futureSituationAspects: [], negativeAspects: [
-      Aspect(name: "test 1", weight: Weight(value: 0.5)),
-      Aspect(name: "test 2", weight: Weight(value: 0.1)),
-      Aspect(name: "test 3", weight: Weight(value: 0.6))
-    ], generalTreatmentGoal: TreatmentGoal(value: 0));
+    final PatientDirective instance = PatientDirective(
+        positiveAspects: [],
+        futureSituationAspects: [],
+        negativeAspects: [
+          Aspect(name: "test 1", weight: Weight(value: 0.5)),
+          Aspect(name: "test 2", weight: Weight(value: 0.1)),
+          Aspect(name: "test 3", weight: Weight(value: 0.6))
+        ],
+        generalTreatmentGoal: TreatmentGoal(value: 0),
+        generalTreatmentPreferences: []);
 
     expect(instance.currentAspectsScore, -1);
   });
   test("test current aspect score with mixed aspects but positive tendency", () {
-    final PatientDirective instance = PatientDirective(positiveAspects: [
-      Aspect(
-        name: "test 1 pos",
-        weight: Weight(value: 0.7),
-      ),
-      Aspect(
-        name: "test 2 pos",
-        weight: Weight(value: 0.2),
-      ),
-      Aspect(
-        name: "test 3 pos",
-        weight: Weight(value: 0.3),
-      ) // sum 1.2
-    ], futureSituationAspects: [], negativeAspects: [
-      Aspect(
-        name: "test 1 neg",
-        weight: Weight(value: 0.3),
-      ),
-      Aspect(
-        name: "test 2 neg",
-        weight: Weight(value: 0.3),
-      ),
-      Aspect(
-        name: "test 3 neg",
-        weight: Weight(value: 0.2),
-      ) // sum 0.8
-    ], generalTreatmentGoal: TreatmentGoal(value: 0));
+    final PatientDirective instance = PatientDirective(
+        positiveAspects: [
+          Aspect(
+            name: "test 1 pos",
+            weight: Weight(value: 0.7),
+          ),
+          Aspect(
+            name: "test 2 pos",
+            weight: Weight(value: 0.2),
+          ),
+          Aspect(
+            name: "test 3 pos",
+            weight: Weight(value: 0.3),
+          ) // sum 1.2
+        ],
+        futureSituationAspects: [],
+        negativeAspects: [
+          Aspect(
+            name: "test 1 neg",
+            weight: Weight(value: 0.3),
+          ),
+          Aspect(
+            name: "test 2 neg",
+            weight: Weight(value: 0.3),
+          ),
+          Aspect(
+            name: "test 3 neg",
+            weight: Weight(value: 0.2),
+          ) // sum 0.8
+        ],
+        generalTreatmentGoal: TreatmentGoal(value: 0),
+        generalTreatmentPreferences: []);
 
     expect(instance.currentAspectsScore, closeTo(0.2, 0.0000000001));
   });
   test("test current aspect score with mixed aspects but negative tendency", () {
-    final PatientDirective instance = PatientDirective(positiveAspects: [
-      Aspect(
-        name: "test 1 pos",
-        weight: Weight(value: 0.3),
-      ),
-      Aspect(
-        name: "test 2 pos",
-        weight: Weight(value: 0.15),
-      ),
-      Aspect(
-        name: "test 3 pos",
-        weight: Weight(value: 0.4),
-      ) // sum 0.85
-    ], futureSituationAspects: [], negativeAspects: [
-      Aspect(
-        name: "test 1 neg",
-        weight: Weight(value: 0.8),
-      ),
-      Aspect(
-        name: "test 2 neg",
-        weight: Weight(value: 0.7),
-      ),
-      Aspect(
-        name: "test 3 neg",
-        weight: Weight(value: 0.6),
-      ) // sum 2..1
-    ], generalTreatmentGoal: TreatmentGoal(value: 0));
+    final PatientDirective instance = PatientDirective(
+        positiveAspects: [
+          Aspect(
+            name: "test 1 pos",
+            weight: Weight(value: 0.3),
+          ),
+          Aspect(
+            name: "test 2 pos",
+            weight: Weight(value: 0.15),
+          ),
+          Aspect(
+            name: "test 3 pos",
+            weight: Weight(value: 0.4),
+          ) // sum 0.85
+        ],
+        futureSituationAspects: [],
+        negativeAspects: [
+          Aspect(
+            name: "test 1 neg",
+            weight: Weight(value: 0.8),
+          ),
+          Aspect(
+            name: "test 2 neg",
+            weight: Weight(value: 0.7),
+          ),
+          Aspect(
+            name: "test 3 neg",
+            weight: Weight(value: 0.6),
+          ) // sum 2..1
+        ],
+        generalTreatmentGoal: TreatmentGoal(value: 0),
+        generalTreatmentPreferences: []);
 
     expect(instance.currentAspectsScore, closeTo(-0.4237288136, 0.0000000001));
   });

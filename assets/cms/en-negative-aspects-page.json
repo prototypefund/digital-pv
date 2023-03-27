@@ -1,0 +1,22 @@
+[
+  {
+    "locale": "en",
+    "intro": "# What causes me grief?\n\nIdentify aspects of your life that negatively affect your quality of life",
+    "aspectListWidget": {
+      "delete_confirmation_question": "Should the negative aspect really be removed?",
+      "delete_confirmation_cancel": "Cancel",
+      "delete_confirmation_confirm": "Delete negative aspect",
+      "low_significance_label": "Low Significance",
+      "high_significance_label": "High Significance",
+      "empty_list_message": "No negative aspects have been indicated yet"
+    },
+    "addAspectWidget": {
+      "empty_textfield_hint": "Negative Aspect",
+      "low_significance_label": "Low Significance",
+      "high_significance_label": "High Significance",
+      "add_aspect_action_label": "Add negative aspect"
+    },
+    "outro": null,
+    "examples_title": "Examples"
+  }
+]

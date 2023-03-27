@@ -9,27 +9,13 @@ part of 'future_situation.dart';
 FutureSituation _$FutureSituationFromJson(Map<String, dynamic> json) => FutureSituation(
       name: json['name'] as String,
       weight: Weight.fromJson(json['weight'] as Map<String, dynamic>),
-      hospitalizationPreference:
-          $enumDecodeNullable(_$TreatmentActivityChoiceEnumMap, json['hospitalizationPreference']) ??
-              TreatmentActivityChoice.notSpecified,
-      intensiveTreatmentPreference:
-          $enumDecodeNullable(_$TreatmentActivityChoiceEnumMap, json['intensiveTreatmentPreference']) ??
-              TreatmentActivityChoice.notSpecified,
-      resuscitationPreference: $enumDecodeNullable(_$TreatmentActivityChoiceEnumMap, json['resuscitationPreference']) ??
-          TreatmentActivityChoice.notSpecified,
+      treatmentActivitiyPreferences: (json['treatmentActivitiyPreferences'] as List<dynamic>)
+          .map((e) => TreatmentActivityPreference.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$FutureSituationToJson(FutureSituation instance) => <String, dynamic>{
       'name': instance.name,
       'weight': instance.weight,
-      'hospitalizationPreference': _$TreatmentActivityChoiceEnumMap[instance.hospitalizationPreference]!,
-      'intensiveTreatmentPreference': _$TreatmentActivityChoiceEnumMap[instance.intensiveTreatmentPreference]!,
-      'resuscitationPreference': _$TreatmentActivityChoiceEnumMap[instance.resuscitationPreference]!,
+      'treatmentActivitiyPreferences': instance.treatmentActivitiyPreferences,
     };
-
-const _$TreatmentActivityChoiceEnumMap = {
-  TreatmentActivityChoice.notSpecified: 'notSpecified',
-  TreatmentActivityChoice.no: 'no',
-  TreatmentActivityChoice.yes: 'yes',
-  TreatmentActivityChoice.symptomControl: 'symptomControl',
-};

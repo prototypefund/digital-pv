@@ -128,9 +128,7 @@ class PdfService with RootContextL10N {
                         child: pw.Text(_pdfViewModel.paragraphPrincipleWishTitle, style: pw.Theme.of(context).header1),
                         alignment: pw.Alignment.topLeft),
                     pw.SizedBox(height: 20),
-                    pw.Bullet(text: _pdfViewModel.generalHospitalizationPreference),
-                    pw.Bullet(text: _pdfViewModel.generalIntensiveTreatmentPreference),
-                    pw.Bullet(text: _pdfViewModel.generalResuscitationPreference),
+                    // TODO(marius): add treatment preferences
                   ],
                 ),
               ),

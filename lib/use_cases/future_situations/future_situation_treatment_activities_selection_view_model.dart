@@ -1,7 +1,7 @@
+import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/future_situation.dart';
-import 'package:pd_app/general/model/patient_directive.dart';
-import 'package:pd_app/general/model/treatment_activity.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view_model.dart';
 
@@ -9,63 +9,46 @@ class FutureSituationTreatmentActivitiesSelectionViewModel extends TreatmentActi
   FutureSituationTreatmentActivitiesSelectionViewModel({required this.futureSituation})
       : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
+    _contentService.addListener(notifyListeners);
   }
+
+  final ContentService _contentService = getIt.get();
 
   final FutureSituation futureSituation;
 
   final PatientDirectiveService _patientDirectiveService;
 
   @override
-  TreatmentActivityChoice get hospitalizationSelection {
-    return _aspectFromPatientDirective()?.hospitalizationPreference ?? TreatmentActivityChoice.notSpecified;
-  }
-
-  @override
-  TreatmentActivityChoice get intensiveTreatmentSelection {
-    return _aspectFromPatientDirective()?.intensiveTreatmentPreference ?? TreatmentActivityChoice.notSpecified;
-  }
-
-  @override
-  TreatmentActivityChoice get resuscitationSelection {
-    return _aspectFromPatientDirective()?.resuscitationPreference ?? TreatmentActivityChoice.notSpecified;
-  }
-
-  @override
-  set hospitalizationSelection(TreatmentActivityChoice newValue) {
-    _changeFutureSituationInDirective((aspect) => aspect.hospitalizationPreference = newValue);
-  }
-
-  @override
-  set intensiveTreatmentSelection(TreatmentActivityChoice newValue) {
-    _changeFutureSituationInDirective((aspect) => aspect.intensiveTreatmentPreference = newValue);
-  }
-
-  @override
-  set resuscitationSelection(TreatmentActivityChoice newValue) {
-    _changeFutureSituationInDirective((aspect) => aspect.resuscitationPreference = newValue);
-  }
-
-  void _changeFutureSituationInDirective(Function(FutureSituation futureSituation) manipulation) {
-    final PatientDirective currentDirective = _patientDirectiveService.currentPatientDirective;
-
-    final FutureSituation futureSituationFromService =
-        currentDirective.futureSituationAspects.firstWhere((element) => element == futureSituation);
-    manipulation(futureSituationFromService);
-    _patientDirectiveService.currentPatientDirective = currentDirective;
-  }
-
-  FutureSituation? _aspectFromPatientDirective() =>
-      _patientDirectiveService.currentPatientDirective.futureSituationAspects
-          .whereType<FutureSituation?>()
-          .firstWhere((element) => element == futureSituation, orElse: () => null);
-
-  @override
   void dispose() {
     super.dispose();
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChanges);
+    _contentService.removeListener(notifyListeners);
   }
 
   void _reactToPatientDirectiveChanges() {
     notifyListeners();
   }
+
+  @override
+  String? getCurrentChoice(TreatmentActivity activity) {
+    return _patientDirectiveService.getTreatmentPreference(futureSituation: futureSituation, activity: activity) ??
+        activity.defaultValue.choice;
+  }
+
+  @override
+  List<TreatmentActivity> get treatmentActivities => _contentService.treatmentActivities;
+
+  @override
+  void updateChoice(TreatmentActivity activity, String? choice) {
+    final int choiceId = activity.choices.where((element) => element.choice == choice).first.id;
+    _patientDirectiveService.updateTreatmentPreference(
+        futureSituation: futureSituation,
+        activity: activity.activity,
+        choice: choice,
+        activityId: activity.id,
+        choiceId: choiceId);
+  }
+
+  @override
+  String get addTreatmentActivitiesSubHeadline => _contentService.futureSituationsPage.treatmentActivitiesTitle;
 }

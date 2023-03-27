@@ -1,0 +1,45 @@
+[
+  {
+    "callToActionLabel": "dPV erstellen",
+    "skipLabel": "Überspringen",
+    "nextButtonLabel": "Weiter",
+    "pages": [
+      {
+        "content": "# Herzlich Willkommen bei d-PV, Ihrer digitalen Patientenverfügung\n\nErstellen Sie in drei Schritten eine rechtsichere Patientenverfügung",
+        "logo": {
+          "id": 2,
+          "name": "placeholder.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+        }
+      },
+      {
+        "content": "# Medizinische Behandlung festlegen\n\nMit einer Patientenverfügung können Sie Ihre medizinische Behandlung für den Fall einer späteren Entscheidungs- bzw. Urteilsunfähigkeit im Voraus schriftlich festlegen.",
+        "logo": {
+          "id": 2,
+          "name": "placeholder.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+        }
+      },
+      {
+        "content": "# Gesetzeskonform\n\nDie dPV entspricht den gesetzlichen Vorgaben in Deutschland",
+        "logo": {
+          "id": 2,
+          "name": "placeholder.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+        }
+      },
+      {
+        "content": "# Vertrauensperson\n\nStatt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen.",
+        "logo": {
+          "id": 2,
+          "name": "placeholder.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
+          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+        }
+      }
+    ]
+  }
+]

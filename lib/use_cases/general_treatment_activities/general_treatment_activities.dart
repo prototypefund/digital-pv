@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
-import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/use_cases/general_treatment_activities/general_treatment_activities_selection_view_model.dart';
@@ -20,29 +20,26 @@ class TreatmentActivities extends StatefulWidget {
 }
 
 class _TreatmentActivitiesState extends State<TreatmentActivities> with RootContextL10N {
-  late GeneralTreatmentActivitiesViewModel _viewModel;
-
   @override
   Widget build(BuildContext context) {
-    _viewModel = context.watch();
     return CreationProcessNavigation<GeneralTreatmentActivitiesViewModel>(
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: Paddings.headlinePadding,
-            child: Text(_viewModel.addTreatmentActivitiesTitle, style: Theme.of(context).textTheme.headlineSmall),
-          ),
-          Padding(
-            padding: Paddings.headlineExplanationPadding,
-            child: Text(
-              _viewModel.addTreatmentActivitiesExplanation,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+          MarkdownBody(
+              content: context.select((GeneralTreatmentActivitiesViewModel viewModel) => viewModel.pageContent).intro),
+          const SizedBox(
+            height: 48,
           ),
           ChangeNotifierProvider(
               create: (_) => GeneralTreatmentActivitiesSelectionViewModel(),
-              child: TreatmentActivitiesSelection<GeneralTreatmentActivitiesSelectionViewModel>())
+              child: TreatmentActivitiesSelection<GeneralTreatmentActivitiesSelectionViewModel>()),
+          const SizedBox(
+            height: 20,
+          ),
+          MarkdownBody(
+              content:
+                  context.select((GeneralTreatmentActivitiesViewModel viewModel) => viewModel.pageContent).outro ?? ''),
         ],
       ),
     );

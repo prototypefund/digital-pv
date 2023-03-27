@@ -1,0 +1,72 @@
+[
+  {
+    "activity": "Aufnahme ins Krankenhaus",
+    "id": 1,
+    "choices": [
+      {
+        "choice": "Keine Angabe",
+        "id": 1
+      },
+      {
+        "choice": "Ja",
+        "id": 2
+      },
+      {
+        "choice": "Nein",
+        "id": 3
+      },
+      {
+        "choice": "Ich möchte zwar in ein Krankenhaus eingewiesen werden, aber nur zur Kontrolle von Symptomen, die ambulant nicht behandelt werden können",
+        "id": 4
+      }
+    ],
+    "default_value": {
+      "choice": "Keine Angabe",
+      "id": 1
+    }
+  },
+  {
+    "activity": "Intensivbehandlung",
+    "id": 3,
+    "choices": [
+      {
+        "choice": "Keine Angabe",
+        "id": 1
+      },
+      {
+        "choice": "Ja",
+        "id": 2
+      },
+      {
+        "choice": "Nein",
+        "id": 3
+      }
+    ],
+    "default_value": {
+      "choice": "Keine Angabe",
+      "id": 1
+    }
+  },
+  {
+    "activity": "Wiederbelebung",
+    "id": 5,
+    "choices": [
+      {
+        "choice": "Keine Angabe",
+        "id": 1
+      },
+      {
+        "choice": "Ja",
+        "id": 2
+      },
+      {
+        "choice": "Nein",
+        "id": 3
+      }
+    ],
+    "default_value": {
+      "choice": "Keine Angabe",
+      "id": 1
+    }
+  }
+]
