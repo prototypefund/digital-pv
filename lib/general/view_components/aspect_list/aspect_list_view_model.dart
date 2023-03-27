@@ -82,7 +82,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   }
 
   void _reactToPatientDirectiveChange() {
-    logger.d('aspect list reacting to patient directive change');
+    logger.v('aspect list reacting to patient directive change');
     final List<AspectType> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
     if (aspectsInService.length != _aspects.length) {
       logger.i("an aspect was removed or added, refreshing view's list of elements and sorting them anew");
