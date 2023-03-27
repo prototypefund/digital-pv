@@ -4,6 +4,7 @@ import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
 import 'package:pd_app/general/model/aspect.dart';
+
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
@@ -275,9 +276,9 @@ class AspectsVisualization extends StatelessWidget {
         final Sector aspectsSector = Sector(angle: angleForVisualisation, radius: constraints.maxWidth / 2);
 
         final List<AspectVisualizationInformation> aspectVisualizationInformation =
-            AspectsPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
+            AspectPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
 
-        final List<CustomPaint> children = aspectVisualizationInformation
+        final List<CustomPaint> aspectCircles = aspectVisualizationInformation
             .map(
               (e) => CustomPaint(
                 painter: AspectCirclePainter(
@@ -292,7 +293,7 @@ class AspectsVisualization extends StatelessWidget {
 
         return Stack(
           alignment: AlignmentDirectional.center,
-          children: children,
+          children: aspectCircles,
         );
       },
     );

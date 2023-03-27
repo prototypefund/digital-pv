@@ -3,11 +3,11 @@ import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/coordinate.dart';
 import 'package:pd_app/general/view_components/aspect_visualization/sector.dart';
 
-class AspectsPositions {
+class AspectPositions {
   final List<Aspect> aspects;
   final Sector sector;
 
-  AspectsPositions({required this.aspects, required this.sector});
+  AspectPositions({required this.aspects, required this.sector});
 
   List<AspectVisualizationInformation> get listOfAspectVisualizationInformation {
     final List<AspectVisualizationInformation> list = [];
