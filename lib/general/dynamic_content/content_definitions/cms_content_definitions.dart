@@ -16,6 +16,12 @@ mixin CmsConfiguration {
   static const String scheme = 'https';
   static const String host = 'strapi.dpv.staging.deyan7.de';
   static const int port = 443;
+
+  // for development
+  // static const String scheme = 'http';
+  // static const String host = 'localhost';
+  // static const int port = 1337;
+
   static const String cmsDirectoryPath = 'assets/cms/';
 
   static CmsConfig cmsConfig =
