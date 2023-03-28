@@ -85,13 +85,13 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     }
   }
 
+  void toggleSimulation({required AspectType aspect}) {
+    logger.w('toggling simulation not implemented in base class - noop');
+  }
+
   void _reactToPatientDirectiveChange() {
     logger.v('aspect list reacting to patient directive change');
-    final List<AspectType> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
-    if (aspectsInService.length != _aspects.length) {
-      logger.i("an aspect was removed or added, refreshing view's list of elements and sorting them anew");
-      _updateAspectsFromService();
-    }
+    _updateAspectsFromService();
     notifyListeners();
   }
 

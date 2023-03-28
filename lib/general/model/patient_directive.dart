@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
@@ -10,6 +11,7 @@ import 'package:pd_app/general/model/treatment_goal.dart';
 part 'patient_directive.g.dart';
 
 @JsonSerializable()
+@CopyWith()
 class PatientDirective {
   PatientDirective(
       {required this.positiveAspects,

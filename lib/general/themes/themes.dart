@@ -80,10 +80,15 @@ class Themes {
             aspectEvaluationArrowColor: DefaultThemeColors.purple,
             treatmentGoalArrowStrokeWidth: 12,
             treatmentGoalArrowColor: Colors.red,
-            aspectCircleGradient: RadialGradient(
+            activeAspectCircleGradient: RadialGradient(
               center: Alignment.topLeft,
               radius: 1,
               colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.purple.withOpacity(0.5)],
+            ),
+            inactiveAspectCircleGradient: RadialGradient(
+              center: Alignment.topLeft,
+              radius: 1,
+              colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.grey.withOpacity(0.2)],
             ),
           )
         ],

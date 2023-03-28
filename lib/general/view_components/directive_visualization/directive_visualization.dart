@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
-
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
@@ -40,8 +39,12 @@ class DirectiveVisualization extends StatelessWidget with Logging {
         Theme.of(context).extension<AspectVisualizationStyle>()!.treatmentGoalArrowColor ?? Colors.black;
     final treatmentGoalArrowStrokeWidth =
         Theme.of(context).extension<AspectVisualizationStyle>()!.treatmentGoalArrowStrokeWidth ?? 9;
-    final aspectCircleGradient = Theme.of(context).extension<AspectVisualizationStyle>()!.aspectCircleGradient ??
-        const RadialGradient(colors: [Colors.white, Colors.black]);
+    final activeAspectCircleGradient =
+        Theme.of(context).extension<AspectVisualizationStyle>()!.activeAspectCircleGradient ??
+            const RadialGradient(colors: [Colors.white, Colors.black]);
+    final inactiveAspectCircleGradient =
+        Theme.of(context).extension<AspectVisualizationStyle>()!.inactiveAspectCircleGradient ??
+            const RadialGradient(colors: [Colors.white, Colors.black]);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -172,7 +175,8 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                 child: AspectsVisualization(
                   aspects: viewModel.positiveAspects,
                   angleForVisualisation: viewModel.aspectEvaluationArrowRotation,
-                  aspectCircleGradient: aspectCircleGradient,
+                  activeAspectCircleGradient: activeAspectCircleGradient,
+                  inactiveAspectCircleGradient: inactiveAspectCircleGradient,
                 ),
               ),
 
@@ -183,7 +187,8 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   child: AspectsVisualization(
                     aspects: viewModel.negativeAspects,
                     angleForVisualisation: math.pi - viewModel.aspectEvaluationArrowRotation,
-                    aspectCircleGradient: aspectCircleGradient,
+                    activeAspectCircleGradient: activeAspectCircleGradient,
+                    inactiveAspectCircleGradient: inactiveAspectCircleGradient,
                   ),
                 ),
               ),
@@ -195,7 +200,8 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   child: AspectsVisualization(
                     aspects: viewModel.futureAspects,
                     angleForVisualisation: math.pi,
-                    aspectCircleGradient: aspectCircleGradient,
+                    activeAspectCircleGradient: activeAspectCircleGradient,
+                    inactiveAspectCircleGradient: inactiveAspectCircleGradient,
                   ),
                 ),
               ),

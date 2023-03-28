@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
+import 'package:pd_app/general/model/aspect_with_simulation.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
@@ -120,20 +121,21 @@ class AspectWidget<AspectType extends Aspect> extends StatelessWidget with Loggi
             viewModel.changeAspectWeight(aspect: aspect, weight: value);
           },
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Flexible(
-              child: SwitchListTile(
-                value: false,
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                onChanged: (newValue) {},
-                title: Text(viewModel.simulateLabel),
-              ),
-            )
-          ],
-        ),
+        if (aspect is AspectWithSimulation)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Flexible(
+                child: SwitchListTile(
+                  value: (aspect as AspectWithSimulation).simulateAspect,
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  onChanged: (_) => viewModel.toggleSimulation(aspect: aspect),
+                  title: Text(viewModel.simulateLabel),
+                ),
+              )
+            ],
+          ),
       ],
     );
   }
