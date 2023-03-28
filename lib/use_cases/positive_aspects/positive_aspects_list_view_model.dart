@@ -49,4 +49,10 @@ class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
 
   @override
   String get aspectsSignificanceLowLabel => _contentService.positiveAspectsPage.aspectListWidget.lowSignificanceLabel;
+
+  @override
+  bool get isSimulateAspectEnabled => false;
+
+  @override
+  String get simulateLabel => 'No label';
 }

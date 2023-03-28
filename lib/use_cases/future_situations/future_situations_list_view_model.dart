@@ -50,4 +50,10 @@ class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation>
 
   @override
   String get aspectsSignificanceLowLabel => _contentService.futureSituationsPage.aspectListWidget.lowSignificanceLabel;
+
+  @override
+  bool get isSimulateAspectEnabled => true;
+
+  @override
+  String get simulateLabel => _contentService.futureSituationsPage.aspectListWidget.simulateAspectLabel ?? '';
 }

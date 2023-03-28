@@ -46,6 +46,10 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
   String get removeAspectConfirmationRemove;
 
+  String get simulateLabel;
+
+  bool get isSimulateAspectEnabled;
+
   VoidCallback? addAspectCallToActionPressed(BuildContext context) =>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
 

@@ -120,6 +120,20 @@ class AspectWidget<AspectType extends Aspect> extends StatelessWidget with Loggi
             viewModel.changeAspectWeight(aspect: aspect, weight: value);
           },
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Flexible(
+              child: SwitchListTile(
+                value: false,
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                onChanged: (newValue) {},
+                title: Text(viewModel.simulateLabel),
+              ),
+            )
+          ],
+        ),
       ],
     );
   }
