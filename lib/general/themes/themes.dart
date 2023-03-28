@@ -30,32 +30,25 @@ class Themes {
                 foregroundColor: DefaultThemeColors.purple,
                 textStyle: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold))),
         textTheme: Typography.blackCupertino.merge(TextTheme(
-          headlineLarge:
-              TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 24),
-          headlineMedium:
-              TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 20),
-          headlineSmall:
-              TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black, height: 32 / 20),
-          titleLarge:
-              TextStyle(fontSize: 16.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 32 / 20),
-          titleMedium:
-              TextStyle(fontSize: 16.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
-          titleSmall:
-              TextStyle(fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300, height: 32 / 20),
+          headlineLarge: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black),
+          headlineMedium: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black),
+          headlineSmall: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold, color: DefaultThemeColors.black),
+          titleLarge: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold),
+          titleMedium: TextStyle(fontSize: 16.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300),
+          titleSmall: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300),
           bodyLarge: TextStyle(fontSize: 15.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
           bodyMedium: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
-          labelLarge:
-              TextStyle(fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold, height: 24 / 16),
+          labelLarge: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold),
           labelMedium: TextStyle(
-              fontSize: 13.sp,
-              color: DefaultThemeColors.blackTransparent,
-              fontWeight: FontWeight.normal,
-              height: 18 / 13),
+            fontSize: 13.sp,
+            color: DefaultThemeColors.blackTransparent,
+            fontWeight: FontWeight.normal,
+          ),
           labelSmall: TextStyle(
-              fontSize: 11.sp,
-              color: DefaultThemeColors.blackTransparent,
-              fontWeight: FontWeight.normal,
-              height: 15 / 11),
+            fontSize: 12.sp,
+            color: DefaultThemeColors.blackTransparent,
+            fontWeight: FontWeight.normal,
+          ),
         )),
         extensions: <ThemeExtension<dynamic>>[
           const PageIndicatorStyle(
@@ -67,8 +60,7 @@ class Themes {
             ),
           ),
           DropdownButtonStyle(
-              textStyle: TextStyle(
-                  color: DefaultThemeColors.purple, fontSize: 10.sp, fontWeight: FontWeight.normal, height: 15 / 11),
+              textStyle: TextStyle(color: DefaultThemeColors.purple, fontSize: 14.sp, fontWeight: FontWeight.normal),
               underlineColor: Colors.deepPurpleAccent,
               underlineHeight: 2.sp),
           AspectVisualizationStyle(
