@@ -12,7 +12,7 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
     with RootContextL10N, Logging {
   @override
   Widget build(BuildContext context) {
-    logger.d('rebuilding TreatmentActivitiesSelection');
+    logger.v('rebuilding TreatmentActivitiesSelection');
     final ViewModelType viewModel = context.watch();
     return Column(
       children: [

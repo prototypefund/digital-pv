@@ -8,26 +8,27 @@ import 'package:flutter_arc_text/flutter_arc_text.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/extensions/aspect_visualization_style.dart';
-import 'package:pd_app/general/view_components/aspect_visualization/aspect_visualization_view_model.dart';
+import 'package:pd_app/general/view_components/directive_visualization/aspects_visualization.dart';
+import 'package:pd_app/general/view_components/directive_visualization/directive_visualization_view_model.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
 
-class AspectVisualization extends StatelessWidget with Logging {
-  const AspectVisualization({super.key, this.onDragAndRotate});
+class DirectiveVisualization extends StatelessWidget with Logging {
+  const DirectiveVisualization({super.key, this.onDragAndRotate});
 
   final ValueChanged<double>? onDragAndRotate;
 
   static Widget widgetWithViewModel(
           {required bool showLabels, required bool showTreatmentGoal, ValueChanged<double>? onDragAndRotate}) =>
       ChangeNotifierProvider(
-          create: (_) => AspectVisualizationViewModel(showLabels: showLabels, showTreatmentGoal: showTreatmentGoal),
-          child: AspectVisualization(
+          create: (_) => DirectiveVisualizationViewModel(showLabels: showLabels, showTreatmentGoal: showTreatmentGoal),
+          child: DirectiveVisualization(
             onDragAndRotate: onDragAndRotate,
           ));
 
   @override
   Widget build(BuildContext context) {
-    final AspectVisualizationViewModel viewModel = context.watch();
+    final DirectiveVisualizationViewModel viewModel = context.watch();
 
     final sectionLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.sectionLabelStyle!;
     final tendencyLabelStyle = Theme.of(context).extension<AspectVisualizationStyle>()!.tendencyLabelStyle!;
@@ -39,6 +40,9 @@ class AspectVisualization extends StatelessWidget with Logging {
         Theme.of(context).extension<AspectVisualizationStyle>()!.treatmentGoalArrowColor ?? Colors.black;
     final treatmentGoalArrowStrokeWidth =
         Theme.of(context).extension<AspectVisualizationStyle>()!.treatmentGoalArrowStrokeWidth ?? 9;
+    final aspectCircleGradient = Theme.of(context).extension<AspectVisualizationStyle>()!.aspectCircleGradient ??
+        const RadialGradient(colors: [Colors.white, Colors.black]);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -162,6 +166,39 @@ class AspectVisualization extends StatelessWidget with Logging {
                           _handleMouseGestureEvent(details.localPosition, centerOfGestureDetector));
                 },
               )),
+
+              /// positive aspects
+              Positioned.fill(
+                child: AspectsVisualization(
+                  aspects: viewModel.positiveAspects,
+                  angleForVisualisation: viewModel.aspectEvaluationArrowRotation,
+                  aspectCircleGradient: aspectCircleGradient,
+                ),
+              ),
+
+              /// negative aspects
+              Positioned.fill(
+                child: Transform.rotate(
+                  angle: viewModel.aspectEvaluationArrowRotation,
+                  child: AspectsVisualization(
+                    aspects: viewModel.negativeAspects,
+                    angleForVisualisation: math.pi - viewModel.aspectEvaluationArrowRotation,
+                    aspectCircleGradient: aspectCircleGradient,
+                  ),
+                ),
+              ),
+
+              /// future aspects
+              Positioned.fill(
+                child: Transform.rotate(
+                  angle: math.pi,
+                  child: AspectsVisualization(
+                    aspects: viewModel.futureAspects,
+                    angleForVisualisation: math.pi,
+                    aspectCircleGradient: aspectCircleGradient,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

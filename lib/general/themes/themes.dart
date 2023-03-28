@@ -71,15 +71,21 @@ class Themes {
                   color: DefaultThemeColors.purple, fontSize: 10.sp, fontWeight: FontWeight.normal, height: 15 / 11),
               underlineColor: Colors.deepPurpleAccent,
               underlineHeight: 2.sp),
-          const AspectVisualizationStyle(
-              sectionLabelStyle:
-                  TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.bold, height: 1),
-              tendencyLabelStyle:
-                  TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.normal, height: 1),
-              aspectEvaluationArrowStrokeWidth: 4,
-              aspectEvaluationArrowColor: DefaultThemeColors.purple,
-              treatmentGoalArrowStrokeWidth: 12,
-              treatmentGoalArrowColor: Colors.red)
+          AspectVisualizationStyle(
+            sectionLabelStyle:
+                const TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.bold, height: 1),
+            tendencyLabelStyle: const TextStyle(
+                color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.normal, height: 1),
+            aspectEvaluationArrowStrokeWidth: 4,
+            aspectEvaluationArrowColor: DefaultThemeColors.purple,
+            treatmentGoalArrowStrokeWidth: 12,
+            treatmentGoalArrowColor: Colors.red,
+            aspectCircleGradient: RadialGradient(
+              center: Alignment.topLeft,
+              radius: 1,
+              colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.purple.withOpacity(0.5)],
+            ),
+          )
         ],
       );
 }
