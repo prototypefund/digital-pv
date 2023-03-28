@@ -1,7 +1,7 @@
 [
   {
     "activity": "Aufnahme ins Krankenhaus",
-    "id": 1,
+    "id": 2,
     "choices": [
       {
         "choice": "Keine Angabe",
@@ -27,7 +27,7 @@
   },
   {
     "activity": "Intensivbehandlung",
-    "id": 3,
+    "id": 4,
     "choices": [
       {
         "choice": "Keine Angabe",
@@ -49,7 +49,7 @@
   },
   {
     "activity": "Wiederbelebung",
-    "id": 5,
+    "id": 6,
     "choices": [
       {
         "choice": "Keine Angabe",

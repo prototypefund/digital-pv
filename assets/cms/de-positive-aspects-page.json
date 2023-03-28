@@ -8,7 +8,8 @@
       "delete_confirmation_confirm": "Positiven Aspekt entfernen",
       "low_significance_label": "Geringe Bedeutung",
       "high_significance_label": "Hohe Bedeutung",
-      "empty_list_message": "Bisher wurden noch keine positiven Aspekte angegeben"
+      "empty_list_message": "Bisher wurden noch keine positiven Aspekte angegeben",
+      "simulate_aspect_label": null
     },
     "addAspectWidget": {
       "empty_textfield_hint": "Positiver Aspekt",
