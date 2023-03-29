@@ -1,18 +1,69 @@
-class Routes {
-  Routes._();
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-  static const patientDirective = 'patient-directive/';
+enum Routes {
+  welcome,
+  positiveAspects,
+  // addPositiveAspect,
+  negativeAspects,
+  evaluateCurrentAspects,
+  generalTreatmentObjective,
+  treatmentActivities,
+  futureSituations,
+  trustedThirdParty,
+  generalInformationAboutPatientDirective,
+  personalDetails,
+  pdf,
+}
 
-  static const welcome = '/';
-  static const positiveAspects = '/${patientDirective}current-situation/positive-aspects';
-  static const addPositiveAspect = '/${patientDirective}current-situation/positive-aspects/add';
-  static const negativeAspects = '/${patientDirective}current-situation/negative-aspects';
-  static const evaluateCurrentAspects = '/${patientDirective}current-situation/evaluate';
-  static const generalTreatmentObjective = '/${patientDirective}treatment-objective';
-  static const treatmentActivities = '/${patientDirective}treatment-objective/treatment-activities';
-  static const futureSituations = '/${patientDirective}future-situations';
-  static const trustedThirdParty = '/${patientDirective}trusted-third-party';
-  static const generalInformationAboutPatientDirective = '/${patientDirective}general-information';
-  static const personalDetails = '/${patientDirective}personal-details';
-  static const pdf = '/${patientDirective}directive-pdf';
+int currentRouteIndex(BuildContext context) =>
+    Routes.values.indexWhere((element) => element.path == GoRouter.of(context).location);
+
+Routes nextRoute(BuildContext context) {
+  if (currentRouteIndex(context) == Routes.values.length - 1) {
+    throw Exception('No next route');
+  }
+  return Routes.values[currentRouteIndex(context) + 1];
+}
+
+Routes previousRoute(BuildContext context) {
+  if (currentRouteIndex(context) == 0) {
+    throw Exception('No previous route');
+  }
+  return Routes.values[currentRouteIndex(context) - 1];
+}
+
+extension RouteExtension on Routes {
+  static const patientDirective = 'patientDirective/';
+
+  String get path {
+    switch (this) {
+      case Routes.welcome:
+        return '/';
+      case Routes.positiveAspects:
+        return '/${patientDirective}current-situation/positive-aspects';
+      // case Routes.addPositiveAspect:
+      //   return '/${patientDirective}current-situation/positive-aspects/add';
+      case Routes.negativeAspects:
+        return '/${patientDirective}current-situation/negative-aspects';
+      case Routes.evaluateCurrentAspects:
+        return '/${patientDirective}current-situation/evaluate';
+      case Routes.generalTreatmentObjective:
+        return '/${patientDirective}treatment-objective';
+      case Routes.treatmentActivities:
+        return '/${patientDirective}treatment-objective/treatment-activities';
+      case Routes.futureSituations:
+        return '/${patientDirective}future-situations';
+      case Routes.trustedThirdParty:
+        return '/${patientDirective}trusted-third-party';
+      case Routes.generalInformationAboutPatientDirective:
+        return '/${patientDirective}general-information';
+      case Routes.personalDetails:
+        return '/${patientDirective}personal-details';
+      case Routes.pdf:
+        return '/${patientDirective}directive-pdf';
+      default:
+        throw Exception('Invalid route');
+    }
+  }
 }

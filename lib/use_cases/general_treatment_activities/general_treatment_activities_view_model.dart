@@ -29,16 +29,6 @@ class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewM
   }
 
   @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.generalTreatmentObjective);
-  }
-
-  @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.futureSituations);
-  }
-
-  @override
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 
   @override

@@ -19,11 +19,6 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
   final ContentService _contentService = getIt.get();
 
   @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.negativeAspects);
-  }
-
-  @override
   bool get nextButtonEnabled => false;
 
   bool get showPositiveSummary {
@@ -43,11 +38,8 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
     notifyListeners();
   }
 
-  @override
-  void onNextButtonPressed(BuildContext context) {}
-
   void onConfirmPressed(BuildContext context) {
-    context.go(Routes.generalTreatmentObjective);
+    onNextButtonPressed(context);
   }
 
   @override

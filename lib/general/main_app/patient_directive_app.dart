@@ -40,57 +40,57 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     _router = GoRouter(
         routes: [
           GoRoute(
-            path: Routes.welcome,
+            path: Routes.welcome.path,
             pageBuilder: (context, state) =>
                 buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
           ),
           GoRoute(
-            path: Routes.positiveAspects,
+            path: Routes.positiveAspects.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<PositiveAspects>(
                 context: context, state: state, child: PositiveAspects.page()),
           ),
           GoRoute(
-            path: Routes.negativeAspects,
+            path: Routes.negativeAspects.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<NegativeAspects>(
                 context: context, state: state, child: NegativeAspects.page()),
           ),
           GoRoute(
-            path: Routes.evaluateCurrentAspects,
+            path: Routes.evaluateCurrentAspects.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<EvaluateCurrentAspects>(
                 context: context, state: state, child: EvaluateCurrentAspects.page()),
           ),
           GoRoute(
-            path: Routes.generalTreatmentObjective,
+            path: Routes.generalTreatmentObjective.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<GeneralTreatmentObjective>(
                 context: context, state: state, child: GeneralTreatmentObjective.page()),
           ),
           GoRoute(
-            path: Routes.treatmentActivities,
+            path: Routes.treatmentActivities.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<TreatmentActivities>(
                 context: context, state: state, child: TreatmentActivities.page()),
           ),
           GoRoute(
-            path: Routes.futureSituations,
+            path: Routes.futureSituations.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<FutureSituations>(
                 context: context, state: state, child: FutureSituations.page()),
           ),
           GoRoute(
-            path: Routes.trustedThirdParty,
+            path: Routes.trustedThirdParty.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<TrustedThirdParty>(
                 context: context, state: state, child: TrustedThirdParty.page()),
           ),
           GoRoute(
-            path: Routes.generalInformationAboutPatientDirective,
+            path: Routes.generalInformationAboutPatientDirective.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<GeneralInformationAboutPatientDirective>(
                 context: context, state: state, child: GeneralInformationAboutPatientDirective.page()),
           ),
           GoRoute(
-            path: Routes.personalDetails,
+            path: Routes.personalDetails.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<PersonalDetails>(
                 context: context, state: state, child: PersonalDetails.page()),
           ),
           GoRoute(
-            path: Routes.pdf,
+            path: Routes.pdf.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<DirectivePdfView>(
                 context: context, state: state, child: DirectivePdfView()),
           ),

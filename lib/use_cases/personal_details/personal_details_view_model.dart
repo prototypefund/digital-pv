@@ -60,11 +60,6 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
   }
 
   @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.generalInformationAboutPatientDirective);
-  }
-
-  @override
   void onNextButtonPressed(BuildContext context) {
     onDownloadDirectivePressed(context);
   }
@@ -107,6 +102,6 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
   }
 
   void onShowDirectivePressed(BuildContext context) {
-    context.go(Routes.pdf);
+    onNextButtonPressed(context);
   }
 }

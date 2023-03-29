@@ -14,11 +14,6 @@ class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNa
   final ContentService _contentService = getIt.get();
 
   @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.trustedThirdParty);
-  }
-
-  @override
   void onNextButtonPressed(BuildContext context) {}
 
   GeneralInformationAboutDirectivePage get pageContent => _contentService.generalInformationAboutDirectivePage;
@@ -35,7 +30,7 @@ class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNa
   bool get nextButtonEnabled => false;
 
   void onConfirmPressed(BuildContext context) {
-    context.go(Routes.personalDetails);
+    onNextButtonPressed(context);
   }
 
   String get confirmLabel => pageContent.confirmActionLabel;

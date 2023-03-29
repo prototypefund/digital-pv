@@ -32,16 +32,6 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel with
   IconData get addPersonOfTrustActionIcon => Icons.add_circle;
 
   @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.futureSituations);
-  }
-
-  @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.generalInformationAboutPatientDirective);
-  }
-
-  @override
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;
 
   @override

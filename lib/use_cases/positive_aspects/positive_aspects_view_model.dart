@@ -38,16 +38,6 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   }
 
   @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.welcome);
-  }
-
-  @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.negativeAspects);
-  }
-
-  @override
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => true;
 
   @override

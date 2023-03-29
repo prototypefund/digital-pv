@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 
 abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNotifier {
@@ -10,12 +11,24 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
   bool get nextButtonShowArrow => true;
 
   void onBackButtonPressed(BuildContext context) {
-    if (Navigator.of(context).canPop()) {
-      context.pop();
-    }
+    context.go(previousRoute(context).path);
   }
 
-  void onNextButtonPressed(BuildContext context);
+  void onNextButtonPressed(BuildContext context) {
+    context.go(nextRoute(context).path);
+  }
+
+  void onStepContinue(BuildContext context, int index) {
+    // as welcome page is not part of the bread crumb navigation, we need to increase the index by one
+    final int indexToGoTo = index + 1;
+    const routes = Routes.values;
+    if (indexToGoTo >= routes.length || indexToGoTo < 0) {
+      throw Exception('index $indexToGoTo is out of bounds for routes');
+    }
+    context.go(routes[indexToGoTo].path);
+  }
+
+  int currentStep(BuildContext context) => currentRouteIndex(context);
 
   bool get backButtonEnabled => true;
 
