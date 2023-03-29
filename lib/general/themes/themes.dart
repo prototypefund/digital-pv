@@ -81,12 +81,12 @@ class Themes {
             treatmentGoalArrowStrokeWidth: 12,
             treatmentGoalArrowColor: Colors.red,
             activeAspectCircleGradient: RadialGradient(
-              center: Alignment.topLeft,
+              center: Alignment.center,
               radius: 1,
               colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.purple.withOpacity(0.5)],
             ),
             inactiveAspectCircleGradient: RadialGradient(
-              center: Alignment.topLeft,
+              center: Alignment.center,
               radius: 1,
               colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.grey.withOpacity(0.2)],
             ),

@@ -1,11 +1,11 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/constraints.dart';
-import 'package:pd_app/general/view_components/directive_visualization/aspect_circle_painter.dart';
 import 'package:pd_app/general/view_components/directive_visualization/aspect_positions.dart';
 import 'package:pd_app/general/view_components/directive_visualization/sector.dart';
+import 'package:pd_app/logging.dart';
 
-class AspectsVisualization extends StatelessWidget {
+class AspectsVisualization extends StatelessWidget with Logging {
   const AspectsVisualization({
     required this.aspects,
     required this.angleForVisualisation,
@@ -29,18 +29,32 @@ class AspectsVisualization extends StatelessWidget {
         final List<AspectVisualizationInformation> aspectVisualizationInformation =
             AspectPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
 
-        final List<CustomPaint> aspectCircles = aspectVisualizationInformation
-            .map(
-              (visualizationInformaion) => CustomPaint(
-                painter: AspectCirclePainter(
-                  coordinate: visualizationInformaion.coordinate,
-                  // TODO: remove hardcoded factors and explain how to use them
-                  radius: (visualizationInformaion.weight.value + 0.9) * 13 * radiusScaleFactor,
-                  gradient: visualizationInformaion.active ? activeAspectCircleGradient : inactiveAspectCircleGradient,
+        final List<Widget> aspectCircles = aspectVisualizationInformation.map(
+          (visualizationInformaion) {
+            final radiusScaleFactor = 2 * (constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth);
+            final size = (visualizationInformaion.weight.value + 0.9) * 10 * radiusScaleFactor;
+            final gradient = visualizationInformaion.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;
+
+            return Positioned(
+              left: visualizationInformaion.coordinate.x - (size / 2) + constraints.maxWidth / 2,
+              top: visualizationInformaion.coordinate.y - (size / 2) + constraints.maxWidth / 2,
+              width: size,
+              height: size,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => logger.i('tap on aspect'),
+                  child: Container(
+                    width: size,
+                    height: size,
+                    decoration: BoxDecoration(gradient: gradient, shape: BoxShape.circle),
+                    child: SizedBox.shrink(),
+                  ),
                 ),
               ),
-            )
-            .toList();
+            );
+          },
+        ).toList();
 
         return Stack(
           alignment: AlignmentDirectional.center,
