@@ -59,7 +59,7 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
   /// rotating by PI means pointing to the left (completely curative)
   ///
   double get treatmentGoalArrowRotation {
-    final treatmentGoalValue = _patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value;
+    final treatmentGoalValue = _patientDirectiveService.currentPatientDirective.simulatedGeneralTreatmentGoal.value;
     // -1 = very palliative should become PI
     // +1 = very curative should become 0
     // 0 = equal should become PI / 2

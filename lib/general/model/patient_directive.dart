@@ -40,8 +40,19 @@ class PatientDirective {
     return _generalTreatmentGoal ?? TreatmentGoal(value: currentAspectsScore);
   }
 
+  TreatmentGoal get simulatedGeneralTreatmentGoal {
+    return TreatmentGoal(value: generalTreatmentGoal.value - simulatedFutureAspectScore);
+  }
+
   set generalTreatmentGoal(TreatmentGoal newValue) {
     _generalTreatmentGoal = newValue;
+  }
+
+  double get simulatedFutureAspectScore {
+    final double simulatedFutureWeights =
+        futureSituationAspects.where((element) => element.simulateAspect).map((e) => e.weight.value).sum;
+
+    return simulatedFutureWeights;
   }
 
   ///
