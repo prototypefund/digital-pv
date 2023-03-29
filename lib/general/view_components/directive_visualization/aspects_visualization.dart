@@ -22,7 +22,7 @@ class AspectsVisualization extends StatelessWidget with Logging {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final radiusScaleFactor = constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth;
+        final radiusScaleFactor = 2 * (constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth);
 
         final Sector aspectsSector = Sector(angle: angleForVisualisation, radius: constraints.maxWidth / 2);
 
@@ -31,7 +31,6 @@ class AspectsVisualization extends StatelessWidget with Logging {
 
         final List<Widget> aspectCircles = aspectVisualizationInformation.map(
           (visualizationInformaion) {
-            final radiusScaleFactor = 2 * (constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth);
             final size = (visualizationInformaion.weight.value + 0.9) * 10 * radiusScaleFactor;
             final gradient = visualizationInformaion.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;
 
@@ -48,7 +47,7 @@ class AspectsVisualization extends StatelessWidget with Logging {
                     width: size,
                     height: size,
                     decoration: BoxDecoration(gradient: gradient, shape: BoxShape.circle),
-                    child: SizedBox.shrink(),
+                    child: const SizedBox.shrink(),
                   ),
                 ),
               ),
