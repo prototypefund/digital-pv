@@ -22,7 +22,7 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
 
   final bool showTreatmentGoal;
 
-  String get evaluationImageBackground => 'assets/images/placeholder.png';
+  String get evaluationImageBackground => 'assets/images/compass.svg';
 
   String get treatmentGoalLabel => l10n.aspectVisualizationTreatmentGoal;
 

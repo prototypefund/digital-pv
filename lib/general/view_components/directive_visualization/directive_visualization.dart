@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
@@ -54,7 +55,11 @@ class DirectiveVisualization extends StatelessWidget with Logging {
         Flexible(
           child: Stack(
             children: [
-              Image.asset(viewModel.evaluationImageBackground),
+              SvgPicture.asset(
+                viewModel.evaluationImageBackground,
+                width: 540,
+                height: 540,
+              ),
               if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
