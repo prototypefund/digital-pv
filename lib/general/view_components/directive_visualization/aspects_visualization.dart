@@ -30,13 +30,13 @@ class AspectsVisualization extends StatelessWidget with Logging {
             AspectPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
 
         final List<Widget> aspectCircles = aspectVisualizationInformation.map(
-          (visualizationInformaion) {
-            final size = (visualizationInformaion.weight.value + 0.9) * 10 * radiusScaleFactor;
-            final gradient = visualizationInformaion.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;
+          (visualInformation) {
+            final size = (visualInformation.weight.value + 0.9) * 10 * radiusScaleFactor;
+            final gradient = visualInformation.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;
 
             return Positioned(
-              left: visualizationInformaion.coordinate.x - (size / 2) + constraints.maxWidth / 2,
-              top: visualizationInformaion.coordinate.y - (size / 2) + constraints.maxWidth / 2,
+              left: visualInformation.coordinate.x - (size / 2) + constraints.maxWidth / 2,
+              top: visualInformation.coordinate.y - (size / 2) + constraints.maxWidth / 2,
               width: size,
               height: size,
               child: MouseRegion(
@@ -44,7 +44,7 @@ class AspectsVisualization extends StatelessWidget with Logging {
                 child: GestureDetector(
                   onTap: () => logger.i('tap on aspect'),
                   child: Tooltip(
-                    message: visualizationInformaion.aspect.name,
+                    message: visualInformation.aspect.name,
                     child: Container(
                       width: size,
                       height: size,
