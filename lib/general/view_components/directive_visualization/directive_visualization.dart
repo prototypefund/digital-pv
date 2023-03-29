@@ -55,10 +55,11 @@ class DirectiveVisualization extends StatelessWidget with Logging {
         Flexible(
           child: Stack(
             children: [
-              SvgPicture.asset(
-                viewModel.evaluationImageBackground,
-                width: 540,
-                height: 540,
+              AspectRatio(
+                aspectRatio: 1,
+                child: SvgPicture.asset(
+                  viewModel.evaluationImageBackground,
+                ),
               ),
               if (viewModel.showLabels)
                 Positioned.fill(
@@ -229,7 +230,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
   }
 }
 
-class AspectVisualizationOverlayArrow extends StatelessWidget {
+class AspectVisualizationOverlayArrow extends StatelessWidget with Logging {
   const AspectVisualizationOverlayArrow(
       {super.key, required this.rotation, required this.strokeWidth, required this.color});
 
@@ -240,7 +241,8 @@ class AspectVisualizationOverlayArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final arrowScaleFactor = constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth;
+      logger.d('building scaled arrow with constraints $constraints');
+      final arrowScaleFactor = (constraints.maxWidth) / Constraints.aspectVisualizationConstraints.maxWidth;
 
       return Transform.rotate(
         angle: rotation,

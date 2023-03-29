@@ -59,6 +59,14 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
   bool get isSimulateAspectEnabled;
 
+  double get listItemHeight {
+    if (showTreatmentOptions) {
+      return Sizes.aspectListItemWithTreatmentOptionsHeight;
+    } else {
+      return Sizes.aspectListItemWithoutTreatmentOptionsHeight;
+    }
+  }
+
   VoidCallback? addAspectCallToActionPressed(BuildContext context) =>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
 
@@ -112,7 +120,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     logger.d('will scroll to $focusAspect, but first waiting 300 ms');
     await Future<void>.delayed(const Duration(milliseconds: 300));
     final indexOfFocusItem = aspects.indexOf(focusAspect);
-    final offset = Sizes.aspectListItemHeight * indexOfFocusItem;
+    final offset = listItemHeight * indexOfFocusItem;
     logger.d('start scrolling to $focusAspect at offset $offset');
     scrollController.jumpTo(offset);
     logger.d('scrolling to $focusAspect DONE');

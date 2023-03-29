@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/paddings.dart';
-import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/aspect_widget/aspect_widget.dart';
 import 'package:pd_app/logging.dart';
@@ -62,7 +61,7 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
     final AspectListViewModel<AspectType> viewModel = context.watch();
     final AspectType aspect = viewModel.aspects[index];
     return SizedBox(
-      height: Sizes.aspectListItemHeight,
+      height: viewModel.listItemHeight,
       child: Padding(
         key: Key(aspect.name),
         padding: Paddings.listElementPadding,
