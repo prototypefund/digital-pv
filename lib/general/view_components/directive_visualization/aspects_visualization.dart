@@ -6,17 +6,18 @@ import 'package:pd_app/general/view_components/directive_visualization/sector.da
 import 'package:pd_app/logging.dart';
 
 class AspectsVisualization extends StatelessWidget with Logging {
-  const AspectsVisualization({
-    required this.aspects,
-    required this.angleForVisualisation,
-    required this.activeAspectCircleGradient,
-    required this.inactiveAspectCircleGradient,
-  });
+  const AspectsVisualization(
+      {required this.aspects,
+      required this.angleForVisualisation,
+      required this.activeAspectCircleGradient,
+      required this.inactiveAspectCircleGradient,
+      required this.onAspectTapped});
 
   final List<Aspect> aspects;
   final double angleForVisualisation;
   final Gradient activeAspectCircleGradient;
   final Gradient inactiveAspectCircleGradient;
+  final ValueChanged<Aspect> onAspectTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class AspectsVisualization extends StatelessWidget with Logging {
               child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
-                  onTap: () => logger.i('tap on aspect'),
+                  onTap: () => onAspectTapped.call(visualInformation.aspect),
                   child: Tooltip(
                     message: visualInformation.aspect.name,
                     child: Container(

@@ -42,6 +42,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
         child: Stack(
           children: [
             CustomScrollView(
+              controller: viewModel.scrollController,
               slivers: [
                 SliverAppBar(
                   automaticallyImplyLeading: false,

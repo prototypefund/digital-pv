@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
+import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect.dart';
 import 'package:pd_app/use_cases/negative_aspects/negative_aspects_view_model.dart';
@@ -10,8 +11,9 @@ import 'package:provider/provider.dart';
 class NegativeAspects extends StatelessWidget {
   const NegativeAspects({super.key});
 
-  static Widget page() {
-    return ChangeNotifierProvider(create: (_) => NegativeAspectsViewModel(), child: const NegativeAspects());
+  static Widget page({required Aspect? focusAspect}) {
+    return ChangeNotifierProvider(
+        create: (_) => NegativeAspectsViewModel(focusAspect: focusAspect), child: const NegativeAspects());
   }
 
   @override
@@ -26,7 +28,9 @@ class NegativeAspects extends StatelessWidget {
             content: context.select((NegativeAspectsViewModel viewModel) => viewModel.pageContent).intro ?? ''),
         ChangeNotifierProvider.value(
             value: context.select((NegativeAspectsViewModel viewModel) => viewModel.negativeAspectsListViewModel),
-            child: AspectList()),
+            child: AspectList(
+              scrollController: viewModel.scrollController,
+            )),
         const SizedBox(
           height: 20,
         ),

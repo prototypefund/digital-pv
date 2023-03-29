@@ -1,3 +1,6 @@
+import 'package:pd_app/general/model/aspect.dart';
+import 'package:pd_app/general/model/future_situation.dart';
+
 class Routes {
   Routes._();
 
@@ -15,4 +18,18 @@ class Routes {
   static const generalInformationAboutPatientDirective = '/${patientDirective}general-information';
   static const personalDetails = '/${patientDirective}personal-details';
   static const pdf = '/${patientDirective}directive-pdf';
+
+  static const focusParam = 'focus';
+
+  static String buildShowFutureSituationsRoute({required FutureSituation highlightedSituation}) {
+    return '$futureSituations?$focusParam=${highlightedSituation.name}';
+  }
+
+  static String buildShowPositiveAspectRoute({required Aspect highlightedSituation}) {
+    return '$positiveAspects?$focusParam=${highlightedSituation.name}';
+  }
+
+  static String buildShowNegativeAspectRoute({required Aspect highlightedSituation}) {
+    return '$negativeAspects?$focusParam=${highlightedSituation.name}';
+  }
 }

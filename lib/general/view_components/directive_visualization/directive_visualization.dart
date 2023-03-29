@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
+import 'package:pd_app/general/model/future_situation.dart';
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
@@ -177,6 +178,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   angleForVisualisation: viewModel.aspectEvaluationArrowRotation,
                   activeAspectCircleGradient: activeAspectCircleGradient,
                   inactiveAspectCircleGradient: inactiveAspectCircleGradient,
+                  onAspectTapped: (aspect) => viewModel.onPositiveAspectTapped(context, aspect),
                 ),
               ),
 
@@ -189,6 +191,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                     angleForVisualisation: math.pi - viewModel.aspectEvaluationArrowRotation,
                     activeAspectCircleGradient: activeAspectCircleGradient,
                     inactiveAspectCircleGradient: inactiveAspectCircleGradient,
+                    onAspectTapped: (aspect) => viewModel.onNegativeAspectTapped(context, aspect),
                   ),
                 ),
               ),
@@ -202,6 +205,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                     angleForVisualisation: math.pi,
                     activeAspectCircleGradient: activeAspectCircleGradient,
                     inactiveAspectCircleGradient: inactiveAspectCircleGradient,
+                    onAspectTapped: (aspect) => viewModel.onFutureAspectTapped(context, aspect as FutureSituation),
                   ),
                 ),
               ),

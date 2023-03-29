@@ -26,4 +26,9 @@ class Aspect {
   int get hashCode => name.hashCode ^ description.hashCode ^ weight.hashCode;
 
   Map<String, dynamic> toJson() => _$AspectToJson(this);
+
+  @override
+  String toString() {
+    return 'Aspect{name: $name, description: $description, weight: $weight}';
+  }
 }

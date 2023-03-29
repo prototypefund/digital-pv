@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';
+import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/themes/themes.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
@@ -46,13 +48,32 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           ),
           GoRoute(
             path: Routes.positiveAspects,
-            pageBuilder: (context, state) => buildPageWithDefaultTransition<PositiveAspects>(
-                context: context, state: state, child: PositiveAspects.page()),
+            pageBuilder: (context, state) {
+              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final PatientDirectiveService directiveService = getIt.get();
+              final focusSituation =
+                  directiveService.currentPatientDirective.findPositiveAspect(name: focusSituationName);
+              return buildPageWithDefaultTransition<PositiveAspects>(
+                  key: ValueKey('positive-aspect-$focusSituationName'),
+                  context: context,
+                  state: state,
+                  child: PositiveAspects.page(focusAspect: focusSituation));
+            },
           ),
           GoRoute(
             path: Routes.negativeAspects,
-            pageBuilder: (context, state) => buildPageWithDefaultTransition<NegativeAspects>(
-                context: context, state: state, child: NegativeAspects.page()),
+            pageBuilder: (context, state) {
+              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final PatientDirectiveService directiveService = getIt.get();
+              final focusSituation =
+                  directiveService.currentPatientDirective.findNegativeAspect(name: focusSituationName);
+
+              return buildPageWithDefaultTransition<NegativeAspects>(
+                  key: ValueKey('negative-aspect-$focusSituationName'),
+                  context: context,
+                  state: state,
+                  child: NegativeAspects.page(focusAspect: focusSituation));
+            },
           ),
           GoRoute(
             path: Routes.evaluateCurrentAspects,
@@ -71,8 +92,17 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           ),
           GoRoute(
             path: Routes.futureSituations,
-            pageBuilder: (context, state) => buildPageWithDefaultTransition<FutureSituations>(
-                context: context, state: state, child: FutureSituations.page()),
+            pageBuilder: (context, state) {
+              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final PatientDirectiveService directiveService = getIt.get();
+              final focusSituation =
+                  directiveService.currentPatientDirective.findFutureSituation(name: focusSituationName);
+              return buildPageWithDefaultTransition<FutureSituations>(
+                  key: ValueKey('future-situation-$focusSituationName'),
+                  context: context,
+                  state: state,
+                  child: FutureSituations.page(focusAspect: focusSituation));
+            },
           ),
           GoRoute(
             path: Routes.trustedThirdParty,
@@ -107,10 +137,11 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
   CustomTransitionPage<T> buildPageWithDefaultTransition<T>({
     required BuildContext context,
     required GoRouterState state,
+    LocalKey? key,
     required Widget child,
   }) {
     return NoTransitionPage<T>(
-      key: state.pageKey,
+      key: key ?? state.pageKey,
       child: child,
     );
   }

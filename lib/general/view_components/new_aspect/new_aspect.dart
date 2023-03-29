@@ -23,7 +23,7 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
                   controller: viewModel.aspectTextFieldController,
                   style: Theme.of(context).textTheme.labelLarge,
                   decoration: InputDecoration(hintText: viewModel.addAspectTextfieldHint),
-                  autofocus: true,
+                  autofocus: viewModel.autofocus,
                 ),
               ),
               DPVSlider(

@@ -7,7 +7,7 @@ import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_mode
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 
 class PositiveAspectsListViewModel extends AspectListViewModel<Aspect> {
-  PositiveAspectsListViewModel() {
+  PositiveAspectsListViewModel({required super.focusAspect, required super.scrollController}) {
     _contentService.addListener(notifyListeners);
   }
 

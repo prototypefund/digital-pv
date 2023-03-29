@@ -13,7 +13,7 @@ import 'package:pd_app/logging.dart';
 
 abstract class NewAspectViewModel<AspectType extends Aspect>
     with RootContextL10N, AspectViewModel, Logging, ChangeNotifier {
-  NewAspectViewModel() : _patientDirectiveService = getIt.get() {
+  NewAspectViewModel({required this.autofocus}) : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     aspectTextFieldController.addListener(_reactToTextChange);
   }
@@ -23,6 +23,8 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
   final PatientDirectiveService _patientDirectiveService;
 
   String get examplesText;
+
+  final bool autofocus;
 
   @override
   void dispose() {

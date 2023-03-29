@@ -1,8 +1,11 @@
 import "dart:math" as math;
 
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
+import 'package:pd_app/general/model/future_situation.dart';
+import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/logging.dart';
@@ -66,6 +69,18 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
     final rotation = math.pi / 2 * treatmentGoalValue - math.pi / 2;
     logger.v('treatment goal value is $treatmentGoalValue, resulting in rotation of $rotation rads');
     return rotation;
+  }
+
+  void onFutureAspectTapped(BuildContext context, FutureSituation aspect) {
+    context.go(Routes.buildShowFutureSituationsRoute(highlightedSituation: aspect));
+  }
+
+  void onPositiveAspectTapped(BuildContext context, Aspect aspect) {
+    context.go(Routes.buildShowPositiveAspectRoute(highlightedSituation: aspect));
+  }
+
+  void onNegativeAspectTapped(BuildContext context, Aspect aspect) {
+    context.go(Routes.buildShowNegativeAspectRoute(highlightedSituation: aspect));
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/paddings.dart';
+import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/aspect_widget/aspect_widget.dart';
 import 'package:pd_app/logging.dart';
@@ -9,7 +10,9 @@ import 'package:provider/provider.dart';
 class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
 
-  AspectList({super.key});
+  AspectList({super.key, required this.scrollController});
+
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +61,14 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
   Widget buildListItem(BuildContext context, int index, Animation<double> animation) {
     final AspectListViewModel<AspectType> viewModel = context.watch();
     final AspectType aspect = viewModel.aspects[index];
-    return Padding(
-      key: Key(aspect.name),
-      padding: Paddings.listElementPadding,
-      child:
-          _buildListItem(animation: animation, aspect: aspect, viewModel: viewModel, interactive: true, index: index),
+    return SizedBox(
+      height: Sizes.aspectListItemHeight,
+      child: Padding(
+        key: Key(aspect.name),
+        padding: Paddings.listElementPadding,
+        child:
+            _buildListItem(animation: animation, aspect: aspect, viewModel: viewModel, interactive: true, index: index),
+      ),
     );
   }
 
