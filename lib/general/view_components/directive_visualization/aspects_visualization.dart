@@ -43,11 +43,14 @@ class AspectsVisualization extends StatelessWidget with Logging {
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
                   onTap: () => logger.i('tap on aspect'),
-                  child: Container(
-                    width: size,
-                    height: size,
-                    decoration: BoxDecoration(gradient: gradient, shape: BoxShape.circle),
-                    child: const SizedBox.shrink(),
+                  child: Tooltip(
+                    message: visualizationInformaion.aspect.name,
+                    child: Container(
+                      width: size,
+                      height: size,
+                      decoration: BoxDecoration(gradient: gradient, shape: BoxShape.circle),
+                      child: const SizedBox.shrink(),
+                    ),
                   ),
                 ),
               ),

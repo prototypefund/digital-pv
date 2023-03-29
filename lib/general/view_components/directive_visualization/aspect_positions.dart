@@ -20,8 +20,8 @@ class AspectPositions {
       } else {
         active = true;
       }
-      list.add(
-          AspectVisualizationInformation(coordinate: _listOfCoordinates[i], weight: aspect.weight, active: active));
+      list.add(AspectVisualizationInformation(
+          aspect: aspect, coordinate: _listOfCoordinates[i], weight: aspect.weight, active: active));
     }
 
     return list;
@@ -105,11 +105,13 @@ class AspectVisualizationInformation {
   final Coordinate coordinate;
   final Weight weight;
   final bool active;
+  final Aspect aspect;
 
-  const AspectVisualizationInformation({required this.coordinate, required this.weight, required this.active});
+  const AspectVisualizationInformation(
+      {required this.aspect, required this.coordinate, required this.weight, required this.active});
 
   @override
   String toString() {
-    return 'AspectVisualizationInformation: coordinate = $coordinate, weight = $weight, active = $active';
+    return 'AspectVisualizationInformation: coordinate = $coordinate, weight = $weight, active = $active, aspect = $aspect';
   }
 }
