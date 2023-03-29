@@ -7,10 +7,12 @@ import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/directive_visualization/directive_visualization.dart';
+import 'package:pd_app/general/view_components/dpv_stepper.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
 import 'package:provider/provider.dart';
+import 'package:collection/collection.dart';
 
 class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
   const CreationProcessNavigation({super.key, required this.widget, this.floatingAddonWidget});
@@ -47,6 +49,52 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   automaticallyImplyLeading: false,
                   // disables back button if popping is possible
                   backgroundColor: Theme.of(context).colorScheme.background,
+                  title: SizedBox(
+                    height: 75,
+                    child: ChangeNotifierProvider(
+                      create: (context) => viewModel,
+                      child: Theme(
+                        data: ThemeData(primaryColor: Colors.indigoAccent),
+                        child: DPVStepper(
+                          physics: const BouncingScrollPhysics(),
+                          currentStep: viewModel.currentStep(context),
+                          type: StepperType.horizontal,
+                          onStepContinue: () {
+                            viewModel.onNextButtonPressed(context);
+                          },
+                          onStepTapped: (int index) {
+                            viewModel.onStepContinue(context, index);
+                          },
+                          onStepCancel: () => viewModel.onBackButtonPressed(context),
+                          steps: [
+                            "PositiveAspects",
+                            "NegativeAspects",
+                            "EvaluateCurrentAspects",
+                            "GeneralTreatmentObjective",
+                            "TreatmentActivities",
+                            "FutureSituations",
+                            "TrustedThirdParty",
+                            "GeneralInformationAboutPatientDirective",
+                            "PersonalDetails",
+                            "DirectivePdfView"
+                          ]
+                              .mapIndexed((index, e) => Step(
+                                
+                                    state: viewModel.currentStep(context) == index
+                                        ? StepState.editing
+                                        : viewModel.currentStep(context) > index
+                                            ? StepState.complete
+                                            : StepState.disabled,
+                                    title:
+                                        Text(e, style: Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 12)),
+                                    content: Container(
+                                        alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
+                                  ))
+                              .toList(),
+                        ),
+                      ),
+                    ),
+                  ),
                   leading: Builder(builder: (context) {
                     return IconButton(
                       icon: const Icon(
