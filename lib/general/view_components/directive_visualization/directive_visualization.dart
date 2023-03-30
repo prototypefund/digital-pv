@@ -245,7 +245,7 @@ class AspectVisualizationOverlayArrow extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      logger.d('building scaled arrow with constraints $constraints');
+      logger.v('building scaled arrow with constraints $constraints');
       final arrowScaleFactor = (constraints.maxWidth) / Constraints.aspectVisualizationConstraints.maxWidth;
 
       return Transform.rotate(
