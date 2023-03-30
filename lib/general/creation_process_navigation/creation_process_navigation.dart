@@ -44,6 +44,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
         child: Stack(
           children: [
             CustomScrollView(
+              controller: viewModel.scrollController,
               slivers: [
                 SliverAppBar(
                   automaticallyImplyLeading: false,
@@ -115,7 +116,9 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                           visible: deviceWidth < responsiveAddonThreshold &&
                               viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
                           child: DirectiveVisualization.widgetWithViewModel(
-                              showLabels: false, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
+                              simulateFutureAspects: viewModel.simulateFutureAspects,
+                              showLabels: false,
+                              showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
                     ),
                   ),
                 ),
@@ -148,7 +151,9 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   child: Padding(
                       padding: Paddings.floatingAspectVisualizationPadding,
                       child: DirectiveVisualization.widgetWithViewModel(
-                          showLabels: true, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
+                          simulateFutureAspects: viewModel.simulateFutureAspects,
+                          showLabels: true,
+                          showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
           ],
         ),
       ),

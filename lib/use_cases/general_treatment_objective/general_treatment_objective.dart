@@ -39,7 +39,8 @@ class GeneralTreatmentObjective extends StatelessWidget {
         ConstrainedBox(
             constraints: Constraints.aspectVisualizationConstraints,
             child: ChangeNotifierProvider(
-                create: (_) => DirectiveVisualizationViewModel(showLabels: true, showTreatmentGoal: true),
+                create: (_) => DirectiveVisualizationViewModel(
+                    showLabels: true, showTreatmentGoal: true, simulateFutureAspects: false),
                 child: DirectiveVisualization(
                   onDragAndRotate: (double direction) {
                     viewModel.adaptTreatmentGoal(direction);

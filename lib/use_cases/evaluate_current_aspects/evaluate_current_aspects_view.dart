@@ -39,7 +39,8 @@ class EvaluateCurrentAspects extends StatelessWidget {
         ConstrainedBox(
             constraints: Constraints.aspectVisualizationConstraints,
             child: ChangeNotifierProvider(
-                create: (_) => DirectiveVisualizationViewModel(showLabels: true, showTreatmentGoal: false),
+                create: (_) => DirectiveVisualizationViewModel(
+                    showLabels: true, showTreatmentGoal: false, simulateFutureAspects: false),
                 child: const DirectiveVisualization())),
         const SizedBox(
           height: 24,

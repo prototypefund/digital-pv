@@ -1,44 +1,66 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/constraints.dart';
-import 'package:pd_app/general/view_components/directive_visualization/aspect_circle_painter.dart';
 import 'package:pd_app/general/view_components/directive_visualization/aspect_positions.dart';
 import 'package:pd_app/general/view_components/directive_visualization/sector.dart';
+import 'package:pd_app/logging.dart';
 
-class AspectsVisualization extends StatelessWidget {
-  const AspectsVisualization({
-    required this.aspects,
-    required this.angleForVisualisation,
-    required this.aspectCircleGradient,
-  });
+class AspectsVisualization extends StatelessWidget with Logging {
+  const AspectsVisualization(
+      {required this.aspects,
+      required this.angleForVisualisation,
+      required this.activeAspectCircleGradient,
+      required this.inactiveAspectCircleGradient,
+      required this.onAspectTapped,
+      required this.simulateFutureAspects});
 
   final List<Aspect> aspects;
   final double angleForVisualisation;
-  final Gradient aspectCircleGradient;
+  final Gradient activeAspectCircleGradient;
+  final Gradient inactiveAspectCircleGradient;
+  final ValueChanged<Aspect> onAspectTapped;
+  final bool simulateFutureAspects;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final radiusScaleFactor = constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth;
+        final radiusScaleFactor = 2 * (constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth);
 
         final Sector aspectsSector = Sector(angle: angleForVisualisation, radius: constraints.maxWidth / 2);
 
         final List<AspectVisualizationInformation> aspectVisualizationInformation =
-            AspectPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
+            AspectPositions(aspects: aspects, sector: aspectsSector, simulateFutureAspects: simulateFutureAspects)
+                .listOfAspectVisualizationInformation;
 
-        final List<CustomPaint> aspectCircles = aspectVisualizationInformation
-            .map(
-              (visualizationInformaion) => CustomPaint(
-                painter: AspectCirclePainter(
-                  coordinate: visualizationInformaion.coordinate,
-                  // TODO: remove hardcoded factors and explain how to use them
-                  radius: (visualizationInformaion.weight.value + 0.9) * 13 * radiusScaleFactor,
-                  gradient: aspectCircleGradient,
+        final List<Widget> aspectCircles = aspectVisualizationInformation.map(
+          (visualInformation) {
+            final size = (visualInformation.weight.value + 0.9) * 10 * radiusScaleFactor;
+            final gradient = visualInformation.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;
+
+            return Positioned(
+              left: visualInformation.coordinate.x - (size / 2) + constraints.maxWidth / 2,
+              top: visualInformation.coordinate.y - (size / 2) + constraints.maxWidth / 2,
+              width: size,
+              height: size,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => onAspectTapped.call(visualInformation.aspect),
+                  child: Tooltip(
+                    message: visualInformation.aspect.name,
+                    child: Container(
+                      width: size,
+                      height: size,
+                      decoration: BoxDecoration(gradient: gradient, shape: BoxShape.circle),
+                      child: const SizedBox.shrink(),
+                    ),
+                  ),
                 ),
               ),
-            )
-            .toList();
+            );
+          },
+        ).toList();
 
         return Stack(
           alignment: AlignmentDirectional.center,

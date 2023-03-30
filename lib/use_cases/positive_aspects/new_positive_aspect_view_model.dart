@@ -11,7 +11,7 @@ import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
 class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
-  NewPositiveAspectViewModel() : _contentService = getIt.get() {
+  NewPositiveAspectViewModel({required super.autofocus}) : _contentService = getIt.get() {
     _contentService.addListener(notifyListeners);
   }
 

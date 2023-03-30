@@ -10,7 +10,8 @@ class AspectListWidget {
       required this.highSignificanceLabel,
       required this.deleteConfirmationCancel,
       required this.deleteConfirmationConfirm,
-      required this.emptyListMessage});
+      required this.emptyListMessage,
+      required this.simulateAspectLabel});
 
   factory AspectListWidget.fromJson(Map<String, dynamic> json) => _$AspectListWidgetFromJson(json);
 
@@ -27,6 +28,9 @@ class AspectListWidget {
   final String highSignificanceLabel;
   @JsonKey(name: "empty_list_message")
   final String emptyListMessage;
+
+  @JsonKey(name: "simulate_aspect_label")
+  final String? simulateAspectLabel;
 
   Map<String, dynamic> toJson() => _$AspectListWidgetToJson(this);
 }

@@ -61,7 +61,8 @@ class ContentService with Logging, ChangeNotifier {
                 highSignificanceLabel: '',
                 deleteConfirmationCancel: '',
                 deleteConfirmationConfirm: '',
-                emptyListMessage: ''),
+                emptyListMessage: '',
+                simulateAspectLabel: ''),
             addAspectWidget: AddAspectWidget(
                 emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))
       ]).first;
@@ -79,7 +80,8 @@ class ContentService with Logging, ChangeNotifier {
                 highSignificanceLabel: '',
                 deleteConfirmationCancel: '',
                 deleteConfirmationConfirm: '',
-                emptyListMessage: ''),
+                emptyListMessage: '',
+                simulateAspectLabel: ''),
             addAspectWidget: AddAspectWidget(
                 emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))
       ]).first;
@@ -98,7 +100,8 @@ class ContentService with Logging, ChangeNotifier {
                 highSignificanceLabel: '',
                 deleteConfirmationCancel: '',
                 deleteConfirmationConfirm: '',
-                emptyListMessage: ''),
+                emptyListMessage: '',
+                simulateAspectLabel: ''),
             addAspectWidget: AddAspectWidget(
                 emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))
       ]).first;

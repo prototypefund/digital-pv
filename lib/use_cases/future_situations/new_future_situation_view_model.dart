@@ -8,7 +8,7 @@ import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
 class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
-  NewFutureSituationViewModel() : _contentService = getIt.get();
+  NewFutureSituationViewModel({required super.autofocus}) : _contentService = getIt.get();
 
   final ContentService _contentService;
 

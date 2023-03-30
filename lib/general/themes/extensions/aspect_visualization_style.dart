@@ -3,15 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> {
-  const AspectVisualizationStyle({
-    required this.sectionLabelStyle,
-    required this.tendencyLabelStyle,
-    required this.aspectEvaluationArrowStrokeWidth,
-    required this.aspectEvaluationArrowColor,
-    required this.treatmentGoalArrowStrokeWidth,
-    required this.treatmentGoalArrowColor,
-    required this.aspectCircleGradient,
-  });
+  const AspectVisualizationStyle(
+      {required this.sectionLabelStyle,
+      required this.tendencyLabelStyle,
+      required this.aspectEvaluationArrowStrokeWidth,
+      required this.aspectEvaluationArrowColor,
+      required this.treatmentGoalArrowStrokeWidth,
+      required this.treatmentGoalArrowColor,
+      required this.activeAspectCircleGradient,
+      required this.inactiveAspectCircleGradient,
+      required this.backgroundColor});
 
   final TextStyle? sectionLabelStyle;
   final TextStyle? tendencyLabelStyle;
@@ -19,7 +20,9 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
   final Color? aspectEvaluationArrowColor;
   final double? treatmentGoalArrowStrokeWidth;
   final Color? treatmentGoalArrowColor;
-  final Gradient? aspectCircleGradient;
+  final Color? backgroundColor;
+  final Gradient? activeAspectCircleGradient;
+  final Gradient? inactiveAspectCircleGradient;
 
   @override
   AspectVisualizationStyle copyWith(
@@ -30,7 +33,9 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
       double? treatmentGoalArrowStrokeWidth,
       Color? treatmentGoalArrowColor,
       Color? aspectCircleColor,
-      Gradient? aspectCircleGradient}) {
+      Color? backgroundColor,
+      Gradient? activeAspectCircleGradient,
+      Gradient? inactiveAspectCircleGradient}) {
     return AspectVisualizationStyle(
         sectionLabelStyle: sectionLabelStyle ?? this.sectionLabelStyle,
         tendencyLabelStyle: tendencyLabelStyle ?? this.tendencyLabelStyle,
@@ -38,7 +43,9 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
         aspectEvaluationArrowColor: aspectEvaluationArrowColor ?? this.aspectEvaluationArrowColor,
         treatmentGoalArrowStrokeWidth: treatmentGoalArrowStrokeWidth ?? this.treatmentGoalArrowStrokeWidth,
         treatmentGoalArrowColor: treatmentGoalArrowColor ?? this.treatmentGoalArrowColor,
-        aspectCircleGradient: aspectCircleGradient ?? this.aspectCircleGradient);
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        activeAspectCircleGradient: activeAspectCircleGradient ?? this.activeAspectCircleGradient,
+        inactiveAspectCircleGradient: inactiveAspectCircleGradient ?? this.inactiveAspectCircleGradient);
   }
 
   @override
@@ -54,12 +61,14 @@ class AspectVisualizationStyle extends ThemeExtension<AspectVisualizationStyle> 
       aspectEvaluationArrowColor: Color.lerp(aspectEvaluationArrowColor, other.aspectEvaluationArrowColor, t),
       treatmentGoalArrowStrokeWidth: lerpDouble(treatmentGoalArrowStrokeWidth, other.treatmentGoalArrowStrokeWidth, t),
       treatmentGoalArrowColor: Color.lerp(treatmentGoalArrowColor, other.treatmentGoalArrowColor, t),
-      aspectCircleGradient: Gradient.lerp(aspectCircleGradient, other.aspectCircleGradient, t),
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      activeAspectCircleGradient: Gradient.lerp(activeAspectCircleGradient, other.activeAspectCircleGradient, t),
+      inactiveAspectCircleGradient: Gradient.lerp(inactiveAspectCircleGradient, other.inactiveAspectCircleGradient, t),
     );
   }
 
   @override
   String toString() {
-    return 'AspectVisualizationStyle{sectionLabelStyle: $sectionLabelStyle, tendencyLabelStyle: $tendencyLabelStyle}';
+    return 'AspectVisualizationStyle{sectionLabelStyle: $sectionLabelStyle, tendencyLabelStyle: $tendencyLabelStyle, aspectEvaluationArrowStrokeWidth: $aspectEvaluationArrowStrokeWidth, aspectEvaluationArrowColor: $aspectEvaluationArrowColor, treatmentGoalArrowStrokeWidth: $treatmentGoalArrowStrokeWidth, treatmentGoalArrowColor: $treatmentGoalArrowColor, backgroundColor: $backgroundColor, activeAspectCircleGradient: $activeAspectCircleGradient, inactiveAspectCircleGradient: $inactiveAspectCircleGradient}';
   }
 }

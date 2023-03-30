@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
@@ -10,6 +11,7 @@ import 'package:pd_app/general/model/treatment_goal.dart';
 part 'patient_directive.g.dart';
 
 @JsonSerializable()
+@CopyWith()
 class PatientDirective {
   PatientDirective(
       {required this.positiveAspects,
@@ -38,8 +40,19 @@ class PatientDirective {
     return _generalTreatmentGoal ?? TreatmentGoal(value: currentAspectsScore);
   }
 
+  TreatmentGoal get simulatedGeneralTreatmentGoal {
+    return TreatmentGoal(value: generalTreatmentGoal.value - simulatedFutureAspectScore);
+  }
+
   set generalTreatmentGoal(TreatmentGoal newValue) {
     _generalTreatmentGoal = newValue;
+  }
+
+  double get simulatedFutureAspectScore {
+    final double simulatedFutureWeights =
+        futureSituationAspects.where((element) => element.simulateAspect).map((e) => e.weight.value).sum;
+
+    return simulatedFutureWeights;
   }
 
   ///
@@ -64,4 +77,16 @@ class PatientDirective {
   }
 
   Map<String, dynamic> toJson() => _$PatientDirectiveToJson(this);
+
+  FutureSituation? findFutureSituation({String? name}) {
+    return futureSituationAspects.firstWhereOrNull((element) => element.name == name);
+  }
+
+  Aspect? findPositiveAspect({String? name}) {
+    return positiveAspects.firstWhereOrNull((element) => element.name == name);
+  }
+
+  Aspect? findNegativeAspect({String? name}) {
+    return negativeAspects.firstWhereOrNull((element) => element.name == name);
+  }
 }

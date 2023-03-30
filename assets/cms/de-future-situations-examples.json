@@ -4,7 +4,11 @@
       "id": 13,
       "group": "Schwere Zustände",
       "title": "Intensivbehandlung unklarer Dauer nach akutem Ereignis",
-      "contextual_help": null
+      "contextual_help": {
+        "id": 1,
+        "title": "Was bedeutet das? ",
+        "content": "z.B. Infektion, Komplikationen bei/nach OP, akute Verschlechterung einer bestehenden Erkrankung"
+      }
     },
     "id": 13,
     "locale": "de"

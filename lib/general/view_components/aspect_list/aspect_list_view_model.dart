@@ -5,6 +5,7 @@ import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
+import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/logging.dart';
@@ -15,10 +16,16 @@ import 'package:pd_app/logging.dart';
 /// Manipulation of the patient directive is done directly by this model
 abstract class AspectListViewModel<AspectType extends Aspect>
     with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
-  AspectListViewModel({this.onAspectAdded, this.onAspectRemoved}) : _patientDirectiveService = getIt.get() {
+  AspectListViewModel(
+      {required this.scrollController, this.onAspectAdded, this.onAspectRemoved, required this.focusAspect})
+      : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
-    _updateAspectsFromService();
+    _updateAspectsFromService(sortAspects: true);
   }
+
+  bool _hasScrolledToFocusItem = false;
+
+  final ScrollController scrollController;
 
   /// can be used to manipulate the view to react to new aspects, for instance with animated lists
   ValueChanged<AspectType>? onAspectAdded;
@@ -31,6 +38,8 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   AspectListChoice<AspectType> get aspectListChoice;
 
   final PatientDirectiveService _patientDirectiveService;
+
+  final AspectType? focusAspect;
 
   bool get showTreatmentOptions;
 
@@ -46,6 +55,18 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
   String get removeAspectConfirmationRemove;
 
+  String get simulateLabel;
+
+  bool get isSimulateAspectEnabled;
+
+  double get listItemHeight {
+    if (showTreatmentOptions) {
+      return Sizes.aspectListItemWithTreatmentOptionsHeight;
+    } else {
+      return Sizes.aspectListItemWithoutTreatmentOptionsHeight;
+    }
+  }
+
   VoidCallback? addAspectCallToActionPressed(BuildContext context) =>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
 
@@ -57,14 +78,14 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChange);
   }
 
-  void _updateAspectsFromService() {
+  void _updateAspectsFromService({required bool sortAspects}) {
     final currentPatientDirective = _patientDirectiveService.currentPatientDirective;
 
     final oldAspects = _aspects;
     final allAspectsFromDirective = List.of(aspectListChoice(currentPatientDirective));
 
     final removedAspects = oldAspects.toSet().difference(allAspectsFromDirective.toSet());
-    logger.d('handling ${removedAspects.length} removed aspects');
+    logger.v('handling ${removedAspects.length} removed aspects');
     for (final aspect in removedAspects) {
       onAspectRemoved?.call(aspect);
       _aspects.remove(aspect);
@@ -72,22 +93,54 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
     _aspects = allAspectsFromDirective;
 
-    _sortAspects();
+    if (sortAspects) {
+      _sortAspects();
+    } else {
+      /// we get updates by the service all the time when adapting weights, but only want
+      /// to reorder the animated list once adjusting the weights is complete
+
+      _sortAspectsAccordingToOldOrder(oldAspects);
+    }
 
     final newAspects = _aspects.toSet().difference(oldAspects.toSet());
-    logger.d('handling ${newAspects.length} new aspects');
+    logger.v('handling ${newAspects.length} new aspects');
     for (final aspect in newAspects) {
       onAspectAdded?.call(aspect);
     }
+
+    final focusAspect = this.focusAspect;
+    if (aspects.isNotEmpty && !_hasScrolledToFocusItem && focusAspect != null) {
+      _hasScrolledToFocusItem = true;
+
+      _performScrollToAspect(focusAspect);
+    }
+  }
+
+  Future<void> _performScrollToAspect(AspectType focusAspect) async {
+    logger.d('will scroll to $focusAspect, but first waiting 300 ms');
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+    final indexOfFocusItem = aspects.indexOf(focusAspect);
+    final offset = listItemHeight * indexOfFocusItem;
+    logger.d('start scrolling to $focusAspect at offset $offset');
+    scrollController.jumpTo(offset);
+    logger.d('scrolling to $focusAspect DONE');
+  }
+
+  void toggleSimulation({required AspectType aspect}) {
+    logger.w('toggling simulation not implemented in base class - noop');
   }
 
   void _reactToPatientDirectiveChange() {
     logger.v('aspect list reacting to patient directive change');
     final List<AspectType> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
+    final bool sortAspects;
     if (aspectsInService.length != _aspects.length) {
       logger.i("an aspect was removed or added, refreshing view's list of elements and sorting them anew");
-      _updateAspectsFromService();
+      sortAspects = true;
+    } else {
+      sortAspects = false;
     }
+    _updateAspectsFromService(sortAspects: sortAspects);
     notifyListeners();
   }
 
@@ -144,6 +197,10 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
   void _sortAspects() {
     _aspects.sort((aspect1, aspect2) => aspect2.weight.value.compareTo(aspect1.weight.value));
+  }
+
+  void _sortAspectsAccordingToOldOrder(List<AspectType> oldOrder) {
+    _aspects.sort((aspect1, aspect2) => oldOrder.indexOf(aspect1).compareTo(oldOrder.indexOf(aspect2)));
   }
 }
 
