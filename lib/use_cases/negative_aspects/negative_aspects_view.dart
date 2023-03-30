@@ -28,9 +28,7 @@ class NegativeAspects extends StatelessWidget {
             content: context.select((NegativeAspectsViewModel viewModel) => viewModel.pageContent).intro ?? ''),
         ChangeNotifierProvider.value(
             value: context.select((NegativeAspectsViewModel viewModel) => viewModel.negativeAspectsListViewModel),
-            child: AspectList(
-              scrollController: viewModel.scrollController,
-            )),
+            child: AspectList()),
         const SizedBox(
           height: 20,
         ),

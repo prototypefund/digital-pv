@@ -19,7 +19,6 @@ class PositiveAspects extends StatelessWidget with Logging {
 
   @override
   Widget build(BuildContext context) {
-    final PositiveAspectsViewModel viewModel = context.watch();
     return CreationProcessNavigation<PositiveAspectsViewModel>(
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,9 +27,7 @@ class PositiveAspects extends StatelessWidget with Logging {
               content: context.select((PositiveAspectsViewModel viewModel) => viewModel.pageContent).intro ?? ''),
           ChangeNotifierProvider.value(
               value: context.select((PositiveAspectsViewModel viewModel) => viewModel.positiveAspectListViewModel),
-              child: AspectList(
-                scrollController: viewModel.scrollController,
-              )),
+              child: AspectList()),
           const SizedBox(
             height: 20,
           ),

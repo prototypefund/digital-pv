@@ -9,9 +9,7 @@ import 'package:provider/provider.dart';
 class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
 
-  AspectList({super.key, required this.scrollController});
-
-  final ScrollController scrollController;
+  AspectList({super.key});
 
   @override
   Widget build(BuildContext context) {
