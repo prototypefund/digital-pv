@@ -80,15 +80,15 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
   }
 
   void onFutureAspectTapped(BuildContext context, FutureSituation aspect) {
-    context.go(Routes.buildShowFutureSituationsRoute(highlightedSituation: aspect));
+    context.go(buildShowFutureSituationsRoute(paramValue: aspect.name));
   }
 
   void onPositiveAspectTapped(BuildContext context, Aspect aspect) {
-    context.go(Routes.buildShowPositiveAspectRoute(highlightedSituation: aspect));
+    context.go(buildShowPositiveAspectRoute(paramValue: aspect.name));
   }
 
   void onNegativeAspectTapped(BuildContext context, Aspect aspect) {
-    context.go(Routes.buildShowNegativeAspectRoute(highlightedSituation: aspect));
+    context.go(buildShowNegativeAspectRoute(paramValue: aspect.name));
   }
 
   @override

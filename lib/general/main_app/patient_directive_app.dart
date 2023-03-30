@@ -47,9 +47,9 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
                 buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
           ),
           GoRoute(
-            path: Routes.positiveAspects,
+            path: Routes.positiveAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final String? focusSituationName = state.queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findPositiveAspect(name: focusSituationName);
@@ -61,9 +61,9 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
             },
           ),
           GoRoute(
-            path: Routes.negativeAspects,
+            path: Routes.negativeAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final String? focusSituationName = state.queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findNegativeAspect(name: focusSituationName);
@@ -91,9 +91,9 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
                 context: context, state: state, child: TreatmentActivities.page()),
           ),
           GoRoute(
-            path: Routes.futureSituations,
+            path: Routes.futureSituations.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final String? focusSituationName = state.queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findFutureSituation(name: focusSituationName);

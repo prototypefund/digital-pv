@@ -76,4 +76,15 @@ class StubCreationProcessNavigationViewModel
 
   @override
   bool get simulateFutureAspects => false;
+
+  @override
+  int currentStep(BuildContext context) {
+    // TODO: implement currentStep
+    throw UnimplementedError();
+  }
+
+  @override
+  void onStepContinue(BuildContext context, int index) {
+    // TODO: implement onStepContinue
+  }
 }

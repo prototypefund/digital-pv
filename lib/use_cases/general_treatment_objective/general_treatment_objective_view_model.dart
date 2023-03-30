@@ -1,6 +1,7 @@
 import "dart:math" as math;
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/dynamic_content/components/contextual_help.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_goal_page.dart';
@@ -11,7 +12,6 @@ import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/view_components/directive_visualization/circular_quadrant_directions.dart';
 import 'package:pd_app/logging.dart';
-import 'package:go_router/go_router.dart';
 
 class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewModel
     with Logging, CircularQuadrantDirections {

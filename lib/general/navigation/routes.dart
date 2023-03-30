@@ -16,6 +16,8 @@ enum Routes {
   pdf,
 }
 
+const focusParam = 'focus';
+
 int currentRouteIndex(BuildContext context) =>
     Routes.values.indexWhere((element) => element.path == GoRouter.of(context).location);
 
@@ -32,6 +34,15 @@ Routes previousRoute(BuildContext context) {
   }
   return Routes.values[currentRouteIndex(context) - 1];
 }
+
+String buildShowFutureSituationsRoute({required String paramValue}) =>
+    '${Routes.futureSituations.path}?$focusParam=$paramValue';
+
+String buildShowPositiveAspectRoute({required String paramValue}) =>
+    '${Routes.positiveAspects.path}?$focusParam=$paramValue';
+
+String buildShowNegativeAspectRoute({required String paramValue}) =>
+    '${Routes.negativeAspects}?$focusParam=$paramValue';
 
 extension RouteExtension on Routes {
   static const patientDirective = 'patientDirective/';
