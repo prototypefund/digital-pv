@@ -63,18 +63,15 @@ class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation>
 
   @override
   void toggleSimulation({required FutureSituation aspect}) {
-    logger.d('toggle simulation property of future situation $aspect');
+  logger.d('toggle simulation property of future situation $aspect');
 
-    final currentDirective = _patientDirectiveService.currentPatientDirective;
-    final index = currentDirective.futureSituationAspects.indexWhere((element) => element == aspect);
-    final situationFromDirective = currentDirective.futureSituationAspects[index];
+  final currentDirective = _patientDirectiveService.currentPatientDirective;
+  final index = currentDirective.futureSituationAspects.indexWhere((element) => element == aspect);
 
-    final updatedSituation = situationFromDirective.copyWith(simulateAspect: !situationFromDirective.simulateAspect);
+  final updatedFutureSituations = List<FutureSituation>.from(currentDirective.futureSituationAspects);
+  updatedFutureSituations[index] = aspect.copyWith(simulateAspect: !aspect.simulateAspect);
 
-    final updatedFutureSituations = List<FutureSituation>.from(currentDirective.futureSituationAspects);
-    updatedFutureSituations[index] = updatedSituation;
-
-    final updatedDirective = currentDirective.copyWith(futureSituationAspects: updatedFutureSituations);
-    _patientDirectiveService.currentPatientDirective = updatedDirective;
+  final updatedDirective = currentDirective.copyWith(futureSituationAspects: updatedFutureSituations);
+  _patientDirectiveService.currentPatientDirective = updatedDirective;
   }
 }
