@@ -79,26 +79,14 @@ class PatientDirective {
   Map<String, dynamic> toJson() => _$PatientDirectiveToJson(this);
 
   FutureSituation? findFutureSituation({String? name}) {
-    try {
-      return futureSituationAspects.firstWhere((element) => element.name == name);
-    } catch (_) {
-      return null;
-    }
+    return futureSituationAspects.firstWhereOrNull((element) => element.name == name);
   }
 
   Aspect? findPositiveAspect({String? name}) {
-    try {
-      return positiveAspects.firstWhere((element) => element.name == name);
-    } catch (_) {
-      return null;
-    }
+    return positiveAspects.firstWhereOrNull((element) => element.name == name);
   }
 
   Aspect? findNegativeAspect({String? name}) {
-    try {
-      return negativeAspects.firstWhere((element) => element.name == name);
-    } catch (_) {
-      return null;
-    }
+    return negativeAspects.firstWhereOrNull((element) => element.name == name);
   }
 }
