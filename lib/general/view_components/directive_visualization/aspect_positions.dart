@@ -11,16 +11,16 @@ class AspectPositions {
   AspectPositions({required this.aspects, required this.sector});
 
   List<AspectVisualizationInformation> get listOfAspectVisualizationInformation {
-return aspects.asMap().entries.map((entry) {
-    final aspect = entry.value;
-    final bool active = (aspect is AspectWithSimulation) ? aspect.simulateAspect : true;
+    return aspects.asMap().entries.map((entry) {
+      final aspect = entry.value;
+      final bool active = !((aspect is AspectWithSimulation) && (aspect as AspectWithSimulation).simulateAspect);
 
-    return AspectVisualizationInformation(
-      coordinate: _listOfCoordinates[entry.key],
-      weight: aspect.weight,
-      active: active,
-    );
-  }).toList();
+      return AspectVisualizationInformation(
+        coordinate: _listOfCoordinates[entry.key],
+        weight: aspect.weight,
+        active: active,
+      );
+    }).toList();
   }
 
   List<Coordinate> get _listOfCoordinates {
