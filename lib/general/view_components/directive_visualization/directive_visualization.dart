@@ -47,6 +47,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
     final inactiveAspectCircleGradient =
         Theme.of(context).extension<AspectVisualizationStyle>()!.inactiveAspectCircleGradient ??
             const RadialGradient(colors: [Colors.white, Colors.black]);
+    final compassBackground = Theme.of(context).extension<AspectVisualizationStyle>()!.backgroundColor ?? Colors.white;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -55,10 +56,13 @@ class DirectiveVisualization extends StatelessWidget with Logging {
         Flexible(
           child: Stack(
             children: [
-              AspectRatio(
-                aspectRatio: 1,
-                child: SvgPicture.asset(
-                  viewModel.evaluationImageBackground,
+              Container(
+                decoration: BoxDecoration(color: compassBackground, shape: BoxShape.circle),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: SvgPicture.asset(
+                    viewModel.evaluationImageBackground,
+                  ),
                 ),
               ),
               if (viewModel.showLabels)

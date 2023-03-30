@@ -72,6 +72,7 @@ class Themes {
               underlineColor: Colors.deepPurpleAccent,
               underlineHeight: 2.sp),
           AspectVisualizationStyle(
+            backgroundColor: Colors.white,
             sectionLabelStyle:
                 const TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.bold, height: 1),
             tendencyLabelStyle: const TextStyle(
