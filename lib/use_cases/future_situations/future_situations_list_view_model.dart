@@ -8,7 +8,8 @@ import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_mode
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 
 class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation> {
-  FutureSituationsListViewModel() {
+  FutureSituationsListViewModel({required super.focusAspect, required super.scrollController}) {
+    logger.d('build future situation list with focus aspect $focusAspect');
     _contentService.addListener(notifyListeners);
   }
 

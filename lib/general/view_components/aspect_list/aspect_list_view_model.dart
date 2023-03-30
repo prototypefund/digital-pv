@@ -5,6 +5,7 @@ import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
+import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/logging.dart';
@@ -15,10 +16,16 @@ import 'package:pd_app/logging.dart';
 /// Manipulation of the patient directive is done directly by this model
 abstract class AspectListViewModel<AspectType extends Aspect>
     with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
-  AspectListViewModel({this.onAspectAdded, this.onAspectRemoved}) : _patientDirectiveService = getIt.get() {
+  AspectListViewModel(
+      {required this.scrollController, this.onAspectAdded, this.onAspectRemoved, required this.focusAspect})
+      : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService(sortAspects: true);
   }
+
+  bool _hasScrolledToFocusItem = false;
+
+  final ScrollController scrollController;
 
   /// can be used to manipulate the view to react to new aspects, for instance with animated lists
   ValueChanged<AspectType>? onAspectAdded;
@@ -31,6 +38,8 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   AspectListChoice<AspectType> get aspectListChoice;
 
   final PatientDirectiveService _patientDirectiveService;
+
+  final AspectType? focusAspect;
 
   bool get showTreatmentOptions;
 
@@ -49,6 +58,14 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   String get simulateLabel;
 
   bool get isSimulateAspectEnabled;
+
+  double get listItemHeight {
+    if (showTreatmentOptions) {
+      return Sizes.aspectListItemWithTreatmentOptionsHeight;
+    } else {
+      return Sizes.aspectListItemWithoutTreatmentOptionsHeight;
+    }
+  }
 
   VoidCallback? addAspectCallToActionPressed(BuildContext context) =>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
@@ -90,6 +107,23 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     for (final aspect in newAspects) {
       onAspectAdded?.call(aspect);
     }
+
+    final focusAspect = this.focusAspect;
+    if (aspects.isNotEmpty && !_hasScrolledToFocusItem && focusAspect != null) {
+      _hasScrolledToFocusItem = true;
+
+      _performScrollToAspect(focusAspect);
+    }
+  }
+
+  Future<void> _performScrollToAspect(AspectType focusAspect) async {
+    logger.d('will scroll to $focusAspect, but first waiting 300 ms');
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+    final indexOfFocusItem = aspects.indexOf(focusAspect);
+    final offset = listItemHeight * indexOfFocusItem;
+    logger.d('start scrolling to $focusAspect at offset $offset');
+    scrollController.jumpTo(offset);
+    logger.d('scrolling to $focusAspect DONE');
   }
 
   void toggleSimulation({required AspectType aspect}) {

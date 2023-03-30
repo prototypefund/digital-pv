@@ -58,11 +58,14 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
   Widget buildListItem(BuildContext context, int index, Animation<double> animation) {
     final AspectListViewModel<AspectType> viewModel = context.watch();
     final AspectType aspect = viewModel.aspects[index];
-    return Padding(
-      key: Key(aspect.name),
-      padding: Paddings.listElementPadding,
-      child:
-          _buildListItem(animation: animation, aspect: aspect, viewModel: viewModel, interactive: true, index: index),
+    return SizedBox(
+      height: viewModel.listItemHeight,
+      child: Padding(
+        key: Key(aspect.name),
+        padding: Paddings.listElementPadding,
+        child:
+            _buildListItem(animation: animation, aspect: aspect, viewModel: viewModel, interactive: true, index: index),
+      ),
     );
   }
 

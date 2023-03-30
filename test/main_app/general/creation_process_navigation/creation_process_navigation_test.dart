@@ -70,4 +70,10 @@ class StubCreationProcessNavigationViewModel
 
   @override
   bool get nextButtonShowArrow => true;
+
+  @override
+  ScrollController get scrollController => ScrollController();
+
+  @override
+  bool get simulateFutureAspects => false;
 }

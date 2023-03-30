@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
+import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect.dart';
 import 'package:pd_app/logging.dart';
@@ -11,8 +12,9 @@ import 'package:provider/provider.dart';
 class PositiveAspects extends StatelessWidget with Logging {
   PositiveAspects({super.key});
 
-  static Widget page() {
-    return ChangeNotifierProvider(create: (_) => PositiveAspectsViewModel(), child: PositiveAspects());
+  static Widget page({required Aspect? focusAspect}) {
+    return ChangeNotifierProvider(
+        create: (_) => PositiveAspectsViewModel(focusAspect: focusAspect), child: PositiveAspects());
   }
 
   @override

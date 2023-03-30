@@ -7,20 +7,27 @@ import 'package:pd_app/general/view_components/directive_visualization/sector.da
 class AspectPositions {
   final List<Aspect> aspects;
   final Sector sector;
+  final bool simulateFutureAspects;
 
-  AspectPositions({required this.aspects, required this.sector});
+  AspectPositions({required this.aspects, required this.sector, required this.simulateFutureAspects});
 
   List<AspectVisualizationInformation> get listOfAspectVisualizationInformation {
-    return aspects.asMap().entries.map((entry) {
-      final aspect = entry.value;
-      final bool active = !((aspect is AspectWithSimulation) && (aspect as AspectWithSimulation).simulateAspect);
+return aspects.asMap().entries.map((entry) {
+    final aspect = entry.value;
+    final bool active;
+    if (aspect is AspectWithSimulation) {
+      active = simulateFutureAspects && (aspect as AspectWithSimulation).simulateAspect;
+    } else {
+      active = true;
+    }
 
-      return AspectVisualizationInformation(
-        coordinate: _listOfCoordinates[entry.key],
-        weight: aspect.weight,
-        active: active,
-      );
-    }).toList();
+    return AspectVisualizationInformation(
+      aspect: aspect,
+      coordinate: _listOfCoordinates[entry.key],
+      weight: aspect.weight,
+      active: active,
+    );
+  }).toList();
   }
 
   List<Coordinate> get _listOfCoordinates {
@@ -101,11 +108,13 @@ class AspectVisualizationInformation {
   final Coordinate coordinate;
   final Weight weight;
   final bool active;
+  final Aspect aspect;
 
-  const AspectVisualizationInformation({required this.coordinate, required this.weight, required this.active});
+  const AspectVisualizationInformation(
+      {required this.aspect, required this.coordinate, required this.weight, required this.active});
 
   @override
   String toString() {
-    return 'AspectVisualizationInformation: coordinate = $coordinate, weight = $weight, active = $active';
+    return 'AspectVisualizationInformation: coordinate = $coordinate, weight = $weight, active = $active, aspect = $aspect';
   }
 }

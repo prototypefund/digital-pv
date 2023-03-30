@@ -77,4 +77,16 @@ class PatientDirective {
   }
 
   Map<String, dynamic> toJson() => _$PatientDirectiveToJson(this);
+
+  FutureSituation? findFutureSituation({String? name}) {
+    return futureSituationAspects.firstWhereOrNull((element) => element.name == name);
+  }
+
+  Aspect? findPositiveAspect({String? name}) {
+    return positiveAspects.firstWhereOrNull((element) => element.name == name);
+  }
+
+  Aspect? findNegativeAspect({String? name}) {
+    return negativeAspects.firstWhereOrNull((element) => element.name == name);
+  }
 }

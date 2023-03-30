@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pd_app/general/model/future_situation.dart';
 // ignore: unused_import
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
@@ -18,9 +20,15 @@ class DirectiveVisualization extends StatelessWidget with Logging {
   final ValueChanged<double>? onDragAndRotate;
 
   static Widget widgetWithViewModel(
-          {required bool showLabels, required bool showTreatmentGoal, ValueChanged<double>? onDragAndRotate}) =>
+          {required bool showLabels,
+          required bool showTreatmentGoal,
+          ValueChanged<double>? onDragAndRotate,
+          required bool simulateFutureAspects}) =>
       ChangeNotifierProvider(
-          create: (_) => DirectiveVisualizationViewModel(showLabels: showLabels, showTreatmentGoal: showTreatmentGoal),
+          create: (_) => DirectiveVisualizationViewModel(
+              showLabels: showLabels,
+              showTreatmentGoal: showTreatmentGoal,
+              simulateFutureAspects: simulateFutureAspects),
           child: DirectiveVisualization(
             onDragAndRotate: onDragAndRotate,
           ));
@@ -45,6 +53,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
     final inactiveAspectCircleGradient =
         Theme.of(context).extension<AspectVisualizationStyle>()!.inactiveAspectCircleGradient ??
             const RadialGradient(colors: [Colors.white, Colors.black]);
+    final compassBackground = Theme.of(context).extension<AspectVisualizationStyle>()!.backgroundColor ?? Colors.white;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -53,7 +62,15 @@ class DirectiveVisualization extends StatelessWidget with Logging {
         Flexible(
           child: Stack(
             children: [
-              Image.asset(viewModel.evaluationImageBackground),
+              Container(
+                decoration: BoxDecoration(color: compassBackground, shape: BoxShape.circle),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: SvgPicture.asset(
+                    viewModel.evaluationImageBackground,
+                  ),
+                ),
+              ),
               if (viewModel.showLabels)
                 Positioned.fill(
                   child: LayoutBuilder(
@@ -176,7 +193,9 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   aspects: viewModel.positiveAspects,
                   angleForVisualisation: viewModel.aspectEvaluationArrowRotation,
                   activeAspectCircleGradient: activeAspectCircleGradient,
+                  simulateFutureAspects: viewModel.simulateFutureAspects,
                   inactiveAspectCircleGradient: inactiveAspectCircleGradient,
+                  onAspectTapped: (aspect) => viewModel.onPositiveAspectTapped(context, aspect),
                 ),
               ),
 
@@ -187,8 +206,10 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   child: AspectsVisualization(
                     aspects: viewModel.negativeAspects,
                     angleForVisualisation: math.pi - viewModel.aspectEvaluationArrowRotation,
+                    simulateFutureAspects: viewModel.simulateFutureAspects,
                     activeAspectCircleGradient: activeAspectCircleGradient,
                     inactiveAspectCircleGradient: inactiveAspectCircleGradient,
+                    onAspectTapped: (aspect) => viewModel.onNegativeAspectTapped(context, aspect),
                   ),
                 ),
               ),
@@ -201,7 +222,9 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                     aspects: viewModel.futureAspects,
                     angleForVisualisation: math.pi,
                     activeAspectCircleGradient: activeAspectCircleGradient,
+                    simulateFutureAspects: viewModel.simulateFutureAspects,
                     inactiveAspectCircleGradient: inactiveAspectCircleGradient,
+                    onAspectTapped: (aspect) => viewModel.onFutureAspectTapped(context, aspect as FutureSituation),
                   ),
                 ),
               ),
@@ -220,7 +243,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
   }
 }
 
-class AspectVisualizationOverlayArrow extends StatelessWidget {
+class AspectVisualizationOverlayArrow extends StatelessWidget with Logging {
   const AspectVisualizationOverlayArrow(
       {super.key, required this.rotation, required this.strokeWidth, required this.color});
 
@@ -231,7 +254,8 @@ class AspectVisualizationOverlayArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final arrowScaleFactor = constraints.maxWidth / Constraints.aspectVisualizationConstraints.maxWidth;
+      logger.v('building scaled arrow with constraints $constraints');
+      final arrowScaleFactor = (constraints.maxWidth) / Constraints.aspectVisualizationConstraints.maxWidth;
 
       return Transform.rotate(
         angle: rotation,

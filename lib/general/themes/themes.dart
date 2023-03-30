@@ -72,6 +72,7 @@ class Themes {
               underlineColor: Colors.deepPurpleAccent,
               underlineHeight: 2.sp),
           AspectVisualizationStyle(
+            backgroundColor: Colors.white,
             sectionLabelStyle:
                 const TextStyle(color: DefaultThemeColors.purple, fontSize: 14, fontWeight: FontWeight.bold, height: 1),
             tendencyLabelStyle: const TextStyle(
@@ -81,12 +82,12 @@ class Themes {
             treatmentGoalArrowStrokeWidth: 12,
             treatmentGoalArrowColor: Colors.red,
             activeAspectCircleGradient: RadialGradient(
-              center: Alignment.topLeft,
+              center: Alignment.center,
               radius: 1,
-              colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.purple.withOpacity(0.5)],
+              colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.purple],
             ),
             inactiveAspectCircleGradient: RadialGradient(
-              center: Alignment.topLeft,
+              center: Alignment.center,
               radius: 1,
               colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.grey.withOpacity(0.2)],
             ),

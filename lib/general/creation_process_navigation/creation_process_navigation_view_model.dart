@@ -9,6 +9,8 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
 
   bool get nextButtonShowArrow => true;
 
+  final ScrollController scrollController = ScrollController();
+
   void onBackButtonPressed(BuildContext context) {
     if (Navigator.of(context).canPop()) {
       context.pop();
@@ -28,6 +30,8 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization;
 
   bool get showFloatingAspectVisualizationIfSpaceAvailable => false;
+
+  bool get simulateFutureAspects => false;
 
   bool get showTreatmentGoalInVisualization;
 }
