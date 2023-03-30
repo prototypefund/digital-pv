@@ -8,7 +8,8 @@
       "delete_confirmation_confirm": "Delete negative aspect",
       "low_significance_label": "Low Significance",
       "high_significance_label": "High Significance",
-      "empty_list_message": "No negative aspects have been indicated yet"
+      "empty_list_message": "No negative aspects have been indicated yet",
+      "simulate_aspect_label": null
     },
     "addAspectWidget": {
       "empty_textfield_hint": "Negative Aspect",

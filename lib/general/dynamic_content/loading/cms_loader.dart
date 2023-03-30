@@ -96,12 +96,19 @@ class CMSLoader with Logging {
   }
 
   Future<Uint8List> downloadMediaUri(Uri uri) async {
-    final headers = {"authorization": "Bearer $apiToken"};
+    final bool isAwsUri = uri.toString().contains('amazonaws.com');
 
-    final requestUri = Uri(
-        path: uri.path, scheme: cmsConfig.baseUri.scheme, host: cmsConfig.baseUri.host, port: cmsConfig.baseUri.port);
-
-    logger.d('requesting image $uri');
+    final Uri requestUri;
+    final Map<String, String> headers;
+    if (isAwsUri) {
+      requestUri = uri;
+      headers = {};
+    } else {
+      headers = {"authorization": "Bearer $apiToken"};
+      requestUri = Uri(
+          path: uri.path, scheme: cmsConfig.baseUri.scheme, host: cmsConfig.baseUri.host, port: cmsConfig.baseUri.port);
+    }
+    logger.d('requesting image $requestUri');
     final response = await http.get(requestUri, headers: headers);
 
     logger.d('got response status code ${response.statusCode} for uri $uri');

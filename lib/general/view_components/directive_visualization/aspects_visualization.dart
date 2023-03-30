@@ -9,12 +9,14 @@ class AspectsVisualization extends StatelessWidget {
   const AspectsVisualization({
     required this.aspects,
     required this.angleForVisualisation,
-    required this.aspectCircleGradient,
+    required this.activeAspectCircleGradient,
+    required this.inactiveAspectCircleGradient,
   });
 
   final List<Aspect> aspects;
   final double angleForVisualisation;
-  final Gradient aspectCircleGradient;
+  final Gradient activeAspectCircleGradient;
+  final Gradient inactiveAspectCircleGradient;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class AspectsVisualization extends StatelessWidget {
                   coordinate: visualizationInformaion.coordinate,
                   // TODO: remove hardcoded factors and explain how to use them
                   radius: (visualizationInformaion.weight.value + 0.9) * 13 * radiusScaleFactor,
-                  gradient: aspectCircleGradient,
+                  gradient: visualizationInformaion.active ? activeAspectCircleGradient : inactiveAspectCircleGradient,
                 ),
               ),
             )

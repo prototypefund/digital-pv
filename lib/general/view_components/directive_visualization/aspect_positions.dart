@@ -1,4 +1,5 @@
 import 'package:pd_app/general/model/aspect.dart';
+import 'package:pd_app/general/model/aspect_with_simulation.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/view_components/directive_visualization/coordinate.dart';
 import 'package:pd_app/general/view_components/directive_visualization/sector.dart';
@@ -10,12 +11,16 @@ class AspectPositions {
   AspectPositions({required this.aspects, required this.sector});
 
   List<AspectVisualizationInformation> get listOfAspectVisualizationInformation {
-    final List<AspectVisualizationInformation> list = [];
-    for (int i = 0; i < aspects.length; i++) {
-      list.add(AspectVisualizationInformation(coordinate: _listOfCoordinates[i], weight: aspects[i].weight));
-    }
+    return aspects.asMap().entries.map((entry) {
+      final aspect = entry.value;
+      final bool active = !((aspect is AspectWithSimulation) && (aspect as AspectWithSimulation).simulateAspect);
 
-    return list;
+      return AspectVisualizationInformation(
+        coordinate: _listOfCoordinates[entry.key],
+        weight: aspect.weight,
+        active: active,
+      );
+    }).toList();
   }
 
   List<Coordinate> get _listOfCoordinates {
@@ -95,11 +100,12 @@ class AspectPositions {
 class AspectVisualizationInformation {
   final Coordinate coordinate;
   final Weight weight;
+  final bool active;
 
-  const AspectVisualizationInformation({required this.coordinate, required this.weight});
+  const AspectVisualizationInformation({required this.coordinate, required this.weight, required this.active});
 
   @override
   String toString() {
-    return 'AspectVisualizationInformation: coordinate = $coordinate, weight = $weight';
+    return 'AspectVisualizationInformation: coordinate = $coordinate, weight = $weight, active = $active';
   }
 }

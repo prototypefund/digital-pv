@@ -8,7 +8,8 @@
       "delete_confirmation_confirm": "Zukünftige Situation entfernen",
       "low_significance_label": "Geringe Bedeutung",
       "high_significance_label": "Hohe Bedeutung",
-      "empty_list_message": "Bisher wurden noch keine zukünftigen Situationen angegeben"
+      "empty_list_message": "Bisher wurden noch keine zukünftigen Situationen angegeben",
+      "simulate_aspect_label": "Situation simulieren"
     },
     "addAspectWidget": {
       "empty_textfield_hint": "Zukünftige Situation",

@@ -17,7 +17,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     with Logging, RootContextL10N, ChangeNotifier, AspectViewModel {
   AspectListViewModel({this.onAspectAdded, this.onAspectRemoved}) : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
-    _updateAspectsFromService();
+    _updateAspectsFromService(sortAspects: true);
   }
 
   /// can be used to manipulate the view to react to new aspects, for instance with animated lists
@@ -46,6 +46,10 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
   String get removeAspectConfirmationRemove;
 
+  String get simulateLabel;
+
+  bool get isSimulateAspectEnabled;
+
   VoidCallback? addAspectCallToActionPressed(BuildContext context) =>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
 
@@ -57,14 +61,14 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     _patientDirectiveService.removeListener(_reactToPatientDirectiveChange);
   }
 
-  void _updateAspectsFromService() {
+  void _updateAspectsFromService({required bool sortAspects}) {
     final currentPatientDirective = _patientDirectiveService.currentPatientDirective;
 
     final oldAspects = _aspects;
     final allAspectsFromDirective = List.of(aspectListChoice(currentPatientDirective));
 
     final removedAspects = oldAspects.toSet().difference(allAspectsFromDirective.toSet());
-    logger.d('handling ${removedAspects.length} removed aspects');
+    logger.v('handling ${removedAspects.length} removed aspects');
     for (final aspect in removedAspects) {
       onAspectRemoved?.call(aspect);
       _aspects.remove(aspect);
@@ -72,22 +76,37 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
     _aspects = allAspectsFromDirective;
 
-    _sortAspects();
+    if (sortAspects) {
+      _sortAspects();
+    } else {
+      /// we get updates by the service all the time when adapting weights, but only want
+      /// to reorder the animated list once adjusting the weights is complete
+
+      _sortAspectsAccordingToOldOrder(oldAspects);
+    }
 
     final newAspects = _aspects.toSet().difference(oldAspects.toSet());
-    logger.d('handling ${newAspects.length} new aspects');
+    logger.v('handling ${newAspects.length} new aspects');
     for (final aspect in newAspects) {
       onAspectAdded?.call(aspect);
     }
   }
 
+  void toggleSimulation({required AspectType aspect}) {
+    logger.w('toggling simulation not implemented in base class - noop');
+  }
+
   void _reactToPatientDirectiveChange() {
     logger.v('aspect list reacting to patient directive change');
     final List<AspectType> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
+    final bool sortAspects;
     if (aspectsInService.length != _aspects.length) {
       logger.i("an aspect was removed or added, refreshing view's list of elements and sorting them anew");
-      _updateAspectsFromService();
+      sortAspects = true;
+    } else {
+      sortAspects = false;
     }
+    _updateAspectsFromService(sortAspects: sortAspects);
     notifyListeners();
   }
 
@@ -144,6 +163,10 @@ abstract class AspectListViewModel<AspectType extends Aspect>
 
   void _sortAspects() {
     _aspects.sort((aspect1, aspect2) => aspect2.weight.value.compareTo(aspect1.weight.value));
+  }
+
+  void _sortAspectsAccordingToOldOrder(List<AspectType> oldOrder) {
+    _aspects.sort((aspect1, aspect2) => oldOrder.indexOf(aspect1).compareTo(oldOrder.indexOf(aspect2)));
   }
 }
 

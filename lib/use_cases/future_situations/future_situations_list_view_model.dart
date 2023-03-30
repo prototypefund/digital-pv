@@ -3,6 +3,7 @@ import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/services/content_service.dart';
+import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 
@@ -12,6 +13,8 @@ class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation>
   }
 
   final ContentService _contentService = getIt.get();
+
+  final PatientDirectiveService _patientDirectiveService = getIt.get();
 
   @override
   String get emptyAspectListsMessageText => _contentService.futureSituationsPage.aspectListWidget.emptyListMessage;
@@ -50,4 +53,24 @@ class FutureSituationsListViewModel extends AspectListViewModel<FutureSituation>
 
   @override
   String get aspectsSignificanceLowLabel => _contentService.futureSituationsPage.aspectListWidget.lowSignificanceLabel;
+
+  @override
+  bool get isSimulateAspectEnabled => true;
+
+  @override
+  String get simulateLabel => _contentService.futureSituationsPage.aspectListWidget.simulateAspectLabel ?? '';
+
+  @override
+  void toggleSimulation({required FutureSituation aspect}) {
+  logger.d('toggle simulation property of future situation $aspect');
+
+  final currentDirective = _patientDirectiveService.currentPatientDirective;
+  final index = currentDirective.futureSituationAspects.indexWhere((element) => element == aspect);
+
+  final updatedFutureSituations = List<FutureSituation>.from(currentDirective.futureSituationAspects);
+  updatedFutureSituations[index] = aspect.copyWith(simulateAspect: !aspect.simulateAspect);
+
+  final updatedDirective = currentDirective.copyWith(futureSituationAspects: updatedFutureSituations);
+  _patientDirectiveService.currentPatientDirective = updatedDirective;
+  }
 }
