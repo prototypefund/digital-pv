@@ -83,7 +83,7 @@ class Themes {
             activeAspectCircleGradient: RadialGradient(
               center: Alignment.center,
               radius: 1,
-              colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.purple.withOpacity(1)],
+              colors: [DefaultThemeColors.white.withOpacity(0.5), DefaultThemeColors.purple],
             ),
             inactiveAspectCircleGradient: RadialGradient(
               center: Alignment.center,
