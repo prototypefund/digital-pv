@@ -11,13 +11,15 @@ class AspectsVisualization extends StatelessWidget with Logging {
       required this.angleForVisualisation,
       required this.activeAspectCircleGradient,
       required this.inactiveAspectCircleGradient,
-      required this.onAspectTapped});
+      required this.onAspectTapped,
+      required this.simulateFutureAspects});
 
   final List<Aspect> aspects;
   final double angleForVisualisation;
   final Gradient activeAspectCircleGradient;
   final Gradient inactiveAspectCircleGradient;
   final ValueChanged<Aspect> onAspectTapped;
+  final bool simulateFutureAspects;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,8 @@ class AspectsVisualization extends StatelessWidget with Logging {
         final Sector aspectsSector = Sector(angle: angleForVisualisation, radius: constraints.maxWidth / 2);
 
         final List<AspectVisualizationInformation> aspectVisualizationInformation =
-            AspectPositions(aspects: aspects, sector: aspectsSector).listOfAspectVisualizationInformation;
+            AspectPositions(aspects: aspects, sector: aspectsSector, simulateFutureAspects: simulateFutureAspects)
+                .listOfAspectVisualizationInformation;
 
         final List<Widget> aspectCircles = aspectVisualizationInformation.map(
           (visualInformation) {

@@ -63,4 +63,7 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
 
   @override
   String get aspectsSignificanceLowLabel => _contentService.futureSituationsPage.addAspectWidget.lowSignificanceLabel;
+
+  @override
+  bool get simulateFutureAspects => true;
 }

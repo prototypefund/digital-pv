@@ -31,5 +31,7 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
 
   bool get showFloatingAspectVisualizationIfSpaceAvailable => false;
 
+  bool get simulateFutureAspects => false;
+
   bool get showTreatmentGoalInVisualization;
 }

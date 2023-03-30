@@ -11,7 +11,8 @@ import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/logging.dart';
 
 class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL10N {
-  DirectiveVisualizationViewModel({required this.showLabels, required this.showTreatmentGoal})
+  DirectiveVisualizationViewModel(
+      {required this.showLabels, required this.showTreatmentGoal, required this.simulateFutureAspects})
       : _patientDirectiveService = getIt.get() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChanges);
   }
@@ -21,6 +22,8 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
   final bool showLabels;
 
   final bool showTreatmentGoal;
+
+  final bool simulateFutureAspects;
 
   String get evaluationImageBackground => 'assets/images/compass.svg';
 
@@ -62,7 +65,12 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
   /// rotating by PI means pointing to the left (completely curative)
   ///
   double get treatmentGoalArrowRotation {
-    final treatmentGoalValue = _patientDirectiveService.currentPatientDirective.simulatedGeneralTreatmentGoal.value;
+    final double treatmentGoalValue;
+    if (simulateFutureAspects) {
+      treatmentGoalValue = _patientDirectiveService.currentPatientDirective.simulatedGeneralTreatmentGoal.value;
+    } else {
+      treatmentGoalValue = _patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value;
+    }
     // -1 = very palliative should become PI
     // +1 = very curative should become 0
     // 0 = equal should become PI / 2

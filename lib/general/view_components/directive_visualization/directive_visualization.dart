@@ -20,9 +20,15 @@ class DirectiveVisualization extends StatelessWidget with Logging {
   final ValueChanged<double>? onDragAndRotate;
 
   static Widget widgetWithViewModel(
-          {required bool showLabels, required bool showTreatmentGoal, ValueChanged<double>? onDragAndRotate}) =>
+          {required bool showLabels,
+          required bool showTreatmentGoal,
+          ValueChanged<double>? onDragAndRotate,
+          required bool simulateFutureAspects}) =>
       ChangeNotifierProvider(
-          create: (_) => DirectiveVisualizationViewModel(showLabels: showLabels, showTreatmentGoal: showTreatmentGoal),
+          create: (_) => DirectiveVisualizationViewModel(
+              showLabels: showLabels,
+              showTreatmentGoal: showTreatmentGoal,
+              simulateFutureAspects: simulateFutureAspects),
           child: DirectiveVisualization(
             onDragAndRotate: onDragAndRotate,
           ));
@@ -187,6 +193,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   aspects: viewModel.positiveAspects,
                   angleForVisualisation: viewModel.aspectEvaluationArrowRotation,
                   activeAspectCircleGradient: activeAspectCircleGradient,
+                  simulateFutureAspects: viewModel.simulateFutureAspects,
                   inactiveAspectCircleGradient: inactiveAspectCircleGradient,
                   onAspectTapped: (aspect) => viewModel.onPositiveAspectTapped(context, aspect),
                 ),
@@ -199,6 +206,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   child: AspectsVisualization(
                     aspects: viewModel.negativeAspects,
                     angleForVisualisation: math.pi - viewModel.aspectEvaluationArrowRotation,
+                    simulateFutureAspects: viewModel.simulateFutureAspects,
                     activeAspectCircleGradient: activeAspectCircleGradient,
                     inactiveAspectCircleGradient: inactiveAspectCircleGradient,
                     onAspectTapped: (aspect) => viewModel.onNegativeAspectTapped(context, aspect),
@@ -214,6 +222,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                     aspects: viewModel.futureAspects,
                     angleForVisualisation: math.pi,
                     activeAspectCircleGradient: activeAspectCircleGradient,
+                    simulateFutureAspects: viewModel.simulateFutureAspects,
                     inactiveAspectCircleGradient: inactiveAspectCircleGradient,
                     onAspectTapped: (aspect) => viewModel.onFutureAspectTapped(context, aspect as FutureSituation),
                   ),

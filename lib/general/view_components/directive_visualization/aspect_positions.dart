@@ -7,8 +7,9 @@ import 'package:pd_app/general/view_components/directive_visualization/sector.da
 class AspectPositions {
   final List<Aspect> aspects;
   final Sector sector;
+  final bool simulateFutureAspects;
 
-  AspectPositions({required this.aspects, required this.sector});
+  AspectPositions({required this.aspects, required this.sector, required this.simulateFutureAspects});
 
   List<AspectVisualizationInformation> get listOfAspectVisualizationInformation {
     final List<AspectVisualizationInformation> list = [];
@@ -16,7 +17,7 @@ class AspectPositions {
       final aspect = aspects[i];
       final bool active;
       if (aspect is AspectWithSimulation) {
-        active = (aspect as AspectWithSimulation).simulateAspect;
+        active = simulateFutureAspects && (aspect as AspectWithSimulation).simulateAspect;
       } else {
         active = true;
       }
