@@ -14,11 +14,13 @@ class FutureSituationsPage with SerializableAsset {
       required this.aspectListWidget,
       required this.outro,
       required this.locale,
-      required this.addAspectWidget});
+      required this.addAspectWidget,
+      required this.breadcrumbTitle});
 
   factory FutureSituationsPage.fromJson(Map<String, dynamic> json) => _$FutureSituationsPageFromJson(json);
 
   factory FutureSituationsPage.fromCMSJson(Map<String, dynamic> attributesJson) => FutureSituationsPage(
+      breadcrumbTitle: attributesJson['breadcrumb_title'] as String,
       intro: attributesJson['intro'] as String?,
       outro: attributesJson['outro'] as String?,
       examplesTitle: attributesJson['examples_title'] as String,
@@ -26,6 +28,8 @@ class FutureSituationsPage with SerializableAsset {
       aspectListWidget: AspectListWidget.fromJson(attributesJson['aspect_list_widget'] as Map<String, dynamic>),
       addAspectWidget: AddAspectWidget.fromJson(attributesJson['add_aspect_widget'] as Map<String, dynamic>),
       locale: attributesJson['locale'] as String);
+
+  final String breadcrumbTitle;
 
   final String locale;
 

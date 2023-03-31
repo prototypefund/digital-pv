@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pd_app/general/creation_process_navigation/navigation_step.dart';
+import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 
 abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNotifier {
+  CreationProcessNavigationViewModel() {
+    _contentService.addListener(notifyListeners);
+  }
+
+  final ContentService _contentService = getIt.get();
+
   String get nextButtonText => l10n.navigationNext;
 
   String get backButtonText => l10n.navigationBack;
@@ -47,4 +56,24 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
   bool get simulateFutureAspects => false;
 
   bool get showTreatmentGoalInVisualization;
+
+  List<NavigationStep> get navigationSteps {
+    return [
+      _contentService.positiveAspectsPage.breadcrumbTitle,
+      _contentService.negativeAspectsPage.breadcrumbTitle,
+      _contentService.qualityOfLifePage.breadcrumbTitle,
+      _contentService.treatmentGoalPage.breadcrumbTitle,
+      _contentService.treatmentActivitiesPage.breadcrumbTitle,
+      _contentService.futureSituationsPage.breadcrumbTitle,
+      _contentService.trustedThirdPartyPage.breadcrumbTitle,
+      _contentService.generalInformationAboutDirectivePage.breadcrumbTitle,
+      _contentService.personalDetailsPage.breadcrumbTitle,
+    ].map((e) => NavigationStep(stepName: e)).toList();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _contentService.removeListener(notifyListeners);
+  }
 }

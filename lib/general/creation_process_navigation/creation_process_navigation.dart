@@ -66,18 +66,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                           viewModel.onStepContinue(context, index);
                         },
                         onStepCancel: () => viewModel.onBackButtonPressed(context),
-                        steps: [
-                          "PositiveAspects",
-                          "NegativeAspects",
-                          "EvaluateCurrentAspects",
-                          "GeneralTreatmentObjective",
-                          "TreatmentActivities",
-                          "FutureSituations",
-                          "TrustedThirdParty",
-                          "GeneralInformationAboutPatientDirective",
-                          "PersonalDetails",
-                          "DirectivePdfView"
-                        ]
+                        steps: viewModel.navigationSteps
                             .mapIndexed(
                               (index, e) => Step(
                                 content: const SizedBox(),
@@ -88,7 +77,7 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                                         : StepState.disabled,
                                 title: Text(
                                   style: Theme.of(context).textTheme.bodySmall,
-                                  e,
+                                  e.stepName,
                                 ),
                               ),
                             )

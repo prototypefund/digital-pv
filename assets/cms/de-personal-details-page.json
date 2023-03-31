@@ -1,5 +1,6 @@
 [
   {
+    "breadcrumbTitle": "Persönliche Daten",
     "intro": "## Persönliche Daten\n\nBitte geben Sie noch ihre persönlichen Daten ein.\nSie können anschließend Ihre Patientenverfügung als PDF abrufen.",
     "download_as_pdf_action_label": "dPV als PDF abrufen",
     "show_directive_action_label": "dPV anzeigen"

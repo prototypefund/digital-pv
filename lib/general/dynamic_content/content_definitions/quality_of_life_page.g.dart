@@ -13,9 +13,11 @@ QualityOfLifePage _$QualityOfLifePageFromJson(Map<String, dynamic> json) => Qual
       negativeQualityOfLifeExplanation: json['negative_quality_of_life_explanation'] as String,
       confirmationQuestion: json['confirmation_question'] as String,
       confirmActionLabel: json['confirm_action_label'] as String,
+      breadcrumbTitle: json['breadcrumbTitle'] as String,
     );
 
 Map<String, dynamic> _$QualityOfLifePageToJson(QualityOfLifePage instance) => <String, dynamic>{
+      'breadcrumbTitle': instance.breadcrumbTitle,
       'intro': instance.intro,
       'positive_quality_of_life_explanation': instance.positiveQualityOfLifeExplanation,
       'negative_quality_of_life_explanation': instance.negativeQualityOfLifeExplanation,

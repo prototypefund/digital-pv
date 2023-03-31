@@ -1,6 +1,7 @@
 [
   {
-    "intro": "# Meine Behandlungswünsche\n\nHier können Sie zu Ihrem  Behandlungsziel bestimme Maßnahmen festlegen.",
+    "breadcrumbTitle": "Behandlungswünsche",
+    "intro": "# Meine Behandlungswünsche\n\nHier können Sie zu Ihrem Behandlungsziel bestimme Maßnahmen festlegen.",
     "outro": null,
     "treatment_activities_title": "Medizinische Maßnahmen"
   }

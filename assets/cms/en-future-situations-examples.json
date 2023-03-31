@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "example": {
+      "id": 23,
+      "group": "Severe conditions",
+      "title": "Intensive care of unclear duration after acute event",
+      "contextual_help": null
+    },
+    "id": 23,
+    "locale": "en"
+  },
+  {
+    "example": {
+      "id": 24,
+      "group": "Severe conditions",
+      "title": "Severe, permanent physical impairment",
+      "contextual_help": null
+    },
+    "id": 24,
+    "locale": "en"
+  },
+  {
+    "example": {
+      "id": 25,
+      "group": "Severe conditions",
+      "title": "Severe or progressive mental impairment",
+      "contextual_help": null
+    },
+    "id": 25,
+    "locale": "en"
+  },
+  {
+    "example": {
+      "id": 26,
+      "group": "Uncertain conditions",
+      "title": "Waking coma or similar condition",
+      "contextual_help": null
+    },
+    "id": 26,
+    "locale": "en"
+  },
+  {
+    "example": {
+      "id": 27,
+      "group": "Death inevitable",
+      "title": "Terminal stage of a fatal disease",
+      "contextual_help": null
+    },
+    "id": 27,
+    "locale": "en"
+  },
+  {
+    "example": {
+      "id": 28,
+      "group": "Death inevitable",
+      "title": "Dying process",
+      "contextual_help": null
+    },
+    "id": 28,
+    "locale": "en"
+  }
+]

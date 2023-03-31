@@ -15,9 +15,11 @@ TreatmentGoalPage _$TreatmentGoalPageFromJson(Map<String, dynamic> json) => Trea
       palliativeExplanation: ContextualHelp.fromJson(json['palliative_explanation'] as Map<String, dynamic>),
       confirmTreatmentGoalActionLabel: json['confirm_treatment_goal_action_label'] as String,
       intro: json['intro'] as String,
+      breadcrumbTitle: json['breadcrumbTitle'] as String,
     );
 
 Map<String, dynamic> _$TreatmentGoalPageToJson(TreatmentGoalPage instance) => <String, dynamic>{
+      'breadcrumbTitle': instance.breadcrumbTitle,
       'intro': instance.intro,
       'treatment_goal_curative_confirmation_question': instance.treatmentGoalCurativeQuestion,
       'treatment_goal_palliative_confirmation_question': instance.treatmentGoalPalliativeQuestion,
