@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
@@ -12,7 +13,6 @@ import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
 import 'package:provider/provider.dart';
-import 'package:collection/collection.dart';
 
 class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationViewModel> extends StatelessWidget {
   const CreationProcessNavigation({super.key, required this.widget, this.floatingAddonWidget});
@@ -24,9 +24,10 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
 
   static const double maximumContentWidth = 1200;
   static const double responsiveAddonThreshold = Thresholds.responsiveAddonContent;
-  static const double sliverBarContentPadding = 8.0;
+  static const double sliverBarContentPadding = 20;
   static const double contentAreaPadding = 32.0;
-  static const double sliverAppBarExpandedHeight = 160.0;
+  static const double sliverAppBarExpandedHeight = 260.0;
+  static const double stepperHeight = 75.0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,48 +52,47 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   // disables back button if popping is possible
                   backgroundColor: Theme.of(context).colorScheme.background,
                   title: SizedBox(
-                    height: 75,
+                    height: stepperHeight,
                     child: ChangeNotifierProvider(
                       create: (context) => viewModel,
-                      child: Theme(
-                        data: ThemeData(primaryColor: Colors.indigoAccent),
-                        child: DPVStepper(
-                          physics: const BouncingScrollPhysics(),
-                          currentStep: viewModel.currentStep(context),
-                          type: StepperType.horizontal,
-                          onStepContinue: () {
-                            viewModel.onNextButtonPressed(context);
-                          },
-                          onStepTapped: (int index) {
-                            viewModel.onStepContinue(context, index);
-                          },
-                          onStepCancel: () => viewModel.onBackButtonPressed(context),
-                          steps: [
-                            "PositiveAspects",
-                            "NegativeAspects",
-                            "EvaluateCurrentAspects",
-                            "GeneralTreatmentObjective",
-                            "TreatmentActivities",
-                            "FutureSituations",
-                            "TrustedThirdParty",
-                            "GeneralInformationAboutPatientDirective",
-                            "PersonalDetails",
-                            "DirectivePdfView"
-                          ]
-                              .mapIndexed((index, e) => Step(
-                                
-                                    state: viewModel.currentStep(context) == index
-                                        ? StepState.editing
-                                        : viewModel.currentStep(context) > index
-                                            ? StepState.complete
-                                            : StepState.disabled,
-                                    title:
-                                        Text(e, style: Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 12)),
-                                    content: Container(
-                                        alignment: Alignment.centerLeft, child: const Text('Content for Step 1')),
-                                  ))
-                              .toList(),
-                        ),
+                      child: DPVStepper(
+                        physics: const ClampingScrollPhysics(),
+                        currentStep: viewModel.currentStep(context),
+                        type: StepperType.horizontal,
+                        onStepContinue: () {
+                          viewModel.onNextButtonPressed(context);
+                        },
+                        onStepTapped: (int index) {
+                          viewModel.onStepContinue(context, index);
+                        },
+                        onStepCancel: () => viewModel.onBackButtonPressed(context),
+                        steps: [
+                          "PositiveAspects",
+                          "NegativeAspects",
+                          "EvaluateCurrentAspects",
+                          "GeneralTreatmentObjective",
+                          "TreatmentActivities",
+                          "FutureSituations",
+                          "TrustedThirdParty",
+                          "GeneralInformationAboutPatientDirective",
+                          "PersonalDetails",
+                          "DirectivePdfView"
+                        ]
+                            .mapIndexed(
+                              (index, e) => Step(
+                                content: const SizedBox(),
+                                state: viewModel.currentStep(context) == index + 1
+                                    ? StepState.editing
+                                    : viewModel.currentStep(context) > index + 1
+                                        ? StepState.complete
+                                        : StepState.disabled,
+                                title: Text(
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                  e,
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ),
                   ),
@@ -109,16 +109,19 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   floating: true,
                   collapsedHeight: Sizes.toolbarHeight,
                   expandedHeight: useExtendedWidthForContent ? Sizes.toolbarHeight : sliverAppBarExpandedHeight,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Padding(
-                      padding: const EdgeInsets.all(sliverBarContentPadding),
-                      child: Visibility(
-                          visible: deviceWidth < responsiveAddonThreshold &&
-                              viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
-                          child: DirectiveVisualization.widgetWithViewModel(
-                              simulateFutureAspects: viewModel.simulateFutureAspects,
-                              showLabels: false,
-                              showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
+                  flexibleSpace: Container(
+                    margin: const EdgeInsets.only(top: 30.0),
+                    child: FlexibleSpaceBar(
+                      background: Padding(
+                        padding: const EdgeInsets.all(50),
+                        child: Visibility(
+                            visible: deviceWidth < responsiveAddonThreshold &&
+                                viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
+                            child: DirectiveVisualization.widgetWithViewModel(
+                                simulateFutureAspects: viewModel.simulateFutureAspects,
+                                showLabels: false,
+                                showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
+                      ),
                     ),
                   ),
                 ),

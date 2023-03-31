@@ -38,6 +38,7 @@ class Themes {
           titleSmall: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.w300),
           bodyLarge: TextStyle(fontSize: 15.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
           bodyMedium: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
+          bodySmall: const TextStyle(fontSize: 16, color: DefaultThemeColors.grey, fontWeight: FontWeight.normal),
           labelLarge: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.black, fontWeight: FontWeight.bold),
           labelMedium: TextStyle(
             fontSize: 13.sp,

@@ -7,6 +7,7 @@ import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/themes/themes.dart';
+import 'package:pd_app/general/utils/custom_browser_scroll_behavior.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations.dart';
@@ -20,6 +21,8 @@ import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+
 
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -151,6 +154,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     return ResponsiveSizer(
       builder: (newContext, orientation, screenType) {
         return MaterialApp.router(
+          scrollBehavior: CustomBrowserScrollBehavior(),
           scaffoldMessengerKey: _navigatorKey,
           routeInformationProvider: _router.routeInformationProvider,
           routeInformationParser: _router.routeInformationParser,
