@@ -42,7 +42,7 @@ String buildShowPositiveAspectRoute({required String paramValue}) =>
     '${Routes.positiveAspects.path}?$focusParam=$paramValue';
 
 String buildShowNegativeAspectRoute({required String paramValue}) =>
-    '${Routes.negativeAspects}?$focusParam=$paramValue';
+    '${Routes.negativeAspects.path}?$focusParam=$paramValue';
 
 extension RouteExtension on Routes {
   static const patientDirective = 'patientDirective/';
