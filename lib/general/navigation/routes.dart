@@ -19,7 +19,7 @@ enum Routes {
 const focusParam = 'focus';
 
 int currentRouteIndex(BuildContext context) =>
-    Routes.values.indexWhere((element) => GoRouter.of(context).location.contains(element.path));
+    Routes.values.indexWhere((element) => element.path == GoRouter.of(context).location);
 
 Routes nextRoute(BuildContext context) {
   if (currentRouteIndex(context) == Routes.values.length - 1) {
