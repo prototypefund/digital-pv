@@ -76,40 +76,50 @@ class _DPVDropDownState extends State<DPVDropDown> {
     final DropdownButtonStyle? dropdownButtonStyle = Theme.of(context).extension();
     return OverlayEntry(
       builder: (BuildContext context) {
-        return Positioned(
-          left: offset.dx,
-          top: offset.dy + size.height,
-          width: size.width,
-          child: Material(
-            elevation: 4.0,
-            child: ListView.separated(
-              itemCount: widget.options.length,
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              separatorBuilder: (BuildContext context, int index) => const Divider(),
-              itemBuilder: (BuildContext context, int index) {
-                final option = widget.options[index];
-                return ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      "${index + 1}. \t $option",
-                      style: dropdownButtonStyle?.textStyle,
-                    ),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      _selectedValue = option;
-                      _selectedIndex = index;
-                      widget.onChanged(option);
-                      _overlayEntry?.remove();
-                      _overlayEntry = null;
-                    });
-                  },
-                );
+        return Stack(
+          children: [
+            ModalBarrier(
+              onDismiss: () {
+                _overlayEntry?.remove();
+                _overlayEntry = null;
               },
             ),
-          ),
+            Positioned(
+              left: offset.dx,
+              top: offset.dy + size.height,
+              width: size.width,
+              child: Material(
+                elevation: 4.0,
+                child: ListView.separated(
+                  itemCount: widget.options.length,
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  separatorBuilder: (BuildContext context, int index) => const Divider(),
+                  itemBuilder: (BuildContext context, int index) {
+                    final option = widget.options[index];
+                    return ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(
+                          "${index + 1}. \t $option",
+                          style: dropdownButtonStyle?.textStyle,
+                        ),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _selectedValue = option;
+                          _selectedIndex = index;
+                          widget.onChanged(option);
+                          _overlayEntry?.remove();
+                          _overlayEntry = null;
+                        });
+                      },
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
         );
       },
     );
