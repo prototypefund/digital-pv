@@ -169,13 +169,13 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                     strokeWidth: treatmentGoalArrowStrokeWidth,
                   ),
                 ),
-              // Positioned.fill(
-              //   child: AspectVisualizationOverlayArrow(
-              //     rotation: viewModel.aspectEvaluationArrowRotation,
-              //     color: aspectEvaluationArrowColor,
-              //     strokeWidth: aspectEvaluationArrowStrokeWidth,
-              //   ),
-              // ),
+              Positioned.fill(
+                child: AspectVisualizationOverlayArrow(
+                  rotation: viewModel.aspectEvaluationArrowRotation,
+                  color: aspectEvaluationArrowColor,
+                  strokeWidth: aspectEvaluationArrowStrokeWidth,
+                ),
+              ),
               Positioned.fill(child: LayoutBuilder(
                 builder: (context, constraints) {
                   final Offset centerOfGestureDetector = Offset(constraints.maxWidth / 2, constraints.maxHeight / 2);
