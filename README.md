@@ -6,6 +6,10 @@ Digital Patient Directive
 
 Dynamic content is managed using Strapi as Content Management System.
 
+## Creating a deployable docker build for web app
+
+Run `scripts/build-and-push-docker-image.sh` from the top level directory. It will push a docker image with the current git commit has as tag and provide you with the name of the image in the registry. Use this in your deployment.
+
 ### Current dynamic content
 
 Dynamic content is currently managed at https://strapi.dpv.staging.deyan7.de/admin
