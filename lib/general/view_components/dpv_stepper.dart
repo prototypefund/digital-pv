@@ -621,7 +621,11 @@ class _DPVStepperState extends State<DPVStepper> with TickerProviderStateMixin {
   Widget _buildHorizontal() {
     final List<Widget> children = <Widget>[
       for (int i = 0; i < widget.steps.length; i += 1) ...<Widget>[
-        InkResponse(
+        InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          splashFactory: NoSplash.splashFactory,
+          hoverColor: Colors.transparent,
           key: _keys[i],
           onTap: widget.steps[i].state != StepState.disabled
               ? () {
