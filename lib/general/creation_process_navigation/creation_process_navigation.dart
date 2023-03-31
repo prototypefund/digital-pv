@@ -81,7 +81,8 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                                 ),
                               ),
                             )
-                            .toList(),
+                            .toList()
+                          ..removeLast(),
                       ),
                     ),
                   ),

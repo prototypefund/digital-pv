@@ -11,9 +11,6 @@ class GeneralInformationAboutPatientDirectiveViewModel extends CreationProcessNa
 
   final ContentService _contentService = getIt.get();
 
-  @override
-  void onNextButtonPressed(BuildContext context) {}
-
   GeneralInformationAboutDirectivePage get pageContent => _contentService.generalInformationAboutDirectivePage;
 
   String get contentMarkdown => pageContent.intro;
