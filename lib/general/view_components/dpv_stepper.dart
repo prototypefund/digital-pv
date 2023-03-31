@@ -174,6 +174,7 @@ class DPVStepper extends StatefulWidget {
 class _DPVStepperState extends State<DPVStepper> with TickerProviderStateMixin {
   late List<GlobalKey> _keys;
   final Map<int, StepState> _oldStates = <int, StepState>{};
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -592,7 +593,6 @@ class _DPVStepperState extends State<DPVStepper> with TickerProviderStateMixin {
                           curve: Curves.fastOutSlowIn,
                           duration: kThemeAnimationDuration,
                         );
-
                         widget.onStepTapped?.call(i);
                       }
                     : null,
@@ -610,8 +610,14 @@ class _DPVStepperState extends State<DPVStepper> with TickerProviderStateMixin {
     final List<Widget> children = <Widget>[
       for (int i = 0; i < widget.steps.length; i += 1) ...<Widget>[
         InkResponse(
+          key: _keys[i],
           onTap: widget.steps[i].state != StepState.disabled
               ? () {
+                  Scrollable.ensureVisible(
+                    _keys[i].currentContext!,
+                    curve: Curves.fastOutSlowIn,
+                    duration: kThemeAnimationDuration,
+                  );
                   widget.onStepTapped?.call(i);
                 }
               : null,
@@ -671,6 +677,7 @@ class _DPVStepperState extends State<DPVStepper> with TickerProviderStateMixin {
           elevation: widget.elevation ?? 2,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
+            controller: _scrollController,
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Row(
