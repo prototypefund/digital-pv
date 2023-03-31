@@ -577,7 +577,7 @@ class _DPVStepperState extends State<DPVStepper> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Scrollable.ensureVisible(
         _keys[widget.currentStep - 1].currentContext!,
         curve: Curves.fastOutSlowIn,
