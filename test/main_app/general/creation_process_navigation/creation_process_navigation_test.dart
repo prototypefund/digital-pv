@@ -91,4 +91,8 @@ class StubCreationProcessNavigationViewModel
 
   @override
   List<NavigationStep> get navigationSteps => [];
+
+  @override
+  // TODO: implement stepperScrollController
+  ScrollController get stepperScrollController => throw UnimplementedError();
 }
