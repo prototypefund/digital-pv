@@ -80,19 +80,12 @@ class StubCreationProcessNavigationViewModel
 
   @override
   int currentStep(BuildContext context) {
-    // TODO: implement currentStep
-    throw UnimplementedError();
+    return 1;
   }
 
   @override
-  void onStepContinue(BuildContext context, int index) {
-    // TODO: implement onStepContinue
-  }
+  void onStepContinue(BuildContext context, int index) {}
 
   @override
-  List<NavigationStep> get navigationSteps => [];
-
-  @override
-  // TODO: implement stepperScrollController
-  ScrollController get stepperScrollController => throw UnimplementedError();
+  List<NavigationStep> get navigationSteps => [NavigationStep(stepName: "Test Step")];
 }
