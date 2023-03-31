@@ -22,6 +22,7 @@ class Themes {
             thumbColor: DefaultThemeColors.darkGrey),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
+                splashFactory: NoSplash.splashFactory,
                 textStyle: TextStyle(fontSize: 14.sp, color: DefaultThemeColors.white, fontWeight: FontWeight.bold),
                 backgroundColor: DefaultThemeColors.purple)),
         iconTheme: const IconThemeData(color: DefaultThemeColors.purple),
