@@ -7,3 +7,4 @@
 /coverage/
 /.flutter-plugins
 .DS_Store
+.vscode/settings.json
