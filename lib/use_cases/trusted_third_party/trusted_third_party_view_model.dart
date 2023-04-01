@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/model/person_of_trust.dart';
-import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party_form_view_model.dart';
@@ -30,16 +28,6 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel with
   String get addPersonOfTrustActionLabel => l10n.personOfTrustAddPerson;
 
   IconData get addPersonOfTrustActionIcon => Icons.add_circle;
-
-  @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.futureSituations);
-  }
-
-  @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.generalInformationAboutPatientDirective);
-  }
 
   @override
   bool get showAspectVisualizationInNavbarIfNotShowingFloatingVisualization => false;

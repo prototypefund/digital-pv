@@ -27,7 +27,7 @@ class WelcomeViewModel with ChangeNotifier, Logging {
 
   void onCallToActionPressed(BuildContext context) {
     logger.d('switching to positive aspects view');
-    context.go(Routes.positiveAspects);
+    context.go(nextRoute(context).path);
   }
 
   @override

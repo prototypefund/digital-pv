@@ -54,12 +54,17 @@ class CmsAssetGenerator with Logging {
       required File cmsDirectory,
       required CMSLoader loader,
       required String locale}) async {
-    final loadingResult = await loader.loadEntitiesFromCMS(locale: locale, contentDefinition: definition);
-    final entities = loadingResult.entities;
+    try {
+      final loadingResult = await loader.loadEntitiesFromCMS(locale: locale, contentDefinition: definition);
+      final entities = loadingResult.entities;
 
-    await CMSToAssetsCache().saveEntitiesToAssets(
-        baseDirectory: cmsDirectory, entities: entities, entityName: definition.localEntityName, locale: locale);
+      await CMSToAssetsCache().saveEntitiesToAssets(
+          baseDirectory: cmsDirectory, entities: entities, entityName: definition.localEntityName, locale: locale);
 
-    return LocalAssetFileCreationResult(containedUris: loadingResult.containedUris);
+      return LocalAssetFileCreationResult(containedUris: loadingResult.containedUris);
+    } catch (error) {
+      logger.e('could not load definition ${definition.cmsEntityName} in language $locale from cms');
+      rethrow;
+    }
   }
 }

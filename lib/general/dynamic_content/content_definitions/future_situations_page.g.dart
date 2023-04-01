@@ -14,9 +14,11 @@ FutureSituationsPage _$FutureSituationsPageFromJson(Map<String, dynamic> json) =
       outro: json['outro'] as String?,
       locale: json['locale'] as String,
       addAspectWidget: AddAspectWidget.fromJson(json['addAspectWidget'] as Map<String, dynamic>),
+      breadcrumbTitle: json['breadcrumbTitle'] as String,
     );
 
 Map<String, dynamic> _$FutureSituationsPageToJson(FutureSituationsPage instance) => <String, dynamic>{
+      'breadcrumbTitle': instance.breadcrumbTitle,
       'locale': instance.locale,
       'intro': instance.intro,
       'aspectListWidget': instance.aspectListWidget,

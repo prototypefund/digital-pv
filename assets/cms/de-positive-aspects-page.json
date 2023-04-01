@@ -1,6 +1,7 @@
 [
   {
     "locale": "de",
+    "breadcrumbTitle": "Positive Aspekte",
     "intro": "# Was macht mir Freude?\n\nBestimmen Sie Aspekte aus Ihrem Leben, die Ihnen Freude machen.",
     "aspectListWidget": {
       "delete_confirmation_question": "Soll der positive Aspekt wirklich entfernt werden?",

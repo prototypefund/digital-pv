@@ -14,6 +14,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_li
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_goal_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/trusted_third_party.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_cache.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/logging.dart';
@@ -64,12 +65,14 @@ class ContentService with Logging, ChangeNotifier {
                 emptyListMessage: '',
                 simulateAspectLabel: ''),
             addAspectWidget: AddAspectWidget(
-                emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''))
+                emptyTextFieldHint: '', lowSignificanceLabel: '', highSignificanceLabel: '', addAspectActionLabel: ''),
+            breadcrumbTitle: '')
       ]).first;
 
   NegativeAspectsPage get negativeAspectsPage =>
       _cmsCache.value<NegativeAspectsPage>(contentDefinition: CmsConfiguration.negativeAspectsPage, defaultValue: [
         NegativeAspectsPage(
+            breadcrumbTitle: '',
             intro: null,
             outro: null,
             locale: locale,
@@ -89,6 +92,7 @@ class ContentService with Logging, ChangeNotifier {
   FutureSituationsPage get futureSituationsPage =>
       _cmsCache.value<FutureSituationsPage>(contentDefinition: CmsConfiguration.futureSituationsPage, defaultValue: [
         FutureSituationsPage(
+            breadcrumbTitle: '',
             intro: null,
             outro: null,
             locale: locale,
@@ -111,12 +115,15 @@ class ContentService with Logging, ChangeNotifier {
       defaultValue: [Onboarding(skipLabel: '', pages: [], nextButtonLabel: '', callToActionLabel: '')]).first;
 
   TreatmentActivitiesPage get treatmentActivitiesPage => _cmsCache.value<TreatmentActivitiesPage>(
-      contentDefinition: CmsConfiguration.treatmentActivitiesPage,
-      defaultValue: [TreatmentActivitiesPage(intro: '', outro: '', treatmentActivitiesTitle: '')]).first;
+          contentDefinition: CmsConfiguration.treatmentActivitiesPage,
+          defaultValue: [
+            TreatmentActivitiesPage(breadcrumbTitle: '', intro: '', outro: '', treatmentActivitiesTitle: '')
+          ]).first;
 
   QualityOfLifePage get qualityOfLifePage =>
       _cmsCache.value<QualityOfLifePage>(contentDefinition: CmsConfiguration.qualityOfLifePage, defaultValue: [
         QualityOfLifePage(
+            breadcrumbTitle: '',
             intro: '',
             outro: '',
             positiveQualityOfLifeExplanation: '',
@@ -128,6 +135,7 @@ class ContentService with Logging, ChangeNotifier {
   TreatmentGoalPage get treatmentGoalPage =>
       _cmsCache.value<TreatmentGoalPage>(contentDefinition: CmsConfiguration.treatmentGoalPage, defaultValue: [
         TreatmentGoalPage(
+            breadcrumbTitle: '',
             treatmentGoalCurativeQuestion: '',
             treatmentGoalPalliativeQuestion: '',
             adjustArrowExplanation: ContextualHelp(id: -1, title: '', content: ''),
@@ -141,11 +149,18 @@ class ContentService with Logging, ChangeNotifier {
   GeneralInformationAboutDirectivePage get generalInformationAboutDirectivePage =>
       _cmsCache.value<GeneralInformationAboutDirectivePage>(
           contentDefinition: CmsConfiguration.generalInformationAboutDirectivePage,
-          defaultValue: [GeneralInformationAboutDirectivePage(intro: '', confirmActionLabel: '')]).first;
+          defaultValue: [
+            GeneralInformationAboutDirectivePage(breadcrumbTitle: '', intro: '', confirmActionLabel: '')
+          ]).first;
 
-  PersonalDetailsPage get personalDetailsPage => _cmsCache.value<PersonalDetailsPage>(
-      contentDefinition: CmsConfiguration.personalDetailsPage,
-      defaultValue: [PersonalDetailsPage(intro: '', downloadAsPdfActionLabel: '', showDirectiveActionLabel: '')]).first;
+  TrustedThirdPartyPage get trustedThirdPartyPage => _cmsCache.value<TrustedThirdPartyPage>(
+      contentDefinition: CmsConfiguration.trustedThirdPartyPage,
+      defaultValue: [TrustedThirdPartyPage(breadcrumbTitle: '')]).first;
+
+  PersonalDetailsPage get personalDetailsPage =>
+      _cmsCache.value<PersonalDetailsPage>(contentDefinition: CmsConfiguration.personalDetailsPage, defaultValue: [
+        PersonalDetailsPage(breadcrumbTitle: '', intro: '', downloadAsPdfActionLabel: '', showDirectiveActionLabel: '')
+      ]).first;
 
   @visibleForTesting
   Future<void> reloadContent() async {

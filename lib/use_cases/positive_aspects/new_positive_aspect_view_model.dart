@@ -32,7 +32,7 @@ class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
   @override
   void onAddAspectActionPressed(BuildContext context) {
     super.onAddAspectActionPressed(context);
-    context.go(Routes.positiveAspects);
+    context.go(Routes.positiveAspects.path);
   }
 
   @override

@@ -7,37 +7,37 @@
       {
         "content": "# Herzlich Willkommen bei d-PV, Ihrer digitalen Patientenverfügung\n\nErstellen Sie in drei Schritten eine rechtsichere Patientenverfügung",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/placeholder_fc52f051e5.png",
-          "assetPath": "assets/cms/placeholder_fc52f051e5.png"
+          "id": 3,
+          "name": "compass_de.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_de_a59aa770cb.png",
+          "assetPath": "assets/cms/compass_de_a59aa770cb.png"
         }
       },
       {
         "content": "# Medizinische Behandlung festlegen\n\nMit einer Patientenverfügung können Sie Ihre medizinische Behandlung für den Fall einer späteren Entscheidungs- bzw. Urteilsunfähigkeit im Voraus schriftlich festlegen.",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/placeholder_fc52f051e5.png",
-          "assetPath": "assets/cms/placeholder_fc52f051e5.png"
+          "id": 3,
+          "name": "compass_de.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_de_a59aa770cb.png",
+          "assetPath": "assets/cms/compass_de_a59aa770cb.png"
         }
       },
       {
         "content": "# Gesetzeskonform\n\nDie dPV entspricht den gesetzlichen Vorgaben in Deutschland",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/placeholder_fc52f051e5.png",
-          "assetPath": "assets/cms/placeholder_fc52f051e5.png"
+          "id": 3,
+          "name": "compass_de.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_de_a59aa770cb.png",
+          "assetPath": "assets/cms/compass_de_a59aa770cb.png"
         }
       },
       {
         "content": "# Vertrauensperson\n\nStatt eine vollständige Patientenverfügung anzulegen, können Sie prinzipiell sämtliche Entscheidungen der Vertretungsperson Ihres Vertrauens überlassen. In diesem Falle können Sie die Vertretungsperson hier direkt benennen.",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/placeholder_fc52f051e5.png",
-          "assetPath": "assets/cms/placeholder_fc52f051e5.png"
+          "id": 3,
+          "name": "compass_de.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_de_a59aa770cb.png",
+          "assetPath": "assets/cms/compass_de_a59aa770cb.png"
         }
       }
     ]

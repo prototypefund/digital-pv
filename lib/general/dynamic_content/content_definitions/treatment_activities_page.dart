@@ -5,15 +5,22 @@ part 'treatment_activities_page.g.dart';
 
 @JsonSerializable()
 class TreatmentActivitiesPage with SerializableAsset {
-  TreatmentActivitiesPage({required this.intro, required this.outro, required this.treatmentActivitiesTitle});
+  TreatmentActivitiesPage(
+      {required this.breadcrumbTitle,
+      required this.intro,
+      required this.outro,
+      required this.treatmentActivitiesTitle});
 
   factory TreatmentActivitiesPage.fromJson(Map<String, dynamic> json) => _$TreatmentActivitiesPageFromJson(json);
 
   factory TreatmentActivitiesPage.fromCMSJson(Map<String, dynamic> attributesJson) => TreatmentActivitiesPage(
+        breadcrumbTitle: attributesJson['breadcrumb_title'] as String,
         intro: attributesJson['intro'] as String,
         outro: attributesJson['outro'] as String?,
         treatmentActivitiesTitle: attributesJson['treatment_activities_title'] as String,
       );
+
+  final String breadcrumbTitle;
 
   final String intro;
 
