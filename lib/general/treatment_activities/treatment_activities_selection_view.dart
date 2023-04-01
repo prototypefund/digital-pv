@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
-import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity_choice.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view_model.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
@@ -40,24 +39,22 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
 
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: DPVDropDown<String>(
-          description: Text(
-            activity.activity,
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-          initialValue: viewModel.getCurrentChoice(activity),
-          onChanged: (String? value) {
-            logger.d('changing activity ${activity.activity} to value $value');
-            viewModel.updateChoice(activity, value);
-          },
-          items: activity.choices.map<DropdownMenuItem<String>>((TreatmentActivityChoice value) {
-            return DropdownMenuItem<String>(
-              value: value.choice,
-              child: Text(
-                value.choice,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          DPVDropDown(
+              initialValue: viewModel.getCurrentChoice(activity)!,
+              description: Text(
+                activity.activity,
+                style: Theme.of(context).textTheme.labelSmall,
               ),
-            );
-          }).toList()),
+              onChanged: (String? value) {
+                logger.d('changing activity ${activity.activity} to value $value');
+                viewModel.updateChoice(activity, value);
+              },
+              options: activity.choices.map((value) => value.choice).toList()),
+        ],
+      ),
     );
   }
 }

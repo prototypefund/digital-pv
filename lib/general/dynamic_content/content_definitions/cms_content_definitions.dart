@@ -10,6 +10,7 @@ import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_li
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activities_page.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_goal_page.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/trusted_third_party.dart';
 import 'package:pd_app/general/dynamic_content/loading/cms_config.dart';
 
 mixin CmsConfiguration {
@@ -146,6 +147,15 @@ mixin CmsConfiguration {
       assetLoadingFunction: (json) => PersonalDetailsPage.fromJson(json),
       queryParameters: {});
 
+  static ContentDefinition<TrustedThirdPartyPage> trustedThirdPartyPage = ContentDefinition<TrustedThirdPartyPage>(
+      isSingleEntity: true,
+      cmsEntityName: 'trusted-third-party-page',
+      fieldsToPopulate: [],
+      cmsLoadingFunction: (baseMap, attributesMap) => TrustedThirdPartyPage.fromCMSJson(attributesMap),
+      localEntityName: 'trusted-third-party-page',
+      assetLoadingFunction: (json) => TrustedThirdPartyPage.fromJson(json),
+      queryParameters: {});
+
   static List<ContentDefinition> definitions = [
     positiveAspectExamples,
     negativeAspectExamples,
@@ -159,6 +169,7 @@ mixin CmsConfiguration {
     qualityOfLifePage,
     treatmentGoalPage,
     generalInformationAboutDirectivePage,
-    personalDetailsPage
+    personalDetailsPage,
+    trustedThirdPartyPage
   ];
 }

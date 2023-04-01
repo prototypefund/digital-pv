@@ -1,6 +1,7 @@
 [
   {
     "locale": "en",
+    "breadcrumbTitle": "Negative Aspects",
     "intro": "# What causes me grief?\n\nIdentify aspects of your life that negatively affect your quality of life",
     "aspectListWidget": {
       "delete_confirmation_question": "Should the negative aspect really be removed?",

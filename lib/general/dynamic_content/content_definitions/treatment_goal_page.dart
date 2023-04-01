@@ -14,11 +14,13 @@ class TreatmentGoalPage with SerializableAsset {
       required this.curativeExplanation,
       required this.palliativeExplanation,
       required this.confirmTreatmentGoalActionLabel,
-      required this.intro});
+      required this.intro,
+      required this.breadcrumbTitle});
 
   factory TreatmentGoalPage.fromJson(Map<String, dynamic> json) => _$TreatmentGoalPageFromJson(json);
 
   factory TreatmentGoalPage.fromCMSJson(Map<String, dynamic> attributesJson) => TreatmentGoalPage(
+      breadcrumbTitle: attributesJson['breadcrumb_title'] as String,
       intro: attributesJson['intro'] as String,
       treatmentGoalCurativeQuestion: attributesJson['treatment_goal_curative_confirmation_question'] as String,
       treatmentGoalPalliativeQuestion: attributesJson['treatment_goal_palliative_confirmation_question'] as String,
@@ -28,6 +30,8 @@ class TreatmentGoalPage with SerializableAsset {
       palliativeExplanation: ContextualHelp.fromJson(attributesJson['palliative_explanation'] as Map<String, dynamic>),
       curativeExplanation: ContextualHelp.fromJson(attributesJson['curative_explanation'] as Map<String, dynamic>),
       confirmTreatmentGoalActionLabel: attributesJson['confirm_treatment_goal_action_label'] as String);
+
+  final String breadcrumbTitle;
 
   final String intro;
 

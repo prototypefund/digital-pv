@@ -36,7 +36,7 @@ class InputOutputService with Logging {
   }
 
   Future<void> startFileDownload(String name, Uint8List bytes) async {
-    await FileSaver.instance.saveFile(name, bytes, "json", mimeType: MimeType.JSON);
+    await FileSaver.instance.saveFile(name: name, bytes: bytes, ext: "json", mimeType: MimeType.json);
   }
 
   Future<void> loadPatientDirectiveFromFile(BuildContext context) async {

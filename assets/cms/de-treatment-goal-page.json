@@ -1,5 +1,6 @@
 [
   {
+    "breadcrumbTitle": "Behandlungsziel",
     "intro": "# Mein Behandlungsziel",
     "treatment_goal_curative_confirmation_question": "Wünschen Sie eine kurative Behandlung?",
     "treatment_goal_palliative_confirmation_question": "Wünschen Sie eine palliative Behandlung?",

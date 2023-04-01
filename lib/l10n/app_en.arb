@@ -7,6 +7,8 @@
   "aspectVisualizationCurative": "Curative",
   "aspectVisualizationPalliative": "Palliative",
   "aspectVisualizationTreatmentGoal": "Treatment Goal",
-  "aspectVisualizationQualityOfLife": "Quality of Life"
+  "aspectVisualizationQualityOfLife": "Quality of Life",
+  "drawerSaveDirective": "Save Directive",
+  "drawerLoadDirective": "Load Directive"
 }
 

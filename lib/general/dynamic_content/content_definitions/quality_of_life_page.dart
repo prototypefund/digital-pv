@@ -11,11 +11,13 @@ class QualityOfLifePage with SerializableAsset {
       required this.positiveQualityOfLifeExplanation,
       required this.negativeQualityOfLifeExplanation,
       required this.confirmationQuestion,
-      required this.confirmActionLabel});
+      required this.confirmActionLabel,
+      required this.breadcrumbTitle});
 
   factory QualityOfLifePage.fromJson(Map<String, dynamic> json) => _$QualityOfLifePageFromJson(json);
 
   factory QualityOfLifePage.fromCMSJson(Map<String, dynamic> attributesJson) => QualityOfLifePage(
+        breadcrumbTitle: attributesJson['breadcrumb_title'] as String,
         intro: attributesJson['intro'] as String,
         positiveQualityOfLifeExplanation: attributesJson['positive_quality_of_life_explanation'] as String,
         negativeQualityOfLifeExplanation: attributesJson['negative_quality_of_life_explanation'] as String,
@@ -24,6 +26,7 @@ class QualityOfLifePage with SerializableAsset {
         outro: attributesJson['outro'] as String?,
       );
 
+  final String breadcrumbTitle;
   final String intro;
 
   @JsonKey(name: 'positive_quality_of_life_explanation')

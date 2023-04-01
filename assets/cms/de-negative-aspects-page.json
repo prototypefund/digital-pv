@@ -1,6 +1,7 @@
 [
   {
     "locale": "de",
+    "breadcrumbTitle": "Negative Aspekte",
     "intro": "# Was bereitet mir Kummer?\n\nBestimmen Sie Aspekte aus Ihrem Leben, die Ihre Lebensqualität negativ beeinflussen",
     "aspectListWidget": {
       "delete_confirmation_question": "Soll der negative Aspekt wirklich entfernt werden?",

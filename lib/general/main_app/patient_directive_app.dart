@@ -7,6 +7,7 @@ import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/themes/themes.dart';
+import 'package:pd_app/general/utils/custom_browser_scroll_behavior.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/evaluate_current_aspects/evaluate_current_aspects_view.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations.dart';
@@ -20,6 +21,8 @@ import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+
 
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -42,14 +45,14 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     _router = GoRouter(
         routes: [
           GoRoute(
-            path: Routes.welcome,
+            path: Routes.welcome.path,
             pageBuilder: (context, state) =>
                 buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
           ),
           GoRoute(
-            path: Routes.positiveAspects,
+            path: Routes.positiveAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final String? focusSituationName = state.queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findPositiveAspect(name: focusSituationName);
@@ -61,9 +64,9 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
             },
           ),
           GoRoute(
-            path: Routes.negativeAspects,
+            path: Routes.negativeAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final String? focusSituationName = state.queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findNegativeAspect(name: focusSituationName);
@@ -76,24 +79,24 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
             },
           ),
           GoRoute(
-            path: Routes.evaluateCurrentAspects,
+            path: Routes.evaluateCurrentAspects.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<EvaluateCurrentAspects>(
                 context: context, state: state, child: EvaluateCurrentAspects.page()),
           ),
           GoRoute(
-            path: Routes.generalTreatmentObjective,
+            path: Routes.generalTreatmentObjective.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<GeneralTreatmentObjective>(
                 context: context, state: state, child: GeneralTreatmentObjective.page()),
           ),
           GoRoute(
-            path: Routes.treatmentActivities,
+            path: Routes.treatmentActivities.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<TreatmentActivities>(
                 context: context, state: state, child: TreatmentActivities.page()),
           ),
           GoRoute(
-            path: Routes.futureSituations,
+            path: Routes.futureSituations.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[Routes.focusParam];
+              final String? focusSituationName = state.queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findFutureSituation(name: focusSituationName);
@@ -105,22 +108,22 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
             },
           ),
           GoRoute(
-            path: Routes.trustedThirdParty,
+            path: Routes.trustedThirdParty.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<TrustedThirdParty>(
                 context: context, state: state, child: TrustedThirdParty.page()),
           ),
           GoRoute(
-            path: Routes.generalInformationAboutPatientDirective,
+            path: Routes.generalInformationAboutPatientDirective.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<GeneralInformationAboutPatientDirective>(
                 context: context, state: state, child: GeneralInformationAboutPatientDirective.page()),
           ),
           GoRoute(
-            path: Routes.personalDetails,
+            path: Routes.personalDetails.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<PersonalDetails>(
                 context: context, state: state, child: PersonalDetails.page()),
           ),
           GoRoute(
-            path: Routes.pdf,
+            path: Routes.pdf.path,
             pageBuilder: (context, state) => buildPageWithDefaultTransition<DirectivePdfView>(
                 context: context, state: state, child: DirectivePdfView()),
           ),
@@ -151,6 +154,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     return ResponsiveSizer(
       builder: (newContext, orientation, screenType) {
         return MaterialApp.router(
+          scrollBehavior: CustomBrowserScrollBehavior(),
           scaffoldMessengerKey: _navigatorKey,
           routeInformationProvider: _router.routeInformationProvider,
           routeInformationParser: _router.routeInformationParser,
