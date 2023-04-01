@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 enum Routes {
   welcome,
   positiveAspects,
-  // addPositiveAspect,
   negativeAspects,
   evaluateCurrentAspects,
   generalTreatmentObjective,
