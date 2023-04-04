@@ -69,6 +69,10 @@ class TrustedThirdPartyViewModel extends CreationProcessNavigationViewModel with
 
   void _reactToPatientDirectiveChanges() {
     notifyListeners();
+    if (_trustedThirdPartyFormViewModels.length !=
+        _patientDirectiveService.currentPatientDirective.personsOfTrust.length) {
+      _createThirdPartyFormViewModelsFromPatientDirective();
+    }
   }
 
   @override
