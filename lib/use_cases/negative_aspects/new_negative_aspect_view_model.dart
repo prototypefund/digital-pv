@@ -11,7 +11,7 @@ import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
 class NewNegativeAspectViewModel extends NewAspectViewModel<Aspect> {
-  NewNegativeAspectViewModel() : _contentService = getIt.get();
+  NewNegativeAspectViewModel({required super.autofocus}) : _contentService = getIt.get();
 
   final ContentService _contentService;
 

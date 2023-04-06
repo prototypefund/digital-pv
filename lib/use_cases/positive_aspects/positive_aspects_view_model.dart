@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/positive_aspects_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
-import 'package:pd_app/general/navigation/routes.dart';
+import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
 import 'package:pd_app/logging.dart';
@@ -11,20 +9,22 @@ import 'package:pd_app/use_cases/positive_aspects/new_positive_aspect_view_model
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_list_view_model.dart';
 
 class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging {
-  PositiveAspectsViewModel()
-      : _positiveAspectListViewModel = PositiveAspectsListViewModel(),
+  PositiveAspectsViewModel({required Aspect? focusAspect})
+      : newPositiveAspectViewModel = NewPositiveAspectViewModel(autofocus: focusAspect == null),
         _contentService = getIt.get() {
+    _positiveAspectListViewModel = _positiveAspectListViewModel =
+        PositiveAspectsListViewModel(focusAspect: focusAspect, scrollController: scrollController);
     _positiveAspectListViewModel.addListener(_reactToAspectListChange);
   }
 
   final ContentService _contentService;
-  final AspectListViewModel _positiveAspectListViewModel;
+  late AspectListViewModel _positiveAspectListViewModel;
 
   PositiveAspectsPage get pageContent => _contentService.positiveAspectsPage;
 
   AspectListViewModel get positiveAspectListViewModel => _positiveAspectListViewModel;
 
-  final NewPositiveAspectViewModel newPositiveAspectViewModel = NewPositiveAspectViewModel();
+  final NewPositiveAspectViewModel newPositiveAspectViewModel;
 
   @override
   void dispose() {
@@ -35,16 +35,6 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
 
   void _reactToAspectListChange() {
     notifyListeners();
-  }
-
-  @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.welcome);
-  }
-
-  @override
-  void onNextButtonPressed(BuildContext context) {
-    context.go(Routes.negativeAspects);
   }
 
   @override

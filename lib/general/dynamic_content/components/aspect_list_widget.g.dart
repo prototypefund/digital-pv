@@ -13,6 +13,7 @@ AspectListWidget _$AspectListWidgetFromJson(Map<String, dynamic> json) => Aspect
       deleteConfirmationCancel: json['delete_confirmation_cancel'] as String,
       deleteConfirmationConfirm: json['delete_confirmation_confirm'] as String,
       emptyListMessage: json['empty_list_message'] as String,
+      simulateAspectLabel: json['simulate_aspect_label'] as String?,
     );
 
 Map<String, dynamic> _$AspectListWidgetToJson(AspectListWidget instance) => <String, dynamic>{
@@ -22,4 +23,5 @@ Map<String, dynamic> _$AspectListWidgetToJson(AspectListWidget instance) => <Str
       'low_significance_label': instance.lowSignificanceLabel,
       'high_significance_label': instance.highSignificanceLabel,
       'empty_list_message': instance.emptyListMessage,
+      'simulate_aspect_label': instance.simulateAspectLabel,
     };

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
@@ -7,6 +8,7 @@ import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/directive_visualization/directive_visualization.dart';
+import 'package:pd_app/general/view_components/dpv_stepper.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
 import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
@@ -22,9 +24,10 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
 
   static const double maximumContentWidth = 1200;
   static const double responsiveAddonThreshold = Thresholds.responsiveAddonContent;
-  static const double sliverBarContentPadding = 8.0;
+  static const double sliverBarContentPadding = 20;
   static const double contentAreaPadding = 32.0;
-  static const double sliverAppBarExpandedHeight = 160.0;
+  static const double sliverAppBarExpandedHeight = 260.0;
+  static const double stepperHeight = 75.0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +45,46 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
         child: Stack(
           children: [
             CustomScrollView(
+              controller: viewModel.scrollController,
               slivers: [
                 SliverAppBar(
                   automaticallyImplyLeading: false,
                   // disables back button if popping is possible
                   backgroundColor: Theme.of(context).colorScheme.background,
+                  title: SizedBox(
+                    height: stepperHeight,
+                    child: ChangeNotifierProvider(
+                      create: (context) => viewModel,
+                      child: DPVStepper(
+                        physics: const ClampingScrollPhysics(),
+                        currentStep: viewModel.currentStep(context),
+                        type: StepperType.horizontal,
+                        onStepContinue: () {
+                          viewModel.onNextButtonPressed(context);
+                        },
+                        onStepTapped: (int index) {
+                          viewModel.onStepContinue(context, index);
+                        },
+                        onStepCancel: () => viewModel.onBackButtonPressed(context),
+                        steps: viewModel.navigationSteps
+                            .mapIndexed(
+                              (index, e) => Step(
+                                content: const SizedBox(),
+                                state: viewModel.currentStep(context) == index + 1
+                                    ? StepState.editing
+                                    : viewModel.currentStep(context) > index + 1
+                                        ? StepState.complete
+                                        : StepState.disabled,
+                                title: Text(
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                  e.stepName,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ),
                   leading: Builder(builder: (context) {
                     return IconButton(
                       icon: const Icon(
@@ -60,14 +98,19 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   floating: true,
                   collapsedHeight: Sizes.toolbarHeight,
                   expandedHeight: useExtendedWidthForContent ? Sizes.toolbarHeight : sliverAppBarExpandedHeight,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Padding(
-                      padding: const EdgeInsets.all(sliverBarContentPadding),
-                      child: Visibility(
-                          visible: deviceWidth < responsiveAddonThreshold &&
-                              viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
-                          child: DirectiveVisualization.widgetWithViewModel(
-                              showLabels: false, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
+                  flexibleSpace: Container(
+                    margin: const EdgeInsets.only(top: 30.0),
+                    child: FlexibleSpaceBar(
+                      background: Padding(
+                        padding: const EdgeInsets.all(50),
+                        child: Visibility(
+                            visible: deviceWidth < responsiveAddonThreshold &&
+                                viewModel.showAspectVisualizationInNavbarIfNotShowingFloatingVisualization,
+                            child: DirectiveVisualization.widgetWithViewModel(
+                                simulateFutureAspects: viewModel.simulateFutureAspects,
+                                showLabels: false,
+                                showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)),
+                      ),
                     ),
                   ),
                 ),
@@ -100,7 +143,9 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   child: Padding(
                       padding: Paddings.floatingAspectVisualizationPadding,
                       child: DirectiveVisualization.widgetWithViewModel(
-                          showLabels: true, showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
+                          simulateFutureAspects: viewModel.simulateFutureAspects,
+                          showLabels: true,
+                          showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
           ],
         ),
       ),

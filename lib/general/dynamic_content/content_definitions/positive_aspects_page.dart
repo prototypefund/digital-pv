@@ -13,11 +13,13 @@ class PositiveAspectsPage with SerializableAsset {
       required this.aspectListWidget,
       required this.outro,
       required this.locale,
-      required this.addAspectWidget});
+      required this.addAspectWidget,
+      required this.breadcrumbTitle});
 
   factory PositiveAspectsPage.fromJson(Map<String, dynamic> json) => _$PositiveAspectsPageFromJson(json);
 
   factory PositiveAspectsPage.fromCMSJson(Map<String, dynamic> attributesJson) => PositiveAspectsPage(
+      breadcrumbTitle: attributesJson['breadcrumb_title'] as String,
       intro: attributesJson['intro'] as String?,
       outro: attributesJson['outro'] as String?,
       examplesTitle: attributesJson['examples_title'] as String,
@@ -26,6 +28,8 @@ class PositiveAspectsPage with SerializableAsset {
       locale: attributesJson['locale'] as String);
 
   final String locale;
+
+  final String breadcrumbTitle;
 
   final String? intro;
 

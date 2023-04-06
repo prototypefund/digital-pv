@@ -8,6 +8,7 @@ part of 'general_information_about_directive_page.dart';
 
 GeneralInformationAboutDirectivePage _$GeneralInformationAboutDirectivePageFromJson(Map<String, dynamic> json) =>
     GeneralInformationAboutDirectivePage(
+      breadcrumbTitle: json['breadcrumbTitle'] as String,
       intro: json['intro'] as String,
       confirmActionLabel: json['confirm_action_label'] as String,
     );
@@ -15,5 +16,6 @@ GeneralInformationAboutDirectivePage _$GeneralInformationAboutDirectivePageFromJ
 Map<String, dynamic> _$GeneralInformationAboutDirectivePageToJson(GeneralInformationAboutDirectivePage instance) =>
     <String, dynamic>{
       'intro': instance.intro,
+      'breadcrumbTitle': instance.breadcrumbTitle,
       'confirm_action_label': instance.confirmActionLabel,
     };

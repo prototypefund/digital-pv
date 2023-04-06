@@ -1,9 +1,19 @@
 [
   {
     "example": {
-      "id": 22,
+      "id": 20,
       "group": "Family",
-      "title": "Death of my partner",
+      "title": "Death of partner",
+      "contextual_help": null
+    },
+    "id": 20,
+    "locale": "en"
+  },
+  {
+    "example": {
+      "id": 21,
+      "group": "Pain",
+      "title": "Back pain",
       "contextual_help": null
     },
     "id": 21,
@@ -11,22 +21,12 @@
   },
   {
     "example": {
-      "id": 23,
-      "group": "Pain",
-      "title": "Back pain",
+      "id": 22,
+      "group": "Life Situation",
+      "title": "Financial worries",
       "contextual_help": null
     },
     "id": 22,
-    "locale": "en"
-  },
-  {
-    "example": {
-      "id": 24,
-      "group": "Life Situation",
-      "title": "Financial problems",
-      "contextual_help": null
-    },
-    "id": 23,
     "locale": "en"
   }
 ]

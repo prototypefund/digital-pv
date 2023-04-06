@@ -7,37 +7,37 @@
       {
         "content": "# Welcome to d-PV, your digital advance directive\n\nCreate a legally secure advance directive in three steps",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
-          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+          "id": 4,
+          "name": "compass_en.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_en_c918076189.png",
+          "assetPath": "assets/cms/compass_en_c918076189.png"
         }
       },
       {
         "content": "# Specify medical treatment\n\nWith a living will, you can specify your medical treatment in advance in writing in the event that you later become incapable of making decisions or judgements.",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
-          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+          "id": 4,
+          "name": "compass_en.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_en_c918076189.png",
+          "assetPath": "assets/cms/compass_en_c918076189.png"
         }
       },
       {
         "content": "# Compliant with the law\n\nThe dPV complies with the legal requirements in Germany",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
-          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+          "id": 4,
+          "name": "compass_en.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_en_c918076189.png",
+          "assetPath": "assets/cms/compass_en_c918076189.png"
         }
       },
       {
         "content": "# Person of trust\n\nInstead of creating a complete advance directive, you can in principle leave all decisions to the trusted representative. In this case, you can name the representative directly here.",
         "logo": {
-          "id": 2,
-          "name": "placeholder.png",
-          "uri": "https://strapi.dpv.staging.deyan7.de/uploads/placeholder_a37b918ac4.png",
-          "assetPath": "assets/cms/uploads/placeholder_a37b918ac4.png"
+          "id": 4,
+          "name": "compass_en.png",
+          "uri": "https://strapi.dpv.staging.deyan7.de/compass_en_c918076189.png",
+          "assetPath": "assets/cms/compass_en_c918076189.png"
         }
       }
     ]

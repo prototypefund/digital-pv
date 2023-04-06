@@ -27,11 +27,6 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   late TreatmentGoal treatmentGoal;
 
   @override
-  void onBackButtonPressed(BuildContext context) {
-    context.go(Routes.evaluateCurrentAspects);
-  }
-
-  @override
   bool get nextButtonEnabled => false;
 
   String get intro => pageContent.intro;
@@ -87,7 +82,7 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   void onNextButtonPressed(BuildContext context) {}
 
   void onConfirmPressed(BuildContext context) {
-    context.go(Routes.treatmentActivities);
+    context.go(nextRoute(context).path);
   }
 
   void adaptTreatmentGoal(double direction) {

@@ -1,5 +1,6 @@
 [
   {
+    "breadcrumbTitle": "What if?",
     "locale": "en",
     "intro": "# What if?\n\nHere you can define specific actions for potential future situations",
     "aspectListWidget": {
@@ -8,7 +9,8 @@
       "delete_confirmation_confirm": "Remove potential situation",
       "low_significance_label": "Low Significance",
       "high_significance_label": "High Significance",
-      "empty_list_message": "No potential situations have been specified yet"
+      "empty_list_message": "No potential situations have been specified yet",
+      "simulate_aspect_label": "Simulate situation"
     },
     "addAspectWidget": {
       "empty_textfield_hint": "Potential Situations",

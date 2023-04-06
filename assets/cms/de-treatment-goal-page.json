@@ -1,21 +1,22 @@
 [
   {
+    "breadcrumbTitle": "Behandlungsziel",
     "intro": "# Mein Behandlungsziel",
     "treatment_goal_curative_confirmation_question": "Wünschen Sie eine kurative Behandlung?",
     "treatment_goal_palliative_confirmation_question": "Wünschen Sie eine palliative Behandlung?",
     "adjust_arrow_explanation": {
-      "id": 6,
+      "id": 5,
       "title": "Behandlungsziel anpassen",
       "content": "Tippen Sie die rote Kompassnadel an, um die Ausrichtung nach Ihren Wünschen anzupassen."
     },
     "reset_arrow_action_label": "Zurücksetzen",
     "curative_explanation": {
-      "id": 7,
+      "id": 6,
       "title": "Was bedeutet kurativ?",
       "content": "Es wird alles medizinisch Mögliche und Sinnvolle getan, um mein Leben zu erhalten. Die mit der Lebenserhaltung verbundenen Belastungen nehme ich in Kauf."
     },
     "palliative_explanation": {
-      "id": 8,
+      "id": 7,
       "title": "Was bedeutet palliativ?",
       "content": "Die Behandlung zielt vor allem darauf, mein Leiden zu lindern. Eine mögliche Verkürzung meiner Lebenszeit nehme ich in Kauf."
     },

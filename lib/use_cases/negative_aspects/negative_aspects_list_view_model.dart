@@ -7,7 +7,7 @@ import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_mode
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 
 class NegativeAspectsListViewModel extends AspectListViewModel<Aspect> {
-  NegativeAspectsListViewModel() {
+  NegativeAspectsListViewModel({required super.focusAspect, required super.scrollController}) {
     _contentService.addListener(notifyListeners);
   }
 
@@ -49,4 +49,10 @@ class NegativeAspectsListViewModel extends AspectListViewModel<Aspect> {
 
   @override
   String get aspectsSignificanceLowLabel => _contentService.negativeAspectsPage.aspectListWidget.lowSignificanceLabel;
+
+  @override
+  bool get isSimulateAspectEnabled => false;
+
+  @override
+  String get simulateLabel => 'No label';
 }

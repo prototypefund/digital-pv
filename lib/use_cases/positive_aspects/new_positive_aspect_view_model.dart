@@ -11,7 +11,7 @@ import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
 class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
-  NewPositiveAspectViewModel() : _contentService = getIt.get() {
+  NewPositiveAspectViewModel({required super.autofocus}) : _contentService = getIt.get() {
     _contentService.addListener(notifyListeners);
   }
 
@@ -32,7 +32,7 @@ class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
   @override
   void onAddAspectActionPressed(BuildContext context) {
     super.onAddAspectActionPressed(context);
-    context.go(Routes.positiveAspects);
+    context.go(Routes.positiveAspects.path);
   }
 
   @override

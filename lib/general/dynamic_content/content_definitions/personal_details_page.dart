@@ -6,15 +6,21 @@ part 'personal_details_page.g.dart';
 @JsonSerializable()
 class PersonalDetailsPage with SerializableAsset {
   PersonalDetailsPage(
-      {required this.intro, required this.downloadAsPdfActionLabel, required this.showDirectiveActionLabel});
+      {required this.breadcrumbTitle,
+      required this.intro,
+      required this.downloadAsPdfActionLabel,
+      required this.showDirectiveActionLabel});
 
   factory PersonalDetailsPage.fromJson(Map<String, dynamic> json) => _$PersonalDetailsPageFromJson(json);
 
   factory PersonalDetailsPage.fromCMSJson(Map<String, dynamic> attributesJson) => PersonalDetailsPage(
+        breadcrumbTitle: attributesJson['breadcrumb_title'] as String,
         intro: attributesJson['intro'] as String,
         downloadAsPdfActionLabel: attributesJson['download_as_pdf_action_label'] as String,
         showDirectiveActionLabel: attributesJson['show_directive_action_label'] as String,
       );
+
+  final String breadcrumbTitle;
 
   final String intro;
 

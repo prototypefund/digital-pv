@@ -13,10 +13,12 @@ PositiveAspectsPage _$PositiveAspectsPageFromJson(Map<String, dynamic> json) => 
       outro: json['outro'] as String?,
       locale: json['locale'] as String,
       addAspectWidget: AddAspectWidget.fromJson(json['addAspectWidget'] as Map<String, dynamic>),
+      breadcrumbTitle: json['breadcrumbTitle'] as String,
     );
 
 Map<String, dynamic> _$PositiveAspectsPageToJson(PositiveAspectsPage instance) => <String, dynamic>{
       'locale': instance.locale,
+      'breadcrumbTitle': instance.breadcrumbTitle,
       'intro': instance.intro,
       'aspectListWidget': instance.aspectListWidget,
       'addAspectWidget': instance.addAspectWidget,
