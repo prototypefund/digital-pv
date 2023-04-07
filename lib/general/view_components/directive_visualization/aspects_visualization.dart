@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/themes/constraints.dart';
+import 'package:pd_app/general/view_components/directive_visualization/aspect_circle_size_controller.dart';
 import 'package:pd_app/general/view_components/directive_visualization/aspect_positions.dart';
 import 'package:pd_app/general/view_components/directive_visualization/sector.dart';
 import 'package:pd_app/logging.dart';
@@ -8,6 +9,7 @@ import 'package:pd_app/logging.dart';
 class AspectsVisualization extends StatelessWidget with Logging {
   const AspectsVisualization(
       {required this.aspects,
+      required this.aspectCircleSizeController,
       required this.angleForVisualisation,
       required this.activeAspectCircleGradient,
       required this.inactiveAspectCircleGradient,
@@ -20,6 +22,7 @@ class AspectsVisualization extends StatelessWidget with Logging {
   final Gradient inactiveAspectCircleGradient;
   final ValueChanged<Aspect> onAspectTapped;
   final bool simulateFutureAspects;
+  final AspectCircleSizeController aspectCircleSizeController;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,9 @@ class AspectsVisualization extends StatelessWidget with Logging {
 
         final List<Widget> aspectCircles = aspectPositionList.map(
           (visualInformation) {
-            final size = (visualInformation.aspect.weight.value + 0.9) * 10 * radiusScaleFactor;
+            final size = (visualInformation.aspect.weight.value + aspectCircleSizeController.minMaxSizeDifference) *
+                aspectCircleSizeController.sizeMultiplier *
+                radiusScaleFactor;
             final gradient = visualInformation.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;
 
             return Positioned(
