@@ -35,7 +35,7 @@ class AspectsVisualization extends StatelessWidget with Logging {
 
         final List<Widget> aspectCircles = aspectVisualizationInformation.map(
           (visualInformation) {
-            final size = (visualInformation.weight.value + 0.9) * 10 * radiusScaleFactor;
+            final size = (visualInformation.aspect.weight.value + 0.9) * 10 * radiusScaleFactor;
             final gradient = visualInformation.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;
 
             return Positioned(
