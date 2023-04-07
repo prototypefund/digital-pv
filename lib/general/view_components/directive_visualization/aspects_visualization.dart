@@ -29,11 +29,11 @@ class AspectsVisualization extends StatelessWidget with Logging {
 
         final Sector aspectsSector = Sector(angle: angleForVisualisation, radius: constraints.maxWidth / 2);
 
-        final List<AspectVisualizationInformation> aspectVisualizationInformation =
-            AspectPositions(aspects: aspects, sector: aspectsSector, simulateFutureAspects: simulateFutureAspects)
-                .listOfAspectVisualizationInformation;
+        final List<AspectPosition> aspectPositionList =
+            AspectPositionHelper(aspects: aspects, sector: aspectsSector, simulateFutureAspects: simulateFutureAspects)
+                .aspectPositionList;
 
-        final List<Widget> aspectCircles = aspectVisualizationInformation.map(
+        final List<Widget> aspectCircles = aspectPositionList.map(
           (visualInformation) {
             final size = (visualInformation.aspect.weight.value + 0.9) * 10 * radiusScaleFactor;
             final gradient = visualInformation.active ? activeAspectCircleGradient : inactiveAspectCircleGradient;

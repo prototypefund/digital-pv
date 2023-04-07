@@ -3,14 +3,27 @@ import 'package:pd_app/general/model/aspect_with_simulation.dart';
 import 'package:pd_app/general/view_components/directive_visualization/coordinate.dart';
 import 'package:pd_app/general/view_components/directive_visualization/sector.dart';
 
-class AspectPositions {
+class AspectPosition {
+  final Coordinate coordinate;
+  final bool active;
+  final Aspect aspect;
+
+  const AspectPosition({required this.aspect, required this.coordinate, required this.active});
+
+  @override
+  String toString() {
+    return 'AspectVisualizationInformation: coordinate = $coordinate, active = $active, aspect = $aspect';
+  }
+}
+
+class AspectPositionHelper {
   final List<Aspect> aspects;
   final Sector sector;
   final bool simulateFutureAspects;
 
-  AspectPositions({required this.aspects, required this.sector, required this.simulateFutureAspects});
+  AspectPositionHelper({required this.aspects, required this.sector, required this.simulateFutureAspects});
 
-  List<AspectVisualizationInformation> get listOfAspectVisualizationInformation {
+  List<AspectPosition> get aspectPositionList {
     return aspects.asMap().entries.map((entry) {
       final aspect = entry.value;
       final bool active;
@@ -20,7 +33,7 @@ class AspectPositions {
         active = true;
       }
 
-      return AspectVisualizationInformation(
+      return AspectPosition(
         aspect: aspect,
         coordinate: _listOfCoordinates[entry.key],
         active: active,
@@ -99,18 +112,5 @@ class AspectPositions {
         finalList.addAll(_amountOfAspectsOverSectorList(amountOfAspectsLeft - 4));
         return finalList;
     }
-  }
-}
-
-class AspectVisualizationInformation {
-  final Coordinate coordinate;
-  final bool active;
-  final Aspect aspect;
-
-  const AspectVisualizationInformation({required this.aspect, required this.coordinate, required this.active});
-
-  @override
-  String toString() {
-    return 'AspectVisualizationInformation: coordinate = $coordinate, active = $active, aspect = $aspect';
   }
 }
