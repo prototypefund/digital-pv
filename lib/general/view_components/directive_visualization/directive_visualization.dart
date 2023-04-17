@@ -9,6 +9,7 @@ import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/constraints.dart';
 import 'package:pd_app/general/themes/extensions/aspect_visualization_style.dart';
+import 'package:pd_app/general/view_components/directive_visualization/aspect_circle_size_controller.dart';
 import 'package:pd_app/general/view_components/directive_visualization/aspects_visualization.dart';
 import 'package:pd_app/general/view_components/directive_visualization/directive_visualization_view_model.dart';
 import 'package:pd_app/logging.dart';
@@ -191,6 +192,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
               Positioned.fill(
                 child: AspectsVisualization(
                   aspects: viewModel.positiveAspects,
+                  aspectCircleSizeController: AspectCircleSizeController.positiveAspects(),
                   angleForVisualisation: viewModel.aspectEvaluationArrowRotation,
                   activeAspectCircleGradient: activeAspectCircleGradient,
                   simulateFutureAspects: viewModel.simulateFutureAspects,
@@ -205,6 +207,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   angle: viewModel.aspectEvaluationArrowRotation,
                   child: AspectsVisualization(
                     aspects: viewModel.negativeAspects,
+                    aspectCircleSizeController: AspectCircleSizeController.negativeAspects(),
                     angleForVisualisation: math.pi - viewModel.aspectEvaluationArrowRotation,
                     simulateFutureAspects: viewModel.simulateFutureAspects,
                     activeAspectCircleGradient: activeAspectCircleGradient,
@@ -220,6 +223,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
                   angle: math.pi,
                   child: AspectsVisualization(
                     aspects: viewModel.futureAspects,
+                    aspectCircleSizeController: AspectCircleSizeController.futureAspects(),
                     angleForVisualisation: math.pi,
                     activeAspectCircleGradient: activeAspectCircleGradient,
                     simulateFutureAspects: viewModel.simulateFutureAspects,
