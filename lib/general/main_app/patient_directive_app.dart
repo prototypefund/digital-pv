@@ -19,6 +19,10 @@ import 'package:pd_app/use_cases/pdf/directive_pdf_view.dart';
 import 'package:pd_app/use_cases/personal_details/personal_details.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
+import 'package:pd_app/use_cases/upsert_patient_directive_page_1/upsert_patient_directive_page_1_view.dart';
+import 'package:pd_app/use_cases/upsert_patient_directive_page_2/upsert_patient_directive_page_2_view.dart';
+import 'package:pd_app/use_cases/upsert_patient_directive_page_3/upsert_patient_directive_page_3_view.dart';
+import 'package:pd_app/use_cases/upsert_patient_directive_page_4/upsert_patient_directive_page_4_view.dart';
 
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -39,13 +43,48 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     super.initState();
 
     _router = GoRouter(
-        initialLocation: Routes.positiveAspects.path,
+        initialLocation: Routes.upsertPatientDirectivePage1.path,
         routes: [
-          // GoRoute(
-          //   path: Routes.welcome.path,
-          //   pageBuilder: (context, state) =>
-          //       buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
-          // ),
+          GoRoute(
+            path: Routes.upsertPatientDirectivePage1.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage1View>(
+                  key: const ValueKey('upsert-patient-directive-page-1'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage1View.page());
+            },
+          ),
+          GoRoute(
+            path: Routes.upsertPatientDirectivePage2.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage2View>(
+                  key: const ValueKey('upsert-patient-directive-page-2'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage2View.page());
+            },
+          ),
+          GoRoute(
+            path: Routes.upsertPatientDirectivePage3.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage3View>(
+                  key: const ValueKey('upsert-patient-directive-page-3'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage3View.page());
+            },
+          ),
+          GoRoute(
+            path: Routes.upsertPatientDirectivePage4.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage4View>(
+                  key: const ValueKey('upsert-patient-directive-page-4'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage4View.page());
+            },
+          ),
           GoRoute(
             path: Routes.positiveAspects.path,
             pageBuilder: (context, state) {

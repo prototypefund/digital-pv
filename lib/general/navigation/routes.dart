@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 enum Routes {
-  welcome,
+  upsertPatientDirectivePage1,
+  upsertPatientDirectivePage2,
+  upsertPatientDirectivePage3,
+  upsertPatientDirectivePage4,
   positiveAspects,
   negativeAspects,
   evaluateCurrentAspects,
@@ -51,8 +54,15 @@ extension RouteExtension on Routes {
 
   String get path {
     switch (this) {
-      case Routes.welcome:
+      case Routes.upsertPatientDirectivePage1:
         return '/';
+      case Routes.upsertPatientDirectivePage2:
+        return '/${patientDirective}create-account';
+      case Routes.upsertPatientDirectivePage3:
+        return '/${patientDirective}create-account/page-3';
+      case Routes.upsertPatientDirectivePage4:
+        return '/${patientDirective}create-account/page-4';
+
       case Routes.positiveAspects:
         return '/${patientDirective}current-situation/positive-aspects';
       // case Routes.addPositiveAspect:
