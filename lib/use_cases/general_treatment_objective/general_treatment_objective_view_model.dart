@@ -122,7 +122,9 @@ falls ich nicht entscheidungsfähig bin
   }
 
   @override
-  void onNextButtonPressed(BuildContext context) {}
+  void onNextButtonPressed(BuildContext context) {
+    context.go(nextRoute(context).path);
+  }
 
   void onConfirmPressed(BuildContext context) {
     context.go(nextRoute(context).path);
