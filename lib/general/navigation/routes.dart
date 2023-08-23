@@ -18,7 +18,8 @@ enum Routes {
 const focusParam = 'focus';
 
 int currentRouteIndex(BuildContext context) {
-  final currentRouteWithoutParamsUri = Uri.parse(GoRouter.of(context).location).replace(query: '');
+  final currentRouteWithoutParamsUri = Uri.parse(GoRouterState.of(context).uri.toString()).replace(query: '');
+
   return Routes.values.toList().indexWhere((element) => currentRouteWithoutParamsUri.path == element.path);
 }
 

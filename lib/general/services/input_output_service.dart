@@ -65,7 +65,7 @@ class InputOutputService with Logging {
           logger.i("user canceled file picker");
         }
       } catch (error, details) {
-        logger.e('error loading patient directive from file: $error', error, details);
+        logger.e('error loading patient directive from file: $error', error: error, stackTrace: details);
       }
     }
   }

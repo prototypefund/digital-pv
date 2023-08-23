@@ -19,10 +19,6 @@ import 'package:pd_app/use_cases/pdf/directive_pdf_view.dart';
 import 'package:pd_app/use_cases/personal_details/personal_details.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
-import 'package:pd_app/use_cases/welcome/welcome_view.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-
-
 
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -43,16 +39,19 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     super.initState();
 
     _router = GoRouter(
+        initialLocation: Routes.positiveAspects.path,
         routes: [
-          GoRoute(
-            path: Routes.welcome.path,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
-          ),
+          // GoRoute(
+          //   path: Routes.welcome.path,
+          //   pageBuilder: (context, state) =>
+          //       buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
+          // ),
           GoRoute(
             path: Routes.positiveAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[focusParam];
+              final Uri uri = state.uri;
+              final Map<String, String> queryParams = uri.queryParameters;
+              final String? focusSituationName = queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findPositiveAspect(name: focusSituationName);
@@ -66,7 +65,9 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           GoRoute(
             path: Routes.negativeAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[focusParam];
+              final Uri uri = state.uri;
+              final Map<String, String> queryParams = uri.queryParameters;
+              final String? focusSituationName = queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findNegativeAspect(name: focusSituationName);
@@ -96,7 +97,10 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           GoRoute(
             path: Routes.futureSituations.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[focusParam];
+              final Uri uri = state.uri;
+              final Map<String, String> queryParams = uri.queryParameters;
+              final String? focusSituationName = queryParams[focusParam];
+
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findFutureSituation(name: focusSituationName);
@@ -151,24 +155,20 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (newContext, orientation, screenType) {
-        return MaterialApp.router(
-          scrollBehavior: CustomBrowserScrollBehavior(),
-          scaffoldMessengerKey: _navigatorKey,
-          routeInformationProvider: _router.routeInformationProvider,
-          routeInformationParser: _router.routeInformationParser,
-          routerDelegate: _router.routerDelegate,
-          title: 'DPV',
-          theme: Themes().defaultTheme,
-          localizationsDelegates: L10n.localizationsDelegates,
-          supportedLocales: L10n.supportedLocales,
-          locale: widget.locale,
-          builder: (_, widget) {
-            _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
-            return widget ?? const SizedBox();
-          },
-        );
+    return MaterialApp.router(
+      scrollBehavior: CustomBrowserScrollBehavior(),
+      scaffoldMessengerKey: _navigatorKey,
+      routeInformationProvider: _router.routeInformationProvider,
+      routeInformationParser: _router.routeInformationParser,
+      routerDelegate: _router.routerDelegate,
+      title: 'DPV',
+      theme: Themes().defaultTheme,
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      locale: widget.locale,
+      builder: (_, widget) {
+        _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
+        return widget ?? const SizedBox();
       },
     );
   }

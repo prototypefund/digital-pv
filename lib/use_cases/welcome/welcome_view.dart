@@ -5,7 +5,6 @@ import 'package:pd_app/use_cases/welcome/welcome_view_model.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_controller.dart';
 import 'package:pd_app/use_cases/welcome/welcome_view_page_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({super.key});
@@ -41,22 +40,21 @@ class _WelcomeViewState extends State<WelcomeView> {
                 itemCount: _viewModel.pageController.numberOfPages,
                 itemBuilder: (context, pageIndex) {
                   final viewModel = controller.modelAtIndex(pageIndex);
-                  return Padding(
-                    padding: EdgeInsets.fromLTRB(10.0.w, 4.0.h, 10.0.w, 2.0.h),
-                    child: Column(
-                      children: [
-                        Image.asset(viewModel.image, height: 27.0.h),
-                        Flexible(
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 4.0.w, 2.0.h),
+                  return Center(
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                      child: Column(
+                        children: [
+                          Flexible(child: Image.asset(viewModel.image)),
+                          Flexible(
+                            child: Center(
                               child: MarkdownBody(
                                 data: viewModel.markdown,
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -79,7 +77,7 @@ class _WelcomeViewState extends State<WelcomeView> {
     _viewModel = context.watch();
     final controller = _viewModel.pageController;
     return Padding(
-      padding: EdgeInsets.fromLTRB(10.0.w, 2.0.h, 10.0.w, 2.0.h),
+      padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -106,7 +104,7 @@ class _WelcomeViewState extends State<WelcomeView> {
               );
             },
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
+              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
             ),
             child: Text(_viewModel.nextButtonText),
           ),
@@ -117,11 +115,11 @@ class _WelcomeViewState extends State<WelcomeView> {
 
   Padding _lastPage(WelcomeViewModel viewModel, BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10.0.w, 2.h, 10.0.w, 2.0.h),
+      padding: const EdgeInsets.fromLTRB(10.0, 2, 10.0, 2.0),
       child: ElevatedButton(
         onPressed: () => viewModel.onCallToActionPressed(context),
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
         ),
         child: Text(viewModel.callToActionText),
       ),

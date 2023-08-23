@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:pd_app/general/background.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/directive_visualization/directive_visualization.dart';
+import 'package:pd_app/general/view_components/dpv_next_page_button.dart';
 import 'package:pd_app/general/view_components/dpv_stepper.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer.dart';
 import 'package:pd_app/general/view_components/navigation_drawer/drawer_view_model.dart';
@@ -33,7 +33,6 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
   Widget build(BuildContext context) {
     final ViewModelType viewModel = context.watch<ViewModelType>();
     final double deviceWidth = MediaQuery.of(context).size.width;
-    final double paddingTop = MediaQuery.of(context).padding.top;
     final useExtendedWidthForContent = deviceWidth >= responsiveAddonThreshold;
     return Scaffold(
       drawer: ChangeNotifierProvider(create: (_) => DrawerViewModel(), child: const DPVDrawer()),
@@ -115,37 +114,35 @@ class CreationProcessNavigation<ViewModelType extends CreationProcessNavigationV
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: BackgroundContainer(
-                    child: ConstrainedSliverWidth(
-                      maxWidth: maximumContentWidth,
-                      child: Padding(
-                        padding: const EdgeInsets.all(contentAreaPadding),
-                        // will just make empty space for the stack to be drawn upon further up the widget tree
-                        child: viewModel.showFloatingAspectVisualizationIfSpaceAvailable
-                            ? ResponsiveAddonContent(
-                                extendedContent: const SizedBox.shrink(),
-                                widthThreshold: responsiveAddonThreshold,
-                                child: widget,
-                              )
-                            : widget,
-                      ),
+                  child: ConstrainedSliverWidth(
+                    maxWidth: maximumContentWidth,
+                    child: Padding(
+                      padding: const EdgeInsets.all(contentAreaPadding),
+                      // will just make empty space for the stack to be drawn upon further up the widget tree
+                      child: viewModel.showFloatingAspectVisualizationIfSpaceAvailable
+                          ? ResponsiveAddonContent(
+                              extendedContent: const SizedBox.shrink(),
+                              widthThreshold: responsiveAddonThreshold,
+                              child: widget,
+                            )
+                          : widget,
                     ),
                   ),
-                )
+                ),
               ],
             ),
-            if (deviceWidth > responsiveAddonThreshold && viewModel.showFloatingAspectVisualizationIfSpaceAvailable)
-              Positioned(
-                  left: deviceWidth * 0.6,
-                  right: 0,
-                  top: 0 + paddingTop + Sizes.toolbarHeight,
-                  bottom: 0,
-                  child: Padding(
-                      padding: Paddings.floatingAspectVisualizationPadding,
-                      child: DirectiveVisualization.widgetWithViewModel(
-                          simulateFutureAspects: viewModel.simulateFutureAspects,
-                          showLabels: true,
-                          showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
+            // if (deviceWidth > responsiveAddonThreshold && viewModel.showFloatingAspectVisualizationIfSpaceAvailable)
+            // Positioned(
+            //     left: deviceWidth * 0.6,
+            //     right: 0,
+            //     top: 0 + paddingTop + Sizes.toolbarHeight,
+            //     bottom: 0,
+            //     child: Padding(
+            //         padding: Paddings.floatingAspectVisualizationPadding,
+            //         child: DirectiveVisualization.widgetWithViewModel(
+            //             simulateFutureAspects: viewModel.simulateFutureAspects,
+            //             showLabels: true,
+            //             showTreatmentGoal: viewModel.showTreatmentGoalInVisualization)))
           ],
         ),
       ),
@@ -183,56 +180,44 @@ class NavigationBarButtons<ViewModelType extends CreationProcessNavigationViewMo
   Widget build(BuildContext context) {
     final ViewModelType viewModel = context.watch();
 
-    const iconSize = 16.0;
-
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 800),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Visibility(
-                    visible: viewModel.backButtonVisible,
-                    child: ElevatedButton.icon(
-                      icon: const Icon(
-                        Icons.arrow_back_ios_sharp,
-                        size: iconSize,
-                      ),
-                      onPressed: viewModel.backButtonEnabled ? () => viewModel.onBackButtonPressed(context) : null,
-                      label: Text(viewModel.backButtonText),
-                    ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 48),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Visibility(
+                  visible: viewModel.backButtonVisible,
+                  child: DPVNextPageButton(
+                    title: viewModel.backButtonText,
+                    onPressed: viewModel.backButtonEnabled ? () => viewModel.onBackButtonPressed(context) : () {},
+                    canProceed: true,
                   ),
-                  const Expanded(
-                    child: SizedBox(),
+
+                  // ElevatedButton.icon(
+                  //   icon: const Icon(
+                  //     Icons.arrow_back_ios_sharp,
+                  //     size: iconSize,
+                  //   ),
+                  //   onPressed: viewModel.backButtonEnabled ? () => viewModel.onBackButtonPressed(context) : null,
+                  //   label: Text(viewModel.backButtonText),
+                  // ),
+                ),
+                Visibility(
+                  visible: viewModel.nextButtonVisible,
+                  child: DPVNextPageButton(
+                    alignment: Alignment.centerLeft,
+                    title: viewModel.nextButtonText,
+                    onPressed: viewModel.backButtonEnabled ? () => viewModel.onNextButtonPressed(context) : () {},
+                    canProceed: true,
                   ),
-                  Visibility(
-                    visible: viewModel.nextButtonVisible,
-                    child: viewModel.nextButtonShowArrow
-                        ? ElevatedButton.icon(
-                            icon: const Icon(
-                              Icons.arrow_forward_ios_sharp,
-                              size: iconSize,
-                            ),
-                            onPressed:
-                                viewModel.nextButtonEnabled ? () => viewModel.onNextButtonPressed(context) : null,
-                            label: Text(
-                              viewModel.nextButtonText,
-                            ))
-                        : ElevatedButton(
-                            onPressed:
-                                viewModel.nextButtonEnabled ? () => viewModel.onNextButtonPressed(context) : null,
-                            child: Text(
-                              viewModel.nextButtonText,
-                            )),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -17,8 +17,7 @@ class SimpleLogPrinter extends LogPrinter {
     final level = event.level;
     final dynamic message = event.message;
     final prefix = SimplePrinter.levelPrefixes[level]!;
-    final emoji = PrettyPrinter.levelEmojis[level]!;
-
+    final String emoji = PrettyPrinter().levelEmojis![level]!;
     final trace = Trace.current();
     final classAndMethod = trace.frames.length > 3 ? trace.frames[3].member : '';
 

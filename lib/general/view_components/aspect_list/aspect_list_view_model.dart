@@ -85,7 +85,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     final allAspectsFromDirective = List.of(aspectListChoice(currentPatientDirective));
 
     final removedAspects = oldAspects.toSet().difference(allAspectsFromDirective.toSet());
-    logger.v('handling ${removedAspects.length} removed aspects');
+    logger.t('handling ${removedAspects.length} removed aspects');
     for (final aspect in removedAspects) {
       onAspectRemoved?.call(aspect);
       _aspects.remove(aspect);
@@ -103,7 +103,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     }
 
     final newAspects = _aspects.toSet().difference(oldAspects.toSet());
-    logger.v('handling ${newAspects.length} new aspects');
+    logger.t('handling ${newAspects.length} new aspects');
     for (final aspect in newAspects) {
       onAspectAdded?.call(aspect);
     }
@@ -131,7 +131,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   }
 
   void _reactToPatientDirectiveChange() {
-    logger.v('aspect list reacting to patient directive change');
+    logger.t('aspect list reacting to patient directive change');
     final List<AspectType> aspectsInService = aspectListChoice(_patientDirectiveService.currentPatientDirective);
     final bool sortAspects;
     if (aspectsInService.length != _aspects.length) {
@@ -145,7 +145,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   }
 
   void changeAspectWeight({required AspectType aspect, required double weight}) {
-    logger.v('changing weight of $aspect to $weight');
+    logger.t('changing weight of $aspect to $weight');
 
     final currentDirective = _patientDirectiveService.currentPatientDirective;
 
