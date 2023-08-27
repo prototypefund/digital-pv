@@ -119,27 +119,6 @@ class NegativeAspects extends StatelessWidget {
     ];
   }
 
-  List<Widget> get items {
-    return [
-      ...Iterable<int>.generate(25).map(
-        (i) => card(
-          more: "Mehr",
-          markdown: """
-#### Beispiel 
-Positiver Aspekt des aktuellen Lebens
-### Unabhängigkeit
-""",
-          assetPath: "assets/images/create.svg",
-        ),
-      )
-    ];
-  }
-
-  PageController pageController(NegativeAspectsViewModel viewModel, double viewPortFraction) {
-    return viewModel.pageController =
-        PageController(viewportFraction: viewPortFraction, initialPage: items.length > 4 ? 1 : 0);
-  }
-
   Widget selectItem(BuildContext context, NegativeAspectsViewModel viewModel) {
     return ChangeNotifierProvider.value(
         value: context.select((NegativeAspectsViewModel viewModel) => viewModel.negativeAspectsListViewModel),

@@ -28,51 +28,9 @@ Widget buildText(String text, BuildContext context, {Color textColor = DefaultTh
   );
 }
 
-md.MarkdownStyleSheet get answerStyle => md.MarkdownStyleSheet(
-      p: const TextStyle(color: DefaultThemeColors.black),
-    );
-
 const double maximumContentWidth = 1200;
 const double responsiveAddonThreshold = Thresholds.responsiveAddonContent;
 const double contentAreaPadding = 32.0;
-
-Widget wrapper(BuildContext context, CreationProcessNavigationViewModel viewModel, Widget widget) {
-  return Scaffold(
-    bottomNavigationBar: const Card(
-        margin: EdgeInsets.zero,
-        child: Padding(
-            padding: Paddings.bottomNavigationBarPadding,
-            child: NavigationBarButtons<CreationProcessNavigationViewModel>())),
-    body: ColoredBox(
-      color: Theme.of(context).colorScheme.background,
-      child: Stack(
-        children: [
-          CustomScrollView(
-            controller: viewModel.scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: ConstrainedSliverWidth(
-                  maxWidth: maximumContentWidth,
-                  child: Padding(
-                    padding: const EdgeInsets.all(contentAreaPadding),
-                    // will just make empty space for the stack to be drawn upon further up the widget tree
-                    child: viewModel.showFloatingAspectVisualizationIfSpaceAvailable
-                        ? ResponsiveAddonContent(
-                            extendedContent: const SizedBox.shrink(),
-                            widthThreshold: responsiveAddonThreshold,
-                            child: widget,
-                          )
-                        : widget,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
 Widget buildRowWithExpandedText(BuildContext context, String question, String answer,
     {md.MarkdownStyleSheet? questionStyle,

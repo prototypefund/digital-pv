@@ -20,8 +20,6 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
     _contentService.addListener(notifyListeners);
   }
 
-  double currentSliderValue = 20;
-
   final TrianglePainter trianglePainter = TrianglePainter();
   final TrianglePainter trianglePainterRight = TrianglePainter(tipDirection: TipDirection.right);
 

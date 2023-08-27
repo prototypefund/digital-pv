@@ -187,28 +187,3 @@ class _Border extends StatelessWidget {
         child: child);
   }
 }
-
-class ExpandableWrapper extends StatelessWidget {
-  final Widget child;
-  final Icon icon;
-
-  const ExpandableWrapper({super.key, required this.child, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: Wrap(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Row(
-              children: [child],
-            ),
-          ),
-          ExpandableButton(child: icon),
-        ],
-      ),
-    );
-  }
-}
