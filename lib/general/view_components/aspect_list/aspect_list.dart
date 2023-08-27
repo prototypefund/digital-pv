@@ -17,21 +17,6 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
   Widget build(BuildContext context) {
     final AspectListViewModel<AspectType> viewModel = context.watch();
 
-    viewModel.onAspectAdded = (AspectType newAspect) {
-      logger.d('adding new aspect to existing list in an animated way');
-      final int index = viewModel.aspects.indexOf(newAspect);
-      _listKey.currentState?.insertItem(index);
-    };
-
-    viewModel.onAspectRemoved = (AspectType removedAspect) {
-      logger.d('removing removed aspect in an animated way');
-      final int oldIndex = viewModel.aspects.indexOf(removedAspect);
-      _listKey.currentState?.removeItem(
-          oldIndex,
-          (context, animation) => _buildListItem(
-              animation: animation, aspect: removedAspect, viewModel: viewModel, interactive: false, index: oldIndex));
-    };
-
     return Column(
       children: [
         buildCenterText(viewModel.selectItemTitle, context),
@@ -142,55 +127,8 @@ ${viewModel.cardSubtitle(index)}
     );
   }
 
-  Widget buildListItem(BuildContext context, int index, Animation<double> animation) {
-    final AspectListViewModel<AspectType> viewModel = context.watch();
-    final AspectType aspect = viewModel.aspects[index];
-    return SizedBox(
-      height: viewModel.listItemHeight,
-      child: Padding(
-        key: Key(aspect.name),
-        padding: Paddings.listElementPadding,
-        child:
-            _buildListItem(animation: animation, aspect: aspect, viewModel: viewModel, interactive: true, index: index),
-      ),
-    );
-  }
-
   PageController pageController(AspectListViewModel viewModel, double viewPortFraction) {
     return viewModel.pageController =
-        PageController(viewportFraction: viewPortFraction, initialPage: viewModel.aspects.isNotEmpty ? 1 : 0);
-  }
-
-  Widget _buildListItem(
-      {required Animation<double> animation,
-      required AspectType aspect,
-      required AspectListViewModel viewModel,
-      required bool interactive,
-      required int index}) {
-    return SizeTransition(
-      sizeFactor: animation,
-      child: FadeTransition(
-        opacity: animation,
-        child: AspectWidget<AspectType>(
-            aspect: aspect,
-            sliderDescription: '',
-            sliderHighLabel: viewModel.aspectSignificanceHighLabel,
-            sliderLowLabel: viewModel.aspectsSignificanceLowLabel,
-            onPositionChange: !interactive
-                ? null
-                : (oldIndex, newIndex) {
-                    logger.d('position change, from $oldIndex to $newIndex');
-                    _listKey.currentState?.removeItem(
-                        oldIndex,
-                        (context, animation) => _buildListItem(
-                            animation: animation,
-                            aspect: aspect,
-                            viewModel: viewModel,
-                            interactive: false,
-                            index: index));
-                    _listKey.currentState?.insertItem(newIndex);
-                  }),
-      ),
-    );
+        PageController(viewportFraction: viewPortFraction, initialPage: viewModel.allAspects.isNotEmpty ? 1 : 0);
   }
 }
