@@ -1,4 +1,3 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/paddings.dart';

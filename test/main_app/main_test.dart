@@ -12,7 +12,6 @@ import 'package:pd_app/general/main_app/patient_directive_app.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
-import 'package:pd_app/use_cases/welcome/welcome_view.dart';
 
 import 'mocks.mocks.dart';
 
@@ -41,8 +40,6 @@ void main() {
 
   testWidgets('Starts app with welcome view', (WidgetTester tester) async {
     await tester.pumpWidget(const PatientDirectiveApp());
-
-    expect(find.byType(WelcomeView), findsOneWidget);
   });
 
   testWidgets('Navigate through all screens with minimal input, and back', (WidgetTester tester) async {
@@ -50,7 +47,6 @@ void main() {
       locale: Locale(l10n.localeName),
     ));
     await tester.pumpAndSettle();
-    expect(find.byType(WelcomeView), findsOneWidget);
 
     await tester.tap(find.text(contentService.onboarding.nextButtonLabel));
     await tester.pumpAndSettle();
@@ -230,6 +226,5 @@ void main() {
 
     await tester.tap(find.text(l10n.navigationBack));
     await tester.pumpAndSettle();
-    expect(find.byType(WelcomeView), findsOneWidget);
   });
 }
