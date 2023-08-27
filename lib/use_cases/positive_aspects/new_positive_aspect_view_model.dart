@@ -15,6 +15,35 @@ class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
     _contentService.addListener(notifyListeners);
   }
 
+  String get nextButtonText => "Bestätigen";
+
+  @override
+  String get selectedItemContent => """
+### Eigener Aspekt 
+Positiver Aspekt des aktuellen Lebens
+## Genesung""";
+  @override
+  String get more => "Mehr";
+  @override
+  String get title => "### Bitte beschreiben Sie Ihren positiven Aspekt";
+
+  @override
+  String get aspectNameLabel => "Wie soll Ihr Aspekt heißen?";
+  @override
+  String get aspectNameHint => "Genesung";
+  @override
+  String get aspectDetailLabel => "Hier können Sie Details beschreiben (optional)";
+
+  @override
+  String get sliderLabel => "Welche Bedeutung hat der Aspekt für Sie?";
+
+  @override
+  String get lowWeightLabel => "niedrig";
+  @override
+  String get middleWeightLabel => "mittel";
+  @override
+  String get highWeightLabel => "hoch";
+
   final ContentService _contentService;
 
   @override
@@ -36,8 +65,8 @@ class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
   }
 
   @override
-  Aspect createNewAspect({required String name, required Weight weight}) {
-    return Aspect(name: name, weight: weight);
+  Aspect createNewAspect({required String name, required Weight weight, String? description}) {
+    return Aspect(name: name, weight: weight, description: description);
   }
 
   @override

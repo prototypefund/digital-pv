@@ -47,7 +47,9 @@ class EvaluateCurrentAspects extends StatelessWidget {
           buildText(viewModel.subtopic, context, Theme.of(context).textTheme.headlineSmall!),
           const SizedBox(height: 120),
           buildCenterText(viewModel.visualizationTitle, context, Theme.of(context).textTheme.headlineSmall!),
-          const WebGaugeViewContainer(),
+          WebGaugeViewContainer(
+            value: viewModel.currentAspectsScore,
+          ),
           DPVWrappedBoxCheckbox(
             height: 234,
             title: viewModel.expectationMatch,

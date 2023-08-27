@@ -38,6 +38,8 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
     }
   }
 
+  double get generalTreatmentGoalScore => _patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value;
+
   @override
   bool get nextButtonEnabled => _expectationMatchSelected || _expectationMismatchSelected;
 
@@ -123,6 +125,7 @@ falls ich nicht entscheidungsfähig bin
 
   @override
   void onNextButtonPressed(BuildContext context) {
+    adaptTreatmentGoal(_expectationMatchSelected ? 1 : -1);
     context.go(nextRoute(context).path);
   }
 

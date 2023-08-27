@@ -10,6 +10,42 @@ import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.
 class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
   NewFutureSituationViewModel({required super.autofocus}) : _contentService = getIt.get();
 
+  String get descriptionOne => "### Welche Bedeutung hat diese Situation für Sie?";
+
+  String get explanationOne => """
+Mit dem Slider können Sie einstellen, welche **Bedeutung**
+diese Was wäre wenn-Situation für **Sie hat**. Die Bedeutung
+hat direkten **Einfluss auf Ihr Behandlungsziel**. Dabei gilt:
+Je höher die Bedeutung, desto größer der Einfluss. Sie können den Einfluss Ihrer Was wäre wenn-Situation auf Ihr Behandlungs- ziel jederzeit simulieren lassen.
+""";
+  @override
+  String get selectedItemContent => """
+#### Was wäre wenn-Situation und zugehörige Maßnahmen
+## Ihre Situation
+""";
+
+  @override
+  String get more => "Mehr";
+
+  @override
+  String get title => "#### Bedeutung";
+
+  @override
+  String get aspectNameLabel => "Wie soll Ihre Situation lauten?";
+  @override
+  String get aspectNameHint => "Wachkoma";
+  @override
+  String get aspectDetailLabel => "Hier können Sie Details beschreiben (optional)";
+
+  @override
+  String get sliderLabel => "Welche Bedeutung hat die Situation für Sie?";
+  @override
+  String get lowWeightLabel => "niedrig";
+  @override
+  String get middleWeightLabel => "mittel";
+  @override
+  String get highWeightLabel => "hoch";
+
   final ContentService _contentService;
 
   @override
@@ -26,8 +62,12 @@ class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
   String get examplesText => _contentService.futureSituationsPage.examplesTitle;
 
   @override
-  FutureSituation createNewAspect({required String name, required Weight weight}) {
-    return FutureSituation(name: name, weight: weight, treatmentActivitiyPreferences: []);
+  FutureSituation createNewAspect({required String name, required Weight weight, String? description}) {
+    return FutureSituation(
+      name: name,
+      weight: weight,
+      treatmentActivitiyPreferences: [],
+    );
   }
 
   @override

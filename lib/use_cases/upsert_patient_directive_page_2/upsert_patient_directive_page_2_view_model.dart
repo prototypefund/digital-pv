@@ -7,6 +7,8 @@ class UpsertPatientDirectivePage2ViewModel extends CreationProcessNavigationView
   final ContentService _contentService;
   bool _createPatientDirectiveIsSelected = false;
   bool _editPatientDirectiveIsSelected = false;
+  @override
+  bool get showAppBar => false;
 
   UpsertPatientDirectivePage2ViewModel() : _contentService = getIt.get() {
     _contentService.addListener(notifyListeners);

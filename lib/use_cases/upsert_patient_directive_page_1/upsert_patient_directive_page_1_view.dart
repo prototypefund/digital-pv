@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
-import 'package:pd_app/general/view_components/dpv_next_page_button.dart';
 import 'package:pd_app/general/view_components/dpv_wrapped_box_checkbox.dart';
 import 'package:pd_app/use_cases/upsert_patient_directive_page_1/upsert_patient_directive_page_1_view_model.dart';
 import 'package:provider/provider.dart';

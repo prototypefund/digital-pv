@@ -55,6 +55,15 @@ class _DPVCardWithCheckboxBelowState extends State<DPVCardWithCheckboxBelow> {
   }
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    key.currentState?.setChecked(widget.value ?? false);
+    _isChecked = widget.value ?? false;
+    widget.onChanged?.call(_isChecked);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

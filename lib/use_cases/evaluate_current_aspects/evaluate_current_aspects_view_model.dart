@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/quality_of_life_page.dart';
 import 'package:pd_app/general/init/get_it.dart';
+import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/logging.dart';
@@ -22,6 +24,8 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
   bool get showPositiveSummary {
     return _patientDirectiveService.currentPatientDirective.currentAspectsScore >= 0;
   }
+
+  double get currentAspectsScore => _patientDirectiveService.currentPatientDirective.currentAspectsScore;
 
   String get subtitle => "Maßnahmen und Situationen beschreiben";
   String get title => "Lassen Sie uns zusammenfassen:";
@@ -73,8 +77,13 @@ class EvaluateCurrentAspectsViewModel extends CreationProcessNavigationViewModel
     notifyListeners();
   }
 
-  void onConfirmPressed(BuildContext context) {
-    onNextButtonPressed(context);
+  @override
+  void onNextButtonPressed(BuildContext context) {
+    if (_expectationMismatchSelected) {
+      context.go(Routes.positiveAspects.path);
+    } else {
+      context.go(Routes.generalTreatmentObjective.path);
+    }
   }
 
   @override

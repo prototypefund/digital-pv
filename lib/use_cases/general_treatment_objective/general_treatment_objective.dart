@@ -48,8 +48,7 @@ class GeneralTreatmentObjective extends StatelessWidget {
           buildText(viewModel.subtopic, context, Theme.of(context).textTheme.titleSmall!),
           const SizedBox(height: 120),
           buildCenterText(viewModel.visualizationTitle, context, Theme.of(context).textTheme.headlineSmall!),
-          const WebGaugeViewContainer(value: 22.0 //viewModel.treatmentGoal.value,
-              ),
+          WebGaugeViewContainer(value: viewModel.generalTreatmentGoalScore == 1 ? 0.0 : 1.0),
           DPVWrappedBoxCheckbox(
             height: 261,
             title: viewModel.expectationMatch,

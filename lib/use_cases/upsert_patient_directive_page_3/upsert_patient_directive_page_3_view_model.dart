@@ -11,6 +11,12 @@ class UpsertPatientDirectivePage3ViewModel extends CreationProcessNavigationView
   }
 
   @override
+  bool get backButtonVisible => false;
+
+  @override
+  bool get showAppBar => false;
+
+  @override
   void dispose() {
     super.dispose();
     _contentService.removeListener(notifyListeners);

@@ -29,8 +29,8 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
   final TextEditingController aspectNameController = TextEditingController();
   final TextEditingController detailDescriptionController = TextEditingController();
 
-  NavigationStep _navigationStep = NavigationStep.description;
-  NavigationStep get navigationStep => _navigationStep;
+  NavigationSubStep _navigationStep = NavigationSubStep.description;
+  NavigationSubStep get navigationStep => _navigationStep;
 
   final ContentService _contentService = getIt.get();
 
@@ -47,7 +47,18 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
   String get subtopic => "### Negatives";
 
   @override
-  String get nextButtonText => "Negative Aspekte beschreiben";
+  String get nextButtonText {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        return "Negative Aspekte beschreiben";
+      case NavigationSubStep.select:
+        return "Aspekt beschreiben";
+      case NavigationSubStep.edit:
+        return "Bestätigen";
+      case NavigationSubStep.complete:
+        return "Negative Aspekte abschließen";
+    }
+  }
 
   String get visualizationTitle => "### Aktuelle Lebensqualität";
 
@@ -67,7 +78,7 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
       "Sie haben **5 Negative Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
 
   String get completeExplanationOne =>
-      "Sie haben Ihrer Lebensqualität mit 5 Aspekten be- schrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
+      "Sie haben Ihrer Lebensqualität mit 5 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
   String get completeDescriptionTwo => "Möchten Sie weitere Negative Aspekte nennen?.";
   String get completeExplanationTwo =>
       "Sie können nun die Beschreibung der Negativen Aspekte abschließen. Natürlich können Sie alternativ gerne Ihre aktuelle Lebensqualität mit weiteren Negativen Aspekten noch besser beschreiben.";
@@ -78,16 +89,10 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
   String get aspectNameHint => "Genesung";
   String get aspectDetailLabel => "Hier können Sie Details beschreiben (optional)";
 
-  String get ownAspect => """
-### Eigener Aspekt 
+  String get selectedItemContent => """
+### Eigener Aspekt
 Negativer Aspekt des aktuellen Lebens
 ## Genesung""";
-
-  String get lowWeightLabel => "niedrig";
-  String get middleWeightLabel => "mittel";
-  String get highWeightLabel => "hoch";
-
-  String get selectAspectTitle => "## Welchen Aspekt möchten Sie beschreiben?";
 
   @override
   void dispose() {
@@ -97,18 +102,49 @@ Negativer Aspekt des aktuellen Lebens
   }
 
   @override
+  void onBackButtonPressed(BuildContext context) {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        super.onBackButtonPressed(context);
+
+        break;
+      case NavigationSubStep.select:
+        _navigationStep = NavigationSubStep.description;
+        break;
+      case NavigationSubStep.edit:
+        _navigationStep = NavigationSubStep.select;
+        break;
+      case NavigationSubStep.complete:
+        _navigationStep = NavigationSubStep.edit;
+        break;
+    }
+    notifyListeners();
+  }
+
+  @override
+  bool get nextButtonEnabled =>
+      _navigationStep != NavigationSubStep.edit ||
+      newNegativeAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty;
+
+  @override
   void onNextButtonPressed(BuildContext context) {
     switch (_navigationStep) {
-      case NavigationStep.description:
-        _navigationStep = NavigationStep.select;
+      case NavigationSubStep.description:
+        _navigationStep = NavigationSubStep.select;
+
         break;
-      case NavigationStep.select:
-        _navigationStep = NavigationStep.edit;
+      case NavigationSubStep.select:
+        _navigationStep = NavigationSubStep.edit;
         break;
-      case NavigationStep.edit:
-        _navigationStep = NavigationStep.complete;
+      case NavigationSubStep.edit:
+        if (_negativeAspectsListViewModel.aspects.length >= 4) {
+          _navigationStep = NavigationSubStep.complete;
+        } else {
+          _navigationStep = NavigationSubStep.select;
+        }
+        newNegativeAspectViewModel.onAddAspectActionPressed(context);
         break;
-      case NavigationStep.complete:
+      case NavigationSubStep.complete:
         super.onNextButtonPressed(context);
         break;
     }

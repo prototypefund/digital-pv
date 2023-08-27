@@ -9,6 +9,8 @@ class UpsertPatientDirectivePage4ViewModel extends CreationProcessNavigationView
   bool _cardOneIsSelected = false;
   bool _cardTwoIsSelected = false;
   bool _cardThreeIsSelected = false;
+  @override
+  bool get showAppBar => false;
 
   UpsertPatientDirectivePage4ViewModel() : _contentService = getIt.get() {
     _contentService.addListener(notifyListeners);

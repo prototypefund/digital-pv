@@ -8,7 +8,9 @@ import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
+import 'package:pd_app/general/view_components/directive_visualization/triangle_painter.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/future_situations/future_situations_list_view_model.dart';
 
 /// this model can be used as part of another view model, which displays a lists of aspects
 /// The implementing model needs to define some concrete implementations. The model can then be provided to an AspectList
@@ -19,9 +21,29 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   AspectListViewModel(
       {required this.scrollController, this.onAspectAdded, this.onAspectRemoved, required this.focusAspect})
       : _patientDirectiveService = getIt.get() {
+    Future.delayed(const Duration(seconds: 1)).then((value) {
+      _aspects = [
+        if (runtimeType == FutureSituationsListViewModel)
+          FutureSituation(
+              name: "Was wäre wenn-Situation und zugehörige Maßnahmen",
+              weight: Weight(value: 0.5),
+              treatmentActivitiyPreferences: []) as AspectType,
+        if (runtimeType != FutureSituationsListViewModel)
+          Aspect(name: "Ihr Aspekt", weight: Weight(value: 0.4)) as AspectType,
+      ];
+    });
+    notifyListeners();
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService(sortAspects: true);
   }
+
+  String get selectItemTitle => "## Welchen Aspekt möchten Sie beschreiben?";
+  final TrianglePainter trianglePainter = TrianglePainter();
+  final TrianglePainter trianglePainterRight = TrianglePainter(tipDirection: TipDirection.right);
+  late PageController pageController;
+
+  String get cardTitle;
+  String cardSubtitle(int index);
 
   bool _hasScrolledToFocusItem = false;
 

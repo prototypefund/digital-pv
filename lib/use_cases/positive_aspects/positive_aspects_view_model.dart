@@ -5,17 +5,13 @@ import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
-import 'package:pd_app/general/view_components/directive_visualization/triangle_painter.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/positive_aspects/new_positive_aspect_view_model.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_list_view_model.dart';
 
-enum NavigationStep { description, select, edit, complete }
+enum NavigationSubStep { description, select, edit, complete }
 
 class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with Logging {
-  final TrianglePainter trianglePainter = TrianglePainter();
-  final TrianglePainter trianglePainterRight = TrianglePainter(tipDirection: TipDirection.right);
-
   PositiveAspectsViewModel({required Aspect? focusAspect})
       : newPositiveAspectViewModel = NewPositiveAspectViewModel(autofocus: focusAspect == null),
         _contentService = getIt.get() {
@@ -24,14 +20,8 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
     _positiveAspectListViewModel.addListener(_reactToAspectListChange);
   }
 
-  double currentSliderValue = 20;
-
-  late PageController pageController;
-  final TextEditingController aspectNameController = TextEditingController();
-  final TextEditingController detailDescriptionController = TextEditingController();
-
-  NavigationStep _navigationStep = NavigationStep.description;
-  NavigationStep get navigationStep => _navigationStep;
+  NavigationSubStep _navigationStep = NavigationSubStep.description;
+  NavigationSubStep get navigationStep => _navigationStep;
 
   final ContentService _contentService;
   late AspectListViewModel _positiveAspectListViewModel;
@@ -47,7 +37,18 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   String get subtopic => "### Positives";
 
   @override
-  String get nextButtonText => "Positive Aspekte beschreiben";
+  String get nextButtonText {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        return "Positive Aspekte beschreiben";
+      case NavigationSubStep.select:
+        return "Aspekt beschreiben";
+      case NavigationSubStep.edit:
+        return "Bestätigen";
+      case NavigationSubStep.complete:
+        return "Positive Aspekte abschließen";
+    }
+  }
 
   String get visualizationTitle => "### Aktuelle Lebensqualität";
 
@@ -66,27 +67,10 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
       "Sie haben **5 positive Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
 
   String get completeExplanationOne =>
-      "Sie haben Ihrer Lebensqualität mit 5 Aspekten be- schrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
+      "Sie haben Ihrer Lebensqualität mit 5 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
   String get completeDescriptionTwo => "Möchten Sie weitere positive Aspekte nennen?.";
   String get completeExplanationTwo =>
       "Sie können nun die Beschreibung der positiven Aspekte abschließen. Natürlich können Sie alternativ gerne Ihre aktuelle Lebensqualität mit weiteren positiven Aspekten noch besser beschreiben.";
-  String get more => "Mehr";
-  String get describePositiveAspectTitle => "### Bitte beschreiben Sie Ihren positiven Aspekt";
-
-  String get aspectNameLabel => "Wie soll Ihr Aspekt heißen?";
-  String get aspectNameHint => "Genesung";
-  String get aspectDetailLabel => "Hier können Sie Details beschreiben (optional)";
-
-  String get ownAspect => """
-### Eigener Aspekt 
-Positiver Aspekt des aktuellen Lebens
-## Genesung""";
-
-  String get lowWeightLabel => "niedrig";
-  String get middleWeightLabel => "mittel";
-  String get highWeightLabel => "hoch";
-
-  String get selectAspectTitle => "## Welchen Aspekt möchten Sie beschreiben?";
 
   @override
   void dispose() {
@@ -100,19 +84,50 @@ Positiver Aspekt des aktuellen Lebens
   }
 
   @override
+  bool get nextButtonEnabled =>
+      _navigationStep != NavigationSubStep.edit ||
+      newPositiveAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty;
+
+  @override
   void onNextButtonPressed(BuildContext context) {
     switch (_navigationStep) {
-      case NavigationStep.description:
-        _navigationStep = NavigationStep.select;
+      case NavigationSubStep.description:
+        _navigationStep = NavigationSubStep.select;
+
         break;
-      case NavigationStep.select:
-        _navigationStep = NavigationStep.edit;
+      case NavigationSubStep.select:
+        _navigationStep = NavigationSubStep.edit;
         break;
-      case NavigationStep.edit:
-        _navigationStep = NavigationStep.complete;
+      case NavigationSubStep.edit:
+        if (_positiveAspectListViewModel.aspects.length >= 4) {
+          _navigationStep = NavigationSubStep.complete;
+        } else {
+          _navigationStep = NavigationSubStep.select;
+        }
+        newPositiveAspectViewModel.onAddAspectActionPressed(context);
         break;
-      case NavigationStep.complete:
+      case NavigationSubStep.complete:
         super.onNextButtonPressed(context);
+        break;
+    }
+    notifyListeners();
+  }
+
+  @override
+  void onBackButtonPressed(BuildContext context) {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        super.onBackButtonPressed(context);
+
+        break;
+      case NavigationSubStep.select:
+        _navigationStep = NavigationSubStep.description;
+        break;
+      case NavigationSubStep.edit:
+        _navigationStep = NavigationSubStep.select;
+        break;
+      case NavigationSubStep.complete:
+        _navigationStep = NavigationSubStep.edit;
         break;
     }
     notifyListeners();

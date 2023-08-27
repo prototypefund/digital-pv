@@ -18,6 +18,21 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     aspectTextFieldController.addListener(_reactToTextChange);
   }
 
+  final TextEditingController detailDescriptionController = TextEditingController();
+
+  String get selectedItemContent => throw Exception("selectedItemContent not implemented");
+  String get more => throw Exception("More not implemented");
+  String get title => throw Exception("title not implemented");
+
+  String get aspectNameLabel => throw Exception("Aspect name label not implemented");
+  String get aspectNameHint => throw Exception("Aspect name hint not implemented");
+  String get aspectDetailLabel => throw Exception("Aspect detail label not implemented");
+
+  String get sliderLabel => throw Exception("Slider label not implemented");
+  String get lowWeightLabel => throw Exception("Low weight label not implemented");
+  String get middleWeightLabel => throw Exception("Middle weight label not implemented");
+  String get highWeightLabel => throw Exception("High weight label not implemented");
+
   AspectListChoice<AspectType> get aspectListChoice;
 
   final PatientDirectiveService _patientDirectiveService;
@@ -56,11 +71,13 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     notifyListeners();
   }
 
-  AspectType createNewAspect({required String name, required Weight weight});
+  AspectType createNewAspect({required String name, required Weight weight, String? description});
 
   void onAddAspectActionPressed(BuildContext context) {
-    final Aspect newAspect =
-        createNewAspect(name: aspectTextFieldController.text.trim(), weight: Weight(value: weight));
+    final Aspect newAspect = createNewAspect(
+        name: aspectTextFieldController.text.trim(),
+        weight: Weight(value: weight),
+        description: detailDescriptionController.text);
     final PatientDirective currentDirective = _patientDirectiveService.currentPatientDirective;
 
     final List<Aspect> aspectsToManipulate = aspectListChoice(currentDirective);
@@ -68,6 +85,7 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     _patientDirectiveService.currentPatientDirective = currentDirective;
 
     aspectTextFieldController.text = "";
+    detailDescriptionController.text = "";
     notifyListeners();
   }
 

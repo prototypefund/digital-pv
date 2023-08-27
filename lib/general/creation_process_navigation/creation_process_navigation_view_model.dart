@@ -11,6 +11,12 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
     _contentService.addListener(notifyListeners);
   }
 
+  void update() {
+    notifyListeners();
+  }
+
+  bool get showAppBar => true;
+
   final ContentService _contentService = getIt.get();
 
   String get nextButtonText => l10n.navigationNext;
@@ -39,7 +45,7 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
     context.go(routes[indexToGoTo].path);
   }
 
-  int currentStep(BuildContext context) => currentRouteIndex(context);
+  int currentStep(BuildContext context) => currentRouteIndex(context) - 3; // because of upsert pages
 
   bool get backButtonEnabled => true;
 

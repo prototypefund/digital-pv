@@ -25,4 +25,5 @@ mixin DefaultThemeColors {
   static const Color cyan = Color.fromARGB(255, 123, 211, 191);
   static const Color brownGrey = Color(0xffBBB0A9);
   static const Color blue = Color(0xffCCDEFF);
+  static const Color darkBlue = Color.fromARGB(255, 80, 112, 174);
 }
