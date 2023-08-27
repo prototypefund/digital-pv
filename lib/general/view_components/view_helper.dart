@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart' as md;
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pd_app/general/creation_process_navigation/creation_process_navigation.dart';
-import 'package:pd_app/general/creation_process_navigation/creation_process_navigation_view_model.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/themes/colors.dart';
-import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/dpv_button.dart';
 import 'package:pd_app/general/view_components/dpv_card_with_checkbox_below.dart';
-import 'package:pd_app/general/view_components/responsive_addon_content/responsive_addon_content.dart';
 
 Widget buildCenterText(String text, BuildContext context, {Color textColor = DefaultThemeColors.black}) {
   return Center(
