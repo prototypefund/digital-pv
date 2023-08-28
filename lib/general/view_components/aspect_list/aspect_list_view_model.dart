@@ -1,9 +1,12 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
+import 'package:pd_app/general/dynamic_content/content_definitions/aspects_example.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/weight.dart';
+import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/themes/sizes.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
@@ -11,6 +14,8 @@ import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/directive_visualization/triangle_painter.dart';
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations_list_view_model.dart';
+import 'package:pd_app/use_cases/negative_aspects/negative_aspects_list_view_model.dart';
+import 'package:pd_app/use_cases/positive_aspects/positive_aspects_list_view_model.dart';
 
 /// this model can be used as part of another view model, which displays a lists of aspects
 /// The implementing model needs to define some concrete implementations. The model can then be provided to an AspectList
@@ -21,21 +26,23 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   AspectListViewModel(
       {required this.scrollController, this.onAspectAdded, this.onAspectRemoved, required this.focusAspect})
       : _patientDirectiveService = getIt.get() {
-    Future.delayed(const Duration(seconds: 1)).then((value) {
-      _aspects = [
-        if (runtimeType == FutureSituationsListViewModel)
-          FutureSituation(
-              name: "Was wäre wenn-Situation und zugehörige Maßnahmen",
-              weight: Weight(value: 0.5),
-              treatmentActivitiyPreferences: []) as AspectType,
-        if (runtimeType != FutureSituationsListViewModel)
-          Aspect(name: "Ihr Aspekt", weight: Weight(value: 0.4)) as AspectType,
-      ];
-    });
+    // Future.delayed(const Duration(seconds: 1)).then((value) {
+    //   _aspects = [
+    //     if (runtimeType == FutureSituationsListViewModel)
+    //       FutureSituation(
+    //           name: "Was wäre wenn-Situation und zugehörige Maßnahmen",
+    //           weight: Weight(value: 0.5),
+    //           treatmentActivitiyPreferences: []) as AspectType,
+    //     if (runtimeType != FutureSituationsListViewModel)
+    //       Aspect(name: "Ihr Aspekt", weight: Weight(value: 0.4)) as AspectType,
+    //   ];
+    // });
     notifyListeners();
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     _updateAspectsFromService(sortAspects: true);
   }
+
+  final ContentService _contentService = getIt.get();
 
   String get selectItemTitle => "## Welchen Aspekt möchten Sie beschreiben?";
   final TrianglePainter trianglePainter = TrianglePainter();
@@ -216,6 +223,34 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   }
 
   List<AspectType> get aspects => _aspects;
+
+  List<AspectType> get allAspects {
+    List<AspectsExample> examples = [];
+    switch (runtimeType) {
+      case FutureSituationsListViewModel:
+        examples = _contentService.futureSituationsExamples;
+        break;
+      case PositiveAspectsListViewModel:
+        examples = _contentService.positiveAspectsExamples;
+        break;
+      case NegativeAspectsListViewModel:
+        examples = _contentService.negativeAspectsExamples;
+        break;
+    }
+    return [
+      ..._aspects,
+      ...examples.map((e) => runtimeType == FutureSituationsListViewModel
+          ? FutureSituation(name: e.example.title, weight: Weight(value: 0.5), treatmentActivitiyPreferences: [])
+              as AspectType
+          : Aspect(name: e.example.group, description: e.example.title, weight: Weight(value: 0.5)) as AspectType)
+    ];
+  }
+
+  void onAspectSelected(AspectType aspect, {bool selected = true}) {
+    _aspects.firstWhereOrNull((element) => element == aspect)?.isSelected = selected;
+
+    notifyListeners();
+  }
 
   void _sortAspects() {
     _aspects.sort((aspect1, aspect2) => aspect2.weight.value.compareTo(aspect1.weight.value));

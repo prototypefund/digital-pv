@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart' as md;
 import 'package:pd_app/general/model/aspect.dart';
-import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_model.dart';
-import 'package:pd_app/general/view_components/aspect_widget/aspect_widget.dart';
 import 'package:pd_app/general/view_components/view_helper.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
 
 class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging {
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-
   AspectList({super.key});
 
   @override
@@ -57,16 +53,16 @@ class AspectList<AspectType extends Aspect> extends StatelessWidget with Logging
                   child: PageView.builder(
                       controller: pageController(viewModel, (310) / constraints.maxWidth),
                       scrollDirection: Axis.horizontal,
-                      itemCount: viewModel.aspects.length,
+                      itemCount: viewModel.allAspects.length,
                       itemBuilder: (context, index) {
-                        final aspect = viewModel.aspects[index];
+                        final aspect = viewModel.allAspects[index];
                         return Padding(
                             padding: const EdgeInsets.only(left: 25, right: 25, top: 100, bottom: 0),
                             child: card(
+                              checked: aspect.isSelected,
                               onChanged: (value) {
-                                // example.selected = value ?? false;
+                                viewModel.onAspectSelected(aspect);
                               },
-                              // checked: example.selected,
                               edgeInsets: const EdgeInsets.all(12),
                               styleSheet: md.MarkdownStyleSheet(
                                   p: const TextStyle(fontSize: 14),
