@@ -110,18 +110,18 @@ abstract class AspectListViewModel<AspectType extends Aspect>
       javascriptJsonArray.add({
         "value": (positiveAspect.weight.value * 100).round(),
         "key": positiveAspect.name,
-        "selected": "false",
-        "show_label": "true",
-        "positive": "true"
+        "selected": false,
+        "show_label": true,
+        "positive": true
       });
     }
     for (final negativeAspect in _patientDirectiveService.currentPatientDirective.negativeAspects) {
       javascriptJsonArray.add({
         "value": (negativeAspect.weight.value * 100).round(),
         "key": negativeAspect.name,
-        "selected": "false",
-        "show_label": "true",
-        "positive": "false"
+        "selected": false,
+        "show_label": true,
+        "positive": false
       });
     }
     final jsonArray = jsonEncode(javascriptJsonArray);
