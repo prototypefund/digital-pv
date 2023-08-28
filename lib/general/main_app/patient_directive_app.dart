@@ -204,7 +204,7 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
       theme: Themes().defaultTheme,
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
-      locale: Locale.fromSubtags(languageCode: "de"),
+      locale: const Locale.fromSubtags(languageCode: "de"),
       builder: (_, widget) {
         _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
         return widget ?? const SizedBox();
