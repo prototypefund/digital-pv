@@ -107,12 +107,22 @@ abstract class AspectListViewModel<AspectType extends Aspect>
     final List<Map<String, dynamic>> javascriptJsonArray = [];
 
     for (final positiveAspect in _patientDirectiveService.currentPatientDirective.positiveAspects) {
-      javascriptJsonArray.add(
-          {"value": "40", "key": positiveAspect.name, "selected": "false", "show_label": "true", "positive": "true"});
+      javascriptJsonArray.add({
+        "value": (positiveAspect.weight.value * 100).round(),
+        "key": positiveAspect.name,
+        "selected": "false",
+        "show_label": "true",
+        "positive": "true"
+      });
     }
     for (final negativeAspect in _patientDirectiveService.currentPatientDirective.negativeAspects) {
-      javascriptJsonArray.add(
-          {"value": "40", "key": negativeAspect.name, "selected": "false", "show_label": "true", "positive": "false"});
+      javascriptJsonArray.add({
+        "value": (negativeAspect.weight.value * 100).round(),
+        "key": negativeAspect.name,
+        "selected": "false",
+        "show_label": "true",
+        "positive": "false"
+      });
     }
     final jsonArray = jsonEncode(javascriptJsonArray);
 
