@@ -38,8 +38,8 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
     }
   }
 
-  double get generalTreatmentGoalScore {
-    return (_patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value * -50) + 50;
+  double get currentAspectScore {
+    return (_patientDirectiveService.currentPatientDirective.currentAspectsScore * -50) + 50;
   }
 
   @override

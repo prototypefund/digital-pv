@@ -43,9 +43,7 @@ class _TreatmentActivitiesState extends State<TreatmentActivities> with RootCont
           buildText(viewModel.subtopic, context),
           const SizedBox(height: 120),
           buildCenterText(viewModel.visualizationTitle, context),
-          WebGaugeViewContainer(
-            value: viewModel.isCurative ? 0.0 : 1.0,
-          ),
+          WebGaugeViewContainer(value: viewModel.currentAspectScore),
           DPVWrappedBoxCheckbox(
             height: 288,
             title: viewModel.situationsTitle,

@@ -35,6 +35,10 @@ class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewM
 
   bool get isCurative => _patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value == 1;
 
+  double get currentAspectScore {
+    return (_patientDirectiveService.currentPatientDirective.currentAspectsScore * -50) + 50;
+  }
+
   String get subtitle => "### Maßnahmen und Situationen beschreiben";
   String get title =>
       isCurative ? "## Sie wünschen eine kurative Behandlung." : "## Sie wünschen eine palliative Behandlung.";
