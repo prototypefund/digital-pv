@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 import 'package:webviewx/webviewx.dart';
+import 'package:collection/collection.dart';
 
 class WebViewContainer extends StatefulWidget {
   const WebViewContainer({super.key, this.data = "var data = [ ];"});
@@ -11,16 +12,18 @@ class WebViewContainer extends StatefulWidget {
 }
 
 class _WebViewContainerState extends State<WebViewContainer> {
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
+  String? _oldData;
+
+  Function deepEq = const DeepCollectionEquality.unordered().equals;
 
   @override
   void didUpdateWidget(covariant WebViewContainer oldWidget) {
     if (webviewController != null) {
-      webviewController!.loadContent(_buildWebviewContent(), SourceType.html);
+      // ignore: avoid_dynamic_calls
+      if (widget.data.isNotEmpty && _oldData != null && deepEq(widget.data, _oldData) == false) {
+        webviewController!.loadContent(_buildWebviewContent(), SourceType.html);
+      }
+      _oldData = widget.data;
     }
     super.didUpdateWidget(oldWidget);
   }
