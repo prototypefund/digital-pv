@@ -38,7 +38,9 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
     }
   }
 
-  double get generalTreatmentGoalScore => _patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value;
+  double get generalTreatmentGoalScore {
+    return (_patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value * -50) + 50;
+  }
 
   @override
   bool get nextButtonEnabled => _expectationMatchSelected || _expectationMismatchSelected;
