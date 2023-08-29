@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/markdown/markdown_body.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 import 'package:webviewx/webviewx.dart';
 import 'package:collection/collection.dart';
@@ -40,6 +41,48 @@ class _WebViewContainerState extends State<WebViewContainer> {
       width: double.maxFinite,
       height: 250,
       initialContent: _buildWebviewContent(),
+      dartCallBacks: {
+        DartCallback(
+          name: 'delete_or_edit_item',
+          callBack: (message) {
+            print(message);
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Row(
+                    children: [
+                      Text('Ausgewählter Aspekt: $message'),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                  content: const MarkdownBody(content: 'Bitte wählen Sie eine der folgenden Aktionen aus.'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Bearbeiten'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Löschen'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+      },
       initialSourceType: SourceType.html,
       onWebViewCreated: (controller) {
         webviewController = controller;
@@ -161,6 +204,9 @@ class _WebViewContainerState extends State<WebViewContainer> {
         .on("mouseover", mouseover) // What to do when hovered
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+         .on("click", function (d, i) {
+          delete_or_edit_item(d.key);
+        })
         .call(d3.drag() // call specific function when circle is dragged
             .on("start", dragstarted)
             .on("drag", dragged)
