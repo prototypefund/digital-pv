@@ -73,11 +73,11 @@ falls ich nicht entscheidungsfähig bin
 
   @override
   void onNextButtonPressed(BuildContext context) {
-    if (_situationSelected) {
-      context.go(Routes.futureSituations.path);
-    } else {
-      _navigationStep = NavigationSubStep.select;
-    }
+    // if (_situationSelected) {
+    context.go(Routes.futureSituations.path);
+    // } else {
+    //   _navigationStep = NavigationSubStep.select;
+    // }
   }
 
   @override

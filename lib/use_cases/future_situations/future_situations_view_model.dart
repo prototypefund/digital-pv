@@ -18,6 +18,7 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
         treatmentActivititySelectionViewModel = TreatmentActivitySelectionViewModel(autofocus: focusAspect == null) {
     _futureSituationsListViewModel =
         FutureSituationsListViewModel(focusAspect: focusAspect, scrollController: scrollController);
+    _futureSituationsListViewModel.addListener(_reactToAspectListChange);
     _contentService.addListener(notifyListeners);
   }
 
@@ -81,20 +82,26 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
         _navigationStep = NavigationSubStep.description;
         break;
       case NavigationSubStep.edit:
-        _navigationStep = NavigationSubStep.assignTreatmentActivity;
-        break;
-      case NavigationSubStep.assignTreatmentActivity:
         _navigationStep = NavigationSubStep.select;
         break;
-      case NavigationSubStep.complete:
+      case NavigationSubStep.assignTreatmentActivity:
         _navigationStep = NavigationSubStep.edit;
+        break;
+      case NavigationSubStep.complete:
+        _navigationStep = NavigationSubStep.assignTreatmentActivity;
         break;
     }
     notifyListeners();
   }
 
   @override
-  bool get nextButtonEnabled => true;
+  bool get nextButtonEnabled =>
+      _navigationStep == NavigationSubStep.select && newFutureSituationViewModel.selectedAspect != null ||
+      _navigationStep == NavigationSubStep.edit &&
+          newFutureSituationViewModel.aspectTextFieldController.text.trim().isNotEmpty ||
+      _navigationStep == NavigationSubStep.complete ||
+      _navigationStep == NavigationSubStep.assignTreatmentActivity ||
+      _navigationStep == NavigationSubStep.description;
 
   @override
   void onNextButtonPressed(BuildContext context) {
@@ -139,9 +146,18 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
   @override
   void dispose() {
     super.dispose();
+    _futureSituationsListViewModel.removeListener(_reactToAspectListChange);
+
     _futureSituationsListViewModel.dispose();
     treatmentActivititySelectionViewModel.dispose();
     _contentService.removeListener(notifyListeners);
+  }
+
+  void _reactToAspectListChange() {
+    newFutureSituationViewModel.selectedAspect = _futureSituationsListViewModel.selectedAspect as FutureSituation?;
+    treatmentActivititySelectionViewModel.selectedAspect =
+        _futureSituationsListViewModel.selectedAspect as FutureSituation?;
+    notifyListeners();
   }
 
   @override

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
-import 'package:pd_app/general/model/future_situation.dart';
-import 'package:pd_app/general/model/weight.dart';
+import 'package:pd_app/general/model/aspect_with_simulation.dart';
 import 'package:pd_app/general/themes/colors.dart';
-import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
 import 'package:pd_app/general/view_components/custom_track_shape.dart';
 import 'package:pd_app/general/view_components/directive_visualization/border_slider_thumb_shape.dart';
+import 'package:pd_app/general/view_components/dpv_card_with_checkbox_below.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_form_change_notification.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 import 'package:pd_app/general/view_components/view_helper.dart';
 import 'package:pd_app/logging.dart';
-import 'package:pd_app/use_cases/future_situations/future_situation_treatment_activities_selection_view_model.dart';
 import 'package:pd_app/use_cases/future_situations/new_future_situation_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +20,7 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
     return Row(
       children: [
         card(
+            state: CheckboxState(),
             showCheckboxBelow: false,
             markdown: viewModel.selectedItemContent,
             assetPath: "assets/images/create.svg",
@@ -33,6 +32,14 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (viewModel.runtimeType == NewFutureSituationViewModel) ...[
+                  ElevatedButton.icon(
+                      icon: Icon(
+                        Icons.explore,
+                      ),
+                      onPressed: () => (viewModel as NewFutureSituationViewModel)
+                          .toggleSimulation(aspect: viewModel.selectedAspect!),
+                      label: Text((viewModel as NewFutureSituationViewModel).simulateLabel)),
+                  const SizedBox(height: 80),
                   buildRowWithExpandedText(
                     context,
                     (viewModel as NewFutureSituationViewModel).descriptionOne,

@@ -14,18 +14,22 @@ import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.da
 
 class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with AspectViewModel, Logging {
   NegativeAspectsViewModel({required Aspect? focusAspect})
-      : newNegativeAspectViewModel = NewNegativeAspectViewModel(autofocus: focusAspect == null) {
+      : newNegativeAspectViewModel = NewNegativeAspectViewModel(autofocus: focusAspect == null),
+        aspectNameController = TextEditingController(),
+        detailDescriptionController = TextEditingController() {
     _negativeAspectsListViewModel =
         NegativeAspectsListViewModel(focusAspect: focusAspect, scrollController: scrollController);
     _contentService.addListener(notifyListeners);
+
+    _negativeAspectsListViewModel.addListener(_reactToAspectListChange);
   }
 
   final TrianglePainter trianglePainter = TrianglePainter();
   final TrianglePainter trianglePainterRight = TrianglePainter(tipDirection: TipDirection.right);
 
   late PageController pageController;
-  final TextEditingController aspectNameController = TextEditingController();
-  final TextEditingController detailDescriptionController = TextEditingController();
+  final TextEditingController aspectNameController;
+  final TextEditingController detailDescriptionController;
 
   NavigationSubStep _navigationStep = NavigationSubStep.description;
   NavigationSubStep get navigationStep => _navigationStep;
@@ -96,7 +100,12 @@ Negativer Aspekt des aktuellen Lebens
   void dispose() {
     super.dispose();
     _negativeAspectsListViewModel.dispose();
-    _contentService.removeListener(notifyListeners);
+    _negativeAspectsListViewModel.removeListener(_reactToAspectListChange);
+  }
+
+  void _reactToAspectListChange() {
+    newNegativeAspectViewModel.selectedAspect = _negativeAspectsListViewModel.selectedAspect;
+    notifyListeners();
   }
 
   @override
@@ -121,8 +130,11 @@ Negativer Aspekt des aktuellen Lebens
 
   @override
   bool get nextButtonEnabled =>
-      _navigationStep != NavigationSubStep.edit ||
-      newNegativeAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty;
+      _navigationStep == NavigationSubStep.select && newNegativeAspectViewModel.selectedAspect != null ||
+      _navigationStep == NavigationSubStep.edit &&
+          newNegativeAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty ||
+      _navigationStep == NavigationSubStep.complete ||
+      _navigationStep == NavigationSubStep.description;
 
   @override
   void onNextButtonPressed(BuildContext context) {

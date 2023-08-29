@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/dynamic_content/content_definitions/treatment_activity.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
-import 'package:pd_app/general/themes/paddings.dart';
 import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view_model.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
+import 'package:pd_app/general/view_components/dpv_card_with_checkbox_below.dart';
 import 'package:pd_app/general/view_components/dpv_checkbox_card.dart';
-import 'package:pd_app/general/view_components/dpv_dropdown.dart';
 import 'package:pd_app/general/view_components/dpv_wrapped_box_checkbox.dart';
 import 'package:pd_app/logging.dart';
 import 'package:provider/provider.dart';
@@ -38,18 +37,13 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // onChanged: (String? value) {
-          //   logger.d('changing activity ${activity.activity} to value $value');
-          //   viewModel.updateChoice(activity, value);
-          // },
-
           DPVWrappedBoxCheckbox(
             crossAxisAlignment: CrossAxisAlignment.start,
             borderRadius: BorderRadius.circular(35),
             showCheckbox: false,
             title: '',
             padding: const EdgeInsets.all(14),
-            edgeInsets: EdgeInsets.zero,
+            edgeInsets: const EdgeInsets.all(14),
             titleChild: Stack(
               children: [
                 Positioned(
@@ -69,9 +63,19 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
                 """)),
                     Wrap(spacing: 14, runSpacing: 14, children: [
                       ...activity.choices.map((value) => value.choice).toList().map((choice) {
+                        final state = CheckboxState();
+                        state.setChecked(viewModel.getCurrentChoice(activity) == choice);
                         return Row(children: [
-                          const DPVCheckboxCard(
-                            checkboxOnly: true,
+                          ChangeNotifierProvider<CheckboxState>(
+                            key: UniqueKey(),
+                            create: (_) => state,
+                            child: DPVCheckboxCard(
+                              checkboxOnly: true,
+                              onChanged: (value) {
+                                logger.d('changing activity ${activity.activity} to value $value');
+                                viewModel.updateChoice(activity, choice);
+                              },
+                            ),
                           ),
                           const SizedBox(width: 14),
                           Expanded(child: Text(choice, softWrap: true)),
@@ -83,7 +87,7 @@ class TreatmentActivitiesSelection<ViewModelType extends TreatmentActivitiesSele
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );

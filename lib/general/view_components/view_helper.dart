@@ -6,6 +6,7 @@ import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/themes/thresholds.dart';
 import 'package:pd_app/general/view_components/dpv_button.dart';
 import 'package:pd_app/general/view_components/dpv_card_with_checkbox_below.dart';
+import 'package:provider/provider.dart';
 
 Widget buildCenterText(String text, BuildContext context, {Color textColor = DefaultThemeColors.black}) {
   return Center(
@@ -57,18 +58,21 @@ Widget buildRowWithExpandedText(BuildContext context, String question, String an
   );
 }
 
-Widget card(
-    {required String markdown,
-    required String assetPath,
-    bool showCheckboxBelow = true,
-    required String more,
-    md.MarkdownStyleSheet? styleSheet,
-    EdgeInsets? edgeInsets,
-    Function(bool?)? onChanged,
-    bool? checked}) {
-  return DPVCardWithCheckboxBelow(
+Widget card({
+  required String markdown,
+  required String assetPath,
+  bool showCheckboxBelow = true,
+  required String more,
+  md.MarkdownStyleSheet? styleSheet,
+  EdgeInsets? edgeInsets,
+  Function(bool?)? onChanged,
+  required CheckboxState state,
+}) {
+  return ChangeNotifierProvider<CheckboxState>(
+    create: (_) => state,
+    child: DPVCardWithCheckboxBelow(
       onChanged: onChanged,
-      value: false,
+
       edgeInsets: EdgeInsets.zero,
       showCheckboxBelow: showCheckboxBelow,
       showCheckbox: false,
@@ -100,7 +104,9 @@ Widget card(
               title: more,
             )
           ]),
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.only(left: 14, right: 14),
       height: 440,
-      width: 270);
+      width: 270,
+    ),
+  );
 }

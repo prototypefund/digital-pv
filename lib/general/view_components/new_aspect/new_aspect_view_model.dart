@@ -13,12 +13,16 @@ import 'package:pd_app/logging.dart';
 
 abstract class NewAspectViewModel<AspectType extends Aspect>
     with RootContextL10N, AspectViewModel, Logging, ChangeNotifier {
-  NewAspectViewModel({required this.autofocus}) : _patientDirectiveService = getIt.get() {
+  NewAspectViewModel({required this.autofocus, AspectType? selectedAspect})
+      : _patientDirectiveService = getIt.get(),
+        _selectedAspect = selectedAspect,
+        aspectTextFieldController = TextEditingController(),
+        detailDescriptionController = TextEditingController() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     aspectTextFieldController.addListener(_reactToTextChange);
   }
 
-  final TextEditingController detailDescriptionController = TextEditingController();
+  final TextEditingController detailDescriptionController;
 
   String get selectedItemContent => throw Exception("selectedItemContent not implemented");
   String get more => throw Exception("More not implemented");
@@ -41,6 +45,18 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
 
   final bool autofocus;
 
+  AspectType? _selectedAspect;
+
+  set selectedAspect(AspectType? newAspect) {
+    _selectedAspect = newAspect;
+    aspectTextFieldController.text = _selectedAspect?.name ?? "";
+    detailDescriptionController.text = _selectedAspect?.description ?? "";
+    weight = _selectedAspect?.weight.value ?? 0.5;
+    notifyListeners();
+  }
+
+  AspectType? get selectedAspect => _selectedAspect;
+
   @override
   void dispose() {
     super.dispose();
@@ -48,7 +64,7 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     aspectTextFieldController.removeListener(_reactToTextChange);
   }
 
-  final TextEditingController aspectTextFieldController = TextEditingController();
+  final TextEditingController aspectTextFieldController;
 
   String get addAspectTextfieldHint;
 

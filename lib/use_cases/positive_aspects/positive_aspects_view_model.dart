@@ -80,13 +80,17 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   }
 
   void _reactToAspectListChange() {
+    newPositiveAspectViewModel.selectedAspect = _positiveAspectListViewModel.selectedAspect;
     notifyListeners();
   }
 
   @override
   bool get nextButtonEnabled =>
-      _navigationStep != NavigationSubStep.edit ||
-      newPositiveAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty;
+      _navigationStep == NavigationSubStep.select && newPositiveAspectViewModel.selectedAspect != null ||
+      _navigationStep == NavigationSubStep.edit &&
+          newPositiveAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty ||
+      _navigationStep == NavigationSubStep.complete ||
+      _navigationStep == NavigationSubStep.description;
 
   @override
   void onNextButtonPressed(BuildContext context) {

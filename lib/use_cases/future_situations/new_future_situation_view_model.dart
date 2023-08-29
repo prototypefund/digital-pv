@@ -4,11 +4,13 @@ import 'package:pd_app/general/model/future_situation.dart';
 import 'package:pd_app/general/model/patient_directive.dart';
 import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/services/content_service.dart';
+import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
 class TreatmentActivitySelectionViewModel extends NewFutureSituationViewModel {
   TreatmentActivitySelectionViewModel({required super.autofocus});
+
   @override
   String get descriptionOne => "### Nehmen Sie sich **Zeit**.  ";
 
@@ -23,7 +25,13 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
 }
 
 class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
-  NewFutureSituationViewModel({required super.autofocus}) : _contentService = getIt.get();
+  NewFutureSituationViewModel({required super.autofocus, super.selectedAspect})
+      : _contentService = getIt.get(),
+        _patientDirectiveService = getIt.get();
+
+  String get simulateLabel => _contentService.futureSituationsPage.aspectListWidget.simulateAspectLabel ?? '';
+
+  final PatientDirectiveService _patientDirectiveService;
 
   String get descriptionOne => "### Welche Bedeutung hat diese Situation für Sie?";
 
@@ -36,7 +44,7 @@ Je höher die Bedeutung, desto größer der Einfluss. Sie können den Einfluss I
   @override
   String get selectedItemContent => """
 #### Was wäre wenn-Situation und zugehörige Maßnahmen
-## Ihre Situation
+### ${selectedAspect?.name}
 """;
 
   @override
@@ -83,6 +91,19 @@ Je höher die Bedeutung, desto größer der Einfluss. Sie können den Einfluss I
       weight: weight,
       treatmentActivitiyPreferences: [],
     );
+  }
+
+  void toggleSimulation({required FutureSituation aspect}) {
+    logger.d('toggle simulation property of future situation $aspect');
+
+    final currentDirective = _patientDirectiveService.currentPatientDirective;
+    final index = currentDirective.futureSituationAspects.indexWhere((element) => element == aspect);
+
+    final updatedFutureSituations = List<FutureSituation>.from(currentDirective.futureSituationAspects);
+    updatedFutureSituations[index] = aspect.copyWith(simulateAspect: !aspect.simulateAspect);
+
+    final updatedDirective = currentDirective.copyWith(futureSituationAspects: updatedFutureSituations);
+    _patientDirectiveService.currentPatientDirective = updatedDirective;
   }
 
   @override
