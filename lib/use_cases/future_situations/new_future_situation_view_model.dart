@@ -7,6 +7,21 @@ import 'package:pd_app/general/services/content_service.dart';
 import 'package:pd_app/general/view_components/aspect_list_choice.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 
+class TreatmentActivitySelectionViewModel extends NewFutureSituationViewModel {
+  TreatmentActivitySelectionViewModel({required super.autofocus});
+  @override
+  String get descriptionOne => "### Nehmen Sie sich **Zeit**.  ";
+
+  @override
+  String get explanationOne =>
+      "Nehmen Sie sich die **Zeit, die Sie benötigen**. Sie können unterbrechen, den aktuellen Stand speichern, um z.B. mit Angehörigen, Freunden oder Ärzt:innen zu sprechen und später an diesem Punkt weiterzumachen.";
+
+  String get descriptionTwo => "### Sehen Sie den **Effekt**.";
+  String get explanationTwo => """
+Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich den Effekt auf Ihr Behandlungsziel zeigen lassen. Drücken Sie dazu den Button "Eintritt simulieren".
+""";
+}
+
 class NewFutureSituationViewModel extends NewAspectViewModel<FutureSituation> {
   NewFutureSituationViewModel({required super.autofocus}) : _contentService = getIt.get();
 

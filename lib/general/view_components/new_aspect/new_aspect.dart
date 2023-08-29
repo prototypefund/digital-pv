@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
+import 'package:pd_app/general/model/future_situation.dart';
+import 'package:pd_app/general/model/weight.dart';
 import 'package:pd_app/general/themes/colors.dart';
+import 'package:pd_app/general/treatment_activities/treatment_activities_selection_view.dart';
 import 'package:pd_app/general/view_components/custom_track_shape.dart';
 import 'package:pd_app/general/view_components/directive_visualization/border_slider_thumb_shape.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_form_change_notification.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 import 'package:pd_app/general/view_components/view_helper.dart';
 import 'package:pd_app/logging.dart';
+import 'package:pd_app/use_cases/future_situations/future_situation_treatment_activities_selection_view_model.dart';
 import 'package:pd_app/use_cases/future_situations/new_future_situation_view_model.dart';
 import 'package:provider/provider.dart';
 
