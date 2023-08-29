@@ -97,13 +97,13 @@ class _WebViewContainerState extends State<WebViewContainer> {
 </style>
 <script>
 
-    var width = 860
-    var height = 460
+    var width = 860;
+    var height = 250;
     var parentWidth = d3.select("body").node().getBoundingClientRect().width;
     var parentHeight = d3.select("body").node().getBoundingClientRect().height;
 
     var parentWidth = document.body.clientWidth;
-    var parentHeight = 460;
+    var parentHeight = 250;
     var svg = d3.select("#my_dataviz")
         .append("svg")
         .attr("viewBox", `0 0 \${parentWidth} \${parentHeight}`);
@@ -254,8 +254,9 @@ class _WebViewContainerState extends State<WebViewContainer> {
         d.fy = d.y;
     }
     function dragged(d) {
-        d.fx = d3.event.x;
-        d.fy = d3.event.y;
+        var radius = size(d.value) + 5; // 5 stroke width
+        d.fx = Math.max(radius, Math.min(width - radius, d3.event.x));
+        d.fy = Math.max(radius, Math.min(height - radius, d3.event.y));
     }
     function dragended(d) {
         if (!d3.event.active) simulation.alphaTarget(.03);
