@@ -311,10 +311,16 @@ class _WebViewContainerState extends State<WebViewContainer> {
             return d.selected ? "8, 4" : "";
         });
 
-
+function truncateString(str, length) {
+    if (str.length > length) {
+        return str.substring(0, length) + "...";
+    } else {
+        return str;
+    }
+}
 
     node.append("text")
-        .text(function (d) { return d.key; }) // display the key
+        .text(function (d) { return truncateString(d.key,10); }) // display the key
         .style("text-anchor", "middle") // center the text horizontally
         .style("dominant-baseline", "central") // center the text vertically
         .style("font-weight", "normal")
