@@ -65,32 +65,36 @@ class UpsertPatientDirectivePage4View extends StatelessWidget {
                   ),
                 ],
               ),
-              const Spacer(),
-              IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () {
-                  Navigator.pop(context);
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(44.0),
+                  child: TextButton(
+                    child: Text(dismiss, style: const TextStyle(color: DefaultThemeColors.white)),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ],
+              backgroundColor: DefaultThemeColors.cyan,
+              content: Builder(
+                builder: (context) {
+                  return ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 580,
+                    ),
+                    child: Stack(
+                      children: [
+                        MarkdownBody(
+                          data: text,
+                          styleSheet: MarkdownStyleSheet(
+                            p: const TextStyle(color: DefaultThemeColors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 },
-              ),
-            ],
-          ),
-          content: Text(
-            text,
-            style: const TextStyle(color: DefaultThemeColors.white),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(44.0),
-              child: TextButton(
-                child: Text(dismiss, style: const TextStyle(color: DefaultThemeColors.white)),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-          ],
-          backgroundColor: DefaultThemeColors.cyan,
-        );
-      },
-    );
+              ));
+        });
   }
 
   @override
