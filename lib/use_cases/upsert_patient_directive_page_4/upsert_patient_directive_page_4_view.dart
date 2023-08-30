@@ -15,66 +15,42 @@ class UpsertPatientDirectivePage4View extends StatelessWidget {
   }
 
   void showMoreInfo(BuildContext context, String text, String dismiss, String moreInfo) {
-    showDialog<AlertDialog>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
-              title: Row(
-                children: [
-                  const Expanded(
-                    child: Divider(
-                      color: DefaultThemeColors.white,
-                      height: 4.0,
-                    ),
-                  ),
-                  const SizedBox(width: 20, height: 40),
-                  MarkdownBody(
-                    data: moreInfo,
-                    styleSheet: MarkdownStyleSheet(
-                      h2: const TextStyle(color: DefaultThemeColors.white),
-                    ),
-                  ),
-                  const SizedBox(width: 20, height: 40),
-                  const Expanded(
-                    child: Divider(
-                      color: DefaultThemeColors.white,
-                      height: 4.0,
-                    ),
-                  ),
-                  const Spacer(),
-                  Positioned(
-                    right: 0,
-                    top: -10,
-                    child: InkResponse(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const CircleAvatar(
-                        backgroundColor: DefaultThemeColors.white,
-                        child: Icon(Icons.close),
-                      ),
-                    ),
-                  ),
-                ],
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Text(
+                moreInfo,
+                style: const TextStyle(color: DefaultThemeColors.white),
               ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(44.0),
-                  child: TextButton(
-                    child: Text(dismiss, style: const TextStyle(color: DefaultThemeColors.white)),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ),
-              ],
-              backgroundColor: DefaultThemeColors.cyan,
-              content: MarkdownBody(
-                data: text,
-                styleSheet: MarkdownStyleSheet(
-                  p: const TextStyle(color: DefaultThemeColors.white),
-                ),
-              ));
-        });
+              const Spacer(),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+          content: Text(
+            text,
+            style: const TextStyle(color: DefaultThemeColors.white),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(44.0),
+              child: TextButton(
+                child: Text(dismiss, style: const TextStyle(color: DefaultThemeColors.white)),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ],
+          backgroundColor: DefaultThemeColors.cyan,
+        );
+      },
+    );
   }
 
   @override
