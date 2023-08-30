@@ -1,8 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 import 'package:webviewx/webviewx.dart';
-import 'package:collection/collection.dart';
 
 class WebViewContainer extends StatefulWidget {
   const WebViewContainer({super.key, this.data = "var data = [ ];"});
@@ -45,7 +45,6 @@ class _WebViewContainerState extends State<WebViewContainer> {
         DartCallback(
           name: 'delete_or_edit_item',
           callBack: (message) {
-            print(message);
             showDialog(
               context: context,
               builder: (BuildContext context) {
