@@ -25,7 +25,7 @@ class UpsertPatientDirectivePage4ViewModel extends CreationProcessNavigationView
   String get subtitle => "Patientenverfügung erstellen";
   String get title => "Für den Fall meiner Entscheidungsunfähigkeit möchte ich";
   String get dismiss => "Schließen";
-  String get moreInfo => "Weitere Informationen";
+  String get moreInfo => "## Weitere Informationen";
   String get importantPointsQuestion => "**Welcher der folgenden\n Punkte ist Ihnen besonders wichtig?**";
   String get importantPointsAnswer =>
       "Mit der Beantwortung dieser Frage wird Ihre Patientenverfügung individuell auf Ihre Wünsche ausgerichtet.";
