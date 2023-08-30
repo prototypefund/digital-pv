@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 import 'package:webviewx/webviewx.dart';
 
@@ -32,67 +33,92 @@ class _WebViewContainerState extends State<WebViewContainer> {
   WebViewXController<dynamic>? webviewController;
 
   String webviewContent = '';
+  bool ignoreAllGestures = false;
 
   // @override
   @override
   Widget build(BuildContext context) {
-    return WebViewX(
-      javascriptMode: JavascriptMode.unrestricted,
-      width: double.maxFinite,
-      height: 250,
-      initialContent: _buildWebviewContent(),
-      dartCallBacks: {
-        DartCallback(
-          name: 'delete_or_edit_item',
-          callBack: (message) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Row(
-                    children: [
-                      Text('Ausgewählter Aspekt: $message'),
-                      const Spacer(),
-                      IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+    return Stack(
+      children: [
+        WebViewX(
+          javascriptMode: JavascriptMode.unrestricted,
+          width: double.maxFinite,
+          height: 250,
+          initialContent: _buildWebviewContent(),
+          dartCallBacks: {
+            DartCallback(
+              name: 'delete_or_edit_item',
+              callBack: (message) {
+                setState(() {
+                  ignoreAllGestures = true;
+                });
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Row(
+                        children: [
+                          Text('Ausgewählter Aspekt: $message'),
+                          const Spacer(),
+                          IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              setState(() {
+                                ignoreAllGestures = false;
+                                Navigator.pop(context);
+                              });
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  content: const MarkdownBody(content: 'Bitte wählen Sie eine der folgenden Aktionen aus.'),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text('Bearbeiten'),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    TextButton(
-                      child: const Text('Löschen'),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
+                      content: const MarkdownBody(content: 'Bitte wählen Sie eine der folgenden Aktionen aus.'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('Bearbeiten'),
+                          onPressed: () {
+                            setState(() {
+                              ignoreAllGestures = false;
+                              Navigator.pop(context);
+                            });
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Löschen'),
+                          onPressed: () {
+                            setState(() {
+                              ignoreAllGestures = false;
+                              Navigator.pop(context);
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  },
                 );
               },
-            );
+            ),
+          },
+          initialSourceType: SourceType.html,
+          onWebViewCreated: (controller) {
+            webviewController = controller;
+
+            //     controller.evalRawJavascript( '''
+            //   document.body.style.overflow = 'hidden';
+            //   document.ontouchmove = function(e){
+            //     e.preventDefault();
+            //   }
+            // ''');
           },
         ),
-      },
-      initialSourceType: SourceType.html,
-      onWebViewCreated: (controller) {
-        webviewController = controller;
-
-        //     controller.evalRawJavascript( '''
-        //   document.body.style.overflow = 'hidden';
-        //   document.ontouchmove = function(e){
-        //     e.preventDefault();
-        //   }
-        // ''');
-      },
+        PointerInterceptor(
+          intercepting: ignoreAllGestures,
+          child: const SizedBox(
+            height: 250,
+            width: double.maxFinite,
+          ),
+        ),
+      ],
     );
   }
 
