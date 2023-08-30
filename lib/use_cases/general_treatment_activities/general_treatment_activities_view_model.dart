@@ -23,7 +23,7 @@ class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewM
     notifyListeners();
   }
 
-  NavigationSubStep _navigationStep = NavigationSubStep.selectType;
+  final NavigationSubStep _navigationStep = NavigationSubStep.selectType;
   NavigationSubStep get navigationStep => _navigationStep;
 
   @override

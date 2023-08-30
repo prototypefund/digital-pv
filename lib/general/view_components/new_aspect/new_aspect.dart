@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
-import 'package:pd_app/general/model/aspect_with_simulation.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/view_components/custom_track_shape.dart';
 import 'package:pd_app/general/view_components/directive_visualization/border_slider_thumb_shape.dart';
@@ -33,7 +32,7 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
               children: [
                 if (viewModel.runtimeType == NewFutureSituationViewModel) ...[
                   ElevatedButton.icon(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.explore,
                       ),
                       onPressed: () => (viewModel as NewFutureSituationViewModel)
@@ -42,7 +41,7 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
                   const SizedBox(height: 80),
                   buildRowWithExpandedText(
                     context,
-                    (viewModel as NewFutureSituationViewModel).descriptionOne,
+                    viewModel.descriptionOne,
                     viewModel.explanationOne,
                     width: 300,
                     color: DefaultThemeColors.darkBlue,
