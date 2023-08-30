@@ -1,4 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:pd_app/general/markdown/markdown_body.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 import 'package:webviewx/webviewx.dart';
 
@@ -11,7 +13,23 @@ class WebViewContainer extends StatefulWidget {
 }
 
 class _WebViewContainerState extends State<WebViewContainer> {
-  late WebViewXController<dynamic> webviewController;
+  String? _oldData;
+
+  Function deepEq = const DeepCollectionEquality.unordered().equals;
+
+  @override
+  void didUpdateWidget(covariant WebViewContainer oldWidget) {
+    if (webviewController != null) {
+      // ignore: avoid_dynamic_calls
+      if (widget.data.isNotEmpty && _oldData != null && deepEq(widget.data, _oldData) == false) {
+        webviewController!.loadContent(_buildWebviewContent(), SourceType.html);
+      }
+      _oldData = widget.data;
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  WebViewXController<dynamic>? webviewController;
 
   String webviewContent = '';
 
@@ -22,9 +40,66 @@ class _WebViewContainerState extends State<WebViewContainer> {
       javascriptMode: JavascriptMode.unrestricted,
       width: double.maxFinite,
       height: 250,
-      initialContent: """
+      initialContent: _buildWebviewContent(),
+      dartCallBacks: {
+        DartCallback(
+          name: 'delete_or_edit_item',
+          callBack: (message) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Row(
+                    children: [
+                      Text('Ausgewählter Aspekt: $message'),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                  content: const MarkdownBody(content: 'Bitte wählen Sie eine der folgenden Aktionen aus.'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Bearbeiten'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Löschen'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+      },
+      initialSourceType: SourceType.html,
+      onWebViewCreated: (controller) {
+        webviewController = controller;
 
-<!-- Code from d3-graph-gallery.com -->
+        //     controller.evalRawJavascript( '''
+        //   document.body.style.overflow = 'hidden';
+        //   document.ontouchmove = function(e){
+        //     e.preventDefault();
+        //   }
+        // ''');
+      },
+    );
+  }
+
+  String _buildWebviewContent() {
+    return """
+
+<!-- Code inspired from d3-graph-gallery.com -->
 <!DOCTYPE html>
 <meta charset="utf-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -39,13 +114,10 @@ class _WebViewContainerState extends State<WebViewContainer> {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-<!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 
-<!-- Color palette -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
-<!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
 <style>
@@ -54,13 +126,11 @@ class _WebViewContainerState extends State<WebViewContainer> {
         opacity: 1 !important;
     }
 
-
     body {
         cursor: default;
         user-select: none;
-        font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-weight: 200;
-        /* // background-color: rgb(255,250,255); */
         background-color: rgb(247, 247, 247);
         padding: 0;
         margin: 0;
@@ -70,71 +140,43 @@ class _WebViewContainerState extends State<WebViewContainer> {
         overflow: hidden
     }
 </style>
-
-
 <script>
 
-    // set the dimensions and margins of the graph
-    var width = 860
-    var height = 460
+    var width = 860;
+    var height = 250;
     var parentWidth = d3.select("body").node().getBoundingClientRect().width;
     var parentHeight = d3.select("body").node().getBoundingClientRect().height;
 
-
-
-
     var parentWidth = document.body.clientWidth;
-    var parentHeight = 460;
-    // append the svg object to the body of the page
+    var parentHeight = 250;
     var svg = d3.select("#my_dataviz")
-
         .append("svg")
-        // .attr("width", parentWidth)
-        // .attr("height", parentHeight)
         .attr("viewBox", `0 0 \${parentWidth} \${parentHeight}`);
 
-    //     var aspect = width / height;
-    //     chart = d3.select('.node');
-    // d3.select(window)
-    //   .on("resize", function() {
-    //     var parentHeight = d3.select("body").node().getBoundingClientRect().height;
-    // console.log('####');
-    // console.log(parentHeight);
-    // console.log('####');
-    //   });
-
-    ${widget.data}
+  ${widget.data}
 
 
-    // Color palette for continents?
     var color = d3.scaleOrdinal()
-        // .domain(["Asia", "Europe", "Africa", "Oceania", "Americas"])
         .range(d3.schemeSet2);
 
-    // Size scale for countries
     var size = d3.scaleLinear()
         .domain([0, 100])
         .range([35, 60])  // circle will be between 7 and 55 px wide
 
-    // create a tooltip
     var Tooltip = d3.select("#my_dataviz")
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
         .style("color", "white")
-
         .style("background-color", 'rgba(251, 0, 112, 0.9)')
         .style("opacity", 0.2)
         .style("border", "solid")
         .style("border-width", "0.0px")
-        // .style("border-color", "grey")
         .style("border-radius", "5px")
         .style("padding", "5px")
-
         .style("position", "absolute");
 
 
-    // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function (d) {
         Tooltip
             .style("opacity", 1)
@@ -145,8 +187,6 @@ class _WebViewContainerState extends State<WebViewContainer> {
             .html('<b>' + d.key + '</b> ' + d.value + "%")
             .style("left", (d3.event.x + 20) + "px") // d3.event.x and d3.event.y give the position of the current event (mouse move)
             .style("top", (d3.event.y) + "px");
-        //  .style("background-color", function(d){ return color(d.region)}) 
-
     }
 
     var mouseleave = function (d) {
@@ -163,80 +203,39 @@ class _WebViewContainerState extends State<WebViewContainer> {
         .on("mouseover", mouseover) // What to do when hovered
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+         .on("click", function (d, i) {
+          delete_or_edit_item(d.key);
+        })
         .call(d3.drag() // call specific function when circle is dragged
             .on("start", dragstarted)
             .on("drag", dragged)
             .on("end", dragended));;
-    
-    // Initialize the circle: all located at the center of the svg area
+
     node.append("circle")
         .attr("class", "node")
         .attr("id", function (d) { return d.id })
-        //  .style("stroke-dasharray", ("8, 3"))
         .attr("r", function (d) { return size(d.value) })
-        // .style("fill", function (d) { return d.selected ? "white" : d.positive ? color(d.region) : "#BBB0A9" })
         .style("fill", function (d) { return d.selected ? "white" : d.positive ? "#66c2a5" : "#BBB0A9" })
         .style("fill-opacity", 0.7)
-        // .attr("stroke", function (d) { return d.positive ?   color(d.region): "#BBB0A9" })
-        .attr("stroke", function (d) { return d.positive ?   "#66c2a5" : "#BBB0A9" })
+        .attr("stroke", function (d) { return d.positive ? "#66c2a5" : "#BBB0A9" })
         .style("stroke-width", 6)
-           .style("stroke-dasharray", function (d) { 
-        return d.selected ? "8, 4" : ""; 
-    });
-
-    // .style("stroke-opacity", 0.2)
+        .style("stroke-dasharray", function (d) {
+            return d.selected ? "8, 4" : "";
+        });
 
 
-
-
-    function isTextOutsideCircle(textElement, circleElement) {
-        // calculate the bounding boxes of the text and the circle
-        var textBBox = textElement.getBBox();
-        var circleBBox = circleElement.getBBox();
-
-        // check if the text is outside the circle
-        if (textBBox.x < circleBBox.x ||
-            textBBox.y < circleBBox.y ||
-            textBBox.x + textBBox.width > circleBBox.x + circleBBox.width ||
-            textBBox.y + textBBox.height > circleBBox.y + circleBBox.height) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     node.append("text")
         .text(function (d) { return d.key; }) // display the key
         .style("text-anchor", "middle") // center the text horizontally
         .style("dominant-baseline", "central") // center the text vertically
         .style("font-weight", "normal")
-        // .style("letter-spacing", "2px")
-        .style("fill", function(d) { return d.selected ?  d3.select(this.parentNode).select("circle").style("stroke") : "#ffffff"}) // set the text color to white
-        
-        // .style("visibility", function (d) {
-            // return isTextOutsideCircle(this, d3.select(this.parentNode).select("circle").node()) ? "hidden" : "visible";
-        // });
-          .style("visibility", function (d) {
-            return d.show_label  ? "visible" : "hidden";
+        .style("fill", function (d) { return d.selected ? d3.select(this.parentNode).select("circle").style("stroke") : "#ffffff" }) // set the text color to white
+
+        .style("visibility", function (d) {
+            return d.show_label ? "visible" : "hidden";
         });
-    // .each(function(d) {
-    //       // Get the color of the node
-    //       var color = d3.select(this.parentNode).select("circle").style("fill");
 
-    //       // Initialize the tooltip
-    //       \$(this).tooltip({
-    //           title: d.key,
-    //           html: true,
-    //           container: 'body'
-    //       })
-    //       .on('show.bs.tooltip', function () {
-    //           // When the tooltip is shown, change its background color to match the node
-    //           \$('.tooltip').css('background-color', color);
-    //           \$('.tooltip').css('border-color', color);
-    //       });
-    //   });
-
-    // Features of the forces applied to the nodes:
     var simulation = d3
         .forceSimulation()
         .force("y", d3.forceY().y(height / 2)) // Attraction to the center of the svg area
@@ -260,7 +259,7 @@ class _WebViewContainerState extends State<WebViewContainer> {
         ); // Force that avoids circle overlapping
 
 
-         var simulationNegative = d3
+    var simulationNegative = d3
         .forceSimulation()
         .force("y", d3.forceY().y(height / 2)) // Attraction to the center of the svg area
         .force(
@@ -282,8 +281,6 @@ class _WebViewContainerState extends State<WebViewContainer> {
                 .iterations(1)
         ); // Force that avoid
 
-    // Apply these forces to the nodes and update their positions.
-    // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
     simulationNegative
         .nodes(data.filter(function (d) { return d.positive === false }))
         .on("tick", function (d) {
@@ -291,14 +288,13 @@ class _WebViewContainerState extends State<WebViewContainer> {
                 .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")" })
         });
 
-         simulation
-                .nodes(data.filter(function (d) { return d.positive == true }))
+    simulation
+        .nodes(data.filter(function (d) { return d.positive == true }))
         .on("tick", function (d) {
             node
-                .attr("transform", function (d) { "translate(" + d.x + "," + d.y + ")"  })
+                .attr("transform", function (d) { "translate(" + d.x + "," + d.y + ")" })
         });
 
-    // What happens when a circle is dragged?
     function dragstarted(d) {
         if (!d3.event.active) simulation.alphaTarget(.03).restart();
         if (!d3.event.active) simulationNegative.alphaTarget(.03).restart();
@@ -306,8 +302,9 @@ class _WebViewContainerState extends State<WebViewContainer> {
         d.fy = d.y;
     }
     function dragged(d) {
-        d.fx = d3.event.x;
-        d.fy = d3.event.y;
+        var radius = size(d.value) + 5; // 5 stroke width
+        d.fx = Math.max(radius, Math.min(width - radius, d3.event.x));
+        d.fy = Math.max(radius, Math.min(height - radius, d3.event.y));
     }
     function dragended(d) {
         if (!d3.event.active) simulation.alphaTarget(.03);
@@ -316,20 +313,7 @@ class _WebViewContainerState extends State<WebViewContainer> {
         d.fy = null;
     }
 
-
 </script>
-""",
-      initialSourceType: SourceType.html,
-      onWebViewCreated: (controller) {
-        webviewController = controller;
-
-        //     controller.evalRawJavascript( '''
-        //   document.body.style.overflow = 'hidden';
-        //   document.ontouchmove = function(e){
-        //     e.preventDefault();
-        //   }
-        // ''');
-      },
-    );
+""";
   }
 }

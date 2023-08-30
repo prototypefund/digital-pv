@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/aspect_view_model/aspect_view_model.dart';
@@ -100,6 +102,52 @@ abstract class AspectListViewModel<AspectType extends Aspect>
       isAddAspectCallToActionEnabled ? () => onAddAspectCallToActionPressed(context) : null;
 
   void onAddAspectCallToActionPressed(BuildContext context);
+
+  String get aspectDataForJavascript {
+    final List<Map<String, dynamic>> javascriptJsonArray = [];
+
+    for (final positiveAspect in _patientDirectiveService.currentPatientDirective.positiveAspects) {
+      javascriptJsonArray.add({
+        "value": (positiveAspect.weight.value * 100).round(),
+        "key": positiveAspect.name,
+        "selected": false,
+        "show_label": true,
+        "positive": true
+      });
+    }
+    for (final negativeAspect in _patientDirectiveService.currentPatientDirective.negativeAspects) {
+      javascriptJsonArray.add({
+        "value": (negativeAspect.weight.value * 100).round(),
+        "key": negativeAspect.name,
+        "selected": false,
+        "show_label": true,
+        "positive": false
+      });
+    }
+    final jsonArray = jsonEncode(javascriptJsonArray);
+
+//     const jsonArray = """
+// [
+//     { value: 40, key: "Unabhängigkeit", selected: false  , show_label: false , positive: true},
+//     { value: 55, key: "Gesundheit", selected: false   , show_label: false, positive: true},
+//     { value: 33, key: "Finanzen", selected: false  , show_label: false, positive: true},
+//     { value: 20, key: "Freunde", selected: false   , show_label: false, positive: true},
+//     { value: 14, key: "Natur", selected: false  , show_label: false, positive: true},
+//     { value: 12, key: "Mein Hund",  selected: false   , show_label: false, positive: true},
+//     { value: 10, key: "Arbeit", selected: false , show_label: false, positive: true},
+//     { value: 83, key: "Genesung", selected: true , show_label: true, positive: true},
+//     { value: 83, key: "Genesung", selected: false , show_label: false, positive: false},
+//     { value: 13, key: "Genesung", selected: false , show_label: false, positive: false},
+//     { value: 23, key: "Genesung", selected: true , show_label: true, positive: false},
+//     { value: 55, key: "Gesundheit", selected: false   , show_label: false, positive: false},
+// ]""";
+    final jsonData = """
+    // Read data
+    var data = $jsonArray; 
+""";
+
+    return jsonData;
+  }
 
   @override
   void dispose() {
