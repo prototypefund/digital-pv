@@ -37,12 +37,6 @@ class StubCreationProcessNavigationViewModel
     with ChangeNotifier, RootContextL10N
     implements CreationProcessNavigationViewModel {
   @override
-  bool get showAppBar => true;
-
-  @override
-  void update() {}
-
-  @override
   bool get backButtonEnabled => false;
 
   @override

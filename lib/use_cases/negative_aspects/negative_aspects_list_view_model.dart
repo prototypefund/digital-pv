@@ -14,11 +14,6 @@ class NegativeAspectsListViewModel extends AspectListViewModel<Aspect> {
   final ContentService _contentService = getIt.get();
 
   @override
-  String get cardTitle => "Beispiel";
-  @override
-  String cardSubtitle(int index) => index == 0 ? "Eigener Aspekt" : "Negativer Aspekt des aktuellen Lebens";
-
-  @override
   String get emptyAspectListsMessageText => _contentService.negativeAspectsPage.aspectListWidget.emptyListMessage;
 
   @override

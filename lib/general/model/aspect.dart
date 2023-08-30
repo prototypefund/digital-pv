@@ -3,12 +3,8 @@ import 'package:pd_app/general/model/weight.dart';
 
 part 'aspect.g.dart';
 
-mixin Selectable {
-  bool isSelected = false;
-}
-
 @JsonSerializable()
-class Aspect with Selectable {
+class Aspect {
   Aspect({required this.name, this.description, required this.weight});
 
   factory Aspect.fromJson(Map<String, dynamic> json) => _$AspectFromJson(json);

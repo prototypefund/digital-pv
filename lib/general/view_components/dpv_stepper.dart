@@ -578,13 +578,11 @@ class _DPVStepperState extends State<DPVStepper> with TickerProviderStateMixin {
   void didChangeDependencies() {
     super.didChangeDependencies();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_keys.isNotEmpty && widget.currentStep - 1 >= 0 && widget.currentStep - 1 < _keys.length) {
-        Scrollable.ensureVisible(
-          _keys[widget.currentStep - 1].currentContext!,
-          curve: Curves.fastOutSlowIn,
-          duration: kThemeAnimationDuration,
-        );
-      }
+      Scrollable.ensureVisible(
+        _keys[widget.currentStep - 1].currentContext!,
+        curve: Curves.fastOutSlowIn,
+        duration: kThemeAnimationDuration,
+      );
     });
   }
 

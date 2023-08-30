@@ -31,7 +31,7 @@ class CMSCache with Logging {
   }
 
   Future<void> _loadEntitiesFromCMS({required String locale, required ContentDefinition contentDefinition}) async {
-    final CmsLoadingResult<dynamic> result =
+    final CmsLoadingResult result =
         await cmsLoader.loadEntitiesFromCMS(locale: locale, contentDefinition: contentDefinition);
     final List<dynamic> entityList = result.entities;
 

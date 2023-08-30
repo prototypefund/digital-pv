@@ -1,7 +1,7 @@
 default:
   tags: [ "docker" ]
 
-image: ghcr.io/cirruslabs/flutter:3.13.0
+image: cirrusci/flutter:3.7.1
 
 stages:
   - analyze

@@ -11,12 +11,6 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
     _contentService.addListener(notifyListeners);
   }
 
-  void update() {
-    notifyListeners();
-  }
-
-  bool get showAppBar => true;
-
   final ContentService _contentService = getIt.get();
 
   String get nextButtonText => l10n.navigationNext;
@@ -37,7 +31,7 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
 
   void onStepContinue(BuildContext context, int index) {
     // as welcome page is not part of the bread crumb navigation, we need to increase the index by one
-    final int indexToGoTo = (index + 3) + 1; // + 3 because of upsert pages
+    final int indexToGoTo = index + 1;
     const routes = Routes.values;
     if (indexToGoTo >= routes.length || indexToGoTo < 0) {
       throw Exception('index $indexToGoTo is out of bounds for routes');
@@ -45,7 +39,7 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
     context.go(routes[indexToGoTo].path);
   }
 
-  int currentStep(BuildContext context) => currentRouteIndex(context) - 3; // because of upsert pages
+  int currentStep(BuildContext context) => currentRouteIndex(context);
 
   bool get backButtonEnabled => true;
 

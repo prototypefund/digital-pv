@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 enum Routes {
-  upsertPatientDirectivePage1,
-  upsertPatientDirectivePage2,
-  upsertPatientDirectivePage3,
-  upsertPatientDirectivePage4,
+  welcome,
   positiveAspects,
   negativeAspects,
   evaluateCurrentAspects,
@@ -21,8 +18,7 @@ enum Routes {
 const focusParam = 'focus';
 
 int currentRouteIndex(BuildContext context) {
-  final currentRouteWithoutParamsUri = Uri.parse(GoRouterState.of(context).uri.toString()).replace(query: '');
-
+  final currentRouteWithoutParamsUri = Uri.parse(GoRouter.of(context).location).replace(query: '');
   return Routes.values.toList().indexWhere((element) => currentRouteWithoutParamsUri.path == element.path);
 }
 
@@ -54,15 +50,8 @@ extension RouteExtension on Routes {
 
   String get path {
     switch (this) {
-      case Routes.upsertPatientDirectivePage1:
+      case Routes.welcome:
         return '/';
-      case Routes.upsertPatientDirectivePage2:
-        return '/${patientDirective}create-account';
-      case Routes.upsertPatientDirectivePage3:
-        return '/${patientDirective}create-account/page-3';
-      case Routes.upsertPatientDirectivePage4:
-        return '/${patientDirective}create-account/page-4';
-
       case Routes.positiveAspects:
         return '/${patientDirective}current-situation/positive-aspects';
       // case Routes.addPositiveAspect:
