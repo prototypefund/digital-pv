@@ -68,24 +68,11 @@ class UpsertPatientDirectivePage4View extends StatelessWidget {
                 ),
               ],
               backgroundColor: DefaultThemeColors.cyan,
-              content: Builder(
-                builder: (context) {
-                  return ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: 580,
-                    ),
-                    child: Stack(
-                      children: [
-                        MarkdownBody(
-                          data: text,
-                          styleSheet: MarkdownStyleSheet(
-                            p: const TextStyle(color: DefaultThemeColors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              content: MarkdownBody(
+                data: text,
+                styleSheet: MarkdownStyleSheet(
+                  p: const TextStyle(color: DefaultThemeColors.white),
+                ),
               ));
         });
   }
