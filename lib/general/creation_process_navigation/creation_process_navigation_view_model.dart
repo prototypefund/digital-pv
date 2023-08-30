@@ -37,7 +37,7 @@ abstract class CreationProcessNavigationViewModel with RootContextL10N, ChangeNo
 
   void onStepContinue(BuildContext context, int index) {
     // as welcome page is not part of the bread crumb navigation, we need to increase the index by one
-    final int indexToGoTo = index + 1;
+    final int indexToGoTo = (index + 3) + 1; // + 3 because of upsert pages
     const routes = Routes.values;
     if (indexToGoTo >= routes.length || indexToGoTo < 0) {
       throw Exception('index $indexToGoTo is out of bounds for routes');

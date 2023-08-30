@@ -64,7 +64,13 @@ class DPVWrappedBoxCheckbox extends StatelessWidget {
         child: Checkbox(
           checkColor: DefaultThemeColors.white,
           fillColor: MaterialStateProperty.resolveWith(
-            (states) => DefaultThemeColors.lightMagenta,
+            (states) {
+              if (states.contains(MaterialState.pressed) || states.contains(MaterialState.selected)) {
+                return DefaultThemeColors.lightMagenta;
+              } else {
+                return Colors.transparent;
+              }
+            },
           ),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           side: BorderSide(

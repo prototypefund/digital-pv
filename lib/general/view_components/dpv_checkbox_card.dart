@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
+import 'package:pd_app/general/view_components/dpv_card_with_checkbox_below.dart';
+import 'package:provider/provider.dart';
 
 class DPVCheckboxCard extends StatefulWidget {
   const DPVCheckboxCard({
     this.checkboxOnly = false,
     this.onChanged,
-    this.cardStateKey,
-  }) : super(key: cardStateKey);
+    this.isChecked = false,
+  });
 
   final bool checkboxOnly;
-  final GlobalKey<DPVCheckboxCardState>? cardStateKey;
+  final bool isChecked;
 
   final Function(bool?)? onChanged;
 
@@ -19,23 +21,14 @@ class DPVCheckboxCard extends StatefulWidget {
 
 class DPVCheckboxCardState extends State<DPVCheckboxCard> {
   bool isHovered = false;
-  late bool isChecked = false;
-
-  void setChecked(bool value) {
-    setState(() {
-      isChecked = value;
-    });
-  }
 
   Widget checkbox() => _DPVCustomCheckbox(
-        isChecked: isChecked,
+        isChecked: Provider.of<CheckboxState>(context).isChecked,
         isHovered: isHovered,
         checkColor: Colors.white,
         onChanged: (bool? value) {
           widget.onChanged?.call(value);
-          setState(() {
-            isChecked = value!;
-          });
+          Provider.of<CheckboxState>(context, listen: false).setChecked(value ?? false);
         },
       );
 
@@ -52,13 +45,11 @@ class DPVCheckboxCardState extends State<DPVCheckboxCard> {
         child: Row(
           children: [
             _DPVCustomCheckbox(
-              isChecked: isChecked,
+              isChecked: Provider.of<CheckboxState>(context).isChecked,
               isHovered: isHovered,
               checkColor: Colors.white,
               onChanged: (bool? value) {
-                setState(() {
-                  isChecked = value!;
-                });
+                Provider.of<CheckboxState>(context, listen: false).setChecked(value ?? false);
               },
             ),
             const SizedBox(width: 10),
@@ -74,9 +65,7 @@ class DPVCheckboxCardState extends State<DPVCheckboxCard> {
     return InkWell(
         hoverColor: Colors.transparent,
         onTap: () {
-          setState(() {
-            isChecked = !isChecked;
-          });
+          Provider.of<CheckboxState>(context, listen: false).setChecked(!Provider.of<CheckboxState>(context).isChecked);
         },
         onHover: (value) {
           setState(() {

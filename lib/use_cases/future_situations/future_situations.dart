@@ -5,11 +5,11 @@ import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/view_components/aspect_list/aspect_list.dart';
 import 'package:pd_app/general/view_components/circle_painer.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect.dart';
+import 'package:pd_app/general/view_components/new_aspect/treatment_activity_selection.dart';
 import 'package:pd_app/general/view_components/view_helper.dart';
 import 'package:pd_app/general/view_components/webview_container.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations_view_model.dart';
 import 'package:pd_app/use_cases/future_situations/new_future_situation_view_model.dart';
-import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx/webviewx.dart';
 
@@ -84,6 +84,8 @@ class FutureSituations extends StatelessWidget {
           if (viewModel.navigationStep == NavigationSubStep.description) ...description(context, viewModel),
           if (viewModel.navigationStep == NavigationSubStep.select) selectItem(context, viewModel),
           if (viewModel.navigationStep == NavigationSubStep.edit) editItem(context, viewModel),
+          if (viewModel.navigationStep == NavigationSubStep.assignTreatmentActivity)
+            assignTreatmentActivity(context, viewModel),
           if (viewModel.navigationStep == NavigationSubStep.complete) ...complete(context, viewModel),
         ],
       ),
@@ -112,6 +114,12 @@ Widget editItem(BuildContext context, FutureSituationsViewModel viewModel) {
   return ChangeNotifierProvider.value(
       value: context.select((FutureSituationsViewModel viewModel) => viewModel.newFutureSituationViewModel),
       child: NewAspect<NewFutureSituationViewModel>());
+}
+
+Widget assignTreatmentActivity(BuildContext context, FutureSituationsViewModel viewModel) {
+  return ChangeNotifierProvider.value(
+      value: context.select((FutureSituationsViewModel viewModel) => viewModel.treatmentActivititySelectionViewModel),
+      child: TreatmentActivitySelection<NewFutureSituationViewModel>());
 }
 
 Widget selectItem(BuildContext context, FutureSituationsViewModel viewModel) {

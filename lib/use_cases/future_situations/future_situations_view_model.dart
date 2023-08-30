@@ -9,13 +9,16 @@ import 'package:pd_app/general/view_components/aspect_list/aspect_list_view_mode
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/future_situations/future_situations_list_view_model.dart';
 import 'package:pd_app/use_cases/future_situations/new_future_situation_view_model.dart';
-import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view_model.dart';
+
+enum NavigationSubStep { description, select, edit, assignTreatmentActivity, complete }
 
 class FutureSituationsViewModel extends CreationProcessNavigationViewModel with AspectViewModel, Logging {
   FutureSituationsViewModel({this.focusAspect})
-      : newFutureSituationViewModel = NewFutureSituationViewModel(autofocus: focusAspect == null) {
+      : newFutureSituationViewModel = NewFutureSituationViewModel(autofocus: focusAspect == null),
+        treatmentActivititySelectionViewModel = TreatmentActivitySelectionViewModel(autofocus: focusAspect == null) {
     _futureSituationsListViewModel =
         FutureSituationsListViewModel(focusAspect: focusAspect, scrollController: scrollController);
+    _futureSituationsListViewModel.addListener(_reactToAspectListChange);
     _contentService.addListener(notifyListeners);
   }
 
@@ -45,7 +48,7 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
   String get selectItemTitle => "Wählen Sie Ihre Was wäre wenn-Situation aus:";
 
   String get completeDescriptionOne =>
-      "Sie haben **5 Situationen** genannt. Damit beschreiben Sie Ihre künftigen Situationen und Maßnahmen sehr gut.";
+      "Sie haben **3 Situationen** genannt. Damit beschreiben Sie Ihre künftigen Situationen und Maßnahmen sehr gut.";
 
   String get completeExplanationOne => "Sie haben ...";
   String get completeDescriptionTwo => "Möchten Sie weitere Situationen nennen?.";
@@ -61,6 +64,8 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
         return "Situation beschreiben";
       case NavigationSubStep.edit:
         return "Bestätigen";
+      case NavigationSubStep.assignTreatmentActivity:
+        return "Maßnahmen der Situation zuweisen";
       case NavigationSubStep.complete:
         return "Künftige Situationen abschließen";
     }
@@ -79,15 +84,24 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
       case NavigationSubStep.edit:
         _navigationStep = NavigationSubStep.select;
         break;
-      case NavigationSubStep.complete:
+      case NavigationSubStep.assignTreatmentActivity:
         _navigationStep = NavigationSubStep.edit;
+        break;
+      case NavigationSubStep.complete:
+        _navigationStep = NavigationSubStep.assignTreatmentActivity;
         break;
     }
     notifyListeners();
   }
 
   @override
-  bool get nextButtonEnabled => true;
+  bool get nextButtonEnabled =>
+      _navigationStep == NavigationSubStep.select && newFutureSituationViewModel.selectedAspect != null ||
+      _navigationStep == NavigationSubStep.edit &&
+          newFutureSituationViewModel.aspectTextFieldController.text.trim().isNotEmpty ||
+      _navigationStep == NavigationSubStep.complete ||
+      _navigationStep == NavigationSubStep.assignTreatmentActivity ||
+      _navigationStep == NavigationSubStep.description;
 
   @override
   void onNextButtonPressed(BuildContext context) {
@@ -100,12 +114,15 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
         _navigationStep = NavigationSubStep.edit;
         break;
       case NavigationSubStep.edit:
-        if (_futureSituationsListViewModel.aspects.length >= 4) {
+        newFutureSituationViewModel.onAddAspectActionPressed(context);
+        _navigationStep = NavigationSubStep.assignTreatmentActivity;
+        break;
+      case NavigationSubStep.assignTreatmentActivity:
+        if (_futureSituationsListViewModel.aspects.length >= 2) {
           _navigationStep = NavigationSubStep.complete;
         } else {
           _navigationStep = NavigationSubStep.select;
         }
-        newFutureSituationViewModel.onAddAspectActionPressed(context);
         break;
       case NavigationSubStep.complete:
         super.onNextButtonPressed(context);
@@ -115,7 +132,7 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
   }
 
   late AspectListViewModel _futureSituationsListViewModel;
-
+  final TreatmentActivitySelectionViewModel treatmentActivititySelectionViewModel;
   final FutureSituation? focusAspect;
 
   final ContentService _contentService = getIt.get();
@@ -129,8 +146,18 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
   @override
   void dispose() {
     super.dispose();
+    _futureSituationsListViewModel.removeListener(_reactToAspectListChange);
+
     _futureSituationsListViewModel.dispose();
+    treatmentActivititySelectionViewModel.dispose();
     _contentService.removeListener(notifyListeners);
+  }
+
+  void _reactToAspectListChange() {
+    newFutureSituationViewModel.selectedAspect = _futureSituationsListViewModel.selectedAspect as FutureSituation?;
+    treatmentActivititySelectionViewModel.selectedAspect =
+        _futureSituationsListViewModel.selectedAspect as FutureSituation?;
+    notifyListeners();
   }
 
   @override

@@ -64,10 +64,10 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
       "Sehen Sie sich gerne die folgenden Beispiele an. Trifft eines zu, können Sie es auswählen und übernehmen. Alternativ können Sie die Aspekte auch frei formulieren.";
 
   String get completeDescriptionOne =>
-      "Sie haben **5 positive Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
+      "Sie haben **3 positive Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
 
   String get completeExplanationOne =>
-      "Sie haben Ihrer Lebensqualität mit 5 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
+      "Sie haben Ihrer Lebensqualität mit 3 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
   String get completeDescriptionTwo => "Möchten Sie weitere positive Aspekte nennen?.";
   String get completeExplanationTwo =>
       "Sie können nun die Beschreibung der positiven Aspekte abschließen. Natürlich können Sie alternativ gerne Ihre aktuelle Lebensqualität mit weiteren positiven Aspekten noch besser beschreiben.";
@@ -80,13 +80,17 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
   }
 
   void _reactToAspectListChange() {
+    newPositiveAspectViewModel.selectedAspect = _positiveAspectListViewModel.selectedAspect;
     notifyListeners();
   }
 
   @override
   bool get nextButtonEnabled =>
-      _navigationStep != NavigationSubStep.edit ||
-      newPositiveAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty;
+      _navigationStep == NavigationSubStep.select && newPositiveAspectViewModel.selectedAspect != null ||
+      _navigationStep == NavigationSubStep.edit &&
+          newPositiveAspectViewModel.aspectTextFieldController.text.trim().isNotEmpty ||
+      _navigationStep == NavigationSubStep.complete ||
+      _navigationStep == NavigationSubStep.description;
 
   @override
   void onNextButtonPressed(BuildContext context) {
@@ -99,7 +103,7 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
         _navigationStep = NavigationSubStep.edit;
         break;
       case NavigationSubStep.edit:
-        if (_positiveAspectListViewModel.aspects.length >= 4) {
+        if (_positiveAspectListViewModel.aspects.length >= 2) {
           _navigationStep = NavigationSubStep.complete;
         } else {
           _navigationStep = NavigationSubStep.select;

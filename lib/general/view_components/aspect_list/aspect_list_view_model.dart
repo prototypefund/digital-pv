@@ -271,6 +271,7 @@ abstract class AspectListViewModel<AspectType extends Aspect>
   }
 
   List<AspectType> get aspects => _aspects;
+  List<AspectType> _allAspects = [];
 
   List<AspectType> get allAspects {
     List<AspectsExample> examples = [];
@@ -285,17 +286,29 @@ abstract class AspectListViewModel<AspectType extends Aspect>
         examples = _contentService.negativeAspectsExamples;
         break;
     }
-    return [
-      ..._aspects,
-      ...examples.map((e) => runtimeType == FutureSituationsListViewModel
-          ? FutureSituation(name: e.example.title, weight: Weight(value: 0.5), treatmentActivitiyPreferences: [])
-              as AspectType
-          : Aspect(name: e.example.group, description: e.example.title, weight: Weight(value: 0.5)) as AspectType)
-    ];
+    if (_allAspects.isEmpty) {
+      _allAspects = [
+        // ..._aspects,
+        if (runtimeType != FutureSituationsListViewModel)
+          Aspect(name: "Ihr Aspekt", description: "Eigener Aspekt", weight: Weight(value: 0.5)) as AspectType,
+        if (runtimeType == FutureSituationsListViewModel)
+          FutureSituation(name: "Ihre Situation", weight: Weight(value: 0.5), treatmentActivitiyPreferences: [])
+              as AspectType,
+        ...examples.map((e) => runtimeType == FutureSituationsListViewModel
+            ? FutureSituation(name: e.example.title, weight: Weight(value: 0.5), treatmentActivitiyPreferences: [])
+                as AspectType
+            : Aspect(name: e.example.group, description: e.example.title, weight: Weight(value: 0.5)) as AspectType)
+      ];
+    }
+    return _allAspects;
   }
 
+  AspectType? get selectedAspect => _allAspects.firstWhereOrNull((element) => element.isSelected);
+
   void onAspectSelected(AspectType aspect, {bool selected = true}) {
-    _aspects.firstWhereOrNull((element) => element == aspect)?.isSelected = selected;
+    _allAspects = _allAspects.map((e) => e..isSelected = false).toList();
+    final index = _allAspects.indexOf(aspect);
+    _allAspects[index] = _allAspects[index]..isSelected = selected;
 
     notifyListeners();
   }

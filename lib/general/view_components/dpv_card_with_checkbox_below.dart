@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/view_components/dpv_checkbox_card.dart';
 import 'package:pd_app/general/view_components/dpv_wrapped_box_checkbox.dart';
+import 'package:provider/provider.dart';
 
-class DPVCardWithCheckboxBelow extends StatefulWidget {
+class CheckboxState extends ChangeNotifier {
+  bool _isChecked = false;
+
+  bool get isChecked => _isChecked;
+
+  void setChecked(bool value) {
+    _isChecked = value;
+    notifyListeners();
+  }
+}
+
+class DPVCardWithCheckboxBelow extends StatelessWidget {
   final bool showCheckbox;
   final bool showCheckboxBelow;
   final EdgeInsets edgeInsets;
@@ -12,12 +24,12 @@ class DPVCardWithCheckboxBelow extends StatefulWidget {
   final double? height;
   final double? width;
   final EdgeInsets padding;
-  final bool? value;
   final String? assetPath;
   final Function(bool?)? onChanged;
   final String? description;
 
   const DPVCardWithCheckboxBelow({
+    super.key,
     this.titleChild,
     this.assetPath,
     this.description,
@@ -29,30 +41,8 @@ class DPVCardWithCheckboxBelow extends StatefulWidget {
     this.width,
     required this.title,
     required this.padding,
-    this.value = false,
     this.onChanged,
   });
-
-  @override
-  State<DPVCardWithCheckboxBelow> createState() => _DPVCardWithCheckboxBelowState();
-}
-
-class _DPVCardWithCheckboxBelowState extends State<DPVCardWithCheckboxBelow> {
-  bool _isChecked = false;
-  late Function(bool?) _onChanged;
-  final key = GlobalKey<DPVCheckboxCardState>();
-
-  @override
-  void initState() {
-    super.initState();
-    _onChanged = (value) {
-      setState(() {
-        _isChecked = value ?? false;
-        widget.onChanged?.call(_isChecked);
-        key.currentState?.setChecked(value ?? false);
-      });
-    };
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,25 +51,25 @@ class _DPVCardWithCheckboxBelowState extends State<DPVCardWithCheckboxBelow> {
         DPVWrappedBoxCheckbox(
           blurRadius: 25,
           borderRadius: BorderRadius.circular(35),
-          titleChild: widget.titleChild,
-          assetPath: widget.assetPath,
-          description: widget.description,
-          showCheckbox: widget.showCheckbox,
-          rightAlignCheckbox: widget.rightAlignCheckbox,
-          edgeInsets: widget.edgeInsets,
-          height: widget.height,
-          width: widget.width,
-          title: widget.title,
-          padding: widget.padding,
-          value: _isChecked,
-          onChanged: _onChanged,
+          titleChild: titleChild,
+          assetPath: assetPath,
+          description: description,
+          showCheckbox: showCheckbox,
+          rightAlignCheckbox: rightAlignCheckbox,
+          edgeInsets: edgeInsets,
+          height: height,
+          width: width,
+          title: title,
+          padding: padding,
+          value: Provider.of<CheckboxState>(context).isChecked,
+          onChanged: onChanged,
         ),
         const SizedBox(height: 10),
-        if (widget.showCheckboxBelow)
+        if (showCheckboxBelow)
           Center(
               child: DPVCheckboxCard(
-            cardStateKey: key,
-            onChanged: _onChanged,
+            isChecked: Provider.of<CheckboxState>(context).isChecked,
+            onChanged: onChanged,
             checkboxOnly: true,
           ))
       ],

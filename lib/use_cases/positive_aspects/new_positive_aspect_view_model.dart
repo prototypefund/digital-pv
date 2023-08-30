@@ -17,11 +17,18 @@ class NewPositiveAspectViewModel extends NewAspectViewModel<Aspect> {
 
   String get nextButtonText => "Bestätigen";
 
+// #### ${viewModel.cardTitle}
+// ${viewModel.cardSubtitle(index)}
+
   @override
   String get selectedItemContent => """
-### Eigener Aspekt 
-Positiver Aspekt des aktuellen Lebens
-## Genesung""";
+#### Beispiel
+ Positiver Aspekt des aktuellen Lebens
+
+### ${selectedAspect!.name}
+#### ${selectedAspect!.description ?? ""}
+""";
+
   @override
   String get more => "Mehr";
   @override

@@ -23,7 +23,7 @@ class GeneralTreatmentActivitiesViewModel extends CreationProcessNavigationViewM
     notifyListeners();
   }
 
-  NavigationSubStep _navigationStep = NavigationSubStep.selectType;
+  final NavigationSubStep _navigationStep = NavigationSubStep.selectType;
   NavigationSubStep get navigationStep => _navigationStep;
 
   @override
@@ -77,11 +77,11 @@ falls ich nicht entscheidungsfähig bin
 
   @override
   void onNextButtonPressed(BuildContext context) {
-    if (_situationSelected) {
-      context.go(Routes.futureSituations.path);
-    } else {
-      _navigationStep = NavigationSubStep.select;
-    }
+    // if (_situationSelected) {
+    context.go(Routes.futureSituations.path);
+    // } else {
+    //   _navigationStep = NavigationSubStep.select;
+    // }
   }
 
   @override

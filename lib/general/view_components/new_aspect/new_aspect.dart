@@ -3,6 +3,7 @@ import 'package:pd_app/general/markdown/markdown_body.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/view_components/custom_track_shape.dart';
 import 'package:pd_app/general/view_components/directive_visualization/border_slider_thumb_shape.dart';
+import 'package:pd_app/general/view_components/dpv_card_with_checkbox_below.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_form_change_notification.dart';
 import 'package:pd_app/general/view_components/new_aspect/new_aspect_view_model.dart';
 import 'package:pd_app/general/view_components/view_helper.dart';
@@ -18,6 +19,7 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
     return Row(
       children: [
         card(
+            state: CheckboxState(),
             showCheckboxBelow: false,
             markdown: viewModel.selectedItemContent,
             assetPath: "assets/images/create.svg",
@@ -29,9 +31,17 @@ class NewAspect<ViewModelClass extends NewAspectViewModel> extends StatelessWidg
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (viewModel.runtimeType == NewFutureSituationViewModel) ...[
+                  ElevatedButton.icon(
+                      icon: const Icon(
+                        Icons.explore,
+                      ),
+                      onPressed: () => (viewModel as NewFutureSituationViewModel)
+                          .toggleSimulation(aspect: viewModel.selectedAspect!),
+                      label: Text((viewModel as NewFutureSituationViewModel).simulateLabel)),
+                  const SizedBox(height: 80),
                   buildRowWithExpandedText(
                     context,
-                    (viewModel as NewFutureSituationViewModel).descriptionOne,
+                    viewModel.descriptionOne,
                     viewModel.explanationOne,
                     width: 300,
                     color: DefaultThemeColors.darkBlue,

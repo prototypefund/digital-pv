@@ -20,9 +20,13 @@ class NewNegativeAspectViewModel extends NewAspectViewModel<Aspect> {
 
   @override
   String get selectedItemContent => """
-### Eigener Aspekt 
-Negativer Aspekt des aktuellen Lebens
-## Genesung""";
+#### Beispiel
+ Negativer Aspekt des aktuellen Lebens
+
+### ${selectedAspect!.name}
+#### ${selectedAspect!.description ?? ""}
+""";
+
   @override
   String get more => "Mehr";
   @override
