@@ -1,8 +1,8 @@
 include: package:lint/analysis_options.yaml
 
 analyzer:
-  strong-mode:
-    implicit-dynamic: false
+  language:
+    strict-raw-types: true
   exclude:
     - '**.g.dart'
 
@@ -13,3 +13,4 @@ linter:
     depend_on_referenced_packages: false
     avoid_redundant_argument_values: false
     type_annotate_public_apis: true
+    

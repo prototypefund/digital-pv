@@ -19,10 +19,10 @@ import 'package:pd_app/use_cases/pdf/directive_pdf_view.dart';
 import 'package:pd_app/use_cases/personal_details/personal_details.dart';
 import 'package:pd_app/use_cases/positive_aspects/positive_aspects_view.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party.dart';
-import 'package:pd_app/use_cases/welcome/welcome_view.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-
-
+import 'package:pd_app/use_cases/upsert_patient_directive_page_1/upsert_patient_directive_page_1_view.dart';
+import 'package:pd_app/use_cases/upsert_patient_directive_page_2/upsert_patient_directive_page_2_view.dart';
+import 'package:pd_app/use_cases/upsert_patient_directive_page_3/upsert_patient_directive_page_3_view.dart';
+import 'package:pd_app/use_cases/upsert_patient_directive_page_4/upsert_patient_directive_page_4_view.dart';
 
 final GlobalKey<ScaffoldMessengerState> _navigatorKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -43,16 +43,54 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
     super.initState();
 
     _router = GoRouter(
+        initialLocation: Routes.upsertPatientDirectivePage1.path,
         routes: [
           GoRoute(
-            path: Routes.welcome.path,
-            pageBuilder: (context, state) =>
-                buildPageWithDefaultTransition<WelcomeView>(context: context, state: state, child: WelcomeView.page()),
+            path: Routes.upsertPatientDirectivePage1.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage1View>(
+                  key: const ValueKey('upsert-patient-directive-page-1'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage1View.page());
+            },
+          ),
+          GoRoute(
+            path: Routes.upsertPatientDirectivePage2.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage2View>(
+                  key: const ValueKey('upsert-patient-directive-page-2'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage2View.page());
+            },
+          ),
+          GoRoute(
+            path: Routes.upsertPatientDirectivePage3.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage3View>(
+                  key: const ValueKey('upsert-patient-directive-page-3'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage3View.page());
+            },
+          ),
+          GoRoute(
+            path: Routes.upsertPatientDirectivePage4.path,
+            pageBuilder: (context, state) {
+              return buildPageWithDefaultTransition<UpsertPatientDirectivePage4View>(
+                  key: const ValueKey('upsert-patient-directive-page-4'),
+                  context: context,
+                  state: state,
+                  child: UpsertPatientDirectivePage4View.page());
+            },
           ),
           GoRoute(
             path: Routes.positiveAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[focusParam];
+              final Uri uri = state.uri;
+              final Map<String, String> queryParams = uri.queryParameters;
+              final String? focusSituationName = queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findPositiveAspect(name: focusSituationName);
@@ -66,7 +104,9 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           GoRoute(
             path: Routes.negativeAspects.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[focusParam];
+              final Uri uri = state.uri;
+              final Map<String, String> queryParams = uri.queryParameters;
+              final String? focusSituationName = queryParams[focusParam];
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findNegativeAspect(name: focusSituationName);
@@ -96,7 +136,10 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
           GoRoute(
             path: Routes.futureSituations.path,
             pageBuilder: (context, state) {
-              final String? focusSituationName = state.queryParams[focusParam];
+              final Uri uri = state.uri;
+              final Map<String, String> queryParams = uri.queryParameters;
+              final String? focusSituationName = queryParams[focusParam];
+
               final PatientDirectiveService directiveService = getIt.get();
               final focusSituation =
                   directiveService.currentPatientDirective.findFutureSituation(name: focusSituationName);
@@ -151,24 +194,20 @@ class _PatientDirectiveAppState extends State<PatientDirectiveApp> with Logging 
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (newContext, orientation, screenType) {
-        return MaterialApp.router(
-          scrollBehavior: CustomBrowserScrollBehavior(),
-          scaffoldMessengerKey: _navigatorKey,
-          routeInformationProvider: _router.routeInformationProvider,
-          routeInformationParser: _router.routeInformationParser,
-          routerDelegate: _router.routerDelegate,
-          title: 'DPV',
-          theme: Themes().defaultTheme,
-          localizationsDelegates: L10n.localizationsDelegates,
-          supportedLocales: L10n.supportedLocales,
-          locale: widget.locale,
-          builder: (_, widget) {
-            _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
-            return widget ?? const SizedBox();
-          },
-        );
+    return MaterialApp.router(
+      scrollBehavior: CustomBrowserScrollBehavior(),
+      scaffoldMessengerKey: _navigatorKey,
+      routeInformationProvider: _router.routeInformationProvider,
+      routeInformationParser: _router.routeInformationParser,
+      routerDelegate: _router.routerDelegate,
+      title: 'DPV',
+      theme: Themes().defaultTheme,
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      locale: const Locale.fromSubtags(languageCode: "de"),
+      builder: (_, widget) {
+        _injectL10nIntoGetIt(_navigatorKey.currentState!.context);
+        return widget ?? const SizedBox();
       },
     );
   }

@@ -241,7 +241,7 @@ class DirectiveVisualization extends StatelessWidget with Logging {
 
   void _handleMouseGestureEvent(Offset localPosition, Offset centerOfGestureDetector) {
     final touchPositionFromCenter = localPosition - centerOfGestureDetector;
-    logger.v(
+    logger.t(
         'onPanUpdate $localPosition, center is $centerOfGestureDetector, touchPositionFromCenter $touchPositionFromCenter, direction ${touchPositionFromCenter.direction}');
     onDragAndRotate?.call(touchPositionFromCenter.direction);
   }
@@ -258,7 +258,7 @@ class AspectVisualizationOverlayArrow extends StatelessWidget with Logging {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      logger.v('building scaled arrow with constraints $constraints');
+      logger.t('building scaled arrow with constraints $constraints');
       final arrowScaleFactor = (constraints.maxWidth) / Constraints.aspectVisualizationConstraints.maxWidth;
 
       return Transform.rotate(
@@ -289,7 +289,7 @@ class ArrowPainter extends CustomPainter with Logging {
     Path path = Path();
     path.moveTo(size.width * 0.24, size.height / 2);
     path.relativeLineTo(size.width * 0.63, 0);
-    path = ArrowPath.make(path: path);
+    path = ArrowPath.addTip(path);
     canvas.drawPath(path, paint);
   }
 

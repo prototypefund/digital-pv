@@ -26,9 +26,6 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
 
   late TreatmentGoal treatmentGoal;
 
-  @override
-  bool get nextButtonEnabled => false;
-
   String get intro => pageContent.intro;
 
   ContextualHelp get adjustArrowExplanation => pageContent.adjustArrowExplanation;
@@ -39,6 +36,54 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
     } else {
       return pageContent.treatmentGoalPalliativeQuestion;
     }
+  }
+
+  double get generalTreatmentGoalScore => _patientDirectiveService.currentPatientDirective.generalTreatmentGoal.value;
+
+  @override
+  bool get nextButtonEnabled => _expectationMatchSelected || _expectationMismatchSelected;
+
+  bool get showPositiveSummary {
+    return _patientDirectiveService.currentPatientDirective.currentAspectsScore >= 0;
+  }
+
+  String get subtitle => "Maßnahmen und Situationen beschreiben";
+  String get title => "Ihre Lebensqualität ist gut, wünschen Sie eine kurative Behandlung?";
+  String get subtopic =>
+      "Lebensqualität und Behandlungswunsch hängen oftmals direkt zusammen, müssen aber nicht. Wählen Sie Ihr Behandlungsziel.";
+  String get visualizationPositiveTitle => "Positive Aspekte";
+  String get visualizationNegativeTitle => "Negative Aspekte";
+  String get visualizationTitle => """
+## Mein Behandlungsziel
+falls ich nicht entscheidungsfähig bin
+""";
+
+  @override
+  String get nextButtonText => "Behandlungsziel bestätigen";
+
+  String get expectationMatch => "Ja, ich wünsche eine kurative Behandlung";
+  String get expectationMismatch => "Nein, ich wünsche eine palliative Behandlung";
+
+  String get expectationMatchDescription =>
+      "Es wird alles medizinisch **Mögliche und Sinnvolle** getan, um mein **Leben zu erhalten**. Die mit der Lebenserhaltung verbundenen **Belastungen** nehme ich in Kauf.";
+  String get expectationMismatchDescription =>
+      "Die Behandlung zielt vor allem darauf, mein **Leiden zu lindern**. Eine mögliche **Verkürzung** meiner **Lebenszeit** nehme ich in Kauf.  **Passen Sie Ihr Behandlungsziel** direkt durch Tippen am roten Pfeil **an**.";
+
+  bool _expectationMatchSelected = false;
+  bool _expectationMismatchSelected = false;
+
+  bool get expectationMatchSelected => _expectationMatchSelected;
+  set expectationMatchSelected(bool value) {
+    _expectationMatchSelected = value;
+    _expectationMismatchSelected = !value;
+    notifyListeners();
+  }
+
+  bool get expectationMismatchSelected => _expectationMismatchSelected;
+  set expectationMismatchSelected(bool value) {
+    _expectationMatchSelected = !value;
+    _expectationMismatchSelected = value;
+    notifyListeners();
   }
 
   String get confirmLabel => pageContent.confirmTreatmentGoalActionLabel;
@@ -79,7 +124,10 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
   }
 
   @override
-  void onNextButtonPressed(BuildContext context) {}
+  void onNextButtonPressed(BuildContext context) {
+    adaptTreatmentGoal(_expectationMatchSelected ? 1 : -1);
+    context.go(nextRoute(context).path);
+  }
 
   void onConfirmPressed(BuildContext context) {
     context.go(nextRoute(context).path);
@@ -99,7 +147,7 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
       adjustedDirection = direction;
     }
     final treatmentGoalValue = (adjustedDirection + math.pi / 2) / (math.pi / 2);
-    logger.v(
+    logger.t(
         'adapting treatment goal to $adjustedDirection radians, resulting in a treatment goal of $treatmentGoalValue');
 
     final directive = _patientDirectiveService.currentPatientDirective;

@@ -13,10 +13,29 @@ import 'package:pd_app/logging.dart';
 
 abstract class NewAspectViewModel<AspectType extends Aspect>
     with RootContextL10N, AspectViewModel, Logging, ChangeNotifier {
-  NewAspectViewModel({required this.autofocus}) : _patientDirectiveService = getIt.get() {
+  NewAspectViewModel({required this.autofocus, AspectType? selectedAspect})
+      : _patientDirectiveService = getIt.get(),
+        _selectedAspect = selectedAspect,
+        aspectTextFieldController = TextEditingController(),
+        detailDescriptionController = TextEditingController() {
     _patientDirectiveService.addListener(_reactToPatientDirectiveChange);
     aspectTextFieldController.addListener(_reactToTextChange);
   }
+
+  final TextEditingController detailDescriptionController;
+
+  String get selectedItemContent => throw Exception("selectedItemContent not implemented");
+  String get more => throw Exception("More not implemented");
+  String get title => throw Exception("title not implemented");
+
+  String get aspectNameLabel => throw Exception("Aspect name label not implemented");
+  String get aspectNameHint => throw Exception("Aspect name hint not implemented");
+  String get aspectDetailLabel => throw Exception("Aspect detail label not implemented");
+
+  String get sliderLabel => throw Exception("Slider label not implemented");
+  String get lowWeightLabel => throw Exception("Low weight label not implemented");
+  String get middleWeightLabel => throw Exception("Middle weight label not implemented");
+  String get highWeightLabel => throw Exception("High weight label not implemented");
 
   AspectListChoice<AspectType> get aspectListChoice;
 
@@ -26,6 +45,18 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
 
   final bool autofocus;
 
+  AspectType? _selectedAspect;
+
+  set selectedAspect(AspectType? newAspect) {
+    _selectedAspect = newAspect;
+    aspectTextFieldController.text = _selectedAspect?.name ?? "";
+    detailDescriptionController.text = _selectedAspect?.description ?? "";
+    weight = _selectedAspect?.weight.value ?? 0.5;
+    notifyListeners();
+  }
+
+  AspectType? get selectedAspect => _selectedAspect;
+
   @override
   void dispose() {
     super.dispose();
@@ -33,7 +64,7 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     aspectTextFieldController.removeListener(_reactToTextChange);
   }
 
-  final TextEditingController aspectTextFieldController = TextEditingController();
+  final TextEditingController aspectTextFieldController;
 
   String get addAspectTextfieldHint;
 
@@ -56,11 +87,13 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     notifyListeners();
   }
 
-  AspectType createNewAspect({required String name, required Weight weight});
+  AspectType createNewAspect({required String name, required Weight weight, String? description});
 
   void onAddAspectActionPressed(BuildContext context) {
-    final Aspect newAspect =
-        createNewAspect(name: aspectTextFieldController.text.trim(), weight: Weight(value: weight));
+    final Aspect newAspect = createNewAspect(
+        name: aspectTextFieldController.text.trim(),
+        weight: Weight(value: weight),
+        description: detailDescriptionController.text);
     final PatientDirective currentDirective = _patientDirectiveService.currentPatientDirective;
 
     final List<Aspect> aspectsToManipulate = aspectListChoice(currentDirective);
@@ -68,6 +101,7 @@ abstract class NewAspectViewModel<AspectType extends Aspect>
     _patientDirectiveService.currentPatientDirective = currentDirective;
 
     aspectTextFieldController.text = "";
+    detailDescriptionController.text = "";
     notifyListeners();
   }
 
