@@ -32,9 +32,28 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
 
   final NewPositiveAspectViewModel newPositiveAspectViewModel;
 
+  void editItem(String item) {
+    final aspect = positiveAspectListViewModel.aspects.firstWhere((element) => item == element.name);
+    aspect.isSelected = true;
+    newPositiveAspectViewModel.selectedAspect = aspect;
+    _navigationStep = NavigationSubStep.edit;
+    notifyListeners();
+  }
+
+  void deleteItem(BuildContext context, String item) {
+    final aspect = positiveAspectListViewModel.aspects.firstWhere((element) => item == element.name);
+    positiveAspectListViewModel.removeAspect(aspect: aspect, context: context);
+    notifyListeners();
+  }
+
   String get subtitle => "#### Maßnahmen und Situationen beschreiben";
   String get title => "## Wie geht es Ihnen aktuell?";
   String get subtopic => "### Positives";
+
+  String get selectionTitle => "### Ausgewählt:";
+  String get selectionContent => "#### Bitte wählen Sie eine der folgenden Aktionen aus.";
+  String get selectionDeleteButtonTitle => "Löschen";
+  String get selectionEditButtonTitle => "Bearbeiten";
 
   @override
   String get nextButtonText {

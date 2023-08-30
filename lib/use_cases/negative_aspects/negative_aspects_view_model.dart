@@ -44,9 +44,28 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
 
   AspectListViewModel get negativeAspectsListViewModel => _negativeAspectsListViewModel;
 
+  String get selectionTitle => "### Ausgewählt:";
+  String get selectionContent => "#### Bitte wählen Sie eine der folgenden Aktionen aus.";
+  String get selectionDeleteButtonTitle => "Löschen";
+  String get selectionEditButtonTitle => "Bearbeiten";
+
   String get subtitle => "#### Maßnahmen und Situationen beschreiben";
   String get title => "## Wie geht es Ihnen aktuell?";
   String get subtopic => "### Negatives";
+
+  void editItem(String item) {
+    final aspect = negativeAspectsListViewModel.aspects.firstWhere((element) => item == element.name);
+    aspect.isSelected = true;
+    newNegativeAspectViewModel.selectedAspect = aspect;
+    _navigationStep = NavigationSubStep.edit;
+    notifyListeners();
+  }
+
+  void deleteItem(BuildContext context, String item) {
+    final aspect = negativeAspectsListViewModel.aspects.firstWhere((element) => item == element.name);
+    negativeAspectsListViewModel.removeAspect(aspect: aspect, context: context);
+    notifyListeners();
+  }
 
   @override
   String get nextButtonText {
