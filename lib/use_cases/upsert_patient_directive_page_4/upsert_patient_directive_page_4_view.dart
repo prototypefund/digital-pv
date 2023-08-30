@@ -14,7 +14,7 @@ class UpsertPatientDirectivePage4View extends StatelessWidget {
         create: (_) => UpsertPatientDirectivePage4ViewModel(), child: const UpsertPatientDirectivePage4View());
   }
 
-  showMoreInfo(BuildContext context, String text, String dismiss, String moreInfo) {
+  void showMoreInfo(BuildContext context, String text, String dismiss, String moreInfo) {
     showDialog<AlertDialog>(
         context: context,
         builder: (BuildContext context) {
