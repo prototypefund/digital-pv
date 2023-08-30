@@ -20,10 +20,10 @@ class ResponsiveAddonContent extends StatelessWidget {
       return Row(
         children: [
           Expanded(flex: 6, child: child),
-          // Expanded(
-          //   flex: 4,
-          //   child: extendedContent,
-          // )
+          Expanded(
+            flex: 4,
+            child: extendedContent,
+          )
         ],
       );
     }

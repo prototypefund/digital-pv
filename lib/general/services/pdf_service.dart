@@ -35,7 +35,7 @@ class PdfService with RootContextL10N {
   pw.Widget footer(pw.Context pdfContext) {
     return pw.Column(
       children: [
-        pw.TableHelper.fromTextArray(context: pdfContext, tableWidth: pw.TableWidth.max, data: <List<String>>[
+        pw.Table.fromTextArray(context: pdfContext, tableWidth: pw.TableWidth.max, data: <List<String>>[
           <String>['', ''],
           <String>[_pdfViewModel.footerPlaceAndDate, _pdfViewModel.footerSignature],
         ]),

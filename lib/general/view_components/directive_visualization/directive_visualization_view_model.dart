@@ -1,9 +1,11 @@
 import "dart:math" as math;
 
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pd_app/general/init/get_it.dart';
 import 'package:pd_app/general/model/aspect.dart';
 import 'package:pd_app/general/model/future_situation.dart';
+import 'package:pd_app/general/navigation/routes.dart';
 import 'package:pd_app/general/services/patient_directive_service.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/logging.dart';
@@ -54,7 +56,7 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
     // 0 = equal should become PI / 2
     final rotation = math.pi / 2 * aspectScore + math.pi / 2;
 
-    logger.t('aspect score is $aspectScore, resulting in rotation of $rotation rads');
+    logger.v('aspect score is $aspectScore, resulting in rotation of $rotation rads');
     return rotation;
   }
 
@@ -73,20 +75,20 @@ class DirectiveVisualizationViewModel with ChangeNotifier, Logging, RootContextL
     // +1 = very curative should become 0
     // 0 = equal should become PI / 2
     final rotation = math.pi / 2 * treatmentGoalValue - math.pi / 2;
-    logger.t('treatment goal value is $treatmentGoalValue, resulting in rotation of $rotation rads');
+    logger.v('treatment goal value is $treatmentGoalValue, resulting in rotation of $rotation rads');
     return rotation;
   }
 
   void onFutureAspectTapped(BuildContext context, FutureSituation aspect) {
-    // context.go(buildShowFutureSituationsRoute(paramValue: aspect.name));
+    context.go(buildShowFutureSituationsRoute(paramValue: aspect.name));
   }
 
   void onPositiveAspectTapped(BuildContext context, Aspect aspect) {
-    // context.go(buildShowPositiveAspectRoute(paramValue: aspect.name));
+    context.go(buildShowPositiveAspectRoute(paramValue: aspect.name));
   }
 
   void onNegativeAspectTapped(BuildContext context, Aspect aspect) {
-    // context.go(buildShowNegativeAspectRoute(paramValue: aspect.name));
+    context.go(buildShowNegativeAspectRoute(paramValue: aspect.name));
   }
 
   @override
