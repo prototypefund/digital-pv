@@ -20,10 +20,7 @@ class UpsertPatientDirectivePage4View extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
-              contentPadding: const EdgeInsets.only(left: 44, right: 84),
-              titlePadding: const EdgeInsets.all(44),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Expanded(
                     child: Divider(
