@@ -48,7 +48,7 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
   String get selectItemTitle => "Wählen Sie Ihre Was wäre wenn-Situation aus:";
 
   String get completeDescriptionOne =>
-      "Sie haben **5 Situationen** genannt. Damit beschreiben Sie Ihre künftigen Situationen und Maßnahmen sehr gut.";
+      "Sie haben **3 Situationen** genannt. Damit beschreiben Sie Ihre künftigen Situationen und Maßnahmen sehr gut.";
 
   String get completeExplanationOne => "Sie haben ...";
   String get completeDescriptionTwo => "Möchten Sie weitere Situationen nennen?.";
@@ -118,7 +118,7 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
         _navigationStep = NavigationSubStep.assignTreatmentActivity;
         break;
       case NavigationSubStep.assignTreatmentActivity:
-        if (_futureSituationsListViewModel.aspects.length >= 4) {
+        if (_futureSituationsListViewModel.aspects.length >= 2) {
           _navigationStep = NavigationSubStep.complete;
         } else {
           _navigationStep = NavigationSubStep.select;

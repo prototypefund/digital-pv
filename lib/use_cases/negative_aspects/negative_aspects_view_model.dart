@@ -77,10 +77,10 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
       "Sehen Sie sich gerne die folgenden Beispiele an. Trifft eines zu, können Sie es auswählen und übernehmen. Alternativ können Sie die Aspekte auch frei formulieren. Gibt es keine negativen Aspekte, können Sie diesen [[Schritt überspringen.]](skip)";
 
   String get completeDescriptionOne =>
-      "Sie haben **5 Negative Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
+      "Sie haben **3 Negative Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
 
   String get completeExplanationOne =>
-      "Sie haben Ihrer Lebensqualität mit 5 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
+      "Sie haben Ihrer Lebensqualität mit 3 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
   String get completeDescriptionTwo => "Möchten Sie weitere Negative Aspekte nennen?.";
   String get completeExplanationTwo =>
       "Sie können nun die Beschreibung der Negativen Aspekte abschließen. Natürlich können Sie alternativ gerne Ihre aktuelle Lebensqualität mit weiteren Negativen Aspekten noch besser beschreiben.";
@@ -147,7 +147,7 @@ Negativer Aspekt des aktuellen Lebens
         _navigationStep = NavigationSubStep.edit;
         break;
       case NavigationSubStep.edit:
-        if (_negativeAspectsListViewModel.aspects.length >= 4) {
+        if (_negativeAspectsListViewModel.aspects.length >= 2) {
           _navigationStep = NavigationSubStep.complete;
         } else {
           _navigationStep = NavigationSubStep.select;
