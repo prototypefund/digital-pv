@@ -14,7 +14,7 @@ class UpsertPatientDirectivePage4View extends StatelessWidget {
         create: (_) => UpsertPatientDirectivePage4ViewModel(), child: const UpsertPatientDirectivePage4View());
   }
 
-  void showMoreInfo(BuildContext context, String text, String dismiss, String moreInfo) {
+  showMoreInfo(BuildContext context, String text, String dismiss, String moreInfo) {
     showDialog<AlertDialog>(
         context: context,
         builder: (BuildContext context) {
@@ -22,33 +22,37 @@ class UpsertPatientDirectivePage4View extends StatelessWidget {
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
               contentPadding: const EdgeInsets.only(left: 44, right: 84),
               titlePadding: const EdgeInsets.all(44),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              title: Stack(
                 children: [
-                  const Expanded(
-                    child: Divider(
-                      color: DefaultThemeColors.white,
-                      height: 4.0,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Expanded(
+                        child: Divider(
+                          color: DefaultThemeColors.white,
+                          height: 4.0,
+                        ),
+                      ),
+                      const SizedBox(width: 20, height: 40),
+                      MarkdownBody(
+                        data: moreInfo,
+                        styleSheet: MarkdownStyleSheet(
+                          h2: const TextStyle(color: DefaultThemeColors.white),
+                        ),
+                      ),
+                      const SizedBox(width: 20, height: 40),
+                      const Expanded(
+                        child: Divider(
+                          color: DefaultThemeColors.white,
+                          height: 4.0,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
-                  const SizedBox(width: 20, height: 40),
-                  MarkdownBody(
-                    data: moreInfo,
-                    styleSheet: MarkdownStyleSheet(
-                      h2: const TextStyle(color: DefaultThemeColors.white),
-                    ),
-                  ),
-                  const SizedBox(width: 20, height: 40),
-                  const Expanded(
-                    child: Divider(
-                      color: DefaultThemeColors.white,
-                      height: 4.0,
-                    ),
-                  ),
-                  const Spacer(),
                   Positioned(
                     right: 0,
-                    top: -10,
+                    top: 0,
                     child: InkResponse(
                       onTap: () {
                         Navigator.of(context).pop();
