@@ -7,6 +7,8 @@ import 'package:pd_app/general/view_components/personal_details_form/personal_de
 import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/trusted_third_party/trusted_third_party_personal_details_view_model.dart';
 
+import '../personal_details/personal_details_view_model.dart';
+
 class TrustedThirdPartyFormViewModel with ChangeNotifier, RootContextL10N, Logging {
   TrustedThirdPartyFormViewModel({required this.readPersonFromService}) : _patientDirectiveService = getIt.get() {
     personalDetailsFormViewModel =
@@ -14,6 +16,9 @@ class TrustedThirdPartyFormViewModel with ChangeNotifier, RootContextL10N, Loggi
 
     personalDetailsFormViewModel.addListener(_reactToPersonalDetailsChange);
   }
+
+  NavigationSubStep _navigationStep = NavigationSubStep.name;
+  NavigationSubStep get navigationStep => _navigationStep;
 
   PersonOfTrust get personOfTrust => readPersonFromService.call();
 
