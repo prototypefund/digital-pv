@@ -56,7 +56,20 @@ class NegativeAspects extends StatelessWidget {
           ),
           Stack(alignment: Alignment.topRight, children: [
             WebViewAware(
-              child: WebViewContainer(data: viewModel.negativeAspectsListViewModel.aspectDataForJavascript),
+              child: WebViewContainer(
+                title: viewModel.selectionTitle,
+                editButtonTitle: viewModel.selectionEditButtonTitle,
+                deleteButtonTitle: viewModel.selectionDeleteButtonTitle,
+                content: viewModel.selectionContent,
+                data: viewModel.negativeAspectsListViewModel.aspectDataForJavascript,
+                itemSelectedCallback: (item, delete) {
+                  if (delete) {
+                    viewModel.deleteItem(context, item);
+                  } else {
+                    viewModel.editItem(item);
+                  }
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

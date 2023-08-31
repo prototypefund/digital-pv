@@ -1,13 +1,26 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/markdown/markdown_body.dart';
+import 'package:pd_app/general/themes/colors.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 import 'package:webviewx/webviewx.dart';
 
 class WebViewContainer extends StatefulWidget {
-  const WebViewContainer({super.key, this.data = "var data = [ ];"});
+  const WebViewContainer(
+      {super.key,
+      this.data = "var data = [ ];",
+      this.itemSelectedCallback,
+      required this.title,
+      required this.content,
+      required this.editButtonTitle,
+      required this.deleteButtonTitle});
   final String data;
+  final String title;
+  final String content;
+  final String editButtonTitle;
+  final String deleteButtonTitle;
+  final Function(String, bool)? itemSelectedCallback;
 
   @override
   State<WebViewContainer> createState() => _WebViewContainerState();
@@ -22,9 +35,10 @@ class _WebViewContainerState extends State<WebViewContainer> {
   void didUpdateWidget(covariant WebViewContainer oldWidget) {
     if (webviewController != null) {
       // ignore: avoid_dynamic_calls
-      if (widget.data.isNotEmpty && _oldData != null && deepEq(widget.data, _oldData) == false) {
+      if (_oldData != null && deepEq(widget.data, _oldData) == false) {
         webviewController!.loadContent(_buildWebviewContent(), SourceType.html);
       }
+
       _oldData = widget.data;
     }
     super.didUpdateWidget(oldWidget);
@@ -57,41 +71,89 @@ class _WebViewContainerState extends State<WebViewContainer> {
                   barrierDismissible: false,
                   builder: (BuildContext context) {
                     return AlertDialog(
+                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                      contentPadding: const EdgeInsets.only(left: 44, right: 84),
+                      backgroundColor: DefaultThemeColors.cyan,
                       title: Row(
                         children: [
-                          Text('Ausgewählter Aspekt: $message'),
+                          const Expanded(
+                            flex: 1,
+                            child: Divider(
+                              color: DefaultThemeColors.white,
+                              height: 4.0,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            flex: 5,
+                            // Add this
+                            child: MarkdownBody(
+                              content: "${widget.title} $message",
+                              color: DefaultThemeColors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          const Expanded(
+                            flex: 1,
+                            child: Divider(
+                              color: DefaultThemeColors.white,
+                              height: 4.0,
+                            ),
+                          ),
                           const Spacer(),
-                          IconButton(
-                            icon: const Icon(Icons.close),
-                            onPressed: () {
+                          InkResponse(
+                            onTap: () {
                               setState(() {
                                 ignoreAllGestures = false;
                                 Navigator.pop(context);
                               });
                             },
+                            child: const CircleAvatar(
+                              backgroundColor: DefaultThemeColors.white,
+                              child: Icon(Icons.close),
+                            ),
                           ),
                         ],
                       ),
-                      content: const MarkdownBody(content: 'Bitte wählen Sie eine der folgenden Aktionen aus.'),
+                      content: Builder(
+                        builder: (context) {
+                          return ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxWidth: 780,
+                              minHeight: 100,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: MarkdownBody(content: widget.content, color: DefaultThemeColors.white),
+                            ),
+                          );
+                        },
+                      ),
                       actions: <Widget>[
                         TextButton(
-                          child: const Text('Bearbeiten'),
+                          child: Text(widget.editButtonTitle, style: const TextStyle(color: DefaultThemeColors.white)),
                           onPressed: () {
                             setState(() {
                               ignoreAllGestures = false;
                               Navigator.pop(context);
                             });
+                            widget.itemSelectedCallback?.call(message as String, false);
                           },
                         ),
                         TextButton(
-                          child: const Text('Löschen'),
+                          child: Text(
+                            widget.deleteButtonTitle,
+                            style: const TextStyle(color: DefaultThemeColors.white),
+                          ),
                           onPressed: () {
                             setState(() {
                               ignoreAllGestures = false;
                               Navigator.pop(context);
                             });
+                            widget.itemSelectedCallback?.call(message as String, true);
                           },
                         ),
+                        const SizedBox(width: 30),
                       ],
                     );
                   },
@@ -249,10 +311,16 @@ class _WebViewContainerState extends State<WebViewContainer> {
             return d.selected ? "8, 4" : "";
         });
 
-
+function truncateString(str, length) {
+    if (str.length > length) {
+        return str.substring(0, length) + "...";
+    } else {
+        return str;
+    }
+}
 
     node.append("text")
-        .text(function (d) { return d.key; }) // display the key
+        .text(function (d) { return truncateString(d.key,10); }) // display the key
         .style("text-anchor", "middle") // center the text horizontally
         .style("dominant-baseline", "central") // center the text vertically
         .style("font-weight", "normal")

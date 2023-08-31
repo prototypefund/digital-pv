@@ -54,24 +54,21 @@ class FutureSituations extends StatelessWidget {
             context,
           ),
           Stack(children: [
-            const WebViewAware(
-              child: WebViewContainer(data: """
-    // Read data
-    var data = [
-    { value: 40, key: "Unabhängigkeit", selected: false  , show_label: false , positive: true},
-    { value: 55, key: "Gesundheit", selected: false   , show_label: false, positive: true},
-    { value: 33, key: "Finanzen", selected: false  , show_label: false, positive: true},
-    { value: 20, key: "Freunde", selected: false   , show_label: false, positive: true},
-    { value: 14, key: "Natur", selected: false  , show_label: false, positive: true},
-    { value: 12, key: "Mein Hund",  selected: false   , show_label: false, positive: true},
-    { value: 10, key: "Arbeit", selected: false , show_label: false, positive: true},
-    { value: 83, key: "Genesung", selected: true , show_label: true, positive: true},
-    { value: 83, key: "Genesung", selected: false , show_label: false, positive: false},
-    { value: 13, key: "Genesung", selected: false , show_label: false, positive: false},
-    { value: 23, key: "Genesung", selected: true , show_label: true, positive: false},
-    { value: 55, key: "Gesundheit", selected: false   , show_label: false, positive: false},
-]; 
-"""),
+            WebViewAware(
+              child: WebViewContainer(
+                title: viewModel.selectionTitle,
+                editButtonTitle: viewModel.selectionEditButtonTitle,
+                deleteButtonTitle: viewModel.selectionDeleteButtonTitle,
+                content: viewModel.selectionContent,
+                data: viewModel.futureSituationsListViewModel.aspectDataForJavascript,
+                itemSelectedCallback: (item, delete) {
+                  if (delete) {
+                    viewModel.deleteItem(context, item);
+                  } else {
+                    viewModel.editItem(item);
+                  }
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

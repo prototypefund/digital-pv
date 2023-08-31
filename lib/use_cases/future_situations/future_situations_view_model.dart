@@ -25,6 +25,11 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
   NavigationSubStep _navigationStep = NavigationSubStep.description;
   NavigationSubStep get navigationStep => _navigationStep;
 
+  String get selectionTitle => "### Ausgewählt:";
+  String get selectionContent => "#### Bitte wählen Sie eine der folgenden Aktionen aus.";
+  String get selectionDeleteButtonTitle => "Löschen";
+  String get selectionEditButtonTitle => "Bearbeiten";
+
   String get subtitle => "### Maßnahmen und Situationen beschreiben";
   String get title => "## Meine Was wäre wenn-Situation.";
   String get subtopic => "#### Beschreiben Sie jetzt künftige Situationen und Maßnahmen, die Ihnen am Herzen liegen.";
@@ -69,6 +74,20 @@ Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich d
       case NavigationSubStep.complete:
         return "Künftige Situationen abschließen";
     }
+  }
+
+  void editItem(String item) {
+    final aspect = futureSituationsListViewModel.allAspects.firstWhere((element) => item == element.name);
+    aspect.isSelected = true;
+    newFutureSituationViewModel.selectedAspect = aspect as FutureSituation;
+    _navigationStep = NavigationSubStep.edit;
+    notifyListeners();
+  }
+
+  void deleteItem(BuildContext context, String item) {
+    final aspect = futureSituationsListViewModel.allAspects.firstWhere((element) => item == element.name);
+    futureSituationsListViewModel.removeAspect(aspect: aspect, context: context);
+    notifyListeners();
   }
 
   @override
