@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pd_app/general/themes/colors.dart';
 import 'package:pd_app/general/view_components/personal_details_form/personal_details_form_view_model.dart';
-import 'package:pd_app/use_cases/personal_details/personal_details_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PersonalDetailsForm extends StatelessWidget {
-  const PersonalDetailsForm({super.key, required this.navigationStep});
-
-  // TODO: find a better way to control navigation
-  final NavigationSubStep navigationStep;
-
   @override
   Widget build(BuildContext context) {
     final PersonalDetailsFormViewModel viewModel = context.watch();
@@ -18,7 +12,6 @@ class PersonalDetailsForm extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 64),
-          width: 700,
           child: _getPersonalDetailsForm(viewModel),
         ),
       ],
@@ -26,11 +19,9 @@ class PersonalDetailsForm extends StatelessWidget {
   }
 
   Widget _getPersonalDetailsForm(PersonalDetailsFormViewModel viewModel) {
-    switch (navigationStep) {
+    switch (viewModel.navigationStep) {
       case NavigationSubStep.name:
         return _getNameEditForm(viewModel);
-      case NavigationSubStep.birthday:
-        return _getBirthdayEditForm(viewModel);
       case NavigationSubStep.address:
         return _getAddressEditForm(viewModel);
       case NavigationSubStep.contact:
@@ -38,28 +29,36 @@ class PersonalDetailsForm extends StatelessWidget {
     }
   }
 
-  Column _getNameEditForm(PersonalDetailsFormViewModel viewModel) {
+  Widget _getNameEditForm(PersonalDetailsFormViewModel viewModel) {
     return Column(
       children: [
-        CustomTextField(
-          controller: viewModel.surnameTextFieldController,
-          labelText: viewModel.surnameLabel,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 250,
+              child: CustomTextField(
+                controller: viewModel.surnameTextFieldController,
+                labelText: viewModel.surnameLabel,
+              ),
+            ),
+            const SizedBox(width: 50),
+            SizedBox(
+              width: 250,
+              child: CustomTextField(
+                controller: viewModel.nameTextFieldController,
+                labelText: viewModel.nameLabel,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 64),
-        CustomTextField(
-          controller: viewModel.nameTextFieldController,
-          labelText: viewModel.nameLabel,
-        ),
-      ],
-    );
-  }
-
-  Column _getBirthdayEditForm(PersonalDetailsFormViewModel viewModel) {
-    return Column(
-      children: [
-        CustomTextField(
-          controller: viewModel.dateOfBirthTextFieldController,
-          labelText: viewModel.dateOfBirthLabel,
+        const SizedBox(height: 50),
+        SizedBox(
+          width: 550,
+          child: CustomTextField(
+            controller: viewModel.dateOfBirthTextFieldController,
+            labelText: viewModel.dateOfBirthLabel,
+          ),
         ),
       ],
     );
@@ -68,25 +67,47 @@ class PersonalDetailsForm extends StatelessWidget {
   Column _getAddressEditForm(PersonalDetailsFormViewModel viewModel) {
     return Column(
       children: [
-        CustomTextField(
-          controller: viewModel.addressTextFieldController,
-          labelText: viewModel.addressLabel,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 350,
+              child: CustomTextField(
+                controller: viewModel.addressTextFieldController,
+                labelText: viewModel.addressLabel,
+              ),
+            ),
+            const SizedBox(width: 50),
+            SizedBox(
+              width: 150,
+              child: CustomTextField(
+                controller: viewModel.zipCodeTextFieldController,
+                labelText: viewModel.zipCodeLabel,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 32),
-        CustomTextField(
-          controller: viewModel.zipCodeTextFieldController,
-          labelText: viewModel.zipCodeLabel,
-        ),
-        const SizedBox(height: 32),
-        CustomTextField(
-          controller: viewModel.cityTextFieldController,
-          labelText: viewModel.cityLabel,
-        ),
-        const SizedBox(height: 32),
-        CustomTextField(
-          controller: viewModel.countryTextFieldController,
-          labelText: viewModel.countryLabel,
-        ),
+        const SizedBox(height: 50),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 250,
+              child: CustomTextField(
+                controller: viewModel.cityTextFieldController,
+                labelText: viewModel.cityLabel,
+              ),
+            ),
+            const SizedBox(width: 50),
+            SizedBox(
+              width: 250,
+              child: CustomTextField(
+                controller: viewModel.countryTextFieldController,
+                labelText: viewModel.countryLabel,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
@@ -94,14 +115,20 @@ class PersonalDetailsForm extends StatelessWidget {
   Column _getContactEditForm(PersonalDetailsFormViewModel viewModel) {
     return Column(
       children: [
-        CustomTextField(
-          controller: viewModel.emailTextFieldController,
-          labelText: viewModel.emailLabel,
+        SizedBox(
+          width: 550,
+          child: CustomTextField(
+            controller: viewModel.emailTextFieldController,
+            labelText: viewModel.emailLabel,
+          ),
         ),
-        const SizedBox(height: 64),
-        CustomTextField(
-          controller: viewModel.phoneTextFieldController,
-          labelText: viewModel.phoneLabel,
+        const SizedBox(height: 50),
+        SizedBox(
+          width: 550,
+          child: CustomTextField(
+            controller: viewModel.phoneTextFieldController,
+            labelText: viewModel.phoneLabel,
+          ),
         ),
       ],
     );
