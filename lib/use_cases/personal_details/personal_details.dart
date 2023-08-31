@@ -26,7 +26,7 @@ class PersonalDetails extends StatelessWidget {
           autovalidateMode: AutovalidateMode.always,
           child: ChangeNotifierProvider.value(
             value: viewModel.personalDetailsFormViewModel,
-            child: PersonalDetailsForm(),
+            child: PersonalDetailsForm2(),
           ),
         ),
         const SizedBox(height: 32),
