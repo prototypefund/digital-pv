@@ -3,6 +3,8 @@ import 'package:pd_app/general/model/personal_details.dart';
 import 'package:pd_app/general/utils/l10n_mixin.dart';
 import 'package:pd_app/logging.dart';
 
+enum NavigationSubStep { name, address, contact }
+
 class PersonalDetailsFormViewModel with ChangeNotifier, RootContextL10N, Logging {
   PersonalDetailsFormViewModel({required this.personalDetails}) {
     surnameTextFieldController.text = personalDetails.surname ?? '';
@@ -32,6 +34,8 @@ class PersonalDetailsFormViewModel with ChangeNotifier, RootContextL10N, Logging
     phoneTextFieldController.text = personalDetails.phone ?? '';
     phoneTextFieldController.addListener(_updatePersonalDetailsObject);
   }
+
+  NavigationSubStep navigationStep = NavigationSubStep.name;
 
   PersonalDetails personalDetails;
 

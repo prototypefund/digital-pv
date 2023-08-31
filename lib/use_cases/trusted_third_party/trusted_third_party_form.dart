@@ -28,7 +28,7 @@ class TrustedThirdPartyForm extends StatelessWidget {
           ),
           ChangeNotifierProvider.value(
             value: viewModel.personalDetailsFormViewModel,
-            child: PersonalDetailsForm(navigationStep: viewModel.navigationStep),
+            child: PersonalDetailsForm(),
           ),
           Padding(
             padding: Paddings.trustedPersonPowerPadding,

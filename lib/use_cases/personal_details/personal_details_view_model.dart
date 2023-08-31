@@ -13,8 +13,6 @@ import 'package:pd_app/logging.dart';
 import 'package:pd_app/use_cases/pdf/pdf_view_model.dart';
 import 'package:pd_app/use_cases/personal_details/personal_data_for_directive_view_model.dart';
 
-enum NavigationSubStep { name, birthday, address, contact }
-
 class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with Logging {
   PersonalDetailsViewModel() : _patientDirectiveService = getIt.get() {
     personalDetailsFormViewModel = PersonalDataForDirectiveViewModel(
@@ -23,9 +21,6 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
     personalDetailsFormViewModel.addListener(_reactToPersonalDetailsChange);
     _contentService.addListener(notifyListeners);
   }
-
-  NavigationSubStep _navigationStep = NavigationSubStep.name;
-  NavigationSubStep get navigationStep => _navigationStep;
 
   late PersonalDetailsFormViewModel personalDetailsFormViewModel;
 
@@ -42,9 +37,8 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
 
   @override
   String get nextButtonText {
-    switch (_navigationStep) {
+    switch (personalDetailsFormViewModel.navigationStep) {
       case NavigationSubStep.name:
-      case NavigationSubStep.birthday:
       case NavigationSubStep.address:
         return "Weiter";
       case NavigationSubStep.contact:
@@ -74,15 +68,12 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
 
   @override
   void onNextButtonPressed(BuildContext context) {
-    switch (_navigationStep) {
+    switch (personalDetailsFormViewModel.navigationStep) {
       case NavigationSubStep.name:
-        _navigationStep = NavigationSubStep.birthday;
-        break;
-      case NavigationSubStep.birthday:
-        _navigationStep = NavigationSubStep.address;
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.address;
         break;
       case NavigationSubStep.address:
-        _navigationStep = NavigationSubStep.contact;
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.contact;
         break;
       case NavigationSubStep.contact:
         onDownloadDirectivePressed(context);
@@ -93,18 +84,15 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
 
   @override
   void onBackButtonPressed(BuildContext context) {
-    switch (_navigationStep) {
+    switch (personalDetailsFormViewModel.navigationStep) {
       case NavigationSubStep.name:
         super.onBackButtonPressed(context);
         break;
-      case NavigationSubStep.birthday:
-        _navigationStep = NavigationSubStep.name;
-        break;
       case NavigationSubStep.address:
-        _navigationStep = NavigationSubStep.birthday;
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.name;
         break;
       case NavigationSubStep.contact:
-        _navigationStep = NavigationSubStep.address;
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.address;
         break;
     }
     notifyListeners();
