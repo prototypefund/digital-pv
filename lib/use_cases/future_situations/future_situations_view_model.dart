@@ -17,6 +17,134 @@ class FutureSituationsViewModel extends CreationProcessNavigationViewModel with 
     _contentService.addListener(notifyListeners);
   }
 
+  NavigationSubStep _navigationStep = NavigationSubStep.description;
+  NavigationSubStep get navigationStep => _navigationStep;
+
+  String get selectionTitle => "### Ausgewählt:";
+  String get selectionContent => "#### Bitte wählen Sie eine der folgenden Aktionen aus.";
+  String get selectionDeleteButtonTitle => "Löschen";
+  String get selectionEditButtonTitle => "Bearbeiten";
+
+  String get subtitle => "### Maßnahmen und Situationen beschreiben";
+  String get title => "## Meine Was wäre wenn-Situation.";
+  String get subtopic => "#### Beschreiben Sie jetzt künftige Situationen und Maßnahmen, die Ihnen am Herzen liegen.";
+  String get visualizationPositiveTitle => "Positive Aspekte";
+  String get visualizationNegativeTitle => "Negative Aspekte";
+  String get visualizationTitle => """
+### Mein Behandlungsziel
+falls ich nicht entscheidungsfähig bin
+""";
+
+  String get descriptionOne => "### Nehmen Sie sich **Zeit**.  ";
+
+  String get explanationOne =>
+      "Nehmen Sie sich die **Zeit, die Sie benötigen**. Sie können unterbrechen, den aktuellen Stand speichern, um z.B. mit Angehörigen, Freunden oder Ärzt:innen zu sprechen und später an diesem Punkt weiterzumachen.";
+
+  String get descriptionTwo => "### Sehen Sie den **Effekt**.";
+  String get explanationTwo => """
+Nachdem Sie eine Was wäre wenn?-Situation beschrieben haben, können Sie sich den Effekt auf Ihr Behandlungsziel zeigen lassen. Drücken Sie dazu den Button "Eintritt simulieren".
+""";
+
+  String get selectItemTitle => "Wählen Sie Ihre Was wäre wenn-Situation aus:";
+
+  String get completeDescriptionOne =>
+      "Sie haben **3 Situationen** genannt. Damit beschreiben Sie Ihre künftigen Situationen und Maßnahmen sehr gut.";
+
+  String get completeExplanationOne => "Sie haben ...";
+  String get completeDescriptionTwo => "Möchten Sie weitere Situationen nennen?.";
+  String get completeExplanationTwo =>
+      "Sie können nun die Beschreibung der Negativen Aspekte abschließen. Natürlich können Sie alternativ gerne Ihre aktuelle Lebensqualität mit weiteren Negativen Aspekten noch besser beschreiben.";
+
+  @override
+  String get nextButtonText {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        return "Künftige Situationen beschreiben";
+      case NavigationSubStep.select:
+        return "Situation beschreiben";
+      case NavigationSubStep.edit:
+        return "Bestätigen";
+      case NavigationSubStep.assignTreatmentActivity:
+        return "Maßnahmen der Situation zuweisen";
+      case NavigationSubStep.complete:
+        return "Künftige Situationen abschließen";
+    }
+  }
+
+  void editItem(String item) {
+    final aspect = futureSituationsListViewModel.allAspects.firstWhere((element) => item == element.name);
+    aspect.isSelected = true;
+    newFutureSituationViewModel.selectedAspect = aspect as FutureSituation;
+    _navigationStep = NavigationSubStep.edit;
+    notifyListeners();
+  }
+
+  void deleteItem(BuildContext context, String item) {
+    final aspect = futureSituationsListViewModel.allAspects.firstWhere((element) => item == element.name);
+    futureSituationsListViewModel.removeAspect(aspect: aspect, context: context);
+    notifyListeners();
+  }
+
+  @override
+  void onBackButtonPressed(BuildContext context) {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        super.onBackButtonPressed(context);
+
+        break;
+      case NavigationSubStep.select:
+        _navigationStep = NavigationSubStep.description;
+        break;
+      case NavigationSubStep.edit:
+        _navigationStep = NavigationSubStep.select;
+        break;
+      case NavigationSubStep.assignTreatmentActivity:
+        _navigationStep = NavigationSubStep.edit;
+        break;
+      case NavigationSubStep.complete:
+        _navigationStep = NavigationSubStep.assignTreatmentActivity;
+        break;
+    }
+    notifyListeners();
+  }
+
+  @override
+  bool get nextButtonEnabled =>
+      _navigationStep == NavigationSubStep.select && newFutureSituationViewModel.selectedAspect != null ||
+      _navigationStep == NavigationSubStep.edit &&
+          newFutureSituationViewModel.aspectTextFieldController.text.trim().isNotEmpty ||
+      _navigationStep == NavigationSubStep.complete ||
+      _navigationStep == NavigationSubStep.assignTreatmentActivity ||
+      _navigationStep == NavigationSubStep.description;
+
+  @override
+  void onNextButtonPressed(BuildContext context) {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        _navigationStep = NavigationSubStep.select;
+
+        break;
+      case NavigationSubStep.select:
+        _navigationStep = NavigationSubStep.edit;
+        break;
+      case NavigationSubStep.edit:
+        newFutureSituationViewModel.onAddAspectActionPressed(context);
+        _navigationStep = NavigationSubStep.assignTreatmentActivity;
+        break;
+      case NavigationSubStep.assignTreatmentActivity:
+        if (_futureSituationsListViewModel.aspects.length >= 2) {
+          _navigationStep = NavigationSubStep.complete;
+        } else {
+          _navigationStep = NavigationSubStep.select;
+        }
+        break;
+      case NavigationSubStep.complete:
+        super.onNextButtonPressed(context);
+        break;
+    }
+    notifyListeners();
+  }
+
   late AspectListViewModel _futureSituationsListViewModel;
 
   final FutureSituation? focusAspect;

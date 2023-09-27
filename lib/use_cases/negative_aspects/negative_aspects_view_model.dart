@@ -27,6 +27,77 @@ class NegativeAspectsViewModel extends CreationProcessNavigationViewModel with A
 
   AspectListViewModel get negativeAspectsListViewModel => _negativeAspectsListViewModel;
 
+  String get selectionTitle => "### Ausgewählt:";
+  String get selectionContent => "#### Bitte wählen Sie eine der folgenden Aktionen aus.";
+  String get selectionDeleteButtonTitle => "Löschen";
+  String get selectionEditButtonTitle => "Bearbeiten";
+
+  String get subtitle => "#### Maßnahmen und Situationen beschreiben";
+  String get title => "## Wie geht es Ihnen aktuell?";
+  String get subtopic => "### Negatives";
+
+  void editItem(String item) {
+    final aspect = negativeAspectsListViewModel.aspects.firstWhere((element) => item == element.name);
+    aspect.isSelected = true;
+    newNegativeAspectViewModel.selectedAspect = aspect;
+    _navigationStep = NavigationSubStep.edit;
+    notifyListeners();
+  }
+
+  void deleteItem(BuildContext context, String item) {
+    final aspect = negativeAspectsListViewModel.aspects.firstWhere((element) => item == element.name);
+    negativeAspectsListViewModel.removeAspect(aspect: aspect, context: context);
+    notifyListeners();
+  }
+
+  @override
+  String get nextButtonText {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        return "Negative Aspekte beschreiben";
+      case NavigationSubStep.select:
+        return "Aspekt beschreiben";
+      case NavigationSubStep.edit:
+        return "Bestätigen";
+      case NavigationSubStep.complete:
+        return "Negative Aspekte abschließen";
+    }
+  }
+
+  String get visualizationTitle => "### Aktuelle Lebensqualität";
+
+  String get visualizationNegativeTitle => "Negative Aspekte";
+
+  String get descriptionOne => "### Sie haben Ihre positiven Aspekte beschrieben. Sehr gut!";
+
+  String get explanationOne =>
+      "Diese Angaben unterstützen Sie einerseits bei der weiteren Entscheidungsfindung und machen anderer- seits Ihre Entscheidung besser nachvollziehbar.";
+
+  String get descriptionTwo =>
+      "### Machen Sie nun bitte mit den **negativen Aspekten** Ihrer aktuellen Lebensqualität weiter.";
+  String get explanationTwo =>
+      "Sehen Sie sich gerne die folgenden Beispiele an. Trifft eines zu, können Sie es auswählen und übernehmen. Alternativ können Sie die Aspekte auch frei formulieren. Gibt es keine negativen Aspekte, können Sie diesen [[Schritt überspringen.]](skip)";
+
+  String get completeDescriptionOne =>
+      "Sie haben **3 Negative Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
+
+  String get completeExplanationOne =>
+      "Sie haben Ihrer Lebensqualität mit 3 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
+  String get completeDescriptionTwo => "Möchten Sie weitere Negative Aspekte nennen?.";
+  String get completeExplanationTwo =>
+      "Sie können nun die Beschreibung der Negativen Aspekte abschließen. Natürlich können Sie alternativ gerne Ihre aktuelle Lebensqualität mit weiteren Negativen Aspekten noch besser beschreiben.";
+  String get more => "Mehr";
+  String get describeNegativeAspectTitle => "### Bitte beschreiben Sie Ihren Negativen Aspekt";
+
+  String get aspectNameLabel => "Wie soll Ihr Aspekt heißen?";
+  String get aspectNameHint => "Genesung";
+  String get aspectDetailLabel => "Hier können Sie Details beschreiben (optional)";
+
+  String get selectedItemContent => """
+### Eigener Aspekt
+Negativer Aspekt des aktuellen Lebens
+## Genesung""";
+
   @override
   void dispose() {
     super.dispose();

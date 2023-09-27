@@ -26,6 +26,65 @@ class PositiveAspectsViewModel extends CreationProcessNavigationViewModel with L
 
   final NewPositiveAspectViewModel newPositiveAspectViewModel;
 
+  void editItem(String item) {
+    final aspect = positiveAspectListViewModel.aspects.firstWhere((element) => item == element.name);
+    aspect.isSelected = true;
+    newPositiveAspectViewModel.selectedAspect = aspect;
+    _navigationStep = NavigationSubStep.edit;
+    notifyListeners();
+  }
+
+  void deleteItem(BuildContext context, String item) {
+    final aspect = positiveAspectListViewModel.aspects.firstWhere((element) => item == element.name);
+    positiveAspectListViewModel.removeAspect(aspect: aspect, context: context);
+    notifyListeners();
+  }
+
+  String get subtitle => "#### Maßnahmen und Situationen beschreiben";
+  String get title => "## Wie geht es Ihnen aktuell?";
+  String get subtopic => "### Positives";
+
+  String get selectionTitle => "### Ausgewählt:";
+  String get selectionContent => "#### Bitte wählen Sie eine der folgenden Aktionen aus.";
+  String get selectionDeleteButtonTitle => "Löschen";
+  String get selectionEditButtonTitle => "Bearbeiten";
+
+  @override
+  String get nextButtonText {
+    switch (_navigationStep) {
+      case NavigationSubStep.description:
+        return "Positive Aspekte beschreiben";
+      case NavigationSubStep.select:
+        return "Aspekt beschreiben";
+      case NavigationSubStep.edit:
+        return "Bestätigen";
+      case NavigationSubStep.complete:
+        return "Positive Aspekte abschließen";
+    }
+  }
+
+  String get visualizationTitle => "### Aktuelle Lebensqualität";
+
+  String get visualizationPositiveTitle => "Positive Aspekte";
+
+  String get descriptionOne => "### Beschreiben Sie im ersten Schritt bitte Ihre aktuelle Lebensqualität";
+
+  String get explanationOne =>
+      "Diese Angaben unterstützen Sie einerseits bei der weiteren Entscheidungsfindung und machen anderer- seits Ihre Entscheidung besser nachvollziehbar.";
+
+  String get descriptionTwo => "### Beginnen Sie mit den **positiven Aspekten** Ihrer aktuellen Lebensqualität.";
+  String get explanationTwo =>
+      "Sehen Sie sich gerne die folgenden Beispiele an. Trifft eines zu, können Sie es auswählen und übernehmen. Alternativ können Sie die Aspekte auch frei formulieren.";
+
+  String get completeDescriptionOne =>
+      "Sie haben **3 positive Aspekte** genannt. Damit beschreiben Sie Ihre Lebensqualität sehr gut.";
+
+  String get completeExplanationOne =>
+      "Sie haben Ihrer Lebensqualität mit 3 Aspekten beschrieben. Das ist eine gute Grundlage, um Ihre Therapiewünsche nachvollziehen zu können.";
+  String get completeDescriptionTwo => "Möchten Sie weitere positive Aspekte nennen?.";
+  String get completeExplanationTwo =>
+      "Sie können nun die Beschreibung der positiven Aspekte abschließen. Natürlich können Sie alternativ gerne Ihre aktuelle Lebensqualität mit weiteren positiven Aspekten noch besser beschreiben.";
+
   @override
   void dispose() {
     super.dispose();

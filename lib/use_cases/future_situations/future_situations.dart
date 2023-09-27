@@ -23,11 +23,54 @@ class FutureSituations extends StatelessWidget {
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MarkdownBody(
-              content: context.select((FutureSituationsViewModel viewModel) => viewModel.pageContent).intro ?? ''),
-          ChangeNotifierProvider.value(
-              value: context.select((FutureSituationsViewModel viewModel) => viewModel.futureSituationsListViewModel),
-              child: AspectList()),
+          buildCenterText(
+            viewModel.subtitle,
+            context,
+          ),
+          const SizedBox(height: 80),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                  left: 55.0,
+                  top: 20,
+                  child: CustomPaint(
+                    painter: CirclePainter(strokeColor: DefaultThemeColors.blue),
+                  )),
+              buildText(
+                viewModel.title,
+                context,
+              ),
+            ],
+          ),
+          buildText(viewModel.subtopic, context),
+          const SizedBox(height: 120),
+          buildCenterText(
+            viewModel.visualizationTitle,
+            context,
+          ),
+          Stack(children: [
+            WebViewAware(
+              child: WebViewContainer(
+                title: viewModel.selectionTitle,
+                editButtonTitle: viewModel.selectionEditButtonTitle,
+                deleteButtonTitle: viewModel.selectionDeleteButtonTitle,
+                content: viewModel.selectionContent,
+                data: viewModel.futureSituationsListViewModel.aspectDataForJavascript,
+                itemSelectedCallback: (item, delete) {
+                  if (delete) {
+                    viewModel.deleteItem(context, item);
+                  } else {
+                    viewModel.editItem(item);
+                  }
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: buildText(viewModel.visualizationPositiveTitle, context, textColor: DefaultThemeColors.cyan),
+            ),
+          ]),
           const SizedBox(
             height: 20,
           ),

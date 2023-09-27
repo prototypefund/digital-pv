@@ -41,6 +41,56 @@ class GeneralTreatmentObjectiveViewModel extends CreationProcessNavigationViewMo
     }
   }
 
+  double get currentAspectScore {
+    return (_patientDirectiveService.currentPatientDirective.currentAspectsScore * -50) + 50;
+  }
+
+  @override
+  bool get nextButtonEnabled => _expectationMatchSelected || _expectationMismatchSelected;
+
+  bool get showPositiveSummary {
+    return _patientDirectiveService.currentPatientDirective.currentAspectsScore >= 0;
+  }
+
+  String get subtitle => "Maßnahmen und Situationen beschreiben";
+  String get title => "Ihre Lebensqualität ist gut, wünschen Sie eine kurative Behandlung?";
+  String get subtopic =>
+      "Lebensqualität und Behandlungswunsch hängen oftmals direkt zusammen, müssen aber nicht. Wählen Sie Ihr Behandlungsziel.";
+  String get visualizationPositiveTitle => "Positive Aspekte";
+  String get visualizationNegativeTitle => "Negative Aspekte";
+  String get visualizationTitle => """
+## Mein Behandlungsziel
+falls ich nicht entscheidungsfähig bin
+""";
+
+  @override
+  String get nextButtonText => "Behandlungsziel bestätigen";
+
+  String get expectationMatch => "Ja, ich wünsche eine kurative Behandlung";
+  String get expectationMismatch => "Nein, ich wünsche eine palliative Behandlung";
+
+  String get expectationMatchDescription =>
+      "Es wird alles medizinisch **Mögliche und Sinnvolle** getan, um mein **Leben zu erhalten**. Die mit der Lebenserhaltung verbundenen **Belastungen** nehme ich in Kauf.";
+  String get expectationMismatchDescription =>
+      "Die Behandlung zielt vor allem darauf, mein **Leiden zu lindern**. Eine mögliche **Verkürzung** meiner **Lebenszeit** nehme ich in Kauf.  **Passen Sie Ihr Behandlungsziel** direkt durch Tippen am roten Pfeil **an**.";
+
+  bool _expectationMatchSelected = false;
+  bool _expectationMismatchSelected = false;
+
+  bool get expectationMatchSelected => _expectationMatchSelected;
+  set expectationMatchSelected(bool value) {
+    _expectationMatchSelected = value;
+    _expectationMismatchSelected = !value;
+    notifyListeners();
+  }
+
+  bool get expectationMismatchSelected => _expectationMismatchSelected;
+  set expectationMismatchSelected(bool value) {
+    _expectationMatchSelected = !value;
+    _expectationMismatchSelected = value;
+    notifyListeners();
+  }
+
   String get confirmLabel => pageContent.confirmTreatmentGoalActionLabel;
 
   String get resetLabel => pageContent.resetArrowActionLabel;

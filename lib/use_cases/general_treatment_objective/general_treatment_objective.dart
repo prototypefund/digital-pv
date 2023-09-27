@@ -21,66 +21,51 @@ class GeneralTreatmentObjective extends StatelessWidget {
   Widget build(BuildContext context) {
     final GeneralTreatmentObjectiveViewModel viewModel = context.watch();
     return CreationProcessNavigation<GeneralTreatmentObjectiveViewModel>(
-        widget: SizedBox(
-      width: double.infinity,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        MarkdownBody(content: viewModel.intro),
-        const SizedBox(
-          height: 24,
-        ),
-        MarkdownBody(content: viewModel.summary),
-        const SizedBox(
-          height: 24,
-        ),
-        ExplanationBox.fromContextualHelp(contextualHelp: viewModel.adjustArrowExplanation),
-        const SizedBox(
-          height: 40,
-        ),
-        ConstrainedBox(
-            constraints: Constraints.aspectVisualizationConstraints,
-            child: ChangeNotifierProvider(
-                create: (_) => DirectiveVisualizationViewModel(
-                    showLabels: true, showTreatmentGoal: true, simulateFutureAspects: false),
-                child: DirectiveVisualization(
-                  onDragAndRotate: (double direction) {
-                    viewModel.adaptTreatmentGoal(direction);
-                  },
-                ))),
-        const SizedBox(
-          height: 24,
-        ),
-        ElevatedButton(
-            onPressed: () => viewModel.resetTreatmentGoal(context),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(viewModel.resetLabel),
-                const SizedBox(
-                  width: Sizes.elevatedButtonLabelIconDistance,
-                ),
-                Icon(viewModel.resetIconData)
-              ],
-            )),
-        const SizedBox(
-          height: 40,
-        ),
-        ExplanationBox.fromContextualHelp(
-          contextualHelp: viewModel.curativeExplanation,
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-        ExplanationBox.fromContextualHelp(
-          contextualHelp: viewModel.palliativeExplanation,
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-        ElevatedButton(
-          onPressed: () => viewModel.onConfirmPressed(context),
-          child: Text(viewModel.confirmLabel),
-        ),
-      ]),
-    ));
+      widget: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                  left: 55.0,
+                  top: 65,
+                  child: CustomPaint(
+                    painter: CirclePainter(
+                        strokeColor:
+                            viewModel.showPositiveSummary ? DefaultThemeColors.cyan : DefaultThemeColors.brownGrey),
+                  )),
+              buildText(viewModel.title, context, Theme.of(context).textTheme.headlineMedium!),
+            ],
+          ),
+          buildText(viewModel.subtopic, context, Theme.of(context).textTheme.titleSmall!),
+          const SizedBox(height: 120),
+          buildCenterText(viewModel.visualizationTitle, context, Theme.of(context).textTheme.headlineSmall!),
+          WebGaugeViewContainer(value: viewModel.currentAspectScore),
+          DPVWrappedBoxCheckbox(
+            height: 261,
+            title: viewModel.expectationMatch,
+            description: viewModel.expectationMatchDescription,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: viewModel.expectationMatchSelected,
+            onChanged: (bool? value) {
+              viewModel.expectationMatchSelected = !viewModel.expectationMatchSelected;
+            },
+          ),
+          const SizedBox(height: 40),
+          DPVWrappedBoxCheckbox(
+            height: 261,
+            description: viewModel.expectationMismatchDescription,
+            title: viewModel.expectationMismatch,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: viewModel.expectationMismatchSelected,
+            onChanged: (bool? value) {
+              viewModel.expectationMismatchSelected = !viewModel.expectationMismatchSelected;
+            },
+          ),
+          const SizedBox(height: 80),
+        ],
+      ),
+    );
   }
 }
