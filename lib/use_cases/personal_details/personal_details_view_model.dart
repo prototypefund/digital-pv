@@ -28,14 +28,23 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
 
   final ContentService _contentService = getIt.get();
 
+  //TODO: set validator for every step //personalDetailsFormViewModel.isInputValid();
   @override
-  bool get nextButtonEnabled => personalDetailsFormViewModel.isInputValid();
+  bool get nextButtonEnabled => true;
 
   @override
   bool get nextButtonShowArrow => false;
 
   @override
-  String get nextButtonText => pageContent.downloadAsPdfActionLabel;
+  String get nextButtonText {
+    switch (personalDetailsFormViewModel.navigationStep) {
+      case NavigationSubStep.name:
+      case NavigationSubStep.address:
+        return "Weiter";
+      case NavigationSubStep.contact:
+        return pageContent.downloadAsPdfActionLabel;
+    }
+  }
 
   PersonalDetailsPage get pageContent => _contentService.personalDetailsPage;
 
@@ -59,7 +68,34 @@ class PersonalDetailsViewModel extends CreationProcessNavigationViewModel with L
 
   @override
   void onNextButtonPressed(BuildContext context) {
-    onDownloadDirectivePressed(context);
+    switch (personalDetailsFormViewModel.navigationStep) {
+      case NavigationSubStep.name:
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.address;
+        break;
+      case NavigationSubStep.address:
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.contact;
+        break;
+      case NavigationSubStep.contact:
+        onDownloadDirectivePressed(context);
+        break;
+    }
+    notifyListeners();
+  }
+
+  @override
+  void onBackButtonPressed(BuildContext context) {
+    switch (personalDetailsFormViewModel.navigationStep) {
+      case NavigationSubStep.name:
+        super.onBackButtonPressed(context);
+        break;
+      case NavigationSubStep.address:
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.name;
+        break;
+      case NavigationSubStep.contact:
+        personalDetailsFormViewModel.navigationStep = NavigationSubStep.address;
+        break;
+    }
+    notifyListeners();
   }
 
   @override

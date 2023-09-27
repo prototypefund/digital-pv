@@ -9,7 +9,10 @@ class PersonalDetails extends StatelessWidget {
   const PersonalDetails({super.key});
 
   static Widget page() {
-    return ChangeNotifierProvider(create: (_) => PersonalDetailsViewModel(), child: const PersonalDetails());
+    return ChangeNotifierProvider(
+      create: (_) => PersonalDetailsViewModel(),
+      child: const PersonalDetails(),
+    );
   }
 
   @override
@@ -23,7 +26,7 @@ class PersonalDetails extends StatelessWidget {
           autovalidateMode: AutovalidateMode.always,
           child: ChangeNotifierProvider.value(
             value: viewModel.personalDetailsFormViewModel,
-            child: PersonalDetailsForm(),
+            child: PersonalDetailsForm2(),
           ),
         ),
         const SizedBox(height: 32),
@@ -32,12 +35,16 @@ class PersonalDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                  onPressed: viewModel.downloadDirectiveAction(context), child: Text(viewModel.downloadDirectiveLabel)),
+                onPressed: viewModel.downloadDirectiveAction(context),
+                child: Text(viewModel.downloadDirectiveLabel),
+              ),
               const SizedBox(
                 width: 20,
               ),
               ElevatedButton(
-                  onPressed: viewModel.showDirectiveAction(context), child: Text(viewModel.showDirectiveLabel))
+                onPressed: viewModel.showDirectiveAction(context),
+                child: Text(viewModel.showDirectiveLabel),
+              )
             ],
           ),
         )

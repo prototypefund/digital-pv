@@ -26,7 +26,10 @@ class TrustedThirdPartyForm extends StatelessWidget {
                   icon: const Icon(Icons.remove_circle_outline)),
             ],
           ),
-          ChangeNotifierProvider.value(value: viewModel.personalDetailsFormViewModel, child: PersonalDetailsForm()),
+          ChangeNotifierProvider.value(
+            value: viewModel.personalDetailsFormViewModel,
+            child: PersonalDetailsForm(),
+          ),
           Padding(
             padding: Paddings.trustedPersonPowerPadding,
             child: DPVBox(
